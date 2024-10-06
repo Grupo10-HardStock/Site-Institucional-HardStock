@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'DM Sans', 'Segoe UI', sans-serif
+}
+
+
+
+
+#principal{
+    background-color: #0000008c;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+#principal h1 {
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+/* HEADER */
+
+header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #000000;
+    /* background-color: aquamarine; */
+    
+}
+
+.nav {
+    height: 10vh;
+    /* height: 105px; */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1rem 0 0;
+}
+
+.nav img {
+    height: 100%;
+}
+
+.nav a {
+    color: white;
+    font-size: 1.8rem;
+    text-decoration: none;
+}
+
+/* FIM DO HEADER */
+
+#ordem{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 5%;
+    background-color: black;
+}
+
+
+h6 {
+    font-size: 2rem;
+}
+
+p {
+    font-size: 1rem;
+}
+
+
+#contextualizando{
+    
+    background-color: #c7d0d8;
+    width: 30%;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 0.1rem;
+    flex-direction: column;
+    padding: 1%;
+    /* box-shadow: #fbfbfb 0 0 1rem 0px; */
+    box-shadow: 0.5rem 0.5rem 0.2rem #fbfbfb;
+    
+}
+
+
+
+
+#problemas{
+
+    background-color: #c7d0d8;
+    width: 30%;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 0.1rem;
+    flex-direction: column;
+    padding: 1%;
+    box-shadow: 0.5rem 0.5rem 0.2rem #fbfbfb;
+
+
+}
+
+
+
+#vantagens{
+
+    background-color: #c7d0d8;
+    width: 30%;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 0.1rem;
+    flex-direction: column;
+    padding: 1%;
+    box-shadow: 0.5rem 0.5rem 0.2rem #fbfbfb;
+
+}
+

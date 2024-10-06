@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ptbr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HardStock | Cadastro</title>
+  <link rel="stylesheet" href='../css/style.css'>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,200..1000&display=swap"
+    rel="stylesheet">
+</head>
+</head>
+
+<body>
+  <div class="content">
+    <div class="background">
+      <img class="img" src="../assets/imgs/HardStock - branco.png" alt="Logo Marca">
+      <img class="img2" src="../assets/imgs/HardStock(Preto).png" alt="Logo Marca">
+    </div>
+    <div class="contentItens" id="tela1">
+      <h3>SEJA BEM VINDO!</h3>
+      <h1>Primeiro acesso, insira os dados:</h1>
+      <div>
+        <label for="input_nome">
+          <span>Nome</span>
+          <input type="text" id="input_nome">
+          <p id="alertNome"></p>
+        </label>
+        <label for="input_email">
+          <span>Email</span>
+          <input type="text" id="input_email">
+          <p id="alertEmail"></p>
+        </label>
+        <label for="input_cnpj">
+          <span>CNPJ</span>
+          <input type="text" id="input_cnpj">
+          <p id="alertCnpj"></p>
+        </label>
+
+        <div class="ctBtn">
+          <button id="btn-cancelar" class="btn">Cancelar</button>
+          <button id="btn-proximo" onclick="next(1)" class="btn">Próximo</button>
+        </div>
+      </div>
+    </div>
+    <div class="contentItens" id="tela2">
+      <h3 id="h3t2">SEJA BEM VINDO</h3>
+      <h1>Primeiro acesso, insira os dados:</h1>
+      <div>
+        <label for="input_senha">
+          <span>Senha</span>
+          <input type="text" id="input_senha">
+          <p id="alertSenha"></p>
+        </label>
+        <div class="verificacao">
+          <li>
+            <span id="aviso1">Conter pelo menos 8 caracteres</span>
+          </li>
+          <li>
+            <span id="aviso2">conter pelo menos uma letra maiúscula (A...Z)</span>
+          </li>
+          <li>
+            <span id="aviso3">conter pelo menos uma letra minúscula (a...z) </span>
+          </li>
+          <li>
+            <span id="aviso4">conter pelo menos um número (0-9)</span>
+          </li>
+          <li>
+            <span id="aviso5">conter pelo menos um caractere especial. (! @ # $ &)</span>
+          </li>
+        </div>
+        <label for="input_confirmar">
+          <span>Confirmação de senha</span>
+          <input type="text" id="input_confirmar">
+          <p id="alertConfirmarSenha"></p>
+        </label>
+        <div class="ctBtn">
+          <button id="btn-cancelar" onclick="voltar(1)" class="btn">Voltar</button>
+          <button id="btn-proximo" class="btn">Cadastrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>
+<script>
+
+  function next(value){
+
+    if(value == 1){
+      tela1.style.display = 'none'
+      tela2.style.display = 'flex'
+    }
+
+
+  }
+
+  function voltar(value){
+    if(value == 1){
+      tela2.style.display = 'none'
+      tela1.style.display = 'flex'
+    }
+  }
+
+  function cadastrar() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = nome_input.value;
+    var cnpjVar = cnpj_input.value;
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
+    var confirmacaoSenhaVar = confirmacao_senha_input.value;
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        cnpjServer: cnpjVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+
+      });
+
+    return false;
+  }
+
+
+  // PRECISAMOS PENSAR NA REGRA DE NEGÓCIO
+  //   function listar() {
+  //     fetch("/empresas/listar", {
+  //       method: "GET",
+  //     })
+  //       .then(function (resposta) {
+  //         resposta.json().then((empresas) => {
+  //           empresas.forEach((empresa) => {
+  //             listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
+  //           });
+  //         });
+  //       })
+  //       .catch(function (resposta) {
+  //         console.log(`#ERRO: ${resposta}`);
+  //       });
+  //   }
+
+  function sumirMensagem() {
+    // cardErro.style.display = "none";
+  }
+</script>
