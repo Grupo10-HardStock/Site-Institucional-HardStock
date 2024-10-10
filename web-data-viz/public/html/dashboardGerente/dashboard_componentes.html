@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title>Dashboard Funcionário | HardStock</title>
+  <title>Dashboard Servidor | HardStock</title>
 
 <style>
   .alinhamento{
@@ -17,6 +17,11 @@
           flex-direction: column;
           margin-top: 5%;
           width: 80%;
+        }
+
+        h1{
+          display: flex;
+          justify-content: center;
         }
 
         #add{
@@ -32,7 +37,7 @@
           display: flex;
           border-radius: 50px;
           align-items: center;
-          width: 210px;
+          width: 175px;
           font-weight: bold;
           color: white;
           background-color: #000000;
@@ -159,7 +164,7 @@
         </a></li>
         <li><a href="../dashboardGerente/dashboard_componentes.html"  style=" background: rgb(0, 0, 0);color: #ffffff;">
           <i class="fa-solid fa-table-list"></i>
-          <span class="navItem">Componentes</span>
+          <span class="navItem">Servidores</span>
         </a></li>
         <div class="sair">
           <li><a href="#">
@@ -167,7 +172,7 @@
               <span class="navItem">Suporte</span>
             </a></li>
           <li>
-            <a href="#">
+            <a href="../../index.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
               <span class="navItem">Sair</span>
             </a>
@@ -179,7 +184,8 @@
 </div>
 
 <div class="alinhamento">
-  <button id="add"><a href="#">Novo Componente <i id="icone" class="fa-solid fa-plus"></i></a></button>
+  <h1>Servidores</h1>
+  <button id="add"><a href="cadastro-servidor.html">Novo Servidor <i id="icone" class="fa-solid fa-plus"></i></a></button>
   <div id="userTable"></div>
 </div>
 
@@ -212,7 +218,7 @@
   }
   
   function editUser(id) {
-      alert('Editar Componente de ID: ' + id);
+    window.location = "./dashboard-edicaoServidor.html"
   }
   
   function deleteUser(id) {

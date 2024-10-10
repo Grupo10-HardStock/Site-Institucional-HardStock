@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./dashboard-gerente.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Dashboard Empresas | HardStock</title>
+
+   <style>
+    .alinhamento {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2%;
+    width: 50%;
+    height: 90%;
+    background-color: gainsboro;
+    border-radius: 50px;
+    padding-top: 20px;
+}
+
+.campos {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.antes, .depois {
+    width: 45%;
+}
+
+.titulo {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 20px;
+}
+
+label p {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+#inputEditar {
+    width: 100%;
+    height: 35px;
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid black;
+    font-size: 1rem;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+#btnCancel, #btnSave {
+    margin-top: 20px;
+    padding: 10px 20px;
+    width: auto;
+    height: auto;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+#btnCancel {
+    background-color: white;
+    border: 1px solid red;
+    color: red;
+    margin-right: 10px;
+}
+
+#btnSave {
+    background-color: rgb(11, 239, 11);
+    border: 1px solid rgb(11, 239, 11);
+    color: white;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+   </style>
+
+</head>
+
+<body>
+    <label for="sidebar-ativo" class="sideBar-open">
+        <i class="fa-duotone fa-solid fa-bars"></i>
+    </label>
+    <nav id="nav">
+        <div class="link-conteiner">
+            <label for="sidebar-ativo" class="sideBar-close">
+                <i id="close" class="fa-solid fa-xmark"></i>
+            </label>
+            <ul>
+                <li>
+                    <p class="logo">
+                        <img src="../assets/icon/HardStock-preto.png" alt="">
+                        <span class="nav-item">Hardstock</span>
+                    </p>
+                </li>
+                <li>
+                    <p style="margin-bottom: 20px;">
+                        <span class="navItem-nome">
+                            Olá, Fernanda
+                        </span>
+                    </p>
+                </li>
+                <li><a href="../dashboardHardStock/dashboard_empresa.html">
+                        <i class="fa-solid fa-square-plus"></i>
+                        <span class="navItem">Cadastro Empresa</span>
+                    </a></li>
+                <li><a href="../dashboardHardStock/dashboard_gerente.html">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span class="navItem">Cadastro Gerente</span>
+                    </a>
+                </li>
+                <li><a href="../dashboardHardStock/dashboard_clientes.html"
+                        style="background: rgb(0, 0, 0);color: #ffffff;">
+                        <i class="fa-solid fa-people-group"></i>
+                        <span class="navItem">Empresas</span>
+                    </a></li>
+
+
+                <div class="sair">
+                    <li><a href="#">
+                            <i class="fa-solid fa-headset"></i>
+                            <span class="navItem">Suporte</span>
+                        </a></li>
+                    <li>
+                        <a href="../../index.html">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            <span class="navItem">Sair</span>
+                        </a>
+                    </li>
+
+                </div>
+            </ul>
+    </nav>
+    </div>
+
+    <div class="alinhamento">
+        <h1>Atualizar Empresa</h1>
+        <div class="campos">
+            <div class="antes">
+                <h3 class="titulo">Como estava:</h3>
+                <label id="nome">
+                    <p>Nome:</p><br>
+                    <input disabled id="inputEditar" type="text" value="Profit"><br>
+                </label>
+                <label id="CNPJ">
+                    <p>CNPJ:</p><br>
+                    <input disabled id="inputEditar" type="text" value="01.394.972/0001-70"><br>
+                </label>
+                <label id="email">
+                    <p>E-mail:</p><br>
+                    <input disabled id="inputEditar" type="text" value="profit@profit.com"><br>
+                </label>
+            </div>
+            <div class="depois">
+                <h3 class="titulo">Como irá ficar:</h3>
+                <label>
+                    <p>Nome:</p><br>
+                    <input id="inputEditar" type="text" placeholder="Informe seu novo Nome:"><br>
+                </label>
+                <label>
+                    <p>CNPJ:</p><br>
+                    <input id="inputEditar" type="number" placeholder="Informe seu novo CNPJ:"><br>
+                </label>
+                <label>
+                    <p>E-mail:</p><br>
+                    <input id="inputEditar" type="text" placeholder="Informe seu novo E-mail:"><br>
+                    <center>
+                        <button id="btnCancel" onclick="cancelar()">Cancelar</button>
+                        <button id="btnSave">Salvar</button>
+                    </center>
+                </label>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
+<script>
+ function cancelar(){
+    window.location = "./dashboard_clientes.html"
+ }
+</script>

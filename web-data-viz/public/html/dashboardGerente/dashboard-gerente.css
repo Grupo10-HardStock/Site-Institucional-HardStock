@@ -19,12 +19,12 @@ body {
 
 nav {
   grid-area: nav;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   z-index: 1;
-  height: 100dvh;
+  height: auto;
   width: 90px;
   background-color: rgba(199, 208, 216, 1);
   overflow: hidden;
@@ -38,42 +38,43 @@ nav {
 
 main {
   display: grid;
+  width: 84%;
+  height: 90%;
+  margin-left: 7%;
+  margin-top: 4%;
+  background-color: #e0e0e0;
   gap: 10px;
   grid-area: main;
   padding: 15px;
-  /* background: #4e4e4e; */
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr;
+
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-areas:
-    "c1 c2 c3"
-    "c4 c4 c5"
-    "c4 c4 c6";
-
+    "c1 c2"
+    "c3 c4";
 }
 
-/* .metricas {
-  grid-area: ft;
-  position: relative;
+.opcoes-btn{
   display: flex;
-  flex-direction: column;
-  width: 57px;
-  overflow: hidden;
-  background-color: #fff;
-  height: 100dvh;
-  top: 0;
-  right: 0;
-  transition: .7s ease;
+  position: absolute;
+  left: 11.5%;
+  top: 5%;
 }
 
-.metricas label {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10%;
-} */
+.opcoes-btn select {
+  background-color: #e0e0e0;
+  height: 25px;
+  padding-right: 4px;
+  border-radius: 5px 5px 1px 1px;
+  font-size: 17px;
+}
 
+main{
+  border-radius: 5px;
+}
 
 .card {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(203 203 203);
   border-radius: 10px;
 
 }
@@ -92,14 +93,6 @@ main {
 
 .card:nth-child(4) {
   grid-area: c4;
-}
-
-.card:nth-child(5) {
-  grid-area: c5;
-}
-
-.card:nth-child(6) {
-  grid-area: c6;
 }
 
 .logo {
@@ -235,6 +228,8 @@ nav:hover {
   }
 
 }
+
+
 
 
 @media (max-width: 1260px) {

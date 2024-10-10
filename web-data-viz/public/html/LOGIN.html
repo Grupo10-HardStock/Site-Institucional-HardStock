@@ -33,11 +33,11 @@
                     <input type="text" id="input_email">
                     <p id="alertEmail"></p>
                 </label>
-                <a href="cadastro.html">Ainda não tem cadastro?</a>
                 <div class="ctBtn">
-                    <button id="btn-cancelar" class="btn">Cancelar</button>
+                    <button id="btn-cancelar" class="btn" onclick="cancelar()">Cancelar</button>
                     <button id="btn-proximo" onclick="entrar()" class="btn">Login</button>
                 </div>
+                <!-- <a href="/web-data-viz/public/teste.html"></a> -->
             </div>
         </div>
 </body>
@@ -45,106 +45,105 @@
 </html>
 <script>
 
-    function entrar() {
+    // function entrar() {
 
-        // var nomeVar = b_usuario;
-        var emailVar = input_email.value;
-        var senhaVar = input_senha.value;
-        var carac_email = email.indexOf('@')
+    //     // var nomeVar = b_usuario;
+    //     var emailVar = input_email.value;
+    //     var senhaVar = input_senha.value;
+    //     var carac_email = email.indexOf('@')
 
-        if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            return false;
-        }
+    //     if (emailVar == "" || senhaVar == "") {
+    //         cardErro.style.display = "block"
+    //         return false;
+    //     }
 
-        if (emailVar == '') {
+    //     if (emailVar == '') {
 
-            alert('Digite seu email')
+    //         alert('Digite seu email')
 
-        }
-        if (senhaVar == '') {
+    //     }
+    //     if (senhaVar == '') {
 
-            alert('Digite sua senha')
+    //         alert('Digite sua senha')
 
-        }
-
-
-        if (carac_email == -1) {
-
-            alert('E-mail inválido')
-            return false
-        }
-
-        else if (senhaVar.length < 8) {
-            alert('Senha inválida')
-            return false
-        }
-
-        window.location.href = "Dashboard.html"
-        return true
+    //     }
 
 
-    }
-    // else {
-    //     setInterval(sumirMensagem, 5000)
+    //     if (carac_email == -1) {
+
+    //         alert('E-mail inválido')
+    //         return false
+    //     }
+
+    //     else if (senhaVar.length < 8) {
+    //         alert('Senha inválida')
+    //         return false
+    //     }
+
+    //     window.location.href = "Dashboard.html"
+    //     return true
+
+
+    // }
+    // // else {
+    // //     setInterval(sumirMensagem, 5000)
+    // // }
+
+    // console.log("FORM LOGIN: ", emailVar);
+    // console.log("FORM SENHA: ", senhaVar);
+
+    // fetch("/usuarios/autenticar", {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify({
+    //         // nomeServer: nomeVar,
+    //         emailServer: emailVar,
+    //         senhaServer: senhaVar
+    //     })
+    // }).then(function (resposta) {
+    //     console.log("ESTOU NO THEN DO entrar()!")
+
+    //     if (resposta.ok) {
+    //         console.log(resposta);
+
+    //         resposta.json().then(json => {
+    //             console.log(json);
+    //             console.log(JSON.stringify(json));
+    //             sessionStorage.EMAIL_USUARIO = json.email;
+    //             sessionStorage.NOME_USUARIO = json.nome;
+    //             sessionStorage.ID_USUARIO = json.id;
+    //             // sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+
+    //             setTimeout(function () {
+    //                 window.location = "./dashboard/cards.html";
+    //             }, 1000); // apenas para exibir o loading
+
+    //         });
+
+    //     } else {
+
+    //         console.log("Houve um erro ao tentar realizar o login!");
+
+    //         resposta.text().then(texto => {
+    //             console.error(texto);
+    //             // finalizarAguardar(texto);
+    //         });
+    //     }
+
+    // }).catch(function (erro) {
+    //     console.log(erro);
+    // })
+
+    // return false;
+
+
+    // function sumirMensagem() {
+    //     //  cardErro.style.display = "none"
     // }
 
-    console.log("FORM LOGIN: ", emailVar);
-    console.log("FORM SENHA: ", senhaVar);
-
-    fetch("/usuarios/autenticar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            // nomeServer: nomeVar,
-            emailServer: emailVar,
-            senhaServer: senhaVar
-        })
-    }).then(function (resposta) {
-        console.log("ESTOU NO THEN DO entrar()!")
-
-        if (resposta.ok) {
-            console.log(resposta);
-
-            resposta.json().then(json => {
-                console.log(json);
-                console.log(JSON.stringify(json));
-                sessionStorage.EMAIL_USUARIO = json.email;
-                sessionStorage.NOME_USUARIO = json.nome;
-                sessionStorage.ID_USUARIO = json.id;
-                // sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
-
-                setTimeout(function () {
-                    window.location = "./dashboard/cards.html";
-                }, 1000); // apenas para exibir o loading
-
-            });
-
-        } else {
-
-            console.log("Houve um erro ao tentar realizar o login!");
-
-            resposta.text().then(texto => {
-                console.error(texto);
-                // finalizarAguardar(texto);
-            });
-        }
-
-    }).catch(function (erro) {
-        console.log(erro);
-    })
-
-    return false;
-
-
-    function sumirMensagem() {
-        //  cardErro.style.display = "none"
+    function cancelar(){
+        window.location = "..   /teste.html";
     }
-
-</script>
-
-
-
 </script>

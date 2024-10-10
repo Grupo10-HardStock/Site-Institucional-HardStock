@@ -19,6 +19,11 @@
           width: 80%;
         }
 
+        h1{
+          display: flex;
+          justify-content: center;
+        }
+
         #add{
           width: auto;
           display: flex;
@@ -158,7 +163,7 @@
         </a></li>
         <li><a href="../dashboardGerente/dashboard_componentes.html">
           <i class="fa-solid fa-table-list"></i>
-          <span class="navItem">Componentes</span>
+          <span class="navItem">Servidores</span>
         </a></li>
         <div class="sair">
           <li><a href="#">
@@ -166,7 +171,7 @@
               <span class="navItem">Suporte</span>
             </a></li>
           <li>
-            <a href="#">
+            <a href="../../index.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
               <span class="navItem">Sair</span>
             </a>
@@ -178,7 +183,8 @@
 </div>
 
 <div class="alinhamento">
-  <button id="add"><a href="#">Novo Funcionário <i id="icone" class="fa-solid fa-plus"></i></a></button>
+  <h1>Funcionários</h1>
+  <button id="add"><a href="cadastro-funcionario.html">Novo Funcionário <i id="icone" class="fa-solid fa-plus"></i></a></button>
   <div id="userTable"></div>
 </div>
 
@@ -212,7 +218,7 @@
   }
   
   function editUser(id) {
-      alert('Editar usuário de ID: ' + id);
+    window.location = "./dashboard-edicaoFuncionario.html"
   }
   
   function deleteUser(id) {
@@ -223,10 +229,13 @@
   }
   
   const usersFromDB = [
-      {id: 1, name: 'João Silva', email: 'joao.silva@gmail.com'},
-      {id: 2, name: 'Maria Souza', email: 'maria.souza@gmail.com'},
-      {id: 3, name: 'Carlos Pereira', email: 'carlos.pereira@gmail.com'},
-      {id: 4, name: 'João Felipe', email: 'joao.felipe@gmail.com'}
+      {id: 1, name: 'João Silva', email: 'joao.silva@profit.com'},
+      {id: 2, name: 'Maria Souza', email: 'maria.souza@profit.com'},
+      {id: 3, name: 'Carlos Pereira', email: 'carlos.pereira@profit.com'},
+      {id: 4, name: 'João Felipe', email: 'joao.felipe@profit.com'},
+      {id: 4, name: 'João Felipe', email: 'joao.felipe@profit.com'},
+      {id: 4, name: 'João Felipe', email: 'joao.felipe@profit.com'},
+      {id: 4, name: 'João Felipe', email: 'joao.felipe@profit.com'}
   ];
   
   populateTable(usersFromDB);

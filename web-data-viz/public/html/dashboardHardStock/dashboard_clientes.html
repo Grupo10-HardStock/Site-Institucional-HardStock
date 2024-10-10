@@ -9,115 +9,118 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title>Dashboard Clientes | HardStock</title>
+  <title>Dashboard Empresas | HardStock</title>
 
-<style>
-  .alinhamento{
-          display: flex;
-          align-items: center;
-          flex-direction: column;
-          margin-top: 5%;
-          width: 80%;
-        }
-        
-
-        #add{
-          width: auto;
-          display: flex;
-          justify-content: end;
-          align-items: center;
-          background-color: transparent;
-        }
-        
-        #add a {
-          display: flex;
-          border-radius: 50px;
-          align-items: center;
-          width: 165px;
-          font-weight: bold;
-          color: white;
-          background-color: #000000;
-          padding: inherit;
-          padding-left: 2%;
-        }
-
-        #icone{
-          padding-left: 2%;
-          width: auto;
-          margin-left: 2%;
-          margin-bottom: 9px;
-        }
+  <style>
+    .alinhamento {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 5%;
+      width: 80%;
+    }
 
 
-        #userTable {
-            margin: 20px auto;
-            padding: 20px;
-            width: 100%;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
-        }
+    #add {
+      width: auto;
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      background-color: transparent;
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+    #add a {
+      display: flex;
+      border-radius: 50px;
+      align-items: center;
+      width: 165px;
+      font-weight: bold;
+      color: white;
+      background-color: #000000;
+      padding: inherit;
+      padding-left: 2%;
+    }
 
-        table, th, td {
-            border: 1px solid #ddd;
-        }
+    #icone {
+      padding-left: 2%;
+      width: auto;
+      margin-left: 2%;
+      margin-bottom: 9px;
+    }
 
-        th {
-            background-color: rgba(199, 208, 216, 1);
-            color: rgb(0, 0, 0);
-            padding: 12px;
-        }
 
-        td {
-            padding: 10px;
-            text-align: left;
-        }
+    #userTable {
+      margin: 20px auto;
+      padding: 20px;
+      width: 100%;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+    }
 
-        .action-btn {
-            padding: 5px 10px;
-            margin: 2px;
-            cursor: pointer;
-            border: none;
-            border-radius: 4px;
-        }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
 
-        .edits{
-          display: flex;
-          justify-content: flex-end;
-        }
+    table,
+    th,
+    td {
+      border: 1px solid #ddd;
+    }
 
-        .edit-btn {
-            background-color: transparent;
-            color: white;
-        }
+    th {
+      background-color: rgba(199, 208, 216, 1);
+      color: rgb(0, 0, 0);
+      padding: 12px;
+    }
 
-        .delete-btn {
-            background-color: transparent;
-            color: white;
-        }
+    td {
+      padding: 10px;
+      text-align: left;
+    }
 
-        .edit-btn:hover {
-            background-color: transparent;
-        }
+    .action-btn {
+      padding: 5px 10px;
+      margin: 2px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+    }
 
-        .delete-btn:hover {
-            background-color: transparent;
-        }
-        
-        #editar{
-          color: #000000;
-          background-color: none;
-        }
-        #excluir{
-          color: #d32f2f;
-        }
-</style>
+    .edits {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .edit-btn {
+      background-color: transparent;
+      color: white;
+    }
+
+    .delete-btn {
+      background-color: transparent;
+      color: white;
+    }
+
+    .edit-btn:hover {
+      background-color: transparent;
+    }
+
+    .delete-btn:hover {
+      background-color: transparent;
+    }
+
+    #botao {
+      color: #000000;
+      background-color: none;
+    }
+
+    #excluir {
+      color: #d32f2f;
+    }
+  </style>
 
 </head>
 
@@ -147,19 +150,19 @@
           </p>
         </li>
         <li><a href="../dashboardHardStock/dashboard_empresa.html">
-          <i class="fa-solid fa-square-plus"></i>
+            <i class="fa-solid fa-square-plus"></i>
             <span class="navItem">Cadastro Empresa</span>
           </a></li>
         <li><a href="../dashboardHardStock/dashboard_gerente.html">
-          <i class="fa-solid fa-user-plus"></i>
-          <span class="navItem">Cadastro Gerente</span>
+            <i class="fa-solid fa-user-plus"></i>
+            <span class="navItem">Cadastro Gerente</span>
           </a>
         </li>
         <li><a href="../dashboardHardStock/dashboard_clientes.html" style="background: rgb(0, 0, 0);color: #ffffff;">
-          <i class="fa-solid fa-people-group"></i>
-          <span class="navItem">Clientes</span>
-        </a></li>
-        
+            <i class="fa-solid fa-people-group"></i>
+            <span class="navItem">Empresas</span>
+          </a></li>
+
 
         <div class="sair">
           <li><a href="#">
@@ -167,7 +170,7 @@
               <span class="navItem">Suporte</span>
             </a></li>
           <li>
-            <a href="#">
+            <a href="../../index.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
               <span class="navItem">Sair</span>
             </a>
@@ -176,12 +179,12 @@
         </div>
       </ul>
   </nav>
-</div>
+  </div>
 
-<div class="alinhamento">
-  <h1>Clientes</h1>
-  <div id="userTable"></div>
-</div>
+  <div class="alinhamento">  
+    <h1>Empresas</h1>
+    <div id="userTable"></div>
+  </div>
 
 
 
@@ -189,17 +192,16 @@
 
 </html>
 <script>
-  function populateTable(users) {
-      let tableHTML = '<table><thead><tr><th>ID</th><th>Nome Empresa</th><th>Email</th><th>... Edições</th></tr></thead><tbody>';
-  
-      users.forEach(user => {
-          tableHTML += `<tr>
+function populateTable(users) {
+    let tableHTML = '<table><thead><tr><th>ID</th><th>Nome Empresa</th><th>Email</th><th>... Edições</th></tr></thead><tbody>';
+
+    users.forEach(user => {
+      tableHTML += `<tr>
                           <td>${user.id}</td>
                           <td>${user.name}</td>
                           <td>${user.email}</td>
                           <td class="edits">
-                            <button class="icon-btn edit-btn" onclick="editUser(${user.id})">
-                            <i id="editar" class="fa-solid fa-pen-to-square"></i>                            
+                            <button class="icon-btn edit-btn" onclick="editUser()"><i id="botao" class="fa-solid fa-pen-to-square"></i>                            
                             </button>
                             
                             <button class="icon-btn delete-btn" onclick="deleteUser(${user.id})">
@@ -207,29 +209,31 @@
                               </button>
                         </td>
                         </tr>`;
-      });
-  
-      tableHTML += '</tbody></table>';
-  
-      document.getElementById('userTable').innerHTML = tableHTML;
+    });
+
+    tableHTML += '</tbody></table>';
+
+    document.getElementById('userTable').innerHTML = tableHTML;
   }
-  
-  function editUser(id) {
-      alert('Editar Empresa de ID: ' + id);
+
+  function editUser() {
+    window.location = "./dashboard-edicao.html"
+
+    // alert('Editar Empresa de ID: ' + id);
   }
-  
+
   function deleteUser(id) {
-      const confirmDelete = confirm('Você tem certeza que deseja excluir o Empresa de ID: ' + id + '?');
-      if (confirmDelete) {
-          alert('Empresa de ID: ' + id + ' foi excluído.');
-      }
+    const confirmDelete = confirm('Você tem certeza que deseja excluir o Empresa de ID: ' + id + '?');
+    if (confirmDelete) {
+      alert('Empresa de ID: ' + id + ' foi excluído.');
+    }
   }
-  
+
   const usersFromDB = [
-      {id: 1, name: 'B3', email: 'joao.silva@b3.com'},
-      {id: 2, name: 'Profit', email: 'maria.souza@profit.com'},
-      {id: 3, name: 'CVM', email: 'carlos.pereira@cvm.com'}
+    { id: 1, name: 'Profit', email: 'profit@profit.com' },
+    { id: 2, name: 'CVM', email: 'cvm@cvm.com' },
+    { id: 3, name: 'B3', email: 'b3@b3.com' }
   ];
-  
+
   populateTable(usersFromDB);
-  </script>
+</script>

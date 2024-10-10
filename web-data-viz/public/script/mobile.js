@@ -5,11 +5,6 @@ $(document).ready(function(){
     })
 })
 
-// window.addEventListener('scroll', function() {
-//     let header = document.querySelector('#header')
-//     header.classList.toggle('rolagem', window.scrollY > 0)
-// })
-
 let darkmode = localStorage.getItem('darkmode')
 const themeSwitch = document.getElementById('theme-switch')
 
