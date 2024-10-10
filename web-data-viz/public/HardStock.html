@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HardStock</title>
+
+    <!-- Logo Na barra -->
+    <link rel="shortcut icon" href="../public/assets/icon/HardStock-preto.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="script" href="script/scripts.js">
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1><img src="../public/assets/imgs/HardStock - branco.png" alt="">HardStock</h1>
+            <nav>
+                <ul>
+                    <li>
+                        <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon" onclick="toggleDarkMode()"></i>
+                    </li>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#solutions">Solução</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                    <li><a href="./html/login.html" class="login-button">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h2>Construindo negócios de um <mark
+                    style="color: white; background-color: #141620; padding-left: 1%; padding-right: 1%;">futuro</mark>
+                melhor</h2>
+            <a href="#solutions" class="btn-primary">Veja as Funcionalidades</a>
+        </div>
+    </section>
+
+    <section id="solutions">
+        <div class="container">
+            <h2>Solução HardStock</h2>
+            <div class="solution-grid">
+                <div class="solution">
+                    <h3>Contexto</h3>
+                    <p>No dinâmico e altamente competitivo setor de compra e venda de ativos financeiros, a precisão e a
+                        confiabilidade dos sistemas de tecnologia são cruciais. Nosso produto inovador de monitoramento
+                        de hardware é projetado especificamente para atender às exigências dos servidores utilizados nas
+                        operações da bolsa de valores. Este sistema avançado permite a vigilância contínua e detalhada
+                        dos componentes de hardware, garantindo que todos os equipamentos estejam funcionando dentro dos
+                        parâmetros ideais e detectando quaisquer anomalias e enviando alertas antes que possam impactar
+                        as operações de negociação.</p>
+                </div>
+                <div class="solution">
+                    <h3>Problemas</h3>
+                    <p>Em um ambiente financeiro onde o tempo é dinheiro e a precisão é fundamental, a ausência de um
+                        sistema de monitoramento de hardware pode ter consequências devastadoras. Sem uma vigilância
+                        constante sobre os servidores que suportam as operações de compra e venda de ativos,
+                        interrupções inesperadas no hardware podem causar atrasos nas transações, perda de oportunidades
+                        de mercado e até mesmo prejuízos financeiros substanciais. Em 2020, por conta de um defeito em
+                        uma peça de hardware, a bolsa de valores de Tóquio teve uma perda financeira de aproximadamente
+                        <b>6 TRILHÕES DE DÓLARES</b>, ocasionando uma crise.
+                    </p>
+                </div>
+                <div class="solution">
+                    <h3>Vantagens</h3>
+                    <p>Problemas como o enfrentado pela bolsa de Tóquio não aconteceriam, tendo em vista que a principal
+                        vantagem do monitoramento contínuo de hardware é a prevenção de falhas e interrupções,
+                        garantindo que problemas sejam detectados e resolvidos antes de afetar as operações, o que
+                        mantém a fluidez do mercado. O sistema também reduz o tempo de inatividade, mantendo os
+                        servidores operacionais e eficientes mesmo diante de falhas iminentes. Além disso, melhora o
+                        desempenho ao permitir ajustes baseados em dados detalhados, e aumenta a segurança dos dados ao
+                        detectar anomalias precocemente. Isso também resulta em economia de custos, ao reduzir a
+                        necessidade de reparos emergenciais e substituições inesperadas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>Sobre Nós</h2>
+            <p>Garanta a eficiência e a segurança dos seus sistemas com a HardStock, líder em monitoramento de hardware.
+                Evite falhas inesperadas, reduza custos com manutenção e proteja seus dados críticos com nossa
+                tecnologia avançada.
+                <br><br>
+                A HardStock proporciona uma análise detalhada sobre seus sistemas, monitorando e garantindo durabilidade
+                e desempenho. Além disso, estamos sempre pensando em novas atualizações para sua melhor experiência.
+            </p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contato</h2>
+            <form action="submit_form.php" method="POST">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Mensagem:</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit" class="btn-primary">Enviar</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 HardStock - by equipe HardStock squad 2.</p>
+            <ul class="social-links">
+                <li><a href="https://github.com/Grupo10-HardStock/HardStock" target="_blank"><i
+                            class="fa-brands fa-github"></i></a></li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+
+</html>
+
+<script>
+    function toggleDarkMode() {
+        const body = document.body;
+        const themeToggleIcon = document.getElementById('themeToggleIcon');
+
+        
+        body.classList.toggle('dark-mode');
+
+        
+        if (body.classList.contains('dark-mode')) {
+            themeToggleIcon.classList.remove('fa-moon');
+            themeToggleIcon.classList.add('fa-sun'); 
+        } else {
+            themeToggleIcon.classList.remove('fa-sun');
+            themeToggleIcon.classList.add('fa-moon'); 
+        }
+    }
+</script>

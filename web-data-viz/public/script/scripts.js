@@ -20,3 +20,19 @@ themeSwitch.addEventListener("click", () => {
 
 
 
+function toggleDarkMode() {
+    const body = document.body;
+    const themeToggleIcon = document.getElementById('themeToggleIcon');
+
+    // Alterna o modo escuro/claro
+    body.classList.toggle('dark-mode');
+
+    // Alterar ícone conforme o tema
+    if (body.classList.contains('dark-mode')) {
+        themeToggleIcon.classList.remove('fa-moon');
+        themeToggleIcon.classList.add('fa-sun'); // Ícone de sol para o modo escuro
+    } else {
+        themeToggleIcon.classList.remove('fa-sun');
+        themeToggleIcon.classList.add('fa-moon'); // Ícone de lua para o modo claro
+    }
+}
