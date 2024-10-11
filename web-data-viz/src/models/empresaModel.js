@@ -24,4 +24,11 @@ function cadastrar(nome, cnpj, email) {
   return database.executar(instrucaoSql);
 }
 
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listar };
+
+function cadastrarGerente(nome, sobrenome, telefone, email, senha, permissao) {
+  var instrucaoSql = `insert into Funcionario (nome, sobrenome, numeroTelefone, email, senha, permissao) values ('${nome}', '${sobrenome}', ${telefone}, '${email}', '${senha}', '${permissao}')`;
+
+  return database.executar(instrucaoSql);
+}
+
+module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listar, cadastrarGerente };

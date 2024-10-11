@@ -32,9 +32,24 @@ function cadastrar(req, res) {
   });
 }
 
+
+function cadastrarGerente(req, res) {
+  let nome = req.body.nomeServer
+  let sobrenome = req.body.sobrenomeServer
+  let telefone = req.body.telefoneServer
+  let email = req.body.emailServer;
+  let senha = req.body.senhaServer;
+  let permissao = req.body.permissaoServer;
+
+  empresaModel.cadastrarGerente(nome, sobrenome, telefone, email, senha, permissao).then((resultado) => {
+    res.status(201).json(resultado);
+  });
+}
+
 module.exports = {
   buscarPorCnpj,
   buscarPorId,
   cadastrar,
   listar,
+  cadastrarGerente
 };
