@@ -10,51 +10,50 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Dashboard Mensal | HardStock</title>
 
-<style>
-    .centralizador{
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-content: center;
-        align-items: center;
-        width: 100%;
+  <style>
+    .centralizador {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-content: center;
+      align-items: center;
+      width: 100%;
 
     }
 
-    #selecTempo{
-        text-align: center;
-        background-color: rgb(145, 144, 144);
-        color:white;
-        font-size: large;
-        padding: 0.5%;
-        border-radius: 50px;
-        width: 15%;
-    }
-    
-    .graficos{
-        width: 65%;
+    #selecTempo {
+      text-align: center;
+      background-color: #232739;
+      color: white;
+      font-size: large;
+      padding: 0.5%;
+      border-radius: 50px;
+      width: 15%;
     }
 
-    .graficos1{
-        display: flex;
-        flex-direction: initial;
-        width: 100%;
+    .graficos {
+      width: 65%;
     }
 
-    .graficos2{
-        display: flex;
-        flex-direction: initial;
-        width: 100%;
+    .graficos1 {
+      display: flex;
+      flex-direction: initial;
+      width: 100%;
+    }
+
+    .graficos2 {
+      display: flex;
+      flex-direction: initial;
+      width: 100%;
     }
 
     .chart-container {
-            width: 100%;
-            margin: 20px auto;
-            align-items: center;
+      width: 100%;
+      margin: 20px auto;
+      align-items: center;
 
     }
-
-</style>
+  </style>
 
 </head>
 
@@ -108,45 +107,44 @@
         </div>
       </ul>
   </nav>
-</div>
+  </div>
 
-<div class="centralizador">
-    
+  <div class="centralizador">
+
     <select name="tempo" id="selecTempo">
-        <option value="#" selected disabled> Selecione o Tempo</option>
-        <option value="1"> 1 mês</option>
-        <option value="2"> 2 meses</option>
-        <option value="3"> 3 meses</option>
-        <option value="6"> 6 meses</option>
-        <option value="12"> 12 meses</option>
+      <option value="#" selected disabled> Selecione o Tempo</option>
+      <option value="1"> 1 mês</option>
+      <option value="3"> 3 meses</option>
+      <option value="6"> 6 meses</option>
+      <option value="12"> 12 meses</option>
     </select>
 
 
     <div class="graficos">
-        <div class="graficos1">
-            
-            <div class="chart-container">
-                <b>Média CPU</b>
-                <canvas id="cpuChart"></canvas>
-            </div>
-            <div class="chart-container">
-                <b>Média RAM</b>
-                <canvas id="ramChart"></canvas>
-            </div>
+      <div class="graficos1">
+
+        <div class="chart-container">
+          <b>Média CPU</b>
+          <canvas id="cpuChart"></canvas>
         </div>
-        <div class="graficos2">
-            <div class="chart-container">
-                <b>Média Rede</b>
-                <canvas id="networkChart"></canvas>
-            </div>
-            
-            <div class="chart-container">
-                <b>Média Disco</b>
-                <canvas id="diskChart"></canvas>
-            </div>
+        <div class="chart-container">
+          <b>Média RAM</b>
+          <canvas id="ramChart"></canvas>
         </div>
+      </div>
+      <div class="graficos2">
+        <div class="chart-container">
+          <b>Média Rede</b>
+          <canvas id="networkChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+          <b>Média Disco</b>
+          <canvas id="diskChart"></canvas>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
 </body>
 
@@ -156,66 +154,65 @@
 
 
 <script>
-    const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-    
-    const cpuData = [40, 45, 50, 55, 60, 65, 70, 75, 68, 64, 58, 52];
-    const ramData = [50, 55, 60, 62, 65, 67, 70, 72, 68, 66, 63, 58];
-    const networkData = [200, 210, 220, 230, 240, 250, 260, 255, 245, 235, 225, 215];
-    const diskData = [60, 62, 65, 67, 70, 72, 75, 77, 73, 70, 68, 64];
-    
-    function createChart(ctx, label, data, color) {
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: months,
-            datasets: [{
-                label: label,
-                data: data,
-                borderColor: color,
-                fill: false,
-                tension: 0.1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true
-                }
-            },
-            scales: {
-                x: {
-                    grid: {
-                        display: false 
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        borderDash: [8, 4], 
-                        color: 'rgba(0, 0, 0, 0.1)', 
-                    },
-                    title: {
-                        display: true,
-                        text: 'Uso (%) ou Mbps'
-                    }
-                }
-            }
-        }
-    });
-}
+  const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
-    
-    const cpuCtx = document.getElementById('cpuChart').getContext('2d');
-    createChart(cpuCtx, 'Média de Uso de CPU (%)', cpuData, 'red');
-    
-    const ramCtx = document.getElementById('ramChart').getContext('2d');
-    createChart(ramCtx, 'Média de Uso de RAM (%)', ramData, 'blue');
-    
-    const networkCtx = document.getElementById('networkChart').getContext('2d');
-    createChart(networkCtx, 'Média de Uso de Rede (Mbps)', networkData, 'green');
-    
-    const diskCtx = document.getElementById('diskChart').getContext('2d');
-    createChart(diskCtx, 'Média de Uso de Disco (%)', diskData, 'grey');
-    </script>
-    
+  const cpuData = [40, 45, 50, 55, 60, 65, 70, 75, 68, 64, 58, 52];
+  const ramData = [50, 55, 60, 62, 65, 67, 70, 72, 68, 66, 63, 58];
+  const networkData = [200, 210, 220, 230, 240, 250, 260, 255, 245, 235, 225, 215];
+  const diskData = [60, 62, 65, 67, 70, 72, 75, 77, 73, 70, 68, 64];
+
+  function createChart(ctx, label, data, color) {
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [{
+          label: label,
+          data: data,
+          borderColor: color,
+          fill: false,
+          tension: 0.1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: true
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              borderDash: [8, 4],
+              color: 'rgba(0, 0, 0, 0.1)',
+            },
+            title: {
+              display: true,
+              text: 'Uso (%) ou Mbps'
+            }
+          }
+        }
+      }
+    });
+  }
+
+
+  const cpuCtx = document.getElementById('cpuChart').getContext('2d');
+  createChart(cpuCtx, 'Média de Uso de CPU (%)', cpuData, 'red');
+
+  const ramCtx = document.getElementById('ramChart').getContext('2d');
+  createChart(ramCtx, 'Média de Uso de RAM (%)', ramData, 'blue');
+
+  const networkCtx = document.getElementById('networkChart').getContext('2d');
+  createChart(networkCtx, 'Média de Uso de Rede (Mbps)', networkData, 'green');
+
+  const diskCtx = document.getElementById('diskChart').getContext('2d');
+  createChart(diskCtx, 'Média de Uso de Disco (%)', diskData, 'grey');
+</script>

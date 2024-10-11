@@ -11,84 +11,85 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Dashboard Empresas | HardStock</title>
 
-   <style>
-    .alinhamento {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 2%;
-    width: 50%;
-    height: 90%;
-    background-color: white;
-    border-radius: 50px;
-    padding-top: 20px;
-}
+    <style>
+        .alinhamento {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 2%;
+            width: 50%;
+            height: 90%;
+            background-color: white;
+            border-radius: 50px;
+            padding-top: 20px;
+        }
 
-.campos {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-}
+        .campos {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
 
-.antes, .depois {
-    width: 45%;
-}
+        .antes,
+        .depois {
+            width: 45%;
+        }
 
-.titulo {
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-}
+        .titulo {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
 
-label {
-    display: block;
-    margin-bottom: 20px;
-}
+        label {
+            display: block;
+            margin-bottom: 20px;
+        }
 
-label p {
-    font-size: 1rem;
-    margin-bottom: 5px;
-}
+        label p {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
 
-#inputEditar {
-    width: 100%;
-    height: 35px;
-    border: none;
-    background-color: transparent;
-    border-bottom: 2px solid black;
-    font-size: 1rem;
-    padding: 5px;
-    margin-bottom: 10px;
-}
+        #inputEditar {
+            width: 100%;
+            height: 35px;
+            border: none;
+            background-color: transparent;
+            border-bottom: 2px solid black;
+            font-size: 1rem;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
 
-#btnCancel, #btnSave {
-    margin-top: 20px;
-    padding: 10px 20px;
-    width: auto;
-    height: auto;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-}
+        #btnCancel,
+        #btnSave {
+            margin-top: 20px;
+            padding: 10px 20px;
+            width: auto;
+            height: auto;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s ease-in-out;
+        }
 
-#btnCancel {
-    background-color: white;
-    border: 1px solid red;
-    color: red;
-    margin-right: 10px;
-}
+        #btnCancel {
+            background-color: white;
+            border: 1px solid red;
+            color: red;
+            margin-right: 10px;
+        }
 
-#btnSave {
-    background-color: rgb(11, 239, 11);
-    border: 1px solid rgb(11, 239, 11);
-    color: white;
-}
+        #btnSave {
+            background-color: rgb(11, 239, 11);
+            border: 1px solid rgb(11, 239, 11);
+            color: white;
+        }
 
-button:hover {
-    opacity: 0.8;
-}
-
-   </style>
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
 
 </head>
 
@@ -125,11 +126,11 @@ button:hover {
                     </a>
                 </li>
                 <li><a href="../dashboardHardStock/dashboard_clientes.html"
-                    style="background: rgba(199, 208, 216, 1);color: #191b27;">
+                        style="background: rgba(199, 208, 216, 1);color: #191b27;">
                         <i class="fa-solid fa-people-group"></i>
                         <span class="navItem" style="color: #191b27;">Empresas</span>
                     </a></li>
-                    <li><a href="../dashboardHardStock/dashboard-feedback.html">
+                <li><a href="../dashboardHardStock/dashboard-feedback.html">
                         <i class="fa-solid fa-message"></i>
                         <span class="navItem">Feedbacks</span>
                     </a></li>
@@ -196,7 +197,7 @@ button:hover {
 
 </html>
 <script>
- function cancelar(){
-    window.location = "./dashboard_clientes.html"
- }
+    function cancelar() {
+        window.location = "./dashboard_clientes.html"
+    }
 </script>

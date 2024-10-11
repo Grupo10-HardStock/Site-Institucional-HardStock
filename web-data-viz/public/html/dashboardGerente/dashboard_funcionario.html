@@ -11,116 +11,119 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Dashboard Funcionário | HardStock</title>
 
-<style>
-  .alinhamento{
-          display: flex;
-          flex-direction: column;
-          margin-top: 5%;
-          width: 80%;
-        }
+  <style>
+    .alinhamento {
+      display: flex;
+      flex-direction: column;
+      margin-top: 5%;
+      width: 80%;
+    }
 
-        h1{
-          display: flex;
-          justify-content: center;
-          color: #191b27;
-        }
+    h1 {
+      display: flex;
+      justify-content: center;
+      color: #191b27;
+    }
 
-        #add{
-          width: auto;
-          display: flex;
-          justify-content: end;
-          align-items: center;
-          background-color: transparent;
-        }
-        
-        #add a {
-          display: flex;
-          border-radius: 50px;
-          align-items: center;
-          width: 210px;
-          font-weight: bold;
-          color: white;
-          background-color: #191b27;
-          padding: inherit;
-          padding-left: 2%;
-        }
+    #add {
+      width: auto;
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      background-color: transparent;
+    }
 
-        #icone{
-          padding-left: 2%;
-          width: auto;
-          margin-left: 2%;
-          margin-bottom: 9px;
-        }
+    #add a {
+      display: flex;
+      border-radius: 50px;
+      align-items: center;
+      width: 210px;
+      font-weight: bold;
+      color: white;
+      background-color: #191b27;
+      padding: inherit;
+      padding-left: 2%;
+    }
 
-        #userTable {
-            margin: 20px auto;
-            padding: 20px;
-            width: 100%;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
-        }
+    #icone {
+      padding-left: 2%;
+      width: auto;
+      margin-left: 2%;
+      margin-bottom: 9px;
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+    #userTable {
+      margin: 20px auto;
+      padding: 20px;
+      width: 100%;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+    }
 
-        table, th, td {
-            border: 1px solid #ddd;
-        }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
 
-        th {
-            background-color: rgba(199, 208, 216, 1);
-            color: #191b27;
-            padding: 12px;
-        }
+    table,
+    th,
+    td {
+      border: 1px solid #ddd;
+    }
 
-        td {
-            padding: 10px;
-            text-align: left;
-        }
+    th {
+      background-color: rgba(199, 208, 216, 1);
+      color: #191b27;
+      padding: 12px;
+    }
 
-        .action-btn {
-            padding: 5px 10px;
-            margin: 2px;
-            cursor: pointer;
-            border: none;
-            border-radius: 4px;
-        }
+    td {
+      padding: 10px;
+      text-align: left;
+    }
 
-        .edits{
-          display: flex;
-          justify-content: flex-end;
-        }
+    .action-btn {
+      padding: 5px 10px;
+      margin: 2px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+    }
 
-        .edit-btn {
-            background-color: transparent;
-            color: white;
-        }
+    .edits {
+      display: flex;
+      justify-content: flex-end;
+    }
 
-        .delete-btn {
-            background-color: transparent;
-            color: white;
-        }
+    .edit-btn {
+      background-color: transparent;
+      color: white;
+    }
 
-        .edit-btn:hover {
-            background-color: transparent;
-        }
+    .delete-btn {
+      background-color: transparent;
+      color: white;
+    }
 
-        .delete-btn:hover {
-            background-color: transparent;
-        }
-        
-        #editar{
-          color: #191b27;
-          background-color: none;
-        }
-        #excluir{
-          color: #d32f2f;
-        }
-</style>
+    .edit-btn:hover {
+      background-color: transparent;
+    }
+
+    .delete-btn:hover {
+      background-color: transparent;
+    }
+
+    #editar {
+      color: #191b27;
+      background-color: none;
+    }
+
+    #excluir {
+      color: #d32f2f;
+    }
+  </style>
 
 </head>
 
@@ -158,14 +161,15 @@
             <span class="navItem">Mensal</span>
           </a>
         </li>
-        <li><a href="../dashboardGerente/dashboard_funcionario.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
-          <i class="fa-solid fa-user-plus"></i>
-          <span class="navItem" style="color: #191b27;">Funcionário</span>
-        </a></li>
+        <li><a href="../dashboardGerente/dashboard_funcionario.html"
+            style="background: rgba(199, 208, 216, 1);color: #191b27;">
+            <i class="fa-solid fa-user-plus"></i>
+            <span class="navItem" style="color: #191b27;">Funcionário</span>
+          </a></li>
         <li><a href="../dashboardGerente/dashboard_componentes.html">
-          <i class="fa-solid fa-table-list"></i>
-          <span class="navItem">Servidores</span>
-        </a></li>
+            <i class="fa-solid fa-table-list"></i>
+            <span class="navItem">Servidores</span>
+          </a></li>
         <div class="sair">
           <li><a href="#">
               <i class="fa-solid fa-headset"></i>
@@ -181,23 +185,24 @@
         </div>
       </ul>
   </nav>
-</div>
+  </div>
 
-<div class="alinhamento">
-  <h1>Funcionários</h1>
-  <button id="add"><a href="cadastro-funcionario.html">Novo Funcionário <i id="icone" class="fa-solid fa-plus"></i></a></button>
-  <div id="userTable"></div>
-</div>
+  <div class="alinhamento">
+    <h1>Funcionários</h1>
+    <button id="add"><a href="cadastro-funcionario.html">Novo Funcionário <i id="icone"
+          class="fa-solid fa-plus"></i></a></button>
+    <div id="userTable"></div>
+  </div>
 
 </body>
 
 </html>
 <script>
   function populateTable(users) {
-      let tableHTML = '<table><thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>... Edições</th></tr></thead><tbody>';
-  
-      users.forEach(user => {
-          tableHTML += `<tr>
+    let tableHTML = '<table><thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>... Edições</th></tr></thead><tbody>';
+
+    users.forEach(user => {
+      tableHTML += `<tr>
                           <td>${user.id}</td>
                           <td>${user.name}</td>
                           <td>${user.email}</td>
@@ -211,30 +216,30 @@
                               </button>
                         </td>
                         </tr>`;
-      });
-  
-      tableHTML += '</tbody></table>';
-  
-      document.getElementById('userTable').innerHTML = tableHTML;
+    });
+
+    tableHTML += '</tbody></table>';
+
+    document.getElementById('userTable').innerHTML = tableHTML;
   }
-  
+
   function editUser(id) {
     window.location = "./dashboard-edicaoFuncionario.html"
   }
-  
+
   function deleteUser(id) {
-      const confirmDelete = confirm('Você tem certeza que deseja excluir o usuário de ID: ' + id + '?');
-      if (confirmDelete) {
-          alert('Usuário de ID: ' + id + ' foi excluído.');
-      }
+    const confirmDelete = confirm('Você tem certeza que deseja excluir o usuário de ID: ' + id + '?');
+    if (confirmDelete) {
+      alert('Usuário de ID: ' + id + ' foi excluído.');
+    }
   }
-  
+
   const usersFromDB = [
-      {id: 1, name: 'João Silva', email: 'joao.silva@profit.com'},
-      {id: 2, name: 'Maria Souza', email: 'maria.souza@profit.com'},
-      {id: 3, name: 'Carlos Pereira', email: 'carlos.pereira@profit.com'},
-      {id: 4, name: 'João Felipe', email: 'joao.felipe@profit.com'}
+    { id: 1, name: 'João Silva', email: 'joao.silva@profit.com' },
+    { id: 2, name: 'Maria Souza', email: 'maria.souza@profit.com' },
+    { id: 3, name: 'Carlos Pereira', email: 'carlos.pereira@profit.com' },
+    { id: 4, name: 'João Felipe', email: 'joao.felipe@profit.com' }
   ];
-  
+
   populateTable(usersFromDB);
-  </script>
+</script>
