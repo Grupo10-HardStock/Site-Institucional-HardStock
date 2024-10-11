@@ -24,20 +24,20 @@
             <h1>Insira seus dados para continuar:</h1>
             <div>
                 <label for="input_nome">
-                    <span>Nome</span>
-                    <input type="text" id="input_nome">
-                    <p id="alertNome"></p>
-                </label>
-                <label for="input_email">
                     <span>Email</span>
                     <input type="text" id="input_email">
                     <p id="alertEmail"></p>
                 </label>
+                <label for="input_email">
+                    <span>Senha</span>
+                    <input type="text" id="input_senha">
+                    <p id="alertSenha"></p>
+                </label>
                 <div class="ctBtn">
-                    <button id="btn-cancelar" class="btn" onclick="cancelar()">Cancelar</button>
-                    <button id="btn-proximo" onclick="entrar()" class="btn">Login</button>
+                    <button id="btn-cancelar" class="btn" onclick="verificar('cancelar')">Cancelar</button>
+                    <button id="btn-proximo" onclick="verificar('login')" class="btn">Login</button>
                 </div>
-                <!-- <a href="/web-data-viz/public/teste.html"></a> -->
+                
             </div>
         </div>
 </body>
@@ -45,105 +45,87 @@
 </html>
 <script>
 
-    // function entrar() {
+    function verificar (value){
 
-    //     // var nomeVar = b_usuario;
-    //     var emailVar = input_email.value;
-    //     var senhaVar = input_senha.value;
-    //     var carac_email = email.indexOf('@')
+       if(value == 'login'){
+        let email = document.getElementById('input_email').value;
+        let senha = document.getElementById('input_senha').value;
 
-    //     if (emailVar == "" || senhaVar == "") {
-    //         cardErro.style.display = "block"
-    //         return false;
-    //     }
-
-    //     if (emailVar == '') {
-
-    //         alert('Digite seu email')
-
-    //     }
-    //     if (senhaVar == '') {
-
-    //         alert('Digite sua senha')
-
-    //     }
-
-
-    //     if (carac_email == -1) {
-
-    //         alert('E-mail inválido')
-    //         return false
-    //     }
-
-    //     else if (senhaVar.length < 8) {
-    //         alert('Senha inválida')
-    //         return false
-    //     }
-
-    //     window.location.href = "Dashboard.html"
-    //     return true
-
-
-    // }
-    // // else {
-    // //     setInterval(sumirMensagem, 5000)
-    // // }
-
-    // console.log("FORM LOGIN: ", emailVar);
-    // console.log("FORM SENHA: ", senhaVar);
-
-    // fetch("/usuarios/autenticar", {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //         // nomeServer: nomeVar,
-    //         emailServer: emailVar,
-    //         senhaServer: senhaVar
-    //     })
-    // }).then(function (resposta) {
-    //     console.log("ESTOU NO THEN DO entrar()!")
-
-    //     if (resposta.ok) {
-    //         console.log(resposta);
-
-    //         resposta.json().then(json => {
-    //             console.log(json);
-    //             console.log(JSON.stringify(json));
-    //             sessionStorage.EMAIL_USUARIO = json.email;
-    //             sessionStorage.NOME_USUARIO = json.nome;
-    //             sessionStorage.ID_USUARIO = json.id;
-    //             // sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
-
-    //             setTimeout(function () {
-    //                 window.location = "./dashboard/cards.html";
-    //             }, 1000); // apenas para exibir o loading
-
-    //         });
-
-    //     } else {
-
-    //         console.log("Houve um erro ao tentar realizar o login!");
-
-    //         resposta.text().then(texto => {
-    //             console.error(texto);
-    //             // finalizarAguardar(texto);
-    //         });
-    //     }
-
-    // }).catch(function (erro) {
-    //     console.log(erro);
-    // })
-
-    // return false;
-
-
-    // function sumirMensagem() {
-    //     //  cardErro.style.display = "none"
-    // }
-
-    function cancelar(){
-        window.location = "./HardStock.html";
+        if (email.indexOf('@') === -1 || email.indexOf('.') === -1){
+            alertEmail.innerHTML = "Preencha o email corretamente!"
+        setTimeout(() => {
+            alertEmail.innerHTML = ""
+        }, 2000)
+        } else if (email.length < 6 || email == null){
+            alertEmail.innerHTML = "Insira um email válido!"
+            setTimeout(() => {
+                alertEmail.innerHTML = ""
+            }, 2000)
+        } else if (senha == ""){
+            alertSenha.innerHTML = "Preencha o campo senha!"
+            setTimeout(() => {
+                alertSenha.innerHTML = ""
+            }, 2000);
+        } else if (senha.length < 4 ){
+            alertSenha.innerHTML = "Insira uma senha válida"
+            setTimeout(() => {
+                alertSenha.innerHTML = ""
+            }, 2000)
+        } else {
+            cadastro(email, senha)
+        }
+       } else if (value == 'cancelar'){
+           if(confirm("Você deseja realmente sair?")){
+               window.location = '../HardStock.html'
+           }
+       } else {
+        alert("ERRO de requisição!")
+       }
     }
+
+    function cadastro(email,senha) {
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: email,
+                senhaServer: senha
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+
+                    setTimeout(function () {
+                        window.location = "./dashboard/cards.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
 </script>
