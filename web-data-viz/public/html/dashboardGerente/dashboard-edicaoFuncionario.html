@@ -2,192 +2,193 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./dashboard-gerente.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Dashboard Edição Funcionário | HardStock</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./dashboard-gerente.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Dashboard Edição Funcionário | HardStock</title>
 
-    <style>
-        .alinhamento {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        margin-top: 2%;
-        width: 50%;
-        height: 90%;
-        background-color: gainsboro;
-        border-radius: 50px;
-        padding-top: 20px;
+  <style>
+    .alinhamento {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 2%;
+      width: 50%;
+      height: 90%;
+      background-color: white;
+      border-radius: 50px;
+      padding-top: 20px;
     }
-    
+
     .campos {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        padding: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
     }
-    
-    .antes, .depois {
-        width: 45%;
+
+    .antes,
+    .depois {
+      width: 45%;
     }
-    
+
     .titulo {
-        margin-bottom: 20px;
-        font-size: 1.2rem;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
     }
-    
+
     label {
-        display: block;
-        margin-bottom: 20px;
+      display: block;
+      margin-bottom: 20px;
     }
-    
+
     label p {
-        font-size: 1rem;
-        margin-bottom: 5px;
+      font-size: 1rem;
+      margin-bottom: 5px;
     }
-    
+
     #inputEditar {
-        width: 100%;
-        height: 35px;
-        border: none;
-        background-color: transparent;
-        border-bottom: 2px solid black;
-        font-size: 1rem;
-        padding: 5px;
-        margin-bottom: 10px;
+      width: 100%;
+      height: 35px;
+      border: none;
+      background-color: transparent;
+      border-bottom: 2px solid black;
+      font-size: 1rem;
+      padding: 5px;
+      margin-bottom: 10px;
     }
-    
-    #btnCancel, #btnSave {
-        margin-top: 20px;
-        padding: 10px 20px;
-        width: auto;
-        height: auto;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: 0.2s ease-in-out;
-    }
-    
-    #btnCancel {
-        background-color: white;
-        border: 1px solid red;
-        color: red;
-        margin-right: 10px;
-    }
-    
+
+    #btnCancel,
     #btnSave {
-        background-color: rgb(11, 239, 11);
-        border: 1px solid rgb(11, 239, 11);
-        color: white;
+      margin-top: 20px;
+      padding: 10px 20px;
+      width: auto;
+      height: auto;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
     }
-    
+
+    #btnCancel {
+      background-color: white;
+      border: 1px solid red;
+      color: red;
+      margin-right: 10px;
+    }
+
+    #btnSave {
+      background-color: rgb(11, 239, 11);
+      border: 1px solid rgb(11, 239, 11);
+      color: white;
+    }
+
     button:hover {
-        opacity: 0.8;
+      opacity: 0.8;
     }
-    
-       </style>
-    
+  </style>
+
 
 </head>
 
 <body>
-    <label for="sidebar-ativo" class="sideBar-open">
-        <i class="fa-duotone fa-solid fa-bars"></i>
-    </label>
-    <nav id="nav">
-        <div class="link-conteiner">
-          <label for="sidebar-ativo" class="sideBar-close">
-            <i id="close" class="fa-solid fa-xmark"></i>
-          </label>
-          <ul>
-            <li>
-              <p class="logo">
-                <img src="../assets/icon/HardStock-preto.png" alt="">
-                <span class="nav-item">Hardstock</span>
-              </p>
-            </li>
-            <li>
-              <p style="margin-bottom: 20px;">
-                <span class="navItem-nome">
-                  Olá, Fernanda
-                </span>
-              </p>
-            </li>
-            <li><a href="../dashboardGerente/dashboard_tempo.html">
-                <i class="fa-solid fa-chart-line"></i>
-                <span class="navItem">Tempo real</span>
-              </a></li>
-            <li><a href="../dashboardGerente/dashboard_mensal.html">
-                <i class="fa-solid fa-magnifying-glass-chart"></i>
-                <span class="navItem">Mensal</span>
-              </a>
-            </li>
-            <li><a href="../dashboardGerente/dashboard_funcionario.html" style=" background: rgb(0, 0, 0);color: #ffffff;">
-              <i class="fa-solid fa-user-plus"></i>
-              <span class="navItem">Funcionário</span>
+  <label for="sidebar-ativo" class="sideBar-open">
+    <i class="fa-duotone fa-solid fa-bars"></i>
+  </label>
+  <nav id="nav">
+    <div class="link-conteiner">
+      <label for="sidebar-ativo" class="sideBar-close">
+        <i id="close" class="fa-solid fa-xmark"></i>
+      </label>
+      <ul>
+        <li>
+          <p class="logo">
+            <img src="../assets/icon/HardStock - branco.png" alt="">
+            <span class="nav-item">Hardstock</span>
+          </p>
+        </li>
+        <li>
+          <p style="margin-bottom: 20px;">
+            <span class="navItem-nome">
+              Olá, Fernanda
+            </span>
+          </p>
+        </li>
+        <li><a href="../dashboardGerente/dashboard_tempo.html">
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="navItem">Tempo real</span>
+          </a></li>
+        <li><a href="../dashboardGerente/dashboard_mensal.html">
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
+            <span class="navItem">Mensal</span>
+          </a>
+        </li>
+        <li><a href="../dashboardGerente/dashboard_funcionario.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
+            <i class="fa-solid fa-user-plus"></i>
+            <span class="navItem" style="color: #191b27;">Funcionário</span>
+          </a></li>
+        <li><a href="../dashboardGerente/dashboard_componentes.html">
+            <i class="fa-solid fa-table-list"></i>
+            <span class="navItem">Servidores</span>
+          </a></li>
+        <div class="sair">
+          <li><a href="#">
+              <i class="fa-solid fa-headset"></i>
+              <span class="navItem">Suporte</span>
             </a></li>
-            <li><a href="../dashboardGerente/dashboard_componentes.html">
-              <i class="fa-solid fa-table-list"></i>
-              <span class="navItem">Servidores</span>
-            </a></li>
-            <div class="sair">
-              <li><a href="#">
-                  <i class="fa-solid fa-headset"></i>
-                  <span class="navItem">Suporte</span>
-                </a></li>
-              <li>
-                <a href="../dashboardGerente/">
-                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                  <span class="navItem">Cancelar</span>
-                </a>
-              </li>
-    
-            </div>
-          </ul>
-      </nav>
-    </div>
+          <li>
+            <a href="../dashboardGerente/">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              <span class="navItem">Cancelar</span>
+            </a>
+          </li>
 
-    <div class="alinhamento">
-        <h1>Atualizar Funcionário</h1>
-        <div class="campos">
-            <div class="antes">
-                <h3 class="titulo">Como estava:</h3>
-                <label id="telefone">
-                    <p>Telefone:</p><br>
-                    <input disabled id="inputEditar" type="text" value="(11)91547-8545"><br>
-                </label>
-                <label id="Senha">
-                    <p>Senha:</p><br>
-                    <input disabled id="inputEditar" type="text" value="profit2022"><br>
-                </label>
-                <label id="Cargo">
-                    <p>Cargo:</p><br>
-                    <input disabled id="inputEditar" type="text" value="Analista"><br>
-                </label>
-            </div>
-            <div class="depois">
-                <h3 class="titulo">Como irá ficar:</h3>
-                <label>
-                    <p>Telefone:</p><br>
-                    <input id="inputEditar" type="number" placeholder="Informe seu novo Telefone:"><br>
-                </label>
-                <label>
-                    <p>Senha:</p><br>
-                    <input id="inputEditar" type="password" placeholder="Informe sua nova Senha:"><br>
-                </label>
-                
-                <label>
-                    <p>Cargo:</p><br>
-                    <input id="inputEditar" type="text" placeholder="Informe seu novo Cargo:"><br>
-                    <button id="btnCancel" onclick="cancelar()">Cancelar</button>
-                    <button id="btnSave">Salvar</button>
-                </label>
-            </div>
         </div>
+      </ul>
+  </nav>
+  </div>
+
+  <div class="alinhamento">
+    <h1>Atualizar Funcionário</h1>
+    <div class="campos">
+      <div class="antes">
+        <h3 class="titulo">Como estava:</h3>
+        <label id="telefone">
+          <p>Telefone:</p><br>
+          <input disabled id="inputEditar" type="text" value="(11)91547-8545"><br>
+        </label>
+        <label id="Senha">
+          <p>Senha:</p><br>
+          <input disabled id="inputEditar" type="text" value="profit2022"><br>
+        </label>
+        <label id="Cargo">
+          <p>Cargo:</p><br>
+          <input disabled id="inputEditar" type="text" value="Analista"><br>
+        </label>
+      </div>
+      <div class="depois">
+        <h3 class="titulo">Como irá ficar:</h3>
+        <label>
+          <p>Telefone:</p><br>
+          <input id="inputEditar" type="number" placeholder="Informe seu novo Telefone:"><br>
+        </label>
+        <label>
+          <p>Senha:</p><br>
+          <input id="inputEditar" type="password" placeholder="Informe sua nova Senha:"><br>
+        </label>
+
+        <label>
+          <p>Cargo:</p><br>
+          <input id="inputEditar" type="text" placeholder="Informe seu novo Cargo:"><br>
+          <button id="btnCancel" onclick="cancelar()">Cancelar</button>
+          <button id="btnSave">Salvar</button>
+        </label>
+      </div>
     </div>
+  </div>
 
 
 
@@ -195,7 +196,7 @@
 
 </html>
 <script>
- function cancelar(){
+  function cancelar() {
     window.location = "./dashboard_funcionario.html"
- }
+  }
 </script>

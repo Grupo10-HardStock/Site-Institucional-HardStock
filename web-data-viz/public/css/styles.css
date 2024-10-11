@@ -151,7 +151,7 @@ nav ul li a:hover {
 
 .hero {
     margin-top: 0;
-    background-image: url(../public/assets/imgs/backgroundPredio.png);
+    background-image: url(../assets/imgs/backgroundPredio.png);
     background-repeat: no-repeat;
     color: white;
     text-align: center;

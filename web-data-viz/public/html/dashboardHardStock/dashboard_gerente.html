@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./dashboard-gerente.css">
+  <link rel="stylesheet" href="./dashboard-hardstock.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -13,45 +13,46 @@
 </head>
 
 <style>
-     .alinhamento {
+  .alinhamento {
     display: flex;
     align-items: center;
     flex-direction: column;
     margin-top: 2%;
     width: 50%;
     height: 90%;
-    background-color: gainsboro;
+    background-color: white;
     border-radius: 50px;
     padding-top: 20px;
-}
+  }
 
-.campos {
+  .campos {
     width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 20px;
-}
+  }
 
-.antes, .depois {
+  .antes,
+  .depois {
     width: 45%;
-}
+  }
 
-.titulo {
+  .titulo {
     margin-bottom: 20px;
     font-size: 1.2rem;
-}
+  }
 
-label {
+  label {
     display: block;
     /* margin-bottom: 20px; */
-}
+  }
 
-label p {
+  label p {
     font-size: 1rem;
     /* margin-bottom: 5px; */
-}
+  }
 
-#inputEditar {
+  #inputEditar {
     width: 100%;
     height: 35px;
     border: none;
@@ -60,8 +61,10 @@ label p {
     font-size: 1rem;
     padding: 5px;
     margin-bottom: 10px;
-}
-#btnCancel, #btnSave {
+  }
+
+  #btnCancel,
+  #btnSave {
     margin-top: 20px;
     padding: 10px 20px;
     width: auto;
@@ -69,37 +72,37 @@ label p {
     font-size: 1rem;
     cursor: pointer;
     transition: 0.2s ease-in-out;
-}
+  }
 
-#btnCancel {
+  #btnCancel {
     background-color: white;
     border: 1px solid red;
     color: red;
     margin-right: 10px;
-}
+  }
 
-#btnSave {
+  #btnSave {
     background-color: rgb(11, 239, 11);
     border: 1px solid rgb(11, 239, 11);
     color: white;
-}
+  }
 
-button:hover {
+  button:hover {
     opacity: 0.8;
-}
+  }
 
-#select{
-        text-align: center;
-        background-color: #c7d0d8;
-        font-size: large;
-        padding: 0.5%;
-        border-radius: 50px;
-        width: auto;
-        margin-top: 15px;
-        margin-bottom: 15px;
-    }
-
+  #select {
+    text-align: center;
+    background-color: #c7d0d8;
+    font-size: large;
+    padding: 0.5%;
+    border-radius: 50px;
+    width: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
 </style>
+
 <body>
   <label for="sidebar-ativo" class="sideBar-open">
     <i class="fa-duotone fa-solid fa-bars"></i>
@@ -114,7 +117,7 @@ button:hover {
       <ul>
         <li>
           <p class="logo">
-            <img src="../assets/icon/HardStock-preto.png" alt="">
+            <img src="../assets/icon/HardStock - branco.png" alt="">
             <span class="nav-item">Hardstock</span>
           </p>
         </li>
@@ -129,16 +132,21 @@ button:hover {
             <i class="fa-solid fa-square-plus"></i>
             <span class="navItem">Cadastro Empresa</span>
           </a></li>
-        <li><a href="../dashboardHardStock/dashboard_gerente.html" style="background: rgb(0, 0, 0);color: #ffffff;">
-            <i class="fa-solid fa-user-plus"></i>
-            <span class="navItem">Cadastro Gerente</span>
+        <li><a href="../dashboardHardStock/dashboard_gerente.html" 
+          style="background: rgba(199, 208, 216, 1);color: #191b27;">
+          <i class="fa-solid fa-user-plus"></i>
+            <span class="navItem" style="color: #191b27;">Cadastro Gerente</span>
           </a>
         </li>
         <li><a href="../dashboardHardStock/dashboard_clientes.html">
             <i class="fa-solid fa-people-group"></i>
             <span class="navItem">Empresas</span>
           </a></li>
-
+        <li><a href="../dashboardHardStock/dashboard-feedback.html">
+          <i class="fa-solid fa-message"></i>
+          <span class="navItem">Feedbacks</span>
+          </a>
+        </li>
 
         <div class="sair">
           <li><a href="#">
@@ -185,7 +193,7 @@ button:hover {
           <p>E-mail:</p><br>
           <input id="inputEditar" type="text" placeholder="Informe seu E-mail:"><br>
         </label>
-        <label> 
+        <label>
           <p>Senha:</p><br>
           <input id="inputEditar" type="number" placeholder="Informe sua Senha:"><br>
         </label>

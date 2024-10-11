@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./dashboard-gerente.css">
+  <link rel="stylesheet" href="./dashboard-analista.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -26,7 +26,7 @@
       <ul>
         <li>
           <p class="logo">
-            <img src="../assets/icon/HardStock-preto.png" alt="">
+            <img src="../assets/icon/HardStock - branco.png" alt="">
             <span class="nav-item">Hardstock</span>
           </p>
         </li>
@@ -37,16 +37,15 @@
             </span>
           </p>
         </li>
-        <li><a href="../dashboardAnalista/dashboard_tempoAnalista.html" style=" background: rgb(0, 0, 0);color: #ffffff;">
-          <i class="fa-solid fa-chart-line"></i>
-          <span class="navItem">Tempo real</span>
-        </a></li>
-      
-      <li><a href="../dashboardAnalista/dashboard_mensalAnalista.html">
-          <i class="fa-solid fa-magnifying-glass-chart"></i>
-          <span class="navItem">Mensal</span>
-        </a>
-      </li>
+        <li><a href="./dashboard_tempoAnalista.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="navItem" style="color: #191b27;">Tempo real</span>
+          </a></li>
+        <li><a href="./dashboard_mensalAnalista.html">
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
+            <span class="navItem">Mensal</span>
+          </a>
+        </li>
         <div class="sair">
           <li><a href="#">
               <i class="fa-solid fa-headset"></i>
@@ -62,9 +61,132 @@
         </div>
       </ul>
   </nav>
-</div>
+  <div class="opcoes-btn">
+    <select>
+      <option disabled selected>Selecione um Servidor</option>
+      <option value="1">Servidor 1</option>
+      <option value="2">Servidor 2</option>
+      <option value="3">Servidor 3</option>
+      <option value="4">Servidor 4</option>
+    </select>
+  </div>
+      <main>
+          <div class="card">
+            <canvas id="RamChart"></canvas>
+          </div>
+          <div class="card">
+            <canvas id="DiscoChart"></canvas>
+          </div>
+          <div class="card">
+            <canvas id="CPUChart"></canvas>
+          </div>
+          <div class="card">
+            <canvas id="RedeChart"></canvas>
+          </div>
+        </main>
+    </body>
 
-</body>
+    </html>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Gráfico de RAM
+    const ramCtx = document.getElementById('RamChart').getContext('2d');
+    new Chart(ramCtx, {
+      type: 'line',
+      data: {
+        labels: ['1', '2', '3', '4', '5', '6'],
+        datasets: [{
+          label: 'Uso de RAM',
+          data: [12, 19, 3, 5, 2, 3],
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 2,
+          fill: false
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: false
+          }
+        }
+      }
+    });
 
-</html>
+    // Gráfico de Disco
+    const discoCtx = document.getElementById('DiscoChart').getContext('2d');
+    new Chart(discoCtx, {
+      type: 'bar',
+      data: {
+        labels: ['1', '2', '3', '4', '5', '6'],
+        datasets: [{
+          label: 'Uso de Disco',
+          data: [20, 30, 40, 50, 60, 70],
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
 
+    // Gráfico de CPU
+    const cpuCtx = document.getElementById('CPUChart').getContext('2d');
+    new Chart(cpuCtx, {
+      type: 'line',
+      data: {
+        labels: ['1', '2', '3', '4', '5', '6'],
+        datasets: [{
+          label: 'Uso de CPU',
+          data: [10, 15, 8, 12, 7, 9],
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 2,
+          fill: false
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: false
+          }
+        }
+      }
+    });
+
+    // Gráfico de Rede
+    const redeCtx = document.getElementById('RedeChart').getContext('2d');
+    new Chart(redeCtx, {
+      type: 'line',
+      data: {
+        labels: ['Download', 'Upload'],
+        datasets: [{
+          label: 'Uso de Rede',
+          data: [70, 30, 30,30,30,30  ],
+          backgroundColor: [
+            'red',
+            'red'
+          ],
+          borderColor: [
+            'red',
+            'red'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+  </script>
