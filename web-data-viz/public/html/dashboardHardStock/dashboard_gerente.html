@@ -169,43 +169,103 @@
     <h1>Cadastrar Gerente</h1>
     <select name="empresa" id="select">
       <option value="#" disabled selected>Selecione a Empresa:</option>
-      <option value="1">Profit</option>
-      <option value="2">CVM</option>
-      <option value="3">B3</option>
+      
     </select>
     <div class="campos">
       <div class="antes">
         <label id="nome">
           <p>Nome:</p><br>
-          <input id="inputEditar" type="text" placeholder="Informe o Nome:"><br>
+          <input id="input_nome" type="text" placeholder="Informe seu Nome:"><br>
         </label>
         <label id="sobrenome">
           <p>Sobrenome:</p><br>
-          <input id="inputEditar" type="text" placeholder="Informe o Sobrenome:"><br>
+          <input id="input_sobrenome" type="text" placeholder="Informe seu Sobrenome:"><br>
         </label>
         <label id="telefone">
           <p>Telefone:</p><br>
-          <input id="inputEditar" type="text" placeholder="Informe o Telefone:"><br>
+          <input id="input_telefone" type="text" placeholder="Informe seu Telefone:"><br>
         </label>
       </div>
       <div class="depois">
         <label>
           <p>E-mail:</p><br>
-          <input id="inputEditar" type="text" placeholder="Informe o E-mail:"><br>
+          <input id="input_email" type="text" placeholder="Informe seu E-mail:"><br>
         </label>
         <label>
           <p>Senha:</p><br>
-          <input id="inputEditar" type="password" placeholder="Informe a Senha:"><br>
+          <input id="input_senha" type="text" placeholder="Informe sua Senha:"><br>
         </label>
         <label>
           <p>Permissão:</p><br>
-          <input id="inputEditar" type="text" placeholder="Informe a Permissão:"><br>
+          <input id="input_permissao" type="text" placeholder="Informe sua Permissão:"><br>
         </label>
       </div>
     </div>
-    <button id="btnSave">Salvar</button>
+    <button onclick="verificarCampos()" id="btnSave">Salvar</button>
   </div>
 
 </body>
+
+<script>
+  function verificarCampos() {
+    let nome = document.getElementById("input_nome").value;
+    let sobrenome = document.getElementById("input_sobrenome").value;
+    let telefone = document.getElementById("input_telefone").value;
+    let email = document.getElementById("input_email").value;
+    let senha = document.getElementById("input_senha").value;
+    let permissao = document.getElementById("input_permissao").value;
+    let empresa = document.getElementById("select").value;
+
+    if (nome === "" || sobrenome === "" || telefone === "" || email === "" || senha === "" || permissao === "" || empresa === "") {
+      alert("Por favor, preencha todos os campos.");
+
+    } else if(!email.includes("@") || !email.includes(".")) {
+      alert("Por favor, insira um e-mail válido.");
+    } else if(senha.length < 8) {
+      alert("Por favor, insira uma senha com pelo menos 8 caracteres.");
+      
+    } else if (telefone < 11) {
+      alert("Por favor, insira um número de telefone válido.");
+    } else {
+      cadastro (nome, sobrenome, telefone, email, senha, permissao, empresa);
+    }
+  }
+
+  function cadastro(nome, sobrenome, telefone, email, senha, permissao, empresa) {
+    
+    fetch("/empresas/cadastrarGerente", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+
+        nomeServer: nome,
+        sobrenomeServer: sobrenome,
+        telefoneServer: telefone,
+        emailServer: email,
+        senhaServer: senha,
+        permissaoServer: permissao,
+        empresaServer: empresa,
+      }), 
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+    
+           alert( "Gerente cadastrado com sucesso!")
+
+        } else {
+          throw  alert ("Houve um erro ao tentar realizar o cadastro!");
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+  }
+</script>
 
 </html>
