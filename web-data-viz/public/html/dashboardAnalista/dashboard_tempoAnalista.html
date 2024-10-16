@@ -61,34 +61,86 @@
         </div>
       </ul>
   </nav>
-  <div class="opcoes-btn">
-    <select>
-      <option disabled selected>Selecione um Servidor</option>
-      <option value="1">Servidor 1</option>
-      <option value="2">Servidor 2</option>
-      <option value="3">Servidor 3</option>
-      <option value="4">Servidor 4</option>
-    </select>
+
+  <div class="alinhamento">
+    <div class="monitor-container">
+      
+      <div class="alert" id="alerta-net">
+          <h3>Monitoramento de Rede</h3>
+          <p>Desempenho: <span class="alertas" id="ConRede"> 130mbps</span></p>
+          <p>Nível atual: <span class="alertas"  id="rede">Normal</span></p>
+      </div>
+      <div class="alert" id="alerta-ram">
+          <h3>Monitoramento de RAM</h3>
+          <p>Desempenho: <span class="alertas" id="ConRam">0%</span></p>
+          <p>Nível atual: <span class="alertas" id="ram">Normal</span></p>
+      </div>
+      <div class="alert" id="alerta-disco">
+          <h3>Monitoramento de Disco</h3>
+          <p>Desempenho: <span class="alertas" id="ConDisco">0%</span></p>
+          <p>Nível atual: <span class="alertas" id="disco">Normal</span></p>
+      </div>
+      <div class="alert" id="alerta-cpu">
+          <h3>Monitoramento de CPU</h3>
+          <p>Desempenho: <span class="alertas" id="rede">0%</span></p>
+          <p>Nível atual: <span class="alertas" id="cpu">Normal</span></p>
+      </div>
+    </div>
+  
+    <div class="opcoes-btn">
+      <select>
+        <option disabled selected>Selecione um Servidor</option>
+        <option value="1">Servidor 1</option>
+        <option value="2">Servidor 2</option>
+        <option value="3">Servidor 3</option>
+        <option value="4">Servidor 4</option>
+      </select>
+    </div>
+    <main>
+      <div class="card">
+        <canvas id="RamChart"></canvas>
+      </div>
+      <div class="card">
+        <canvas id="DiscoChart"></canvas>
+      </div>
+      <div class="card">
+        <canvas id="CPUChart"></canvas>
+      </div>
+      <div class="card">
+        <canvas id="RedeChart"></canvas>
+      </div>
+    </main>
   </div>
-  <main>
-    <div class="card">
-      <canvas id="RamChart"></canvas>
-    </div>
-    <div class="card">
-      <canvas id="DiscoChart"></canvas>
-    </div>
-    <div class="card">
-      <canvas id="CPUChart"></canvas>
-    </div>
-    <div class="card">
-      <canvas id="RedeChart"></canvas>
-    </div>
-  </main>
 </body>
 
 </html>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+
+  
+function simulacao() {
+    const alertaNet = document.getElementById('alerta-net');
+    const alertaRam = document.getElementById('alerta-ram');
+    const alertaDisco = document.getElementById('alerta-disco');
+    const alertaCpu = document.getElementById('alerta-cpu');
+
+    alertaNet.className = 'alert perigo'; 
+    document.getElementById('rede').textContent = 'Alerta';
+    document.getElementById('ConRede').textContent = '85mbps';
+
+    alertaRam.className = 'alert critico'; 
+    document.getElementById('ram').textContent = 'Crítico';
+    document.getElementById('ConRam').textContent = '75%';
+
+    alertaDisco.className = 'alert severo'; 
+    document.getElementById('disco').textContent = 'Severo';
+    document.getElementById('ConDisco').textContent = '98%';
+
+    cpuAlert.className = 'alert normal'; 
+    document.getElementById('cpu').textContent = 'Normal';
+}
+setTimeout(simulacao, 8000);
+
   // Gráfico de RAM
   const ramCtx = document.getElementById('RamChart').getContext('2d');
   new Chart(ramCtx, {
