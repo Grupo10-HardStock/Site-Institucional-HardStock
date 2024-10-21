@@ -13,13 +13,14 @@ foreign key (fkAdministrador) references Funcionario(idFuncionario),
 fkHardStock varchar(45) default "NP",
 primary key (idFuncionario));
 
+
 create table if not exists Empresa (
 idEmpresa int auto_increment,
-fkRepresentante int,
+fkRepresentante int default null,
 razaoSocial varchar (256),
 cnpj char(14),
 emailCorporativo varchar(256),
-primary key (idEmpresa,fkRepresentante));
+primary key (idEmpresa));
 
 create table if not exists Especificacoes (
 idEspecificacao int primary key auto_increment,
@@ -39,39 +40,55 @@ fkEspecificacao int,
 foreign key (fkEspecificacao) references Especificacoes(idEspecificacao),
 primary key (idServidor,fkEmpresa,fkEspecificacao));
 
-create table if not exists Componente (
-idComponente int auto_increment,
-fkServidor int,
-foreign key (fkServidor) references Servidor(idServidor),
-`cpu` float,
-memoriaRam float,
-disco float,
-rede float,
-primary key (idComponente,fkServidor));
-
-create table if not exists Captura (
-idCaptura int auto_increment,
-fkComponenente int,
-foreign key (fkComponenente) references Componente(idComponente),
-unidadeMedida varchar (45),
-`status` varchar (50),
-primary key (idCaptura, fkComponenente)
+create table if not exists CapturasPython  (
+    idPython INT AUTO_INCREMENT,
+    fkServidor int,
+    foreign key (fkServidor) references Servidor(idServidor),
+    data_hora DATETIME NOT NULL,
+    cpu_uso_percentual FLOAT,
+    cpu_velocidade FLOAT,
+    cpu_tempo_ativo FLOAT,
+    disco_total_gb FLOAT,
+    disco_usado_gb FLOAT,
+    disco_livre_gb FLOAT,
+    disco_porcentagem_usada FLOAT,
+    disco_tempo_leitura_ms FLOAT,
+    disco_tempo_gravacao_ms FLOAT,
+    memoria_total_gb FLOAT,
+    memoria_disponivel_gb FLOAT,
+    memoria_porcentagem_usada FLOAT,
+    memoria_usada_gb FLOAT,
+    primary key (idPython,fkServidor)
 );
 
-
-create table if not exists Dados (
-idDados int auto_increment,
+create table if not exists Alertas_pyhton (
+idAlerta int auto_increment,
 fkCaptura int,
-foreign key (fkCaptura) references Captura(idCaptura),
-dados varchar(45),
-horaData datetime,
-primary key (idDados,fkCaptura));
-
-create table if not exists Alertas (
-idalerta int auto_increment,
-fkComponente int,
-foreign key (fkComponente) references Componente(idComponente),
+foreign key (fkCaptura) references CapturasPython(idPython),
 gravidade enum('baixo', 'médio', 'alto', 'critico'),
 descricao varchar(256),
 data_criacao timestamp default current_timestamp,
-primary key (idalerta,fkComponente));
+primary key (idAlerta, fkCaptura)
+);
+
+create table if not exists CapturasLooca (
+idLooca int auto_increment,
+fkServidor int,
+foreign key (fkServidor) references Servidor(idServidor),
+bytes_enviados float,
+bytes_recebidos float,
+data_hora timestamp DEFAULT CURRENT_TIMESTAMP,
+primary key (idLooca, fkServidor)
+);
+
+create table if not exists Alertas_looca (
+idAlerta int auto_increment,
+fkCaptura int,
+foreign key (fkCaptura) references CapturasLooca(idLooca),
+gravidade enum('baixo', 'médio', 'alto', 'critico'),
+descricao varchar(256),
+data_criacao timestamp default current_timestamp,
+primary key (idAlerta, fkCaptura)
+);
+
+

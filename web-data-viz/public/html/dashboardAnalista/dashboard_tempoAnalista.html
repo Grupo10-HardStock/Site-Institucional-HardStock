@@ -32,8 +32,8 @@
         </li>
         <li>
           <p style="margin-bottom: 20px;">
-            <span class="navItem-nome">
-              Olá, Fernanda
+            <span id="nome" class="navItem-nome">
+    
             </span>
           </p>
         </li>
@@ -52,7 +52,7 @@
               <span class="navItem">Suporte</span>
             </a></li>
           <li>
-            <a href="../../HardStock.html">
+             <a href="../../index.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
               <span class="navItem">Sair</span>
             </a>
@@ -241,4 +241,9 @@ setTimeout(simulacao, 8000);
       maintainAspectRatio: false
     }
   });
+  
+  function carregarNome(){
+    let nome = sessionStorage.getItem('NOME_USUARIO');
+    nome.innerHTML = `Olá, ${nome}`;
+  }
 </script>

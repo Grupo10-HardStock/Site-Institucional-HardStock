@@ -14,7 +14,7 @@
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="./css/styles.css">
     <link rel="script" href="../script/scripts.js">
 
 </head>
@@ -149,4 +149,32 @@
             themeToggleIcon.classList.add('fa-moon');
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const solutions = document.querySelectorAll('.solution');
+    const aboutSection = document.querySelector('#about');
+
+    function showOnScroll() {
+        const triggerBottom = window.innerHeight * 0.85;
+
+        // Mostrar as soluções
+        solutions.forEach(solution => {
+            const solutionTop = solution.getBoundingClientRect().top;
+
+            if (solutionTop < triggerBottom) {
+                solution.classList.add('show');
+            }
+        });
+
+        // Mostrar a seção "Sobre Nós"
+        const aboutTop = aboutSection.getBoundingClientRect().top;
+        if (aboutTop < triggerBottom) {
+            aboutSection.classList.add('show');
+        }
+    }
+
+    window.addEventListener('scroll', showOnScroll);
+    showOnScroll();  // Executa ao carregar a página também
+});
+
 </script>

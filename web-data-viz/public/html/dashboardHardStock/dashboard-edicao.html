@@ -43,7 +43,7 @@
 
         label {
             display: block;
-            margin-bottom: 20px;
+            /* margin-bottom: 20px; */
         }
 
         label p {
@@ -64,8 +64,8 @@
 
         #btnCancel,
         #btnSave {
-            margin-top: 20px;
-            padding: 10px 20px;
+            margin-top: 8px;
+            padding: 5px 5px;
             width: auto;
             height: auto;
             font-size: 1rem;
@@ -120,8 +120,8 @@
                 </li>
                 <li>
                     <p style="margin-bottom: 20px;">
-                        <span class="navItem-nome">
-                            Olá, Fernanda
+                        <span  id="nome" class="navItem-nome">
+                   
                         </span>
                     </p>
                 </li>
@@ -149,7 +149,7 @@
                             <span class="navItem">Suporte</span>
                         </a></li>
                     <li>
-                        <a href="../../HardStock.html">
+                        <a href="../../index.html">
                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
                             <span class="navItem">Sair</span>
                         </a>
@@ -209,4 +209,8 @@
     function cancelar() {
         window.location = "./dashboard_clientes.html"
     }
+    function carregarNome(){
+    let nome = sessionStorage.getItem('NOME_USUARIO');
+    nome.innerHTML = `Olá, ${nome}`;
+  }
 </script>

@@ -29,7 +29,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    padding:  0px 20px 0px 20px;
   }
 
   .antes,
@@ -66,7 +66,7 @@
 
   #btnCancel,
   #btnSave {
-    margin-top: 20px;
+    margin-top: 12px;
     padding: 10px 20px;
     width: auto;
     height: auto;
@@ -124,8 +124,8 @@
         </li>
         <li>
           <p style="margin-bottom: 20px;">
-            <span class="navItem-nome">
-              Olá, Fernanda
+            <span id="nome" class="navItem-nome">
+        
             </span>
           </p>
         </li>
@@ -155,7 +155,7 @@
               <span class="navItem">Suporte</span>
             </a></li>
           <li>
-            <a href="../../HardStock.html">
+            <a href="../../index.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
               <span class="navItem">Sair</span>
             </a>
@@ -198,7 +198,12 @@
         </label>
         <label>
           <p>Permissão:</p><br>
-          <input id="input_permissao" type="text" placeholder="Informe sua Permissão:"><br>
+          <select id="input_permissao">
+            <option value="1">ADM</option>
+            <option value="2">Gerente</option>
+            <option value="3">Analista</option>
+          </select>
+          
         </label>
       </div>
     </div>
@@ -266,6 +271,11 @@
       });
 
     return false;
+  }
+
+  function carregarNome(){
+    let nome = sessionStorage.getItem('NOME_USUARIO');
+    nome.innerHTML = `Olá, ${nome}`;
   }
 </script>
 

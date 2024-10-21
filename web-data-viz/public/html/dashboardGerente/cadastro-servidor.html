@@ -126,8 +126,8 @@
         </li>
         <li>
           <p style="margin-bottom: 20px;">
-            <span class="navItem-nome">
-              Olá, Fernanda
+            <span id="nome" class="navItem-nome">
+          
             </span>
           </p>
         </li>
@@ -228,5 +228,10 @@
 <script>
   function cancelar() {
     window.location = "./dashboard_componentes.html"
+  }
+  
+  function carregarNome(){
+    let nome = sessionStorage.getItem('NOME_USUARIO');
+    nome.innerHTML = `Olá, ${nome}`;
   }
 </script>
