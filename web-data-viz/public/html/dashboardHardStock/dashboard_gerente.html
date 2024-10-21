@@ -29,7 +29,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding:  0px 20px 0px 20px;
+    padding: 0px 20px 0px 20px;
   }
 
   .antes,
@@ -52,8 +52,7 @@
     /* margin-bottom: 5px; */
   }
 
-  input
-  {
+  input {
     width: 100%;
     height: 35px;
     border: none;
@@ -104,7 +103,7 @@
   }
 </style>
 
-<body>
+<body onload="carregarNome()">
   <label for="sidebar-ativo" class="sideBar-open">
     <i class="fa-duotone fa-solid fa-bars"></i>
   </label>
@@ -124,9 +123,7 @@
         </li>
         <li>
           <p style="margin-bottom: 20px;">
-            <span id="nome" class="navItem-nome">
-        
-            </span>
+            <span id="nomeTop" class="navItem-nome"></span>
           </p>
         </li>
         <li><a href="../dashboardHardStock/dashboard_empresa.html">
@@ -150,7 +147,8 @@
         </li>
 
         <div class="sair">
-          <li><a href="#">
+          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4
+" target="_blank">
               <i class="fa-solid fa-headset"></i>
               <span class="navItem">Suporte</span>
             </a></li>
@@ -170,7 +168,7 @@
     <h1>Cadastrar Gerente</h1>
     <select name="empresa" id="select">
       <option value="#" disabled selected>Selecione a Empresa:</option>
-      
+
     </select>
     <div class="campos">
       <div class="antes">
@@ -199,11 +197,12 @@
         <label>
           <p>Permissão:</p><br>
           <select id="input_permissao">
+            <option disabled selected>Selecione o cargo</option>
             <option value="1">ADM</option>
             <option value="2">Gerente</option>
             <option value="3">Analista</option>
           </select>
-          
+
         </label>
       </div>
     </div>
@@ -225,20 +224,20 @@
     if (nome === "" || sobrenome === "" || telefone === "" || email === "" || senha === "" || permissao === "" || empresa === "") {
       alert("Por favor, preencha todos os campos.");
 
-    } else if(!email.includes("@") || !email.includes(".")) {
+    } else if (!email.includes("@") || !email.includes(".")) {
       alert("Por favor, insira um e-mail válido.");
-    } else if(senha.length < 8) {
+    } else if (senha.length < 8) {
       alert("Por favor, insira uma senha com pelo menos 8 caracteres.");
-      
+
     } else if (telefone < 11) {
       alert("Por favor, insira um número de telefone válido.");
     } else {
-      cadastro (nome, sobrenome, telefone, email, senha, permissao, empresa);
+      cadastro(nome, sobrenome, telefone, email, senha, permissao, empresa);
     }
   }
 
   function cadastro(nome, sobrenome, telefone, email, senha, permissao, empresa) {
-    
+
     fetch("/empresas/cadastrarGerente", {
       method: "POST",
       headers: {
@@ -253,17 +252,17 @@
         senhaServer: senha,
         permissaoServer: permissao,
         empresaServer: empresa,
-      }), 
+      }),
     })
       .then(function (resposta) {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-    
-           alert( "Gerente cadastrado com sucesso!")
+
+          alert("Gerente cadastrado com sucesso!")
 
         } else {
-          throw  alert ("Houve um erro ao tentar realizar o cadastro!");
+          throw alert("Houve um erro ao tentar realizar o cadastro!");
         }
       })
       .catch(function (resposta) {
@@ -273,9 +272,9 @@
     return false;
   }
 
-  function carregarNome(){
-    let nome = sessionStorage.getItem('NOME_USUARIO');
-    nome.innerHTML = `Olá, ${nome}`;
+  function carregarNome() {
+    let text = sessionStorage.NOME_USUARIO;
+    nomeTop.innerHTML = "Olá, " + text;
   }
 </script>
 

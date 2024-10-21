@@ -57,7 +57,7 @@
 
 </head>
 
-<body>
+<body onload="carregarNome()">
   <label for="sidebar-ativo" class="sideBar-open">
     <i class="fa-duotone fa-solid fa-bars"></i>
   </label>
@@ -101,7 +101,8 @@
             <span class="navItem">Servidores</span>
           </a></li>
         <div class="sair">
-          <li><a href="#">
+          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4
+" target="_blank">
               <i class="fa-solid fa-headset"></i>
               <span class="navItem">Suporte</span>
             </a></li>
@@ -225,7 +226,7 @@
   createChart(diskCtx, 'Média de Uso de Disco (%)', diskData, 'grey');
 
   function carregarNome(){
-    let nome = sessionStorage.getItem('NOME_USUARIO');
-    nome.innerHTML = `Olá, ${nome}`;
+     let text = sessionStorage.NOME_USUARIO;
+    nome.innerHTML = "Olá, " + text;
   }
 </script>

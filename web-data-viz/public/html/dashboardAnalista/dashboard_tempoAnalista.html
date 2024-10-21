@@ -12,7 +12,7 @@
 
 </head>
 
-<body>
+<body onload="carregarNome()">
   <label for="sidebar-ativo" class="sideBar-open">
     <i class="fa-duotone fa-solid fa-bars"></i>
   </label>
@@ -32,9 +32,7 @@
         </li>
         <li>
           <p style="margin-bottom: 20px;">
-            <span id="nome" class="navItem-nome">
-    
-            </span>
+            <span id="nome" class="navItem-nome"></span>
           </p>
         </li>
         <li><a href="./dashboard_tempoAnalista.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
@@ -47,7 +45,8 @@
           </a>
         </li>
         <div class="sair">
-          <li><a href="#">
+          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4
+" target="_blank">
               <i class="fa-solid fa-headset"></i>
               <span class="navItem">Suporte</span>
             </a></li>
@@ -243,7 +242,7 @@ setTimeout(simulacao, 8000);
   });
   
   function carregarNome(){
-    let nome = sessionStorage.getItem('NOME_USUARIO');
-    nome.innerHTML = `Olá, ${nome}`;
+    let teste = sessionStorage.NOME_USUARIO;
+    nome.innerHTML = "Olá, " + teste;
   }
 </script>

@@ -110,7 +110,7 @@
 </style>
 
 
-<body>
+<body onload="carregarNome()">
   <label for="sidebar-ativo" class="sideBar-open">
     <i class="fa-duotone fa-solid fa-bars"></i>
   </label>
@@ -130,7 +130,7 @@
         </li>
         <li>
           <p style="margin-bottom: 20px;">
-            <span id="nome" class="navItem-nome">
+            <span id="nomeTop" class="navItem-nome">
 
             </span>
           </p>
@@ -155,7 +155,8 @@
 
 
         <div class="sair">
-          <li><a href="#">
+          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4
+" target="_blank">
               <i class="fa-solid fa-headset"></i>
               <span class="navItem">Suporte</span>
             </a></li>
@@ -248,7 +249,7 @@
   }
 
   function carregarNome(){
-    let nome = sessionStorage.getItem('NOME_USUARIO');
-    nome.innerHTML = `Olá, ${nome}`;
+    let text = sessionStorage.NOME_USUARIO;
+    nomeTop.innerHTML = "Olá, " + text;
   }
 </script>
