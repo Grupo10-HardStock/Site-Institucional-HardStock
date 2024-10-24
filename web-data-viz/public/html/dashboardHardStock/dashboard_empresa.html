@@ -178,15 +178,15 @@
       <div class="antes">
         <label id="nome">
           <p>Razão Social:</p><br>
-          <input id="inputEditar" type="text" placeholder="Informe seu Nome:"><br>
+          <input id="input_nome" type="text" placeholder="Informe sua Razão social:"><br>
         </label>
         <label id="cnpj">
           <p>CNPJ:</p><br>
-          <input id="inputEditar" type="text" placeholder="Informe seu Sobrenome:"><br>
+          <input id="input_cnpj" type="text" placeholder="Informe seu CNPJ:"><br>
         </label>
         <label id="email">
           <p>E-mail:</p><br>
-          <input id="inputEditar" type="text" placeholder="Informe seu E-mail:"><br>
+          <input id="input_email" type="text" placeholder="Informe seu E-mail:"><br>
         </label>
       </div>
     </div>
@@ -207,7 +207,7 @@
 
     if (nome == "" || cnpj == "" || email == "") {
       alert("Preencha os dados corretamente")
-    } else if (cnpj.length < 13) {
+    } else if (cnpj.length < 10) {
       alert("Preencha o CNPJ corretamente")
     } else if (email.indexOf('@') == -1 || email.indexOf('.') == -1) {
       alert("Insira um email válido")
