@@ -7,7 +7,7 @@ function buscarPorId(id) {
 }
 
 function listar() {
-  var instrucaoSql = `SELECT id, razao_social, cnpj, codigo_ativacao FROM empresa`;
+  var instrucaoSql = `select idEmpresa, razaoSocial from Empresa;`;
 
   return database.executar(instrucaoSql);
 }
@@ -25,8 +25,8 @@ function cadastrar(nome, cnpj, email) {
 }
 
 
-function cadastrarGerente(nome, sobrenome, telefone, email, senha, permissao) {
-  var instrucaoSql = `insert into Funcionario (nome, sobrenome, numeroTelefone, email, senha, permissao) values ('${nome}', '${sobrenome}', ${telefone}, '${email}', '${senha}', '${permissao}')`;
+function cadastrarGerente(nome, sobrenome, telefone, email, senha, permissao, empresa) {
+  var instrucaoSql = `insert into Funcionario (nome, sobrenome, numeroTelefone, email, senha, permissao, fkEmpresa) values ('${nome}', '${sobrenome}', ${telefone}, '${email}', '${senha}', '${permissao}', '${empresa}')`;
 
   return database.executar(instrucaoSql);
 }

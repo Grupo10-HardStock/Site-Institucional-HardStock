@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -190,6 +194,13 @@ nav ul li a:hover {
     background-color: white;
 }
 
+#solutions2 {
+    margin-top: 10px;
+    padding: 134px 30px 10px;
+    ;
+    background-color: white;
+}
+
 #solutions h2 {
     text-align: center;
     margin-bottom: 30px;
@@ -352,6 +363,11 @@ footer p {
 
 .social-links li a:hover {
     color: #0004f4;
+}
+
+.mvv{
+    height: 100%;
+    width: 100%;
 }
 
 

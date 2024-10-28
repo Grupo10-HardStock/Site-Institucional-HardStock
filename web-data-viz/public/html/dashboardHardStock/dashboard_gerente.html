@@ -91,7 +91,7 @@
     opacity: 0.8;
   }
 
-  #select {
+  #listaEmpresas {
     text-align: center;
     background-color: #c7d0d8;
     font-size: large;
@@ -103,7 +103,7 @@
   }
 </style>
 
-<body onload="carregarNome()">
+<body onload="carregarNome(), listar()">
   <label for="sidebar-ativo" class="sideBar-open">
     <i class="fa-duotone fa-solid fa-bars"></i>
   </label>
@@ -166,7 +166,7 @@
 
   <div class="alinhamento">
     <h1>Cadastrar Gerente</h1>
-    <select name="empresa" id="select">
+    <select name="empresa" id="listaEmpresas">
       <option value="#" disabled selected>Selecione a Empresa:</option>
 
     </select>
@@ -219,7 +219,7 @@
     let email = document.getElementById("input_email").value;
     let senha = document.getElementById("input_senha").value;
     let permissao = document.getElementById("input_permissao").value;
-    let empresa = document.getElementById("select").value;
+    let empresa = document.getElementById("listaEmpresas").value;
 
     if (nome === "" || sobrenome === "" || telefone === "" || email === "" || senha === "" || permissao === "" || empresa === "") {
       alert("Por favor, preencha todos os campos.");
@@ -271,7 +271,23 @@
 
     return false;
   }
-
+  function listar() {
+  fetch("/empresas/listar", {
+    method: "GET",
+  })
+    .then(function (resposta) {
+      resposta.json().then(json => {
+        json.forEach(empresa => {
+          console.log(empresa.idEmpresa);
+          console.log(empresa.razaoSocial);
+          listaEmpresas.innerHTML += `<option value='${empresa.idEmpresa}'>${empresa.razaoSocial}</option>`;
+        });
+      });
+    })
+    .catch(function (erro) {
+      console.log(`#ERRO: ${erro}`);
+    });
+}
   function carregarNome() {
     let text = sessionStorage.NOME_USUARIO;
     nomeTop.innerHTML = "Olá, " + text;

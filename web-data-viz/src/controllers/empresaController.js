@@ -40,8 +40,9 @@ function cadastrarGerente(req, res) {
   let email = req.body.emailServer;
   let senha = req.body.senhaServer;
   let permissao = req.body.permissaoServer;
+  let empresa = req.body.empresaServer;
 
-  empresaModel.cadastrarGerente(nome, sobrenome, telefone, email, senha, permissao).then((resultado) => {
+  empresaModel.cadastrarGerente(nome, sobrenome, telefone, email, senha, permissao, empresa).then((resultado) => {
     res.status(201).json(resultado);
   });
 }
