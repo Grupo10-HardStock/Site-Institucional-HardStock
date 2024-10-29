@@ -109,6 +109,10 @@ nav ul li a:hover {
     background-color: #232739;
     color: #f0f0f0;
 }
+.dark-mode #solutionS2 {
+    background-color: #232739;
+    color: #f0f0f0;
+}
 
 .dark-mode .solution {
     background-color: #191b27;
@@ -197,7 +201,6 @@ nav ul li a:hover {
 #solutions2 {
     margin-top: 10px;
     padding: 134px 30px 10px;
-    ;
     background-color: white;
 }
 
@@ -361,15 +364,91 @@ footer p {
     font-size: 1.2rem;
 }
 
+
+
 .social-links li a:hover {
     color: #0004f4;
 }
 
-.mvv{
-    height: 100%;
-    width: 100%;
-}
 
+.menu-hamburguer {
+    display: none;
+    cursor: pointer;
+  }
+  
+  .menu-hamburguer .bar {
+    width: 35px;
+    height: 5px;
+    background-color: #fff;
+    margin: 6px auto;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Estilo para o menu aberto */
+  .menu-hamburguer.open .bar:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+  }
+  
+  .menu-hamburguer.open .bar:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .menu-hamburguer.open .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -8px);
+  }
+  
+  @media (max-width: 1030px) {
+    nav ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      width: 100%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    
+    nav ul li {
+      display: block;
+      margin-bottom: 20px;
+    }
+    
+    nav ul li a {
+      color: #fff;
+      transition: color 0.2s ease-in-out;
+    }
+    
+    nav ul li a:hover {
+      color: #ccc;
+    }
+  
+  .menu-hamburguer {
+      display: block;
+    }
+    
+    .menu-hamburguer.open + ul {
+      display: block;
+    }
+    
+    nav ul.open {
+      display: block;
+    }
+    
+    /* Efeito blur ao fundo */
+    .blur-background {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+  }
+  
+  /* Classe para adicionar o efeito blur */
+  .blur-background-active {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
 
 @media (min-width: 1024px) {
     .hero h2 {
