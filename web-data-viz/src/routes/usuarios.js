@@ -11,5 +11,11 @@ router.post("/cadastrar", function (req, res) {
 router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
+// Fazer o enviar Mensagem 
+
+router.get("/buscarMensagens", function (req, res) {
+    usuarioController.buscarMensagens(req, res);
+});
+
 
 module.exports = router;

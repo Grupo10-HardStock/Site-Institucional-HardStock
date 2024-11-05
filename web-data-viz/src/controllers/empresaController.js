@@ -47,10 +47,34 @@ function cadastrarGerente(req, res) {
   });
 }
 
+
+function buscarEmpresa(req, res) {
+ 
+
+  empresaModel.buscarEmpresa()
+      .then(resultadoAutenticar => {
+          console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+          console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+
+          if (resultadoAutenticar.length > 0) {
+              res.status(200).json(resultadoAutenticar);
+          } else {
+              res.status(200).json([]);
+          }
+      })
+      .catch(erro => {
+          console.log(erro);
+          console.log("\nHouve um erro ao realizar o buscar Empresas! Erro: ", erro.sqlMessage);
+          res.status(500).json({ error: "Houve um erro ao realizar o buscar Empresas!", details: erro.sqlMessage });
+      });
+}
+
+
 module.exports = {
   buscarPorCnpj,
   buscarPorId,
   cadastrar,
   listar,
-  cadastrarGerente
+  cadastrarGerente,
+  buscarEmpresa
 };
