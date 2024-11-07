@@ -38,7 +38,8 @@ function buscarEmpresa() {
   `SELECT 
   idEmpresa,
   razaoSocial,
-  emailCorporativo
+  emailCorporativo,
+  estado
 FROM 
   Empresa;`
 
@@ -46,7 +47,29 @@ FROM
   return database.executar(instrucaoSql);
 }
 
+function editar(novoEstado, novoNome, novoCNPJ, novaEmail,idEmpresa) {
+  console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editar(): ", novoEstado, novoNome, novoCNPJ, novaEmail,idEmpresa);
+  var instrucaoSql = `
+          UPDATE Empresa SET estado = '${novoEstado}', razaoSocial = '${novoNome}', cnpj = '${novoCNPJ}', emailCorporativo = '${novaEmail}' WHERE idEmpresa = ${idEmpresa};
+            `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
 
+function deletar(idEmpresa) {
+  console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n deletar():", idEmpresa);
+  var instrucaoSql = `update Empresa set estado = "Desativado" where idEmpresa = ${idEmpresa};`;
+  
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
 
+function listarEmpresa(idEmpresa) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n listarFuncionario(): ",idEmpresa)
+    var instrucaoSql = `SELECT estado,razaoSocial,cnpj,emailCorporativo FROM Empresa where idEmpresa = ${idEmpresa};`;
+    
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listar, cadastrarGerente,buscarEmpresa };
+module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listar, cadastrarGerente,buscarEmpresa, listarEmpresa,editar, deletar };

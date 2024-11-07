@@ -96,7 +96,7 @@
 
     .edit-btn {
       background-color: transparent;
-      color: white;
+      color: black;
     }
 
     .delete-btn {
@@ -196,6 +196,7 @@
             <th>ID</th>
             <th>Razão Social</th>
             <th>Email Corporativo</th>
+            <th>Estado</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -251,6 +252,7 @@ fetch(`/empresas/buscarEmpresa/`, {
           <td>${empresa.idEmpresa}</td>
           <td>${empresa.razaoSocial} </td>
           <td>${empresa.emailCorporativo}</td>
+          <td>${empresa.estado}</td>
           <td class="edits">
             <button class="icon-btn edit-btn" onclick="editar(${empresa.idEmpresa})">
               <i id="editar" class="fa-solid fa-pen-to-square"></i>                            
@@ -269,20 +271,16 @@ fetch(`/empresas/buscarEmpresa/`, {
   });
 });
 
-
-
 function editar(idEmpresa) {
 sessionStorage.ID_EDITANDO = idEmpresa;
 console.log("Cliquei em editar - " + idEmpresa)
-window.alert("Você será redirecionado à página de edição Funcionário de id: " + idEmpresa)
-window.location.href = dashboard-edicao.html;
+window.alert("Você será redirecionado à página de edição EMPRESA de id: " + idEmpresa)
+window.location.href = `dashboard-edicao.html`;
 }
 
-
-
-function deletar(idFuncionario) {
-      console.log("Criar função de apagar post escolhido - ID" + idFuncionario);
-      fetch(`/usuarios/deletar/${idFuncionario}`, {
+function deletar(idEmpresa) {
+      console.log("Criar função de apagar post escolhido - ID" + idEmpresa);
+      fetch(`/empresas/deletar/${idEmpresa}`, {
           method: "DELETE",
           headers: {
               "Content-Type": "application/json"
@@ -290,12 +288,12 @@ function deletar(idFuncionario) {
       }).then(function (resposta) {
 
           if (resposta.ok) {
-              window.alert("Funcionário Desativado com sucesso pelo usuário de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+              window.alert("Empresa Desativado com sucesso pelo usuário de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
               location.reload()
           } else if (resposta.status == 404) {
               window.alert("Deu 404!");
           } else if (resposta.status == 500) {
-              window.alert("Não é possível excluir esse Funcionário pois ele está vinculado à uma empresa.");
+              window.alert("Não é possível excluir esse Empresa.");
           } else {
               throw ("Houve um erro ao tentar excluir! Código da resposta: " + resposta.status);
               window.alert("Houve um erro ao tentar excluir! Código da resposta: " + resposta.status);
