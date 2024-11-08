@@ -236,6 +236,10 @@
         if (resposta.ok) {
     
            alert( "Empresa cadastrada com sucesso!")
+            document.getElementById("input_nome").value = "";
+            document.getElementById("input_cnpj").value = "";
+            document.getElementById("input_email").value = "";
+
 
         } else {
           throw  alert ("Houve um erro ao tentar realizar o cadastro!");

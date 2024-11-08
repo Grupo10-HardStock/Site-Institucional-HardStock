@@ -96,7 +96,7 @@
 
     .edit-btn {
       background-color: transparent;
-      color: white;
+      color: black;
     }
 
     .delete-btn {
@@ -189,7 +189,22 @@
 
   <div class="alinhamento">
     <h1>Empresas</h1>
-    <div id="userTable"></div>
+    <div id="userTable">
+      <table id="tabelaEmpresa-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Razão Social</th>
+            <th>Email Corporativo</th>
+            <th>Estado</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+      </table>
+    </div>
   </div>
 
 
@@ -198,53 +213,93 @@
 
 </html>
 <script>
-  function populateTable(users) {
-    let tableHTML = '<table><thead><tr><th>ID</th><th>Nome Empresa</th><th>Email</th><th>... Edições</th></tr></thead><tbody>';
+  
 
-    users.forEach(user => {
-      tableHTML += `<tr>
-                          <td>${user.id}</td>
-                          <td>${user.name}</td>
-                          <td>${user.email}</td>
-                          <td class="edits">
-                            <button class="icon-btn edit-btn" onclick="editUser()"><i id="botao" class="fa-solid fa-pen-to-square"></i>                            
-                            </button>
-                            
-                            <button class="icon-btn delete-btn" onclick="deleteUser(${user.id})">
-                            <i id="excluir" class="fa-solid fa-trash"></i>
-                              </button>
-                        </td>
-                        </tr>`;
-    });
+function carregarNome() {
+  let text = sessionStorage.NOME_USUARIO;
+  nome.innerHTML = "Olá, " + text;
+}
 
-    tableHTML += '</tbody></table>';
+document.addEventListener('DOMContentLoaded', function () {
 
-    document.getElementById('userTable').innerHTML = tableHTML;
+fetch(`/empresas/buscarEmpresa/`, {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json"
   }
-
-  function editUser() {
-    window.location = "./dashboard-edicao.html"
-
-    // alert('Editar Empresa de ID: ' + id);
-  }
-
-  function deleteUser(id) {
-    const confirmDelete = confirm('Você tem certeza que deseja excluir o Empresa de ID: ' + id + '?');
-    if (confirmDelete) {
-      alert('Empresa de ID: ' + id + ' foi excluído.');
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`{HTTP error! status: ${response.status}`);
     }
-  }
+    return response.json();
+  })
+  .then(data => {
+    const tbody = document.querySelector('#tabelaEmpresa-table tbody');
+    tbody.innerHTML = '';
 
-  const usersFromDB = [
-    { id: 1, name: 'Profit', email: 'profit@profit.com' },
-    { id: 2, name: 'CVM', email: 'cvm@cvm.com' },
-    { id: 3, name: 'B3', email: 'b3@b3.com' }
-  ];
+    if (data.length === 0) {
+      const row = document.createElement('tr');
+      const cell = document.createElement('td');
+      cell.colSpan = 4; // Ajuste o colspan para 4, pois temos 4 colunas
+      cell.textContent = 'Nenhum Analista vinculado.';
+      row.appendChild(cell);
+      tbody.appendChild(row);
+    } else {
+      data.forEach(empresa => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${empresa.idEmpresa}</td>
+          <td>${empresa.razaoSocial} </td>
+          <td>${empresa.emailCorporativo}</td>
+          <td>${empresa.estado}</td>
+          <td class="edits">
+            <button class="icon-btn edit-btn" onclick="editar(${empresa.idEmpresa})">
+              <i id="editar" class="fa-solid fa-pen-to-square"></i>                            
+            </button>
+            <button class="icon-btn deletar-btn" onclick="deletar(${empresa.idEmpresa})">
+              <i id="excluir" class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+  })
+  .catch(error => {
+    console.error('Houve um erro ao capturar os dados dos Empresas!', error);
+  });
+});
 
-  populateTable(usersFromDB);
+function editar(idEmpresa) {
+sessionStorage.ID_EDITANDO = idEmpresa;
+console.log("Cliquei em editar - " + idEmpresa)
+window.alert("Você será redirecionado à página de edição EMPRESA de id: " + idEmpresa)
+window.location.href = `dashboard-edicao.html`;
+}
 
-  function carregarNome(){
-     let text = sessionStorage.NOME_USUARIO;
-    nome.innerHTML = "Olá, " + text;
+function deletar(idEmpresa) {
+      console.log("Criar função de apagar post escolhido - ID" + idEmpresa);
+      fetch(`/empresas/deletar/${idEmpresa}`, {
+          method: "DELETE",
+          headers: {
+              "Content-Type": "application/json"
+          }
+      }).then(function (resposta) {
+
+          if (resposta.ok) {
+              window.alert("Empresa Desativado com sucesso pelo usuário de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+              location.reload()
+          } else if (resposta.status == 404) {
+              window.alert("Deu 404!");
+          } else if (resposta.status == 500) {
+              window.alert("Não é possível excluir esse Empresa.");
+          } else {
+              throw ("Houve um erro ao tentar excluir! Código da resposta: " + resposta.status);
+              window.alert("Houve um erro ao tentar excluir! Código da resposta: " + resposta.status);
+          }
+      }).catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+      });
   }
 </script>

@@ -51,7 +51,7 @@
             margin-bottom: 5px;
         }
 
-        #inputEditar {
+        input {
             width: 100%;
             height: 35px;
             border: none;
@@ -98,6 +98,28 @@
         button:hover {
             opacity: 0.8;
         }
+        
+    #select1 {
+      text-align: center;
+      background-color: #232739;
+      color: white;
+      font-size: large;
+      padding: 1%;
+      border-radius: 50px;
+      width: auto;
+      margin-bottom: 10px;
+    }
+
+    #select2 {
+      text-align: center;
+      background-color: #232739;
+      color: white;
+      font-size: large;
+      padding: 1%;
+      border-radius: 50px;
+      width: auto;
+      margin-bottom: 10px;
+    }
     </style>
 
 </head>
@@ -165,38 +187,51 @@
         <h1>Atualizar Empresa</h1>
         <div class="campos">
             <div class="antes">
-                <h3 class="titulo">Como estava:</h3>
+                <h3 class="titulo">Como esta:</h3>
+                <p id="pform">Status:</p><br>
+                <input disabled id="inputStatus" type="text"><br>
                 <label id="nome">
                     <p>Nome:</p><br>
-                    <input disabled id="inputEditar" type="text" value="Profit"><br>
+                    <input disabled id="inputNome" type="text" ><br>
                 </label>
                 <label id="CNPJ">
                     <p>CNPJ:</p><br>
-                    <input disabled id="inputEditar" type="text" value="01.394.972/0001-70"><br>
+                    <input disabled id="inputCnpj" type="text" ><br>
                 </label>
                 <label id="email">
                     <p>E-mail:</p><br>
-                    <input disabled id="inputEditar" type="text" value="profit@profit.com"><br>
+                    <input disabled id="inputEmail" type="text" ><br>
                 </label>
             </div>
             <div class="depois">
                 <h3 class="titulo">Como irá ficar:</h3>
+                <p id="pform">Status:</p><br>
+                <select name="Cargo" id="select1">
+                  <option value="#" selected disabled>Selecione o Status</option>
+                  <option value="Ativo">Ativo</option>
+                  <option value="Desativado">Desativado</option>
+                </select>
+
                 <label>
                     <p>Nome:</p><br>
-                    <input id="inputEditar" type="text" placeholder="Informe o novo Nome:"><br>
+                    <input id="inputNovoNome" type="text" placeholder="Informe o novo Nome:"><br>
                 </label>
+                
                 <label>
                     <p>CNPJ:</p><br>
-                    <input id="inputEditar" type="number" placeholder="Informe o novo CNPJ:"><br>
+                    <input id="inputNovoCnpj" type="number" placeholder="Informe o novo CNPJ:"><br>
                 </label>
                 <label>
                     <p>E-mail:</p><br>
-                    <input id="inputEditar" type="text" placeholder="Informe o novo E-mail:"><br>
-                    <center>
-                        <button id="btnCancel" onclick="cancelar()">Cancelar</button>
-                        <button id="btnSave">Salvar</button>
-                    </center>
+                    <input id="inputNovoEmail" type="text" placeholder="Informe o novo E-mail:"><br>
                 </label>
+                    <label>
+                        <center>
+                            <button id="btnCancel" onclick="cancelar()">Cancelar</button>
+                            <button id="btnSave" onclick="editar()">Salvar</button>
+                        </center>
+                    </label>
+              
             </div>
         </div>
     </div>
@@ -214,4 +249,108 @@
      let text = sessionStorage.NOME_USUARIO;
     nome.innerHTML = "Olá, " + text;
   }
+
+
+  function listarInformacoes() {
+    var idEmpresa = sessionStorage.ID_EDITANDO;
+    console.log("ID do Empresa:", idEmpresa);
+
+    if (!idEmpresa) {
+      console.error("ID da Empresa não está definido.");
+      return;
+    }
+
+    console.log("Iniciando fetch para obter informações do funcionário...");
+    fetch(`/empresas/listarEmpresa/${idEmpresa}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(empresa => {
+        console.log("Dados do Funcionário:", empresa);
+        if (empresa) {
+         
+          document.getElementById('inputStatus').value = empresa[0].estado || "(não definido)";
+          document.getElementById('inputNome').value = empresa[0].razaoSocial || "(não definido)";
+          document.getElementById('inputCnpj').value = empresa[0].cnpj || "(não definido)";
+          document.getElementById('inputEmail').value = empresa[0].emailCorporativo || "(não definido)";
+
+          document.getElementById('select1').value = empresa[0].estado || "(não definido)";
+          document.getElementById('inputNovoNome').value = empresa[0].razaoSocial || "(não definido)";
+          document.getElementById('inputNovoCnpj').value = empresa[0].cnpj || "(não definido)";
+          document.getElementById('inputNovoEmail').value = empresa[0].emailCorporativo || "(não definido)";
+
+        } else {
+          console.log('Funcionário não encontrado.');
+        }
+      })
+      .catch(error => {
+        console.error('Houve um erro ao capturar os dados dos Funcionarios!', error);
+      });
+  }
+
+  function editar() {
+    var novoEstado = select1.value;
+    var novoNome = inputNovoNome.value;
+    var novoCNPJ = inputNovoCnpj.value;
+    var novaEmail = inputNovoEmail.value;
+
+    var textoFinal = "";
+
+    // if (novoTelefone.length < 9) {
+    //   textoFinal += "Preencha o campo telefone corretamente com 9 dígitos.\n";
+    // }
+    // if (novaSenha.length < 4) {
+    //   textoFinal += "Preencha o campo senha corretamente com mais de 4 dígitos.\n";
+    // }
+    // if (novoCargo == "#") {
+    //   textoFinal += "Selecione cargo corretamente.\n";
+    // }
+    // if (novoEstado == "#") {
+    //   textoFinal += "Selecione Status corretamente.\n";
+    // }
+
+    if (textoFinal.length > 0) {
+      window.alert(textoFinal);
+    } else {
+      fetch(`/empresas/editar/${sessionStorage.getItem("ID_EDITANDO")}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            Estado: novoEstado,
+            Nome: novoNome,
+            cnpj: novoCNPJ,
+            Email: novaEmail
+        })
+      }).then(function (resposta) {
+
+        if (resposta.ok) {
+          window.alert("Perfil atualizado com sucesso !");
+          window.location = "./dashboard_clientes.html"
+        } else if (resposta.status == 404) {
+          window.alert("Deu 404!");
+        } else {
+          throw ("Houve um erro ao tentar Editar! Código da resposta: " + resposta.status);
+        }
+      }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+    }
+  }
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    carregarNome();
+    listarInformacoes();
+  });
+
 </script>
