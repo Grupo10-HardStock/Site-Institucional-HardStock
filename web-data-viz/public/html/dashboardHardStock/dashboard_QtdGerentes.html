@@ -107,6 +107,45 @@
     margin-bottom: 15px;
   }
 
+
+  .monitor-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 100%; 
+  max-width: 1200px; 
+  padding: 20px; 
+}
+
+.alert {
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 1.0rem;
+  text-align: center;
+  width: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.4s ease, transform 0.3s ease;
+  background-color: #8a97cf;
+  cursor: pointer;
+}
+
+.alertas {
+  font-weight: bold;
+}
+
+main {
+  border-radius: 5px;
+}
+
+.card {
+  background-color: rgb(203 203 203);
+  border-radius: 10px;
+  width:400px; 
+  height: 200px;
+}
+
 </style>
 
 
@@ -135,9 +174,9 @@
             </span>
           </p>
         </li>
-        <li><a href="../dashboardHardStock/dashboard_empresa.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
+        <li><a href="../dashboardHardStock/dashboard_empresa.html">
             <i class="fa-solid fa-square-plus"></i>
-            <span class="navItem" style="color: #191b27;">Cadastro Empresa</span>
+            <span class="navItem">Cadastro Empresa</span>
           </a></li>
         <li><a href="../dashboardHardStock/dashboard_gerente.html">
             <i class="fa-solid fa-user-plus"></i>
@@ -148,20 +187,19 @@
             <i class="fa-solid fa-people-group"></i>
             <span class="navItem">Empresas</span>
           </a></li>
-          <li><a href="../dashboardHardStock/dashboard-feedback.html">
+        <li><a href="../dashboardHardStock/dashboard-feedback.html">
             <i class="fa-solid fa-message"></i>
             <span class="navItem">Feedbacks</span>
-          </a></li>          
-          <li><a href="../dashboardHardStock/dashboard_QtdGerentes.html">
+          </a></li>
+          <li><a href="../dashboardHardStock/dashboard_QtdGerentes.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <!-- <i class="fa-solid fa-display"></i> -->
             <i class="fa-solid fa-chart-line"></i>
-            <span class="navItem">Graficos Empresas</span>
+            <span class="navItem" style="color: #191b27;">Graficos Empresas</span>
           </a></li>
 
 
         <div class="sair">
-          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4
-" target="_blank">
+          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4" target="_blank">
               <i class="fa-solid fa-headset"></i>
               <span class="navItem">Suporte</span>
             </a></li>
@@ -178,24 +216,21 @@
   </div>
 
   <div class="alinhamento">
-    <h1>Cadastrar Empresa</h1>
-    <div class="campos">
-      <div class="antes">
-        <label id="nome">
-          <p>Razão Social:</p><br>
-          <input id="input_nome" type="text" placeholder="Informe sua Razão social:"><br>
-        </label>
-        <label id="cnpj">
-          <p>CNPJ:</p><br>
-          <input id="input_cnpj" type="text" placeholder="Informe seu CNPJ:"><br>
-        </label>
-        <label id="email">
-          <p>E-mail:</p><br>
-          <input id="input_email" type="text" placeholder="Informe seu E-mail:"><br>
-        </label>
-      </div>
+    <h1>Graficos Empresa</h1>
+    <div class="monitor-container">
+        <div class="alert" id="alerta-net">
+          <h3>Quantidade Total de Empresas</h3>
+          <p><span class="alertas" id="rede">5</span></p>
+        </div>
+        <div class="alert" id="alerta-ram">
+          <h3>Quantidade Total de Funcionarios</h3>
+          <p><span class="alertas" id="ConRam">22</span></p>
+        </div>
     </div>
-    <button onclick="verificar()" id="btnSave">Salvar</button>
+            <div class="card">
+                 <canvas id="userChart"></canvas>
+            </div>
+        
   </div>
 
 </body>
@@ -205,62 +240,38 @@
 </html>
 
 <script>
-  function verificar() {
-    let nome = document.getElementById('input_nome').value
-    let cnpj = document.getElementById('input_cnpj').value
-    let email = document.getElementById('input_email').value
+        const empresas = ['Empresa A', 'Empresa B', 'Empresa C', 'Empresa D'];
+        const usuarios = [45, 30, 70, 20];
 
-    if (nome == "" || cnpj == "" || email == "") {
-      alert("Preencha os dados corretamente")
-    } else if (cnpj.length < 10) {
-      alert("Preencha o CNPJ corretamente")
-    } else if (email.indexOf('@') == -1 || email.indexOf('.') == -1) {
-      alert("Insira um email válido")
-    } else {
-      cadastroEmpresa(nome, cnpj, email)
-    }
-  }
-
-  function cadastroEmpresa(nome, cnpj, email) {
-
-    fetch("/empresas/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-
-        nomeServer: nome,
-        cnpjServer: cnpj,
-        emailServer: email,
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
-    
-           alert( "Empresa cadastrada com sucesso!")
-            document.getElementById("input_nome").value = "";
-            document.getElementById("input_cnpj").value = "";
-            document.getElementById("input_email").value = "";
-
-
-        } else {
-          throw  alert ("Houve um erro ao tentar realizar o cadastro!");
-        }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-
-    return false;
-  }
-
-  
-
-  function carregarNome(){
-    let text = sessionStorage.NOME_USUARIO;
-    nomeTop.innerHTML = "Olá, " + text;
-  }
+const ctx = document.getElementById('userChart').getContext('2d');
+        const userChart = new Chart(ctx, {
+            type: 'bar', // Tipo de gráfico (pode ser 'line', 'pie', etc.)
+            data: {
+                labels: empresas,
+                datasets: [{
+                    label: 'Usuários por Empresa',
+                    data: usuarios,
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
 </script>
