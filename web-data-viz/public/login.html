@@ -20,8 +20,8 @@
             <img class="img2" src="../assets/imgs/HardStock(Preto).png" alt="Logo Marca">
         </div>
         <div class="contentItens">
-            <h3>SEJA BEM VINDO!</h3>
-            <h1>Insira seus dados para continuar:</h1>
+            <h3>Login</h3>
+            <h1></h1>
             <div>
                 <label for="input_nome">
                     <span>Email</span>
@@ -30,7 +30,7 @@
                 </label>
                 <label for="input_email">
                     <span>Senha</span>
-                    <input type="text" id="input_senha">
+                    <input type="password" id="input_senha">
                     <p id="alertSenha"></p>
                 </label>
                 <div class="ctBtn">
@@ -107,22 +107,27 @@
                     sessionStorage.ID_USUARIO = json.id;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.EMPRESA_USUARIO = json.fkEmpresa;
                     sessionStorage.PERMISSAO_USUARIO = json.permissao;
-                    permissao = sessionStorage.PERMISSAO_USUARIO = json.permissao;
+                    sessionStorage.STATUS_PERFIL = json.status;
+                    status = sessionStorage.STATUS_PERFIL;
+                    permissao = sessionStorage.PERMISSAO_USUARIO;
                     
-                   if( permissao == '1'){
+                   if( permissao == 'Hardstock' & status == 'Ativo'){
                     setTimeout(function () {
                         window.location = "../html/dashboardHardStock/dashboard_empresa.html";
                     }, 1000);
-                   } else if (permissao == '2'){
+                   } else if (permissao == 'Gerente' & status == 'Ativo'){
                     setTimeout(function () {
-                        window.location = "../html/dashboardGerente/dashboard_tempo.html";
+                        window.location = "../html/dashboardGerentePt2/dashboard_mensal.html";
                     }, 1000);
-                   } else if (permissao == '3'){
+                   } else if (permissao == 'Analista'){
                     setTimeout(function () {
                         window.location = "../html/dashboardAnalista/dashboard_tempoAnalista.html   ";
                     }, 1000); 
-                   } else {
+                   } else if(status == 'Desativado'){
+                    alert("Não foi possível fazer login, sua conta foi desativada!")
+                   }else {
                     alert("Houve um erro ao tentar realizar o login!");
                    }
 
