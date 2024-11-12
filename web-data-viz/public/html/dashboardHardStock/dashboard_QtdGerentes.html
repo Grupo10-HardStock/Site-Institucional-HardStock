@@ -9,147 +9,77 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Dashboard Cadastro Empresa | HardStock</title>
+  <style>
+    .alinhamento {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 5%;
+      width: 40%;
+      height: 85%;
+      background-color: white;
+      border-radius: 50px;
+      padding-top: 20px;
+      padding-bottom: 0px;
+    }
+
+    .monitor-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+      padding: 20px;
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+
+    .alert {
+      padding: 10px;
+      border-radius: 12px;
+      align-items: center;
+      flex-direction: column;
+      display: flex;
+      font-size: 1rem;
+      text-align: center;
+      width: 50%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.4s ease, transform 0.3s ease;
+      background: linear-gradient(to bottom, #515a83, #232739, #191b27);
+      cursor: pointer;
+      color: white;
+    }
+
+    .alertas {
+      font-weight: bold;
+    }
+
+    span{
+      color: white;
+    }
+
+    .card {
+      background-color: rgb(203, 203, 203);
+      border-radius: 10px;
+      width: 96%;
+      height: 51%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  </style>
 </head>
 
-<style>
-  .alinhamento {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 5%;
-    width: 40%;
-    height: 80%;
-    background-color: white;
-    border-radius: 50px;
-    padding-top: 20px;
-  }
-  
-
-  .campos {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* padding: 2px; */
-  }
-  
-
-  .antes,
-  .depois {
-    width: 45%;
-  }
-
-  .titulo {
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-  }
-
-  label {
-    display: block;
-    /* margin-bottom: 20px; */
-  }
-
-  label p {
-    font-size: 1rem;
-    /* margin-bottom: 5px; */
-  }
-  
-  input{
-    width: 100%;
-    height: 35px;
-    border: none;
-    background-color: transparent;
-    border-bottom: 2px solid black;
-    font-size: 1rem;
-    padding: 5px;
-    margin-bottom: 10px;
-  }
-
-  #btnCancel,
-  #btnSave {
-    margin-top: 12px;
-    padding: 5px 20px;
-    width: auto;
-    height: auto;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-  }
-  
-
-  #btnCancel {
-    background-color: white;
-    border: 1px solid red;
-    color: red;
-    margin-right: 10px;
-  }
-
-  #btnSave {
-    background-color: rgb(11, 239, 11);
-    border: 1px solid rgb(11, 239, 11);
-    color: white;
-  }
-
-
-  button:hover {
-    opacity: 0.8;
-  }
-
-  #select {
-    text-align: center;
-    background-color: #c7d0d8;
-    font-size: large;
-    padding: 0.5%;
-    border-radius: 50px;
-    width: auto;
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
-
-
-  .monitor-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 20px;
-  width: 100%; 
-  max-width: 1200px; 
-  padding: 20px; 
-}
-
-.alert {
-  padding: 10px;
-  border-radius: 12px;
-  font-size: 1.0rem;
-  text-align: center;
-  width: 50%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.4s ease, transform 0.3s ease;
-  background-color: #8a97cf;
-  cursor: pointer;
-}
-
-.alertas {
-  font-weight: bold;
-}
-
-main {
-  border-radius: 5px;
-}
-
-.card {
-  background-color: rgb(203 203 203);
-  border-radius: 10px;
-  width:400px; 
-  height: 200px;
-}
-
-</style>
-
-
-<body onload="carregarNome()">
+<body onload="carregarNome(),obterDadosGrafico()">
   <label for="sidebar-ativo" class="sideBar-open">
     <i class="fa-duotone fa-solid fa-bars"></i>
   </label>
@@ -169,9 +99,7 @@ main {
         </li>
         <li>
           <p style="margin-bottom: 20px;">
-            <span id="nomeTop" class="navItem-nome">
-
-            </span>
+            <span id="nomeTop" class="navItem-nome"></span>
           </p>
         </li>
         <li><a href="../dashboardHardStock/dashboard_empresa.html">
@@ -191,13 +119,10 @@ main {
             <i class="fa-solid fa-message"></i>
             <span class="navItem">Feedbacks</span>
           </a></li>
-          <li><a href="../dashboardHardStock/dashboard_QtdGerentes.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
-            <!-- <i class="fa-solid fa-display"></i> -->
+        <li><a href="../dashboardHardStock/dashboard_QtdGerentes.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <i class="fa-solid fa-chart-line"></i>
             <span class="navItem" style="color: #191b27;">Graficos Empresas</span>
           </a></li>
-
-
         <div class="sair">
           <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4" target="_blank">
               <i class="fa-solid fa-headset"></i>
@@ -209,69 +134,206 @@ main {
               <span class="navItem">Sair</span>
             </a>
           </li>
-
         </div>
       </ul>
+    </div>
   </nav>
-  </div>
-
   <div class="alinhamento">
     <h1>Graficos Empresa</h1>
     <div class="monitor-container">
-        <div class="alert" id="alerta-net">
-          <h3>Quantidade Total de Empresas</h3>
-          <p><span class="alertas" id="rede">5</span></p>
-        </div>
-        <div class="alert" id="alerta-ram">
-          <h3>Quantidade Total de Funcionarios</h3>
-          <p><span class="alertas" id="ConRam">22</span></p>
-        </div>
-    </div>
-            <div class="card">
-                 <canvas id="userChart"></canvas>
-            </div>
+      <div class="alert" id="alerta-net">
+        <h3>Quantidade Total de Empresas</h3>
+        <div id="QtdTotalEmpresas"> </div>
         
+      </div>
+      <div class="alert" id="alerta-ram">
+        <h3>Quantidade Total de Funcionarios</h3>
+        <div id="QtdTotalFuncionarios"> </div>
+      </div>
+    </div>
+    <div class="card">
+      <canvas id="userChart"></canvas>
+    </div>
+
+    <div class="monitor-container">
+      <div class="alert" id="alerta-net">
+        <h3>Quantidade Total de Gerentes</h3>
+        <div id="QtdTotalGerente"> </div>
+   
+      </div>
+      <div class="alert" id="alerta-ram">
+        <h3>Quantidade Total de Analistas</h3>
+        <div id="QtdTotalAnalistas"> </div>
+      </div>
   </div>
 
+<!--  <script>
+    window.onload = function () {
+      const empresas = ['Empresa A', 'Empresa B', 'Empresa C', 'Empresa D'];
+      const usuarios = [45, 30, 70, 20];
+
+      const ctx = document.getElementById('userChart').getContext('2d');
+      const userChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: empresas,
+          datasets: [{
+            label: 'Usuários por Empresa',
+            data: usuarios,
+            backgroundColor: [
+              'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+              'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    };
+  </script>-->
+
+<script>
+
+function obterDadosGrafico() {
+
+fetch(`/empresas/ultimas/`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+        response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
+
+            plotarGrafico(resposta);
+
+        });
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+    }
+})
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+  function obterDadosGrafico() {
+    fetch(`/empresas/ultimas/`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
+            plotarGrafico(resposta); // Chamar a função de plotagem aqui após obter os dados
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  }
+  
+  function plotarGrafico(resposta) {
+    console.log('iniciando plotagem do gráfico...');
+    
+    var razaoSocial = [];
+    var listaQtdAnalistas = [];
+    var listaQtdGerente = [];
+  
+    for (var index = 0; index < resposta.length; index++) {
+      var registro = resposta[index];
+      razaoSocial.push(registro.Empresa);
+      listaQtdAnalistas.push(parseInt(registro.QuantidadeAnalistas) || 0);
+      listaQtdGerente.push(parseInt(registro.QuantidadeGerentes) || 0);
+    }
+
+    var QtdEmpresas = 0
+
+    for (let index = 0; index < razaoSocial.length; index++) {
+
+          QtdEmpresas = QtdEmpresas + 1
+
+      } 
+                                  
+      var QtdAnalistas = 0
+
+      for (let index = 0; index < listaQtdAnalistas.length; index++) {
+
+        QtdAnalistas = QtdAnalistas +  Number(listaQtdAnalistas[index])
+
+          } 
+
+          var QtdGerente = 0
+
+      for (let index = 0; index < listaQtdGerente.length; index++) {
+
+        QtdGerente = QtdGerente + Number(listaQtdGerente[index])
+
+        } 
+        
+        var QtdFuncioariosTotal = QtdAnalistas + QtdGerente
+
+      QtdTotalFuncionarios.innerHTML = `<p><span class="alertas">  ${QtdFuncioariosTotal}  </span></p>`
+      
+      QtdTotalAnalistas.innerHTML = ` <p><span class="alertas" >${QtdAnalistas}</span></p>`
+
+      QtdTotalGerente.innerHTML = ` <p><span class="alertas" >${QtdGerente}</span></p>`
+      
+      QtdTotalEmpresas.innerHTML = `<p><span class="alertas" >  ${QtdEmpresas}  </span></p>`
+
+
+
+
+    const ctx = document.getElementById('userChart').getContext('2d');
+    const userChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: razaoSocial, // Corrigido para usar a variável preenchida
+        datasets: [
+          {
+            label: 'Analistas',
+            data: listaQtdAnalistas, // Corrigido para usar a variável preenchida
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+          },
+          {
+            label: 'Gerentes',
+            data: listaQtdGerente, // Corrigido para usar a variável preenchida
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+  
+  window.onload = function () {
+    obterDadosGrafico(); // Chamada da função para obter os dados ao carregar a página
+  };
+  </script>
+  
 </body>
-
-
 
 </html>
 
-<script>
-        const empresas = ['Empresa A', 'Empresa B', 'Empresa C', 'Empresa D'];
-        const usuarios = [45, 30, 70, 20];
 
-const ctx = document.getElementById('userChart').getContext('2d');
-        const userChart = new Chart(ctx, {
-            type: 'bar', // Tipo de gráfico (pode ser 'line', 'pie', etc.)
-            data: {
-                labels: empresas,
-                datasets: [{
-                    label: 'Usuários por Empresa',
-                    data: usuarios,
-                    backgroundColor: [
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-</script>

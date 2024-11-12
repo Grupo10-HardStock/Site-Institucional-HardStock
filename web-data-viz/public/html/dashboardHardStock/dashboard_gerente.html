@@ -101,6 +101,8 @@
     margin-top: 15px;
     margin-bottom: 15px;
   }
+
+
 </style>
 
 <body onload="carregarNome(), listar()">
@@ -171,6 +173,9 @@
 
   <div class="alinhamento">
     <h1>Cadastrar Gerente</h1>
+
+
+    <h4>Selecione a Empresa:</h4>
     <select name="empresa" id="listaEmpresas">
       <option value="#" disabled selected>Selecione a Empresa:</option>
 
@@ -187,7 +192,7 @@
         </label>
         <label id="telefone">
           <p>Telefone:</p><br>
-          <input id="input_telefone" type="tel" maxlength="11" onkeyup="handlePhone(event)"  placeholder="Informe seu Telefone:"><br>
+          <input id="input_telefone" type="tel" maxlength="15" onkeyup="handlePhone(event)"  placeholder="Informe seu Telefone:"><br>
         </label>
       </div>
       <div class="depois">
@@ -203,9 +208,9 @@
           <p>Permissão:</p><br>
           <select id="input_permissao">
             <option disabled selected>Selecione o cargo</option>
-            <option value="1">ADM</option>
-            <option value="2">Gerente</option>
-            <option value="3">Analista</option>
+            <option value="HardStock">HardStock</option>
+            <option value="Gerente">Gerente</option>
+            <option value="Analista">Analista</option>
           </select>
 
         </label>
@@ -249,13 +254,15 @@ const phoneMask = (value) => {
     } else if (senha.length < 8) {
       alert("Por favor, insira uma senha com pelo menos 8 caracteres.");
 
-    } else if (telefone < 11) {
+    } else if (telefone == 15) {
       alert("Por favor, insira um número de telefone válido.");
     } else {
       cadastro(nome, sobrenome, telefone, email, senha, permissao, empresa);
     }
   }
 
+
+  
   function cadastro(nome, sobrenome, telefone, email, senha, permissao, empresa) {
 
     fetch("/empresas/cadastrarGerente", {

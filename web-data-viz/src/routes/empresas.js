@@ -39,4 +39,8 @@ router.delete("/deletar/:idEmpresa", function (req, res) {
 router.get("/listarEmpresa/:idEmpresa", function (req, res) {
   empresaController.listarEmpresa(req, res);
 })
+
+router.get("/ultimas/", function (req, res) {
+  empresaController.buscarUltimasMedidas(req, res);
+});
 module.exports = router;

@@ -90,7 +90,6 @@ main {
 .card {
   background-color: rgb(203 203 203);
   border-radius: 10px;
-
 }
 
 .card:nth-child(1) {

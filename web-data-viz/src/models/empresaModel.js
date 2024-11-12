@@ -19,14 +19,14 @@ function buscarPorCnpj(cnpj) {
 }
 
 function cadastrar(nome, cnpj, email) {
-  var instrucaoSql = `insert into Empresa (razaoSocial,cnpj,emailCorporativo) values ('${nome}', ${cnpj}, '${email}');`;
+  var instrucaoSql = `insert into Empresa (razaoSocial,cnpj,emailCorporativo) values ('${nome}', '${cnpj}', '${email}');`;
 
   return database.executar(instrucaoSql);
 }
 
 
 function cadastrarGerente(nome, sobrenome, telefone, email, senha, permissao, empresa) {
-  var instrucaoSql = `insert into Funcionario (nome, sobrenome, numeroTelefone, email, senha, permissao, fkEmpresa) values ('${nome}', '${sobrenome}', ${telefone}, '${email}', '${senha}', '${permissao}', '${empresa}');`;
+  var instrucaoSql = `insert into Funcionario (nome, sobrenome, numerotelefone, email, senha, permissao, fkEmpresa) values ('${nome}', '${sobrenome}','${telefone}', '${email}', '${senha}', '${permissao}', '${empresa}');`;
 
   return database.executar(instrucaoSql);
 }
@@ -72,4 +72,25 @@ function listarEmpresa(idEmpresa) {
     return database.executar(instrucaoSql);
 }
 
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listar, cadastrarGerente,buscarEmpresa, listarEmpresa,editar, deletar };
+
+
+function buscarUltimasMedidas() {
+
+  var instrucaoSql = `
+SELECT 
+    e.razaoSocial AS Empresa,
+    SUM(CASE WHEN f.permissao = 'Analista' THEN 1 ELSE 0 END) AS QuantidadeAnalistas,
+    SUM(CASE WHEN f.permissao = 'Gerente' THEN 1 ELSE 0 END) AS QuantidadeGerentes
+FROM 
+    Empresa e
+LEFT JOIN 
+    Funcionario f ON e.idEmpresa = f.fkEmpresa
+GROUP BY 
+    e.razaoSocial;
+;`;
+
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listar, cadastrarGerente,buscarEmpresa, listarEmpresa,editar, deletar,buscarUltimasMedidas };

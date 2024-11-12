@@ -110,15 +110,15 @@
                     sessionStorage.PERMISSAO_USUARIO = json.permissao;
                     permissao = sessionStorage.PERMISSAO_USUARIO = json.permissao;
                     
-                   if( permissao == '1'){
+                   if( permissao == 'Hardstock'){
                     setTimeout(function () {
                         window.location = "../html/dashboardHardStock/dashboard_empresa.html";
                     }, 1000);
-                   } else if (permissao == '2'){
+                   } else if (permissao == 'Gerente'){
                     setTimeout(function () {
                         window.location = "../html/dashboardGerente/dashboard_tempo.html";
                     }, 1000);
-                   } else if (permissao == '3'){
+                   } else if (permissao == 'Analista'){
                     setTimeout(function () {
                         window.location = "../html/dashboardAnalista/dashboard_tempoAnalista.html   ";
                     }, 1000); 

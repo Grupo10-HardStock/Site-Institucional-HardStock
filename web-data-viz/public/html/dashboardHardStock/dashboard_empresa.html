@@ -187,7 +187,7 @@
         </label>
         <label id="cnpj">
           <p>CNPJ:</p><br>
-          <input id="input_cnpj" type="text" placeholder="Informe seu CNPJ:"><br>
+          <input id="input_cnpj" type="text" maxlength="18" onkeyup="handleCNPJ(event)" placeholder="Informe seu CNPJ:"><br>
         </label>
         <label id="email">
           <p>E-mail:</p><br>
@@ -205,6 +205,23 @@
 </html>
 
 <script>
+
+const handleCNPJ = (event) => {
+  let input = event.target;
+  input.value = cnpjMask(input.value);
+}
+
+const cnpjMask = (value) => {
+  if (!value) return "";
+  value = value.replace(/\D/g, ''); // Remove caracteres não numéricos
+  value = value.replace(/^(\d{2})(\d)/, "$1.$2"); // Coloca o primeiro ponto
+  value = value.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3"); // Coloca o segundo ponto
+  value = value.replace(/\.(\d{3})(\d)/, ".$1/$2"); // Coloca a barra
+  value = value.replace(/(\d{4})(\d)/, "$1-$2"); // Coloca o hífen
+  return value;
+}
+
+
   function verificar() {
     let nome = document.getElementById('input_nome').value
     let cnpj = document.getElementById('input_cnpj').value
@@ -212,7 +229,7 @@
 
     if (nome == "" || cnpj == "" || email == "") {
       alert("Preencha os dados corretamente")
-    } else if (cnpj.length < 10) {
+    } else if (cnpj.length < 12) {
       alert("Preencha o CNPJ corretamente")
     } else if (email.indexOf('@') == -1 || email.indexOf('.') == -1) {
       alert("Insira um email válido")
@@ -220,7 +237,7 @@
       cadastroEmpresa(nome, cnpj, email)
     }
   }
-
+  
   function cadastroEmpresa(nome, cnpj, email) {
 
     fetch("/empresas/cadastrar", {
