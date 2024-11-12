@@ -1,6 +1,7 @@
 var usuarioModel = require("../models/usuarioModel");
 // var aquarioModel = require("../models/aquarioModel");
 
+
 function autenticar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
@@ -14,7 +15,7 @@ function autenticar(req, res) {
             .then(
                 function (resultadoAutenticar) {
                     console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
-                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
+                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); 
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
@@ -24,6 +25,8 @@ function autenticar(req, res) {
                             nome: resultadoAutenticar[0].nome,
                             email: resultadoAutenticar[0].email,
                             permissao: resultadoAutenticar[0].permissao,
+                            fkEmpresa: resultadoAutenticar[0].fkEmpresa,
+                            status:  resultadoAutenticar[0].estado
                         });
 
                     } else if (resultadoAutenticar.length == 0) {
@@ -41,7 +44,8 @@ function autenticar(req, res) {
             );
     }
 
-}   
+}
+
 
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
