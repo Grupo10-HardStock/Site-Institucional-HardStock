@@ -43,4 +43,8 @@ router.get("/listarEmpresa/:idEmpresa", function (req, res) {
 router.get("/ultimas/", function (req, res) {
   empresaController.buscarUltimasMedidas(req, res);
 });
+
+router.post("/clickbtn", function (req, res) {
+  empresaController.clickbtn(req, res);
+})
 module.exports = router;

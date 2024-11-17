@@ -93,4 +93,10 @@ GROUP BY
   return database.executar(instrucaoSql);
 }
 
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listar, cadastrarGerente,buscarEmpresa, listarEmpresa,editar, deletar,buscarUltimasMedidas };
+function clickbtn(btnnome, tipomobdes){
+  var instrucaoSql = `INSERT INTO site (btnnome, tipomobdes) VALUES ('${btnnome}', '${tipomobdes}')`;
+  return database.executar(instrucaoSql);
+};
+
+
+module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listar, cadastrarGerente,buscarEmpresa, listarEmpresa,editar, deletar,buscarUltimasMedidas,clickbtn };

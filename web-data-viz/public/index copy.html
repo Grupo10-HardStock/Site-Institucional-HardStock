@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HardStock</title>
+
+    <!-- Logo na barra -->
+    <link rel="shortcut icon" href="../assets/icon/HardStock-preto.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1><img src="../assets/imgs/HardStock - branco.png" alt="">HardStock</h1>
+            <nav>
+                <div class="menu-hamburguer" onclick="toggleMenu()">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <ul>
+                    <li><i class="fa-solid fa-moon theme-icon" id="themeToggleIcon" onclick="toggleDarkMode()"></i></li>
+                    <li><a id="home" href="#home" onclick="clickbtn(event)">Home</a></li>
+                    <li><a id="solucao" href="#solucao" onclick="clickbtn(event)">Solução</a></li>
+                    <li><a id="sobre" href="#sobre" onclick="clickbtn(event)">Sobre</a></li>
+                    <li><a id="mvv" href="#mvv" onclick="clickbtn(event)">MVV</a></li>
+                    <li><a id="contato" href="#contato" onclick="clickbtn(event)">Contato</a></li>
+                    <li><a id="login" href="./login.html" class="login-button" onclick="clickbtn(event)">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h2>Construindo negócios de um <mark style="color: white; background-color: #141620; padding-left: 1%; padding-right: 1%;">futuro</mark> melhor</h2>
+            <a href="#solutions" class="btn-primary" onclick="clickbtn(event)">Veja as Funcionalidades</a>
+        </div>
+    </section>
+
+    <!-- Restante do conteúdo omitido para manter o foco -->
+
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            const themeToggleIcon = document.getElementById('themeToggleIcon');
+
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                themeToggleIcon.classList.remove('fa-moon');
+                themeToggleIcon.classList.add('fa-sun');
+            } else {
+                themeToggleIcon.classList.remove('fa-sun');
+                themeToggleIcon.classList.add('fa-moon');
+            }
+        }
+
+        // Função para registrar o clique no banco de dados (simulado aqui com um console.log)
+        function clickbtn(event) {
+            event.preventDefault(); // Previne comportamento padrão dos links
+
+            const buttonId = event.target.id || 'sem-id';
+            console.log(`Botão clicado: ${buttonId}`);
+
+            // Aqui, você enviaria uma requisição para o backend para salvar o clique no banco de dados
+            // Exemplo usando fetch (ajuste a URL e os dados conforme necessário):
+            fetch('https://seuservidor.com/salvar-clique', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ buttonId: buttonId, timestamp: new Date().toISOString() })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dados enviados com sucesso:', data);
+            })
+            .catch(error => {
+                console.error('Erro ao enviar os dados:', error);
+            });
+        }
+    </script>
+</body>
+
+</html>
