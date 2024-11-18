@@ -49,7 +49,6 @@ function cadastrarGerente(req, res) {
 
 
 function buscarEmpresa(req, res) {
-
   empresaModel.buscarEmpresa()
       .then(resultadoAutenticar => {
           console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
@@ -177,6 +176,85 @@ function buscarUltimasMedidas(req, res) {
 }
 
 
+function sitegrafico4( req , res) {
+  empresaModel.sitegrafico4()
+  .then(resultadoAutenticar => {
+    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+
+    if (resultadoAutenticar.length > 0) {
+      res.status(200).json(resultadoAutenticar);
+    } else {
+      res.status(200).json([]);
+    }
+  })
+  .catch(erro => {
+    console.log(erro);
+    console.log("\nHouve um erro ao realizar o buscar Empresas! Erro: ", erro.sqlMessage);
+    res.status(500).json({ error: "Houve um erro ao realizar o buscar Empresas!", details: erro.sqlMessage });
+  });
+}
+
+function sitegrafico1( req , res) {
+  empresaModel.sitegrafico1()
+  .then(resultadoAutenticar => {
+    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+
+    if (resultadoAutenticar.length > 0) {
+      res.status(200).json(resultadoAutenticar);
+    } else {
+      res.status(200).json([]);
+    }
+  })
+  .catch(erro => {
+    console.log(erro);
+    console.log("\nHouve um erro ao realizar o buscar Empresas! Erro: ", erro.sqlMessage);
+    res.status(500).json({ error: "Houve um erro ao realizar o buscar Empresas!", details: erro.sqlMessage });
+  });
+}
+
+function sitegrafico3( req , res) {
+  empresaModel.sitegrafico3()
+  .then(resultadoAutenticar => {
+    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+
+    if (resultadoAutenticar.length > 0) {
+      res.status(200).json(resultadoAutenticar);
+    } else {
+      res.status(200).json([]);
+    }
+  })
+  .catch(erro => {
+    console.log(erro);
+    console.log("\nHouve um erro ao realizar o buscar Empresas! Erro: ", erro.sqlMessage);
+    res.status(500).json({ error: "Houve um erro ao realizar o buscar Empresas!", details: erro.sqlMessage });
+  });
+}
+
+function sitegrafico2( req , res) {
+  empresaModel.sitegrafico2()
+  .then(resultadoAutenticar => {
+    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+
+    if (resultadoAutenticar.length > 0) {
+      res.status(200).json(resultadoAutenticar);
+    } else {
+      res.status(200).json([]);
+    }
+  })
+  .catch(erro => {
+    console.log(erro);
+    console.log("\nHouve um erro ao realizar o buscar Empresas! Erro: ", erro.sqlMessage);
+    res.status(500).json({ error: "Houve um erro ao realizar o buscar Empresas!", details: erro.sqlMessage });
+  });
+}
+
+
+
+
 module.exports = {
   buscarPorCnpj,
   buscarPorId,
@@ -188,5 +266,9 @@ module.exports = {
   editar,
   deletar,
   buscarUltimasMedidas,
-  clickbtn
+  clickbtn,
+  sitegrafico4,
+  sitegrafico3,
+  sitegrafico2,
+  sitegrafico1
 };

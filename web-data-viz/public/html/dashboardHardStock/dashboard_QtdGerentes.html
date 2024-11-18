@@ -17,8 +17,8 @@
       align-items: center;
       flex-direction: column;
       margin-top: 5%;
-      width: 40%;
-      height: 85%;
+      width: 50%;
+      height: 120%;
       background-color: white;
       border-radius: 50px;
       padding-top: 20px;
@@ -98,7 +98,6 @@
           </p>
         </li>
         <li>
-          <p style="margin-bottom: 20px;">
             <span id="nomeTop" class="navItem-nome"></span>
           </p>
         </li>
@@ -306,15 +305,13 @@ fetch(`/empresas/ultimas/`, { cache: 'no-store' }).then(function (response) {
           {
             label: 'Analistas',
             data: listaQtdAnalistas, // Corrigido para usar a variável preenchida
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor: ' rgba(81, 90, 131)',
             borderWidth: 1
           },
           {
             label: 'Gerentes',
             data: listaQtdGerente, // Corrigido para usar a variável preenchida
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(131, 81, 81)',
             borderWidth: 1
           }
         ]

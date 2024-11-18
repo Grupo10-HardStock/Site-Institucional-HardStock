@@ -31,12 +31,12 @@
                 </div>
                 <ul>
                     <li><i class="fa-solid fa-moon theme-icon" id="themeToggleIcon" onclick="toggleDarkMode()"></i></li>
-                    <li><a id="home" href="#home" onclick="clickbtn(event)">Home</a></li>
-                    <li><a id="solucao" href="#solucao" onclick="clickbtn(event)">Solução</a></li>
-                    <li><a id="sobre" href="#sobre" onclick="clickbtn(event)">Sobre</a></li>
-                    <li><a id="mvv" href="#mvv" onclick="clickbtn(event)">MVV</a></li>
-                    <li><a id="contato" href="#contato" onclick="clickbtn(event)">Contato</a></li>
-                    <li><a id="login" href="./login.html" class="login-button" onclick="clickbtn(event)">Login</a></li>
+                    <li><a id="ref_home"  onclick="clickbtn(event, '#home')">Home</a></li>
+                    <li><a id="ref_solucao" onclick="clickbtn(event, '#solucao')">Solução</a></li>
+                    <li><a id="ref_sobre" onclick="clickbtn(event, '#sobre')">Sobre</a></li>
+                    <li><a id="ref_mvv" onclick="clickbtn(event, '#mvv')">MVV</a></li>
+                    <li><a id="ref_contato" onclick="clickbtn(event, '#contato')">Contato</a></li>
+                    <li><a id="ref_login" class="login-button" onclick="clickbtn(event, 'login.html')">Login</a></li>
                 </ul>
             </nav>
         </div>
@@ -54,7 +54,7 @@
 
     <section id="solucao">
         <div class="container">
-            <h2>Solução HardStock</h2>
+            <h2 class="Titulos">Solução HardStock</h2>
             <div class="solution-grid">
                 <div class="solution">
                     <h3>Contexto</h3>
@@ -93,7 +93,7 @@
 
     <section id="sobre">
         <div class="container">
-            <h2>Sobre Nós</h2>
+            <h2 class="Titulos">Sobre Nós</h2>
             <p>&nbsp;&nbsp;&nbsp;Somos um grupo de estudantes de Tecnologia da Informação com o objetivo de desenvolver
                 softwares inovadores que possam transformar o setor.
                 <br><br>
@@ -109,7 +109,7 @@
 
     <section id="mvv">
         <div class="container">
-        <h2 style=" display: flex; justify-content: center;">MVV HardStock</h2>
+        <h2 class="Titulos">MVV HardStock</h2>
             <div class="solution-grid">
                 <div class="solution">
                     <h3><i class="fas fa-bullseye"></i> Missão</h3>
@@ -137,10 +137,9 @@
         </div>
     </section>
 
-
     <section id="contato">
         <div class="container">
-            <h2>Contato</h2>
+            <h2 class="Titulos">Contato</h2>
             <form action="submit_form.php" method="POST">
                 <label for="name">Nome:</label>
                 <input type="text" id="name" name="name" required>
@@ -151,7 +150,7 @@
                 <label for="message">Mensagem:</label>
                 <textarea id="message" name="message" required></textarea>
 
-                <button type="submit" class="btn-primary">Enviar</button>
+                <button type="submit" class="btn-primary"> Enviar </button>
             </form>
         </div>
     </section>
@@ -188,6 +187,7 @@
             themeToggleIcon.classList.add('fa-moon');
         }
     }
+
 
     document.addEventListener('DOMContentLoaded', function () {
         const solutions = document.querySelectorAll('.solution');
@@ -229,10 +229,12 @@
         return window.innerWidth <= 768 ? 'mobile' : 'desktop';
     }
 
-    function clickbtn(event) {
+    function clickbtn(event, page) {
         event.preventDefault();
         const buttonId = event.target.id;
         const deviceType = getDeviceType();
+
+        window.location.href = page
 
         fetch('/empresas/clickbtn', {
             method: 'POST',
@@ -240,7 +242,7 @@
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                btnnome: buttonId,
+                btnnome: page.replace("#", ""),
                 tipomobdes: deviceType
             })
         });

@@ -98,5 +98,75 @@ function clickbtn(btnnome, tipomobdes){
   return database.executar(instrucaoSql);
 };
 
+function sitegrafico4() {
+  console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n sitegrafico4(): ")
+  var instrucaoSql = 
+  `SELECT tipomobdes AS tipo_dispositivo, COUNT(*) AS total_interacoes
+FROM site
+GROUP BY tipomobdes;`
 
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listar, cadastrarGerente,buscarEmpresa, listarEmpresa,editar, deletar,buscarUltimasMedidas,clickbtn };
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+
+function sitegrafico1() {
+  console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n sitegrafico1(): ")
+  var instrucaoSql = 
+  `SELECT btnnome, COUNT(*) AS total_cliques
+    FROM site
+    GROUP BY btnnome
+    ORDER BY total_cliques DESC;
+`
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+function sitegrafico3() {
+  console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n sitegrafico1(): ")
+  var instrucaoSql = 
+  `SELECT DAYOFWEEK(datahora) AS dia_da_semana, COUNT(*) AS total_cliques
+FROM site
+GROUP BY dia_da_semana
+ORDER BY dia_da_semana;
+`
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+function sitegrafico2() {
+  console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n sitegrafico1(): ")
+  var instrucaoSql = 
+  `SELECT 
+    btnnome,
+    COUNT(*) AS total_cliques,
+    (COUNT(*) * 100.0 / total.total_cliques) AS percentual_cliques
+FROM 
+    site
+CROSS JOIN 
+    (SELECT COUNT(*) AS total_cliques FROM site) AS total
+GROUP BY 
+    btnnome, total.total_cliques;
+`
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+
+module.exports = { 
+  buscarPorCnpj, 
+  buscarPorId, 
+  cadastrar, 
+  listar, 
+  cadastrarGerente,
+  buscarEmpresa, 
+  listarEmpresa,
+  editar, 
+  deletar,
+  buscarUltimasMedidas,
+  clickbtn,
+  sitegrafico4,
+  sitegrafico3,
+  sitegrafico2,
+  sitegrafico1
+ };

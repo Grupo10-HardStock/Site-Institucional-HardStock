@@ -149,7 +149,6 @@ h1{
           </p>
         </li>
         <li>
-          <p style="margin-bottom: 20px;">
             <span id="nomeTop" class="navItem-nome"></span>
           </p>
         </li>
@@ -226,7 +225,7 @@ h1{
 
 function obterDadosGrafico() {
 
-fetch(`/empresas/ultimas/`, { cache: 'no-store' }).then(function (response) {
+fetch(`/empresas/sitegrafico4/`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
         response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -244,14 +243,15 @@ fetch(`/empresas/ultimas/`, { cache: 'no-store' }).then(function (response) {
     });
 }
 
-  function obterDadosGrafico() {
-    fetch(`/empresas/ultimas/`, { cache: 'no-store' })
+
+  async function obterDadosGrafico() {
+    /*Grafico 01*/
+    fetch(`/empresas/sitegrafico1/`, { cache: 'no-store' })
       .then(function (response) {
         if (response.ok) {
-          response.json().then(function (resposta) {
-            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-            resposta.reverse();
-            plotarGrafico(resposta); // Chamar a função de plotagem aqui após obter os dados
+          response.json().then(function (resposta1) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta1)}`);
+            plotarGrafico1(resposta1); 
           });
         } else {
           console.error('Nenhum dado encontrado ou erro na API');
@@ -260,93 +260,214 @@ fetch(`/empresas/ultimas/`, { cache: 'no-store' }).then(function (response) {
       .catch(function (error) {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
       });
-  }
-  
-  function plotarGrafico(resposta) {
-    console.log('iniciando plotagem do gráfico...');
     
-    var razaoSocial = [];
-    var listaQtdAnalistas = [];
-    var listaQtdGerente = [];
+      /*Grafico 02*/
+
+      fetch(`/empresas/sitegrafico2/`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta2) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta2)}`);
+            plotarGrafico2(resposta2); 
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+
+          /*Grafico 03*/
+      fetch(`/empresas/sitegrafico3/`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta3) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta3)}`);
+            plotarGrafico3(resposta3); 
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+      
+          /*Grafico 04*/
+          fetch(`/empresas/sitegrafico4/`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta4) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta4)}`);
+            plotarGrafico4(resposta4); 
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+      
+  }
+
   
-    for (var index = 0; index < resposta.length; index++) {
-      var registro = resposta[index];
-      razaoSocial.push(registro.Empresa);
-      listaQtdAnalistas.push(parseInt(registro.QuantidadeAnalistas) || 0);
-      listaQtdGerente.push(parseInt(registro.QuantidadeGerentes) || 0);
+
+
+  function plotarGrafico1(resposta1) {
+    list_btnnome = []
+    list_total_cliques = []
+
+    for (var index = 0; index < resposta1.length; index++) {
+      var registro = resposta1[index];
+      list_btnnome.push(registro.btnnome);
+      list_total_cliques.push(parseInt(registro.total_cliques) || 0);
     }
 
-    var QtdEmpresas = 0
+    const ctxaa = document.getElementById('userChart1').getContext('2d');
+    const userChart01 = new Chart(ctxaa, {
+        type: 'bar',
+        data: {
+            labels: list_btnnome,
+            datasets: [{
+                label: 'Número Total de Cliques',
+                data: list_total_cliques,
+                backgroundColor: ' rgba(81, 90, 131)',
 
-    for (let index = 0; index < razaoSocial.length; index++) {
-
-          QtdEmpresas = QtdEmpresas + 1
-
-      } 
-                                  
-      var QtdAnalistas = 0
-
-      for (let index = 0; index < listaQtdAnalistas.length; index++) {
-
-        QtdAnalistas = QtdAnalistas +  Number(listaQtdAnalistas[index])
-
-          } 
-
-          var QtdGerente = 0
-
-      for (let index = 0; index < listaQtdGerente.length; index++) {
-
-        QtdGerente = QtdGerente + Number(listaQtdGerente[index])
-
-        } 
-        
-        var QtdFuncioariosTotal = QtdAnalistas + QtdGerente
-
-      QtdTotalFuncionarios.innerHTML = `<p><span class="alertas">  ${QtdFuncioariosTotal}  </span></p>`
-      
-      QtdTotalAnalistas.innerHTML = ` <p><span class="alertas" >${QtdAnalistas}</span></p>`
-
-      QtdTotalGerente.innerHTML = ` <p><span class="alertas" >${QtdGerente}</span></p>`
-      
-      QtdTotalEmpresas.innerHTML = `<p><span class="alertas" >  ${QtdEmpresas}  </span></p>`
-
-
-
-
-    const ctx = document.getElementById('userChart').getContext('2d');
-    const userChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: razaoSocial, // Corrigido para usar a variável preenchida
-        datasets: [
-          {
-            label: 'Analistas',
-            data: listaQtdAnalistas, // Corrigido para usar a variável preenchida
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
-          },
-          {
-            label: 'Gerentes',
-            data: listaQtdGerente, // Corrigido para usar a variável preenchida
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
         }
-      }
     });
   }
+
+
+  function plotarGrafico2(resposta2) {
+    list_btnnome = []
+    list_total_cliques = []
+    list_percentual_cliques = []
+
+    for (var index = 0; index < resposta2.length; index++) {
+      var registro = resposta2[index];
+      list_btnnome.push(registro.btnnome);
+      list_total_cliques.push(parseInt(registro.total_cliques) || 0);
+      list_percentual_cliques.push(parseInt(registro.percentual_cliques) || 0);
+    }
+
+    const percentCtx = document.getElementById('userChart2').getContext('2d');
+    const percentClicksByButtonChart = new Chart(percentCtx, {
+        type: 'bar',
+        data: {
+            labels: list_btnnome ,
+            datasets: [{
+                label: 'Percentual de Cliques',
+                data: list_percentual_cliques, 
+                backgroundColor: ' rgba(81, 90, 131)'
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+  }
+
   
+  function plotarGrafico3(resposta3) {
+    const list_dia_da_semana = [];
+    const list_total_cliques = [];
+
+    for (var index = 0; index < resposta3.length; index++) {
+        var registro = resposta3[index];
+        list_dia_da_semana.push(registro.dia_da_semana);  
+        list_total_cliques.push(parseInt(registro.total_cliques) || 0);  
+    }
+
+    const diasSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+
+    const ctx2 = document.getElementById('userChart3');
+    if (ctx2) {
+        const clicksByDayChart = new Chart(ctx2.getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: list_dia_da_semana.map(dia => diasSemana[dia - 1] || 'Desconhecido'),  
+                datasets: [{
+                    label: 'Número de Cliques',
+                    data: list_total_cliques,  
+                    backgroundColor: ' rgba(81, 90, 131)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 10
+                        }
+                    }
+                }
+            }
+        });
+    } else {
+        console.error("Elemento de canvas com ID 'clicksByDayChart' não encontrado.");
+    }
+}
+
+
+
+  function plotarGrafico4(resposta4) {
+    console.log('iniciando plotagem do gráfico...');
+    
+    list_tipo_dispositivo = []
+    list_total_interacoes = []
+
+    for (var index = 0; index < resposta4.length; index++) {
+      var registro = resposta4[index];
+      list_tipo_dispositivo.push(registro.tipo_dispositivo);
+      list_total_interacoes.push(parseInt(registro.total_interacoes) || 0);
+    }
+
+    const ctx = document.getElementById('userChart4').getContext('2d');
+    const userChart = new Chart(ctx, {
+      type: 'bar',
+        data: {
+            labels: list_tipo_dispositivo,  
+            datasets: [{
+                label: 'Interações por Tipo de Dispositivo',
+                data: list_total_interacoes,  
+                backgroundColor: ' rgba(81, 90, 131)',
+                hoverOffset: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return `${tooltipItem.label}: ${tooltipItem.raw} interações`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+  }
+
+
   window.onload = function () {
     obterDadosGrafico(); // Chamada da função para obter os dados ao carregar a página
   };

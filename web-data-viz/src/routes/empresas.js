@@ -47,4 +47,22 @@ router.get("/ultimas/", function (req, res) {
 router.post("/clickbtn", function (req, res) {
   empresaController.clickbtn(req, res);
 })
+
+router.get("/sitegrafico4", function (req, res) {
+  empresaController.sitegrafico4(req, res);
+})
+
+router.get("/sitegrafico3", function (req, res) {
+  empresaController.sitegrafico3(req, res);
+})
+
+router.get("/sitegrafico2", function (req, res) {
+  empresaController.sitegrafico2(req, res);
+})
+
+router.get("/sitegrafico1", function (req, res) {
+  empresaController.sitegrafico1(req, res);
+})
+
+
 module.exports = router;
