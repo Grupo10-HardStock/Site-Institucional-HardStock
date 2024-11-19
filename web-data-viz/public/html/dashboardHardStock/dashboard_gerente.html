@@ -91,7 +91,7 @@
     opacity: 0.8;
   }
 
-  #listaEmpresas {
+  .listaEmpresas {
     text-align: center;
     background-color: #c7d0d8;
     font-size: large;
@@ -124,8 +124,10 @@
           </p>
         </li>
         <li>
-            <span id="nomeTop" class="navItem-nome"></span>
-          </p>
+          <p style="margin-bottom: 20px;">
+            <span id="aparecerNome" class="navItem-nome">                
+            </span>
+        </p>
         </li>
         <li><a href="../dashboardHardStock/dashboard_empresa.html">
             <i class="fa-solid fa-square-plus"></i>
@@ -157,11 +159,7 @@
         </a></li>
 
         <div class="sair">
-          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4
-" target="_blank">
-              <i class="fa-solid fa-headset"></i>
-              <span class="navItem">Suporte</span>
-            </a></li>
+    
           <li>
             <a href="../../index.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -179,7 +177,7 @@
 
 
     <h4>Selecione a Empresa:</h4>
-    <select name="empresa" id="listaEmpresas">
+    <select name="empresa" id="listaEmpresas" class="listaEmpresas">
       <option value="#" disabled selected>Selecione a Empresa:</option>
 
     </select>
@@ -225,6 +223,11 @@
 </body>
 
 <script>
+
+function carregarNome(){
+    let text = sessionStorage.NOME_USUARIO;
+    aparecerNome.innerHTML = "Olá, " + text;
+  }
 
   const handlePhone = (event) => {
   let input = event.target
@@ -318,10 +321,7 @@ const phoneMask = (value) => {
       console.log(`#ERRO: ${erro}`);
     });
 }
-  function carregarNome() {
-    let text = sessionStorage.NOME_USUARIO;
-    nomeTop.innerHTML = "Olá, " + text;
-  }
+
 </script>
 
 </html>

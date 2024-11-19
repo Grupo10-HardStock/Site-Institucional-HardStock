@@ -125,9 +125,10 @@
           </p>
         </li>
         <li>
-            <span id="nomeTop" class="navItem-nome">
-
+          <p style="margin-bottom: 20px;">
+            <span id="aparecerNome" class="navItem-nome">                
             </span>
+        </p>
           </p>
         </li>
         <li><a href="../dashboardHardStock/dashboard_empresa.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
@@ -158,11 +159,6 @@
           </a></li>
 
         <div class="sair">
-          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4" target="_blank">
-              <i class="fa-solid fa-headset"></i>
-              <span class="navItem">Suporte</span>
-            </a>
-          </li>
           <li>
             <a href="../../index.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -202,6 +198,11 @@
 </html>
 
 <script>
+  
+function carregarNome(){
+    var text = sessionStorage.NOME_USUARIO;
+    aparecerNome.innerHTML = "Olá, " + text;
+  }
 
 const handleCNPJ = (event) => {
   let input = event.target;
@@ -259,7 +260,6 @@ const cnpjMask = (value) => {
             document.getElementById("input_cnpj").value = "";
             document.getElementById("input_email").value = "";
 
-
         } else {
           throw  alert ("Houve um erro ao tentar realizar o cadastro!");
         }
@@ -271,10 +271,4 @@ const cnpjMask = (value) => {
     return false;
   }
 
-  
-
-  function carregarNome(){
-    let text = sessionStorage.NOME_USUARIO;
-    nomeTop.innerHTML = "Olá, " + text;
-  }
 </script>

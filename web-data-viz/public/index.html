@@ -196,7 +196,6 @@
         function showOnScroll() {
             const triggerBottom = window.innerHeight * 0.85;
 
-            // Mostrar as soluções
             solutions.forEach(solution => {
                 const solutionTop = solution.getBoundingClientRect().top;
 
@@ -205,7 +204,6 @@
                 }
             });
 
-            // Mostrar a seção "Sobre Nós"
             const aboutTop = aboutSection.getBoundingClientRect().top;
             if (aboutTop < triggerBottom) {
                 aboutSection.classList.add('show');
@@ -213,7 +211,7 @@
         }
 
         window.addEventListener('scroll', showOnScroll);
-        showOnScroll();  // Executa ao carregar a página também
+        showOnScroll(); 
     });
 
     function toggleMenu() {
@@ -225,14 +223,14 @@
     }
 
 
-    function getDeviceType() {
+    function TIpoDoDispositivo() {
         return window.innerWidth <= 768 ? 'mobile' : 'desktop';
     }
 
     function clickbtn(event, page) {
         event.preventDefault();
         const buttonId = event.target.id;
-        const deviceType = getDeviceType();
+        const deviceType = TIpoDoDispositivo();
 
         window.location.href = page
 
