@@ -132,7 +132,7 @@ module.exports = {
   buscarPorId,
   cadastrar,
   listar,
-  cadastrarGerente,
+  // cadastrarGerente,
   buscarEmpresa,
   listarEmpresa,
   editar,

@@ -30,21 +30,31 @@
             </span>
           </p>
         </li>
-        <li><a href="../dashboardGerente/dashboard_mensal.html">
+        <li><a href="../dashboardGerente/dashboard_tempo.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span class="navItem">Relatório</span>
+        </a></li>
+        <li><a href="../dashboardGerente/dashboard_componentes.html">
+            <i class="fa-solid fa-table-list"></i>
+            <span class="navItem">Servidores</span>
+          </a></li>
+        <li><a href="../dashboardGerente/dashboard_mensal.html"
+            style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
-            <span class="navItem">Mensal</span>
+            <span class="navItem" style="color: #191b27;">Mensal</span>
           </a>
         </li>
         <li><a href="../dashboardGerente/dashboard_funcionario.html">
             <i class="fa-solid fa-user-plus"></i>
             <span class="navItem">Funcionário</span>
-          </a></li>
-          <li>
-            <a id="btnIcone" onclick="toggleDarkMode()">
-              <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon"></i>
-              <span class="navItem">Mudar Tema</span>
-            </a>
-          </li>
+          </a>
+        </li>
+        <li>
+          <a id="btnIcone" onclick="toggleDarkMode()">
+            <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon"></i>
+            <span class="navItem">Mudar Tema</span>
+          </a>
+        </li>
         <div class="sair">
           <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4" target="_blank">
               <i class="fa-solid fa-headset"></i>
@@ -126,7 +136,7 @@
 
 </html>
 <script>
-      function toggleDarkMode() {
+  function toggleDarkMode() {
     const body = document.body;
     const themeToggleIcon = document.getElementById('themeToggleIcon');
 
@@ -144,20 +154,20 @@
   }
 
 
-    function togglePassword() {
-      const passwordInput = document.getElementById("inputSenha");
-      const toggleIcon = document.getElementById("toggleIcon");
+  function togglePassword() {
+    const passwordInput = document.getElementById("inputSenha");
+    const toggleIcon = document.getElementById("toggleIcon");
 
-      if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        toggleIcon.classList.remove("fa-eye");
-        toggleIcon.classList.add("fa-eye-slash"); 
-      } else {
-        passwordInput.type = "password";
-        toggleIcon.classList.remove("fa-eye-slash");
-        toggleIcon.classList.add("fa-eye"); 
-      }
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      toggleIcon.classList.remove("fa-eye");
+      toggleIcon.classList.add("fa-eye-slash");
+    } else {
+      passwordInput.type = "password";
+      toggleIcon.classList.remove("fa-eye-slash");
+      toggleIcon.classList.add("fa-eye");
     }
+  }
 
   function carregarNome() {
     let text = sessionStorage.NOME_USUARIO;
@@ -263,8 +273,8 @@
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          nome:nome,
-          sobrenome:sobrenome,
+          nome: nome,
+          sobrenome: sobrenome,
           telefone: telefone,
           email: email,
           senha: senha,

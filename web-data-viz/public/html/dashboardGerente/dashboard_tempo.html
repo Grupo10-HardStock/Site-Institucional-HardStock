@@ -33,14 +33,18 @@
         <li>
           <p style="margin-bottom: 20px;">
             <span id="nome" class="navItem-nome">
-       
+
             </span>
           </p>
         </li>
-        <li><a href="../dashboardGerente/dashboard_mensal.html"
-            style="background: rgba(199, 208, 216, 1);color: #191b27;">
-            <i class="fa-solid fa-chart-line"></i>
-            <span class="navItem" style="color: #191b27;">Tempo real</span>
+        <li><a href="../dashboardGerente/dashboard_tempo.html"
+          style="background: rgba(199, 208, 216, 1);color: #191b27;">
+          <i class="fa-solid fa-chart-line"></i>
+          <span class="navItem" style="color: #191b27;">Relatório</span>
+        </a></li>
+        <li><a href="../dashboardGerente/dashboard_componentes.html">
+            <i class="fa-solid fa-table-list"></i>
+            <span class="navItem">Servidores</span>
           </a></li>
         <li><a href="../dashboardGerente/dashboard_mensal.html">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
@@ -50,18 +54,21 @@
         <li><a href="../dashboardGerente/dashboard_funcionario.html">
             <i class="fa-solid fa-user-plus"></i>
             <span class="navItem">Funcionário</span>
-          </a></li>
-        <li><a href="../dashboardGerente/dashboard_componentes.html">
-            <i class="fa-solid fa-table-list"></i>
-            <span class="navItem">Servidores</span>
-          </a></li>
+          </a>
+        </li>
+        <li>
+          <a id="btnIcone" onclick="toggleDarkMode()">
+            <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon"></i>
+            <span class="navItem">Mudar Tema</span>
+          </a>
+        </li>
         <div class="sair">
           <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4" target="_blank">
               <i class="fa-solid fa-headset"></i>
               <span class="navItem">Suporte</span>
             </a></li>
           <li>
-             <a href="../../index.html">
+            <a href="../../index.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
               <span class="navItem">Sair</span>
             </a>
@@ -125,28 +132,28 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 
-function simulacao() {
+  function simulacao() {
     const alertaNet = document.getElementById('alerta-net');
     const alertaRam = document.getElementById('alerta-ram');
     const alertaDisco = document.getElementById('alerta-disco');
     const alertaCpu = document.getElementById('alerta-cpu');
 
-    alertaNet.className = 'alert perigo'; 
+    alertaNet.className = 'alert perigo';
     document.getElementById('rede').textContent = 'Alerta';
     document.getElementById('ConRede').textContent = '85mbps';
 
-    alertaRam.className = 'alert critico'; 
+    alertaRam.className = 'alert critico';
     document.getElementById('ram').textContent = 'Crítico';
     document.getElementById('ConRam').textContent = '75%';
 
-    alertaDisco.className = 'alert severo'; 
+    alertaDisco.className = 'alert severo';
     document.getElementById('disco').textContent = 'Severo';
     document.getElementById('ConDisco').textContent = '98%';
 
-    cpuAlert.className = 'alert normal'; 
+    cpuAlert.className = 'alert normal';
     document.getElementById('cpu').textContent = 'Normal';
-}
-setTimeout(simulacao, 8000);
+  }
+  setTimeout(simulacao, 8000);
 
   // Gráfico de RAM
   const ramCtx = document.getElementById('RamChart').getContext('2d');
@@ -249,8 +256,8 @@ setTimeout(simulacao, 8000);
     }
   });
 
-  function carregarNome(){
-     let text = sessionStorage.NOME_USUARIO;
+  function carregarNome() {
+    let text = sessionStorage.NOME_USUARIO;
     nome.innerHTML = "Olá, " + text;
   }
 </script>
