@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+        Gráfico de Cliques por Botão (Número Total de Cliques)
+    </h1>
+    <canvas id="clicksByButtonChart" width="400" height="200"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctxaa = document.getElementById('clicksByButtonChart').getContext('2d');
+    const clicksByButtonChart = new Chart(ctxaa, {
+        type: 'bar',
+        data: {
+            labels: ['Botão 1', 'Botão 2', 'Botão 3', 'Botão 4', 'Botão 5'], // Exemplo de rótulos de botões
+            datasets: [{
+                label: 'Número Total de Cliques',
+                data: [30, 50, 80, 40, 60], // Dados de cliques por botão, obtidos da base de dados
+                backgroundColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#33A1FF'],
+                borderColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#33A1FF'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+<h1> 
+    Gráfico de Percentual de Cliques por Botão
+</h1>
+<canvas id="percentClicksByButtonChart" width="400" height="200"></canvas>
+<script>
+    const percentCtx = document.getElementById('percentClicksByButtonChart').getContext('2d');
+    const percentClicksByButtonChart = new Chart(percentCtx, {
+        type: 'polarArea',
+        data: {
+            labels: ['Botão 1', 'Botão 2', 'Botão 3', 'Botão 4', 'Botão 5'],
+            datasets: [{
+                label: 'Percentual de Cliques',
+                data: [30, 10, 20, 15, 25], // Percentuais de cliques
+                backgroundColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#33A1FF'],
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>
+
+<h1>
+    Gráfico de iteração mobile ou descktop
+</h1>
+<canvas id="deviceInteractionsChart" width="400" height="200"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Dados simulados para o gráfico (substitua pelos dados reais obtidos do banco de dados)
+    const dataFromDBA = [
+        { device_type: 'mobile', interaction_count: 30 },
+        { device_type: 'desktop', interaction_count: 120 }
+    ];
+
+    // Processando os dados para o gráfico
+    const deviceTypes = [];
+    const interactionCounts = [];
+
+    dataFromDBA.forEach(data => {
+        deviceTypes.push(data.device_type.charAt(0).toUpperCase() + data.device_type.slice(1)); // Capitalizando o primeiro caractere
+        interactionCounts.push(data.interaction_count);
+    });
+
+    // Configuração do gráfico
+    const ctx = document.getElementById('deviceInteractionsChart').getContext('2d');
+    const deviceInteractionsChart = new Chart(ctx, {
+        type: 'bar', // Gráfico de pizza
+        data: {
+            labels: deviceTypes,  // Tipos de dispositivos: Mobile, Desktop
+            datasets: [{
+                label: 'Interações por Tipo de Dispositivo',
+                data: interactionCounts,  // Quantidade de interações
+                backgroundColor: ['#FF6384', '#36A2EB'],  // Cores para os segmentos
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return `${tooltipItem.label}: ${tooltipItem.raw} interações`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+
+
+<h1>
+     grafico de quais dias da semana tiveram mais clicks 
+</h1>
+
+<canvas id="clicksByDayChart" width="400" height="200"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Dados simulados para o gráfico (substitua isso pelos dados retornados pela consulta SQL)
+    const dataFromDB = [
+        { day_of_week: 1, click_count: 45 },  // Domingo
+        { day_of_week: 2, click_count: 30 },  // Segunda-feira
+        { day_of_week: 3, click_count: 60 },  // Terça-feira
+        { day_of_week: 4, click_count: 55 },  // Quarta-feira
+        { day_of_week: 5, click_count: 70 },  // Quinta-feira
+        { day_of_week: 6, click_count: 40 },  // Sexta-feira
+        { day_of_week: 7, click_count: 20 }   // Sábado
+    ];
+
+    // Mapeamento dos números de dias da semana para os nomes
+    const daysOfWeek = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+
+    // Processando os dados para o gráfico
+    const days = [];
+    const clicks = [];
+
+    dataFromDB.forEach(data => {
+        days.push(daysOfWeek[data.day_of_week - 1]); // Ajustando o índice (1 = domingo, 7 = sábado)
+        clicks.push(data.click_count);
+    });
+
+    // Configuração do gráfico
+    const ctx2 = document.getElementById('clicksByDayChart').getContext('2d');
+    const clicksByDayChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: days,  // Dias da semana
+            datasets: [{
+                label: 'Número de Cliques',
+                data: clicks,  // Número de cliques por dia
+                backgroundColor: '#33A1FF',
+                borderColor: '#007BFF',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 10  // Ajuste conforme necessário
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+
+</body>
+</html>

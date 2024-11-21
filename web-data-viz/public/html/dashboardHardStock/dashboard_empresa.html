@@ -25,15 +25,13 @@
     padding-top: 20px;
   }
   
-
   .campos {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     /* padding: 2px; */
-  }
-  
+  }   
 
   .antes,
   .depois {
@@ -77,7 +75,6 @@
     transition: 0.2s ease-in-out;
   }
   
-
   #btnCancel {
     background-color: white;
     border: 1px solid red;
@@ -106,7 +103,6 @@
     margin-top: 15px;
     margin-bottom: 15px;
   }
-
 </style>
 
 
@@ -130,9 +126,9 @@
         </li>
         <li>
           <p style="margin-bottom: 20px;">
-            <span id="nomeTop" class="navItem-nome">
-
+            <span id="aparecerNome" class="navItem-nome">                
             </span>
+        </p>
           </p>
         </li>
         <li><a href="../dashboardHardStock/dashboard_empresa.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
@@ -151,22 +147,24 @@
           <li><a href="../dashboardHardStock/dashboard-feedback.html">
             <i class="fa-solid fa-message"></i>
             <span class="navItem">Feedbacks</span>
+          </a></li>          
+          <li><a href="../dashboardHardStock/dashboard_QtdGerentes.html">
+            <!-- <i class="fa-solid fa-display"></i> -->
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="navItem">Graficos Empresas</span>
+          </a></li>
+          <li><a href="../dashboardHardStock/dashboard_Site.html" >
+            <i class="fa-solid fa-display"></i> 
+            <span class="navItem">Graficos Site</span>
           </a></li>
 
-
         <div class="sair">
-          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4
-" target="_blank">
-              <i class="fa-solid fa-headset"></i>
-              <span class="navItem">Suporte</span>
-            </a></li>
           <li>
             <a href="../../index.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
               <span class="navItem">Sair</span>
             </a>
           </li>
-
         </div>
       </ul>
   </nav>
@@ -182,7 +180,7 @@
         </label>
         <label id="cnpj">
           <p>CNPJ:</p><br>
-          <input id="input_cnpj" type="text" placeholder="Informe seu CNPJ:"><br>
+          <input id="input_cnpj" type="text" maxlength="18" onkeyup="handleCNPJ(event)" placeholder="Informe seu CNPJ:"><br>
         </label>
         <label id="email">
           <p>E-mail:</p><br>
@@ -200,6 +198,28 @@
 </html>
 
 <script>
+  
+function carregarNome(){
+    var text = sessionStorage.NOME_USUARIO;
+    aparecerNome.innerHTML = "Olá, " + text;
+  }
+
+const handleCNPJ = (event) => {
+  let input = event.target;
+  input.value = cnpjMask(input.value);
+}
+
+const cnpjMask = (value) => {
+  if (!value) return "";
+  value = value.replace(/\D/g, ''); // Remove caracteres não numéricos
+  value = value.replace(/^(\d{2})(\d)/, "$1.$2"); // Coloca o primeiro ponto
+  value = value.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3"); // Coloca o segundo ponto
+  value = value.replace(/\.(\d{3})(\d)/, ".$1/$2"); // Coloca a barra
+  value = value.replace(/(\d{4})(\d)/, "$1-$2"); // Coloca o hífen
+  return value;
+}
+
+
   function verificar() {
     let nome = document.getElementById('input_nome').value
     let cnpj = document.getElementById('input_cnpj').value
@@ -207,7 +227,7 @@
 
     if (nome == "" || cnpj == "" || email == "") {
       alert("Preencha os dados corretamente")
-    } else if (cnpj.length < 10) {
+    } else if (cnpj.length < 12) {
       alert("Preencha o CNPJ corretamente")
     } else if (email.indexOf('@') == -1 || email.indexOf('.') == -1) {
       alert("Insira um email válido")
@@ -215,7 +235,7 @@
       cadastroEmpresa(nome, cnpj, email)
     }
   }
-
+  
   function cadastroEmpresa(nome, cnpj, email) {
 
     fetch("/empresas/cadastrar", {
@@ -236,6 +256,10 @@
         if (resposta.ok) {
     
            alert( "Empresa cadastrada com sucesso!")
+            document.getElementById("input_nome").value = "";
+            document.getElementById("input_cnpj").value = "";
+            document.getElementById("input_email").value = "";
+
 
         } else {
           throw  alert ("Houve um erro ao tentar realizar o cadastro!");
@@ -248,10 +272,4 @@
     return false;
   }
 
-  
-
-  function carregarNome(){
-    let text = sessionStorage.NOME_USUARIO;
-    nomeTop.innerHTML = "Olá, " + text;
-  }
 </script>

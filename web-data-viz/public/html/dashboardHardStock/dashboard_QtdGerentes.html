@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./dashboard-hardstock.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Dashboard Graficos Empresa | HardStock</title>
+  
+  
+  <style>
+    .alinhamento {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 1%;
+      width: 60%;
+      background-color: white;
+      border-radius: 50px;
+      padding-top: 20px;
+      padding-bottom: 0px;
+    }
+
+
+    .monitor-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  width: 82%;
+  padding: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+    .alert {
+      padding: 10px;
+      border-radius: 12px;
+      align-items: center;
+      flex-direction: column;
+      display: flex;
+      font-size: 1rem;
+      text-align: center;
+      width: 50%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.4s ease, transform 0.3s ease;
+      background: linear-gradient(to bottom, #515a83, #232739, #191b27);
+      cursor: pointer;
+      color: white;
+    }
+
+    .alertas {
+      font-weight: bold;
+    }
+
+    span{
+      color: white;
+    }
+
+    .card {
+      background-color: rgb(203, 203, 203);
+      border-radius: 10px;
+      width: 80%;
+      height: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    h5{
+    font-size: 10px;
+    }
+  </style>
+
+
+
+
+</head>
+
+<body onload="carregarNome(),obterDadosGrafico()">
+  <label for="sidebar-ativo" class="sideBar-open">
+    <i class="fa-duotone fa-solid fa-bars"></i>
+  </label>
+  <input type="checkbox" id="sidebar-ativo">
+  <input type="checkbox" id="catracas-hover">
+  <nav id="nav">
+    <div class="link-conteiner">
+      <label for="sidebar-ativo" class="sideBar-close">
+        <i id="close" class="fa-solid fa-xmark"></i>
+      </label>
+      <ul>
+        <li>
+          <p class="logo">
+            <img src="../assets/icon/HardStock - branco.png" alt="">
+            <span class="nav-item">Hardstock</span>
+          </p>
+        </li>
+        <li>
+          <p style="margin-bottom: 20px;">
+            <span id="aparecerNome" class="navItem-nome">                
+            </span>
+        </p>
+        </li>
+        <li><a href="../dashboardHardStock/dashboard_empresa.html">
+            <i class="fa-solid fa-square-plus"></i>
+            <span class="navItem">Cadastro Empresa</span>
+          </a></li>
+        <li><a href="../dashboardHardStock/dashboard_gerente.html">
+            <i class="fa-solid fa-user-plus"></i>
+            <span class="navItem">Cadastro Gerente</span>
+          </a>
+        </li>
+        <li><a href="../dashboardHardStock/dashboard_clientes.html">
+            <i class="fa-solid fa-people-group"></i>
+            <span class="navItem">Empresas</span>
+          </a></li>
+        <li><a href="../dashboardHardStock/dashboard-feedback.html">
+            <i class="fa-solid fa-message"></i>
+            <span class="navItem">Feedbacks</span>
+          </a></li>
+        <li><a href="../dashboardHardStock/dashboard_QtdGerentes.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="navItem" style="color: #191b27;">Graficos Empresas</span>
+          </a></li>
+          <li><a href="../dashboardHardStock/dashboard_Site.html" >
+            <i class="fa-solid fa-display"></i> 
+            <span class="navItem" >Graficos Site</span>
+          </a></li>
+        <div class="sair">
+          
+          <li>
+            <a href="../../index.html">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              <span class="navItem">Sair</span>
+            </a>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </nav>
+  <div class="alinhamento">
+    <h1>Graficos Empresa</h1>
+    <div class="monitor-container">
+      <div class="alert" id="alerta-net">
+        <h5>Quantidade Total de Empresas</h5>
+        <div id="QtdTotalEmpresas"> </div>
+        
+      </div>
+      <div class="alert" id="alerta-ram">
+        <h5>Quantidade Total de Funcionarios</h5>
+        <div id="QtdTotalFuncionarios"> </div>
+      </div>
+    </div>
+    <div class="card">
+      <canvas id="userChart"></canvas>
+    </div>
+
+    <div class="monitor-container">
+      <div class="alert" id="alerta-net">
+        <h5>Quantidade Total de Gerentes</h5>
+        <div id="QtdTotalGerente"> </div>
+   
+      </div>
+      <div class="alert" id="alerta-ram">
+        <h5>Quantidade Total de Analistas</h5>
+        <div id="QtdTotalAnalistas"> </div>
+      </div>
+  </div>
+
+<!--  <script>
+    window.onload = function () {
+      const empresas = ['Empresa A', 'Empresa B', 'Empresa C', 'Empresa D'];
+      const usuarios = [45, 30, 70, 20];
+
+      const ctx = document.getElementById('userChart').getContext('2d');
+      const userChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: empresas,
+          datasets: [{
+            label: 'Usuários por Empresa',
+            data: usuarios,
+            backgroundColor: [
+              'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+              'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    };
+  </script>-->
+
+<script>
+function carregarNome() {
+  var text = sessionStorage.getItem('NOME_USUARIO');
+  var aparecerNome = document.getElementById('aparecerNome'); // Certifique-se de que o elemento existe
+  
+  if (text && aparecerNome) {
+    aparecerNome.innerHTML = "Olá, " + text;
+  } else if (!text) {
+    console.error('NOME_USUARIO não está definido no sessionStorage.');
+  } else {
+    console.error('Elemento aparecerNome não encontrado no DOM.');
+  }
+}
+
+
+
+function obterDadosGrafico() {
+
+fetch(`/empresas/ultimas/`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+        response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
+
+            plotarGrafico(resposta);
+
+        });
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+    }
+})
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+  function obterDadosGrafico() {
+    fetch(`/empresas/ultimas/`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
+            plotarGrafico(resposta); // Chamar a função de plotagem aqui após obter os dados
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  }
+  
+  function plotarGrafico(resposta) {
+    console.log('iniciando plotagem do gráfico...');
+    
+    var razaoSocial = [];
+    var listaQtdAnalistas = [];
+    var listaQtdGerente = [];
+  
+    for (var index = 0; index < resposta.length; index++) {
+      var registro = resposta[index];
+      razaoSocial.push(registro.Empresa);
+      listaQtdAnalistas.push(parseInt(registro.QuantidadeAnalistas) || 0);
+      listaQtdGerente.push(parseInt(registro.QuantidadeGerentes) || 0);
+    }
+
+    var QtdEmpresas = 0
+
+    for (let index = 0; index < razaoSocial.length; index++) {
+
+          QtdEmpresas = QtdEmpresas + 1
+
+      } 
+                                  
+      var QtdAnalistas = 0
+
+      for (let index = 0; index < listaQtdAnalistas.length; index++) {
+
+        QtdAnalistas = QtdAnalistas +  Number(listaQtdAnalistas[index])
+
+          } 
+
+          var QtdGerente = 0
+
+      for (let index = 0; index < listaQtdGerente.length; index++) {
+
+        QtdGerente = QtdGerente + Number(listaQtdGerente[index])
+
+        } 
+        
+        var QtdFuncioariosTotal = QtdAnalistas + QtdGerente
+
+      QtdTotalFuncionarios.innerHTML = `<h5>  ${QtdFuncioariosTotal}  </h5>`
+      
+      QtdTotalAnalistas.innerHTML = ` <h5>${QtdAnalistas}</h5>`
+
+      QtdTotalGerente.innerHTML = ` <h5>${QtdGerente}</h5>`
+      
+      QtdTotalEmpresas.innerHTML = `<h5>  ${QtdEmpresas}  </h5>`
+
+
+
+
+    const ctx = document.getElementById('userChart').getContext('2d');
+    const userChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: razaoSocial, // Corrigido para usar a variável preenchida
+        datasets: [
+          {
+            label: 'Analistas',
+            data: listaQtdAnalistas, // Corrigido para usar a variável preenchida
+            backgroundColor: ' rgba(81, 90, 131)',
+            borderWidth: 1
+          },
+          {
+            label: 'Gerentes',
+            data: listaQtdGerente, // Corrigido para usar a variável preenchida
+            backgroundColor: 'rgba(131, 81, 81)',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+  
+  window.onload = function () {
+    carregarNome(),obterDadosGrafico(); // Chamada da função para obter os dados ao carregar a página
+  };
+  </script>
+  
+</body>
+
+</html>
+
+

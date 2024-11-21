@@ -30,15 +30,13 @@
                     <div class="bar"></div>
                 </div>
                 <ul>
-                    <li>
-                        <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon" onclick="toggleDarkMode()"></i>
-                    </li>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#solutions">Solução</a></li>
-                    <li><a href="#about">Sobre</a></li>
-                    <li><a href="#solutions2">MVV</a></li>
-                    <li><a href="#contact">Contato</a></li>
-                    <li><a href="./login.html" class="login-button">Login</a></li>
+                    <li><i class="fa-solid fa-moon theme-icon" id="themeToggleIcon" onclick="toggleDarkMode()"></i></li>
+                    <li><a id="ref_home"  onclick="clickbtn(event, '#home')">Home</a></li>
+                    <li><a id="ref_solucao" onclick="clickbtn(event, '#solucao')">Solução</a></li>
+                    <li><a id="ref_sobre" onclick="clickbtn(event, '#sobre')">Sobre</a></li>
+                    <li><a id="ref_mvv" onclick="clickbtn(event, '#mvv')">MVV</a></li>
+                    <li><a id="ref_contato" onclick="clickbtn(event, '#contato')">Contato</a></li>
+                    <li><a id="ref_login" class="login-button" onclick="clickbtn(event, 'login.html')">Login</a></li>
                 </ul>
             </nav>
         </div>
@@ -54,9 +52,9 @@
         </div>
     </section>
 
-    <section id="solutions">
+    <section id="solucao">
         <div class="container">
-            <h2>Solução HardStock</h2>
+            <h2 class="Titulos">Solução HardStock</h2>
             <div class="solution-grid">
                 <div class="solution">
                     <h3>Contexto</h3>
@@ -93,9 +91,9 @@
 
 
 
-    <section id="about">
+    <section id="sobre">
         <div class="container">
-            <h2>Sobre Nós</h2>
+            <h2 class="Titulos">Sobre Nós</h2>
             <p>&nbsp;&nbsp;&nbsp;Somos um grupo de estudantes de Tecnologia da Informação com o objetivo de desenvolver
                 softwares inovadores que possam transformar o setor.
                 <br><br>
@@ -109,9 +107,9 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <section id="solutions2">
-        <div class="container"">
-        <h2 style=" display: flex; justify-content: center;">MVV HardStock</h2>
+    <section id="mvv">
+        <div class="container">
+        <h2 class="Titulos">MVV HardStock</h2>
             <div class="solution-grid">
                 <div class="solution">
                     <h3><i class="fas fa-bullseye"></i> Missão</h3>
@@ -139,10 +137,9 @@
         </div>
     </section>
 
-
-    <section id="contact">
+    <section id="contato">
         <div class="container">
-            <h2>Contato</h2>
+            <h2 class="Titulos">Contato</h2>
             <form action="submit_form.php" method="POST">
                 <label for="name">Nome:</label>
                 <input type="text" id="inputNome" name="name" required>
@@ -153,7 +150,7 @@
                 <label for="message">Mensagem:</label>
                 <textarea id="inputMensagem" name="mensagem" required></textarea>
 
-                <button type="submit" class="btn-primary" onclick="enviar()">Enviar</button>
+                <button type="submit" class="btn-primary">Enviar</button>
             </form>
         </div>
     </section>
@@ -191,14 +188,14 @@
         }
     }
 
+
     document.addEventListener('DOMContentLoaded', function () {
         const solutions = document.querySelectorAll('.solution');
-        const aboutSection = document.querySelector('#about');
+        const aboutSection = document.querySelector('#sobre');
 
         function showOnScroll() {
             const triggerBottom = window.innerHeight * 0.85;
 
-            // Mostrar as soluções
             solutions.forEach(solution => {
                 const solutionTop = solution.getBoundingClientRect().top;
 
@@ -207,7 +204,6 @@
                 }
             });
 
-            // Mostrar a seção "Sobre Nós"
             const aboutTop = aboutSection.getBoundingClientRect().top;
             if (aboutTop < triggerBottom) {
                 aboutSection.classList.add('show');
@@ -215,7 +211,7 @@
         }
 
         window.addEventListener('scroll', showOnScroll);
-        showOnScroll();  // Executa ao carregar a página também
+        showOnScroll(); 
     });
 
     function toggleMenu() {
@@ -226,6 +222,29 @@
         navUl.classList.toggle('open');
     }
 
+
+    function TIpoDoDispositivo() {
+        return window.innerWidth <= 768 ? 'mobile' : 'desktop';
+    }
+
+    function clickbtn(event, page) {
+        event.preventDefault();
+        const buttonId = event.target.id;
+        const deviceType = TIpoDoDispositivo();
+
+        window.location.href = page
+
+        fetch('/empresas/clickbtn', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                btnnome: page.replace("#", ""),
+                tipomobdes: deviceType
+            })
+        });
+    }
 
     function enviar() {
         var nome = inputNome.value;

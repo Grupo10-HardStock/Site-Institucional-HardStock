@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./dashboard-hardstock.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Dashboard Site | HardStock</title>
+<!-- <style>
+    .alinhamento {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 5%;
+      width: 40%;
+      height: 85%;
+      background-color: white;
+      border-radius: 50px;
+      padding-top: 20px;
+      padding-bottom: 0px;
+    }
+
+    .monitor-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+      padding: 20px;
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+
+    .alert {
+      padding: 10px;
+      border-radius: 12px;
+      align-items: center;
+      flex-direction: column;
+      display: flex;
+      font-size: 1rem;
+      text-align: center;
+      width: 50%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.4s ease, transform 0.3s ease;
+      background: linear-gradient(to bottom, #515a83, #232739, #191b27);
+      cursor: pointer;
+      color: white;
+    }
+
+    .alertas {
+      font-weight: bold;
+    }
+
+    span{
+      color: white;
+    }
+
+    .card {
+      background-color: rgb(203, 203, 203);
+      border-radius: 10px;
+      width: 96%;
+      height: 51%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  </style> 
+  
+
+  <style>/* Definindo estilo para o container dos gráficos */
+.alinhamento {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 5%;
+  width: 80%;
+  height: auto;
+  background-color: white;
+  border-radius: 50px;
+  padding: 20px;
+}
+
+.monitor-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.card {
+  background-color: rgb(203, 203, 203);
+  border-radius: 10px;
+  width: 40%; /* Ajusta a largura para 48% para dar espaçamento entre os cards */
+  height: 200px; /* Ajusta a altura conforme necessário */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px; /* Adiciona um espaço inferior */
+  transition: transform 0.3s ease;
+
+}
+.card:hover {
+  transform: translateY(-10px); /* Efeito de hover para elevar o card */
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+h1{
+  margin-bottom: 10px;
+}
+
+.alert {
+      padding: 10px;
+      border-radius: 12px;
+      align-items: center;
+      flex-direction: column;
+      display: flex;
+      font-size: 1rem;
+      text-align: center;
+
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.4s ease, transform 0.3s ease;
+      background: linear-gradient(to bottom, #515a83, #232739, #191b27);
+      cursor: pointer;
+      color: white;
+    }
+--> 
+    <style>
+    .alinhamento {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 1%;
+  width: 70%;
+  height: 95%;
+  background-color: white;
+  border-radius: 50px;
+}
+h5{
+  font-size: 10px;
+}
+
+.alertas-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.alert {
+  padding: 8px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.4s ease, transform 0.3s ease;
+  background: linear-gradient(to bottom, #515a83, #232739, #191b27);
+  cursor: pointer;
+  color: white;
+  width: 170px;
+  height: auto;
+}
+.alert:hover {
+  transform: translateY(-5px); 
+}
+
+.monitor-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.card {
+  background-color: rgb(203, 203, 203);
+  border-radius: 10px;
+  width: 40%; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  flex-direction: column;
+  padding: 10px 5px;
+}
+
+.card:hover {
+  transform: translateY(-10px); 
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+
+</style>
+
+</head>
+
+<body onload="carregarNome(),obterDadosGrafico()">
+  <label for="sidebar-ativo" class="sideBar-open">
+    <i class="fa-duotone fa-solid fa-bars"></i>
+  </label>
+  <input type="checkbox" id="sidebar-ativo">
+  <input type="checkbox" id="catracas-hover">
+  <nav id="nav">
+    <div class="link-conteiner">
+      <label for="sidebar-ativo" class="sideBar-close">
+        <i id="close" class="fa-solid fa-xmark"></i>
+      </label>
+      <ul>
+        <li>
+          <p class="logo">
+            <img src="../assets/icon/HardStock - branco.png" alt="">
+            <span class="nav-item">Hardstock</span>
+          </p>
+        </li>
+        <li>
+          <p style="margin-bottom: 20px;">
+            <span id="aparecerNome" class="navItem-nome">                
+            </span>
+        </p>
+        </li>
+        <li><a href="../dashboardHardStock/dashboard_empresa.html">
+            <i class="fa-solid fa-square-plus"></i>
+            <span class="navItem">Cadastro Empresa</span>
+          </a></li>
+        <li><a href="../dashboardHardStock/dashboard_gerente.html">
+            <i class="fa-solid fa-user-plus"></i>
+            <span class="navItem">Cadastro Gerente</span>
+          </a>
+        </li>
+        <li><a href="../dashboardHardStock/dashboard_clientes.html">
+            <i class="fa-solid fa-people-group"></i>
+            <span class="navItem">Empresas</span>
+          </a></li>
+        <li><a href="../dashboardHardStock/dashboard-feedback.html">
+            <i class="fa-solid fa-message"></i>
+            <span class="navItem">Feedbacks</span>
+          </a></li>
+        <li><a href="../dashboardHardStock/dashboard_QtdGerentes.html" >
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="navItem">Graficos Empresas</span>
+          </a></li>
+          <li><a href="../dashboardHardStock/dashboard_Site.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
+            <i class="fa-solid fa-display"></i> 
+            <span class="navItem" style="color: #191b27;">Graficos Site</span>
+          </a></li>
+        <div class="sair">
+
+          <li>
+            <a href="../../index.html">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              <span class="navItem">Sair</span>
+            </a>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </nav>
+  <div class="alinhamento">
+    <h1>Análise de Navegação do Site</h1>
+    <div class="alertas-container">
+      <div class="alert">
+       <div id="QtdClickstot"></div>
+      </div>
+      <div class="alert">
+        <div id="QtdClickstot2"></div>
+      </div>
+      <div class="alert">
+        <div id="QtdClickstot3"></div>
+      </div>
+      <div class="alert">
+        <div id="QtdClickstot4"></div>
+      </div>
+    </div>
+    <div class="monitor-container">
+      <div class="card">
+        <div>
+          <h4>Quantidade de clicks por Funcionalidade</h4>
+        </div>
+        <canvas id="userChart1"></canvas>
+      </div>
+      <div class="card">
+        <div>
+          <h4>Porcentagem de clicks por Funcionalidade</h4>
+        </div>
+        <canvas id="userChart2"></canvas>
+      </div>
+
+      <div class="monitor-container">
+      <div class="card">
+        <div>
+          <h4>Analise de Navegação em Dias</h4>
+        </div>
+        <canvas id="userChart3"></canvas>
+      </div>
+      <div class="card">
+        <div>
+          <h4>Analise de Navegação dos Dispositivo</h4>
+        </div>
+        <canvas id="userChart4"></canvas>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+
+<script>
+
+
+function carregarNome(){
+  var text = sessionStorage.NOME_USUARIO;
+    aparecerNome.innerHTML = "Olá, " + text;
+  }
+
+
+function obterDadosGrafico() {
+
+fetch(`/empresas/sitegrafico4/`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+        response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
+
+            plotarGrafico(resposta);
+
+        });
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+    }
+})
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+
+  async function obterDadosGrafico() {
+    /*Grafico 01*/
+    fetch(`/empresas/sitegrafico1/`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta1) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta1)}`);
+            plotarGrafico1(resposta1); 
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+    
+      /*Grafico 02*/
+
+      fetch(`/empresas/sitegrafico2/`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta2) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta2)}`);
+            plotarGrafico2(resposta2); 
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+
+          /*Grafico 03*/
+      fetch(`/empresas/sitegrafico3/`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta3) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta3)}`);
+            plotarGrafico3(resposta3); 
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+      
+          /*Grafico 04*/
+          fetch(`/empresas/sitegrafico4/`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta4) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta4)}`);
+            plotarGrafico4(resposta4); 
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+      
+  }
+
+  
+
+
+  function plotarGrafico1(resposta1) {
+    list_btnnome = []
+    list_total_cliques = []
+
+    for (var index = 0; index < resposta1.length; index++) {
+      var registro = resposta1[index];
+      list_btnnome.push(registro.btnnome);
+      list_total_cliques.push(parseInt(registro.total_cliques) || 0);
+    }
+
+    var QtdClicks = 0
+
+    for (let index = 0; index < list_total_cliques.length; index++) {
+
+      QtdClicks = QtdClicks +  Number(list_total_cliques[index])
+
+      } 
+                                  
+      QtdClickstot.innerHTML = `<h5> A Quantidade Total de Clicks: <br>${QtdClicks} <h5>`
+      
+    const ctxaa = document.getElementById('userChart1').getContext('2d');
+    const userChart01 = new Chart(ctxaa, {
+        type: 'bar',
+        data: {
+            labels: list_btnnome,
+            datasets: [{
+                label: 'Número Total de Cliques',
+                data: list_total_cliques,
+                backgroundColor: ' rgba(81, 90, 131)',
+
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+  }
+
+
+  function plotarGrafico2(resposta2) {
+list_btnnome = [];
+list_total_cliques = [];
+list_percentual_cliques = [];
+
+for (var index = 0; index < resposta2.length; index++) {
+  var registro = resposta2[index];
+  list_btnnome.push(registro.btnnome);
+  list_total_cliques.push(parseInt(registro.total_cliques) || 0);
+  list_percentual_cliques.push(parseInt(registro.percentual_cliques) || 0);
+}
+
+var QtdClicks = 0;
+for (let index = 0; index < list_total_cliques.length; index++) {
+  QtdClicks += Number(list_total_cliques[index]);
+}
+
+var maxPer = list_percentual_cliques.indexOf(Math.max(...list_percentual_cliques));
+var btnMax = list_btnnome[maxPer];
+
+QtdClickstot2.innerHTML = `<h5>Funcionaliade mais acessada:<br> ${btnMax} </h5>`;
+
+    const percentCtx = document.getElementById('userChart2').getContext('2d');
+    const percentClicksByButtonChart = new Chart(percentCtx, {
+        type: 'bar',
+        data: {
+            labels: list_btnnome ,
+            datasets: [{
+                label: 'Percentual de Cliques',
+                data: list_percentual_cliques, 
+                backgroundColor: ' rgba(81, 90, 131)'
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+  }
+
+  
+  function plotarGrafico3(resposta3) {
+    const list_dia_da_semana = [];
+    const list_total_cliques = [];
+
+    for (var index = 0; index < resposta3.length; index++) {
+        var registro = resposta3[index];
+        list_dia_da_semana.push(registro.dia_da_semana);  
+        list_total_cliques.push(parseInt(registro.total_cliques) || 0);  
+    }
+
+    const diasSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+
+      var QtdClicks = 0;
+      for (let index = 0; index < list_total_cliques.length; index++) {
+          QtdClicks += Number(list_total_cliques[index]);
+      }
+
+    var maxPercentual = list_total_cliques.indexOf(Math.max(...list_total_cliques));
+    var btn = list_dia_da_semana[maxPercentual];
+    
+    btnDiaSemana = diasSemana[btn -1]
+
+    QtdClickstot3.innerHTML = `<h5>Dia da semana com mais clicks:<br> ${btnDiaSemana} </h5>`;
+
+
+    const ctx2 = document.getElementById('userChart3');
+    if (ctx2) {
+        const clicksByDayChart = new Chart(ctx2.getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: list_dia_da_semana.map(dia => diasSemana[dia - 1] || 'Desconhecido'),  
+                datasets: [{
+                    label: 'Número de Cliques',
+                    data: list_total_cliques,  
+                    backgroundColor: ' rgba(81, 90, 131)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 10
+                        }
+                    }
+                }
+            }
+        });
+    } else {
+        console.error("Elemento de canvas com ID 'clicksByDayChart' não encontrado.");
+    }
+}
+
+
+
+  function plotarGrafico4(resposta4) {
+    console.log('iniciando plotagem do gráfico...');
+    
+    list_tipo_dispositivo = []
+    list_total_interacoes = []
+
+    for (var index = 0; index < resposta4.length; index++) {
+      var registro = resposta4[index];
+      list_tipo_dispositivo.push(registro.tipo_dispositivo);
+      list_total_interacoes.push(parseInt(registro.total_interacoes) || 0);
+    }
+
+  var InteracoesIndex = list_total_interacoes.indexOf(Math.max(...list_total_interacoes));
+  var DispositivoMaisAcesso = list_tipo_dispositivo[InteracoesIndex];
+
+  QtdClickstot4.innerHTML = `<h5>Dispositivo com mais acesso:<br> ${DispositivoMaisAcesso} </h5>`;
+
+  
+
+    const ctx = document.getElementById('userChart4').getContext('2d');
+    const userChart = new Chart(ctx, {
+      type: 'bar',
+        data: {
+            labels: list_tipo_dispositivo,  
+            datasets: [{
+                label: 'Interações por Tipo de Dispositivo',
+                data: list_total_interacoes,  
+                backgroundColor: ' rgba(81, 90, 131)',
+                hoverOffset: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return `${tooltipItem.label}: ${tooltipItem.raw} interações`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+  }
+
+
+  window.onload = function () {
+    carregarNome(),obterDadosGrafico(); 
+  };
+  </script>
+  
+</body>
+
+</html>
+
+
+  
