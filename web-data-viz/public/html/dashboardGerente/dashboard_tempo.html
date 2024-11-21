@@ -8,8 +8,159 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Incluindo o Chart.js -->
   <title>Dashboard Mensal | HardStock</title>
 
+  <style>
+/* Estilos para o dashboard */
+.centralizador {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 110px;
+}
+
+#selecTempo {
+  text-align: justify;
+  background-color: #232739;
+  color: white;
+  font-size: large;
+  padding: 0.5%;
+  border-radius: 50px;
+  width: 250px;
+  height: 40px;
+  margin-bottom: 20px;
+  appearance: none;
+  background-image: url("../assets/icon/seta-direita.png");
+  -position: right center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+}
+
+.linha-grafico-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 50%;
+  margin: 0 auto;
+  justify-content: space-between;
+  margin-left: -20px;
+}
+
+.divisao {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  padding: 20px;
+  margin-top: -100px;
+}
+
+.card {
+  flex: 1;
+  margin: 10px;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  min-width: 150px; /* Tamanho mínimo */
+  max-width: 300px; /* Tamanho máximo */
+  height: 250px; /* Altura fixa */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card canvas {
+  width: 100% !important;  /* Garante que o gráfico ocupe toda a largura disponível */
+  height: 200px; /* Altura fixa para evitar distorção */
+  max-height: 300px; /* Limita a altura máxima */
+  object-fit: contain; /* Garante que o gráfico não fique distorcido */
+}
+
+.card:hover {
+  transform: scale(1.05);
+  /* Efeito de zoom suave ao passar o mouse */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  /* Sombra mais intensa no hover */
+}
+
+.cardLinha1,
+.cardLinha2 {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 50%;
+}
+
+.iframe {
+  width: 72%;
+  height: 640px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: bisque;
+  margin-left: 70px;
+}
+
+@media (max-width: 768px) {
+  .centralizador {
+    flex-direction: column;
+  }
+
+  .linha-grafico-card,
+  .divisao {
+    width: 90%;
+    /* Ajuste da largura para 90% em telas pequenas */
+    margin-left: 0;
+  }
+
+  .iframe,
+  .card {
+    width: 100%;
+    height: auto;
+    /* Ajuste da altura para adaptação */
+  }
+
+  #selecTempo {
+    width: 100%;
+  }
+
+  .divisao {
+    width: 100%;
+    /* Em telas pequenas, a divisão ocupa toda a largura */
+    height: auto;
+    /* Altura automática em telas pequenas */
+    padding: 10px;
+    /* Ajuste do espaçamento interno */
+  }
+
+  .card {
+    width: 100%;
+    /* Ajuste dos cards para ocupar toda a largura disponível */
+  }
+
+  .iframe {
+    width: 100%;
+    /* Ajuste do iframe para ocupar toda a largura da tela */
+    height: 400px;
+    /* Ajuste de altura */
+  }
+
+  /* Ajustes para o gráfico em dispositivos móveis */
+  .card canvas {
+    width: 100% !important;
+    height: 150px; /* Ajuste da altura para dispositivos móveis */
+    max-height: 200px; /* Limita a altura máxima */
+  }
+}
+
+  </style>
 </head>
 
 <body onload="carregarNome()">
@@ -32,34 +183,27 @@
         </li>
         <li>
           <p style="margin-bottom: 20px;">
-            <span id="nome" class="navItem-nome">
-
-            </span>
+            <span id="nome" class="navItem-nome"></span>
           </p>
         </li>
         <li><a href="../dashboardGerente/dashboard_tempo.html"
-          style="background: rgba(199, 208, 216, 1);color: #191b27;">
-          <i class="fa-solid fa-chart-line"></i>
-          <span class="navItem" style="color: #191b27;">Relatório</span>
-        </a></li>
+            style="background: rgba(199, 208, 216, 1);color: #191b27;">
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
+            <span class="navItem" style="color: #191b27;">Relatórios</span>
+          </a>
+        </li>
         <li><a href="../dashboardGerente/dashboard_componentes.html">
             <i class="fa-solid fa-table-list"></i>
             <span class="navItem">Servidores</span>
           </a></li>
-        <li><a href="../dashboardGerente/dashboard_mensal.html">
+          <li><a href="../dashboardGerente/dashboard_mensal.html">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
             <span class="navItem">Mensal</span>
           </a>
         </li>
-        <li><a href="../dashboardGerente/dashboard_funcionario.html">
+          <li><a href="../dashboardGerente/dashboard_funcionario.html">
             <i class="fa-solid fa-user-plus"></i>
             <span class="navItem">Funcionário</span>
-          </a>
-        </li>
-        <li>
-          <a id="btnIcone" onclick="toggleDarkMode()">
-            <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon"></i>
-            <span class="navItem">Mudar Tema</span>
           </a>
         </li>
         <div class="sair">
@@ -73,191 +217,266 @@
               <span class="navItem">Sair</span>
             </a>
           </li>
-
         </div>
       </ul>
+    </div>
   </nav>
 
-  <div class="alinhamento">
-    <div class="monitor-container">
-      <div class="alert" id="alerta-net">
-        <h3>Rede</h3>
-        <p>Desempenho: <span class="alertas" id="ConRede"> 130mbps</span></p>
-        <p>Nível atual: <span class="alertas" id="rede">Normal</span></p>
-      </div>
-      <div class="alert" id="alerta-ram">
-        <h3>RAM</h3>
-        <p>Desempenho: <span class="alertas" id="ConRam">0%</span></p>
-        <p>Nível atual: <span class="alertas" id="ram">Normal</span></p>
-      </div>
-      <div class="alert" id="alerta-disco">
-        <h3>Disco</h3>
-        <p>Desempenho: <span class="alertas" id="ConDisco">0%</span></p>
-        <p>Nível atual: <span class="alertas" id="disco">Normal</span></p>
-      </div>
-      <div class="alert" id="alerta-cpu">
-        <h3>CPU</h3>
-        <p>Desempenho: <span class="alertas" id="rede">0%</span></p>
-        <p>Nível atual: <span class="alertas" id="cpu">Normal</span></p>
-      </div>
+  <div class="centralizador">
+    <div class="divisao">
+      <!-- Seleção do tipo de relatório -->
+      <select id="selecTempo" onchange="carregarRelatorio()">
+        <option disabled selected value="#">Selecione o relatório</option>
+        <option value="mensal">Relatório Mensal</option>
+        <option value="trimestral">Relatório Trimestral</option>
+        <option value="semestral">Relatório Semestral</option>
+      </select>
+
+      <!-- Relatório RMarkdown -->
+      <iframe class="iframe" id="iframeRelatorio"></iframe>
     </div>
 
-    <div class="opcoes-btn">
-      <select>
-        <option disabled selected>Selecione um Servidor</option>
-        <option value="1">Servidor 1</option>
-        <option value="2">Servidor 2</option>
-        <option value="3">Servidor 3</option>
-        <option value="4">Servidor 4</option>
-      </select>
+    <div class="linha-grafico-card">
+      <div class="cardLinha1">
+        <div class="card card1">
+          <!-- Gráfico 1 -->
+          <canvas id="graficoRede"></canvas>
+        </div>
+
+        <div class="card card2">
+          <!-- Gráfico 2 -->
+          <canvas id="graficoRam"></canvas>
+        </div>
+
+        <div class="card card3">
+          <!-- Gráfico 3 -->
+          <canvas id="graficoDisco"></canvas>
+        </div>
+      </div>
+
+      <div class="cardLinha2">
+        <div class="card card4">
+          <!-- Gráfico 4 -->
+          <canvas id="graficoCpu"></canvas>
+        </div>
+
+        <div class="card card5">
+          <!-- Gráfico 5 -->
+          <canvas id="graficoStatus"></canvas>
+        </div>
+      </div>
     </div>
-    <main>
-      <div class="card">
-        <canvas id="RamChart"></canvas>
-      </div>
-      <div class="card">
-        <canvas id="DiscoChart"></canvas>
-      </div>
-      <div class="card">
-        <canvas id="CPUChart"></canvas>
-      </div>
-      <div class="card">
-        <canvas id="RedeChart"></canvas>
-      </div>
-    </main>
   </div>
+
+
 </body>
 
 </html>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-
-  function simulacao() {
-    const alertaNet = document.getElementById('alerta-net');
-    const alertaRam = document.getElementById('alerta-ram');
-    const alertaDisco = document.getElementById('alerta-disco');
-    const alertaCpu = document.getElementById('alerta-cpu');
-
-    alertaNet.className = 'alert perigo';
-    document.getElementById('rede').textContent = 'Alerta';
-    document.getElementById('ConRede').textContent = '85mbps';
-
-    alertaRam.className = 'alert critico';
-    document.getElementById('ram').textContent = 'Crítico';
-    document.getElementById('ConRam').textContent = '75%';
-
-    alertaDisco.className = 'alert severo';
-    document.getElementById('disco').textContent = 'Severo';
-    document.getElementById('ConDisco').textContent = '98%';
-
-    cpuAlert.className = 'alert normal';
-    document.getElementById('cpu').textContent = 'Normal';
-  }
-  setTimeout(simulacao, 8000);
-
-  // Gráfico de RAM
-  const ramCtx = document.getElementById('RamChart').getContext('2d');
-  new Chart(ramCtx, {
-    type: 'line',
-    data: {
-      labels: ['1', '2', '3', '4', '5', '6'],
-      datasets: [{
-        label: 'Uso de RAM',
-        data: [12, 19, 3, 5, 2, 3],
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 2,
-        fill: false
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: false
-        }
-      }
-    }
-  });
-
-  // Gráfico de Disco
-  const discoCtx = document.getElementById('DiscoChart').getContext('2d');
-  new Chart(discoCtx, {
-    type: 'bar',
-    data: {
-      labels: ['1', '2', '3', '4', '5', '6'],
-      datasets: [{
-        label: 'Uso de Disco',
-        data: [20, 30, 40, 50, 60, 70],
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        borderColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-
-  // Gráfico de CPU
-  const cpuCtx = document.getElementById('CPUChart').getContext('2d');
-  new Chart(cpuCtx, {
-    type: 'line',
-    data: {
-      labels: ['1', '2', '3', '4', '5', '6'],
-      datasets: [{
-        label: 'Uso de CPU',
-        data: [10, 15, 8, 12, 7, 9],
-        borderColor: 'rgba(54, 162, 235, 1)',
-        borderWidth: 2,
-        fill: false
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: false
-        }
-      }
-    }
-  });
-
-  // Gráfico de Rede
-  const redeCtx = document.getElementById('RedeChart').getContext('2d');
-  new Chart(redeCtx, {
-    type: 'line',
-    data: {
-      labels: ['Download', 'Upload'],
-      datasets: [{
-        label: 'Uso de Rede',
-        data: [70, 30, 30, 30, 30, 30],
-        backgroundColor: [
-          'red',
-          'red'
-        ],
-        borderColor: [
-          'red',
-          'red'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false
-    }
-  });
-
   function carregarNome() {
     let text = sessionStorage.NOME_USUARIO;
-    nome.innerHTML = "Olá, " + text;
+    document.getElementById('nome').innerHTML = "Olá, " + text;
   }
+
+  function carregarRelatorio() {
+    const selecao = document.getElementById("selecTempo").value;
+    let iframe = document.getElementById("iframeRelatorio");
+
+    if (!selecao || !iframe) {
+      console.error("Erro: Elemento não encontrado.");
+      return;
+    }
+
+    switch (selecao) {
+      case "mensal":
+        iframe.src = "./relatorioMensal.html"; // Mude para o caminho correto do relatório mensal
+        break;
+      case "trimestral":
+        iframe.src = "./relatorioTrimestral.html"; // Mude para o caminho correto do relatório trimestral
+        break;
+      case "semestral":
+        iframe.src = "./relatorioSemestral.html"; // Mude para o caminho correto do relatório semestral
+        break;
+      default:
+        iframe.src = ""; // Limpar o iframe se nenhuma opção for válida
+    }
+  }
+
+  function plotarGrafico(graficoId, dados, titulo) {
+  console.log(`Iniciando plotagem do gráfico para: ${graficoId}...`);
+
+  const ctx = document.getElementById(graficoId).getContext('2d');
+  if (!ctx) {
+    console.error(`Erro: o canvas com ID ${graficoId} não foi encontrado.`);
+    return;
+  }
+
+  const chartData = {
+    labels: dados.labels,
+    datasets: [{
+      label: dados.label,
+      data: dados.data,
+      backgroundColor: dados.backgroundColor,
+      borderWidth: 1
+    }]
+  };
+
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      title: {
+        display: true,
+        text: titulo, // Título do gráfico
+        font: {
+          size: 18
+        },
+        padding: {
+          top: 10,
+          bottom: 30
+        }
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true
+      },
+      x: {
+        grid: {
+          display: true
+        }
+      }
+    }
+  };
+
+  try {
+    new Chart(ctx, {
+      type: 'bar',
+      data: chartData,
+      options: chartOptions
+    });
+  } catch (error) {
+    console.error('Erro ao criar o gráfico:', error);
+  }
+}
+
+// Exemplo de como chamar a função para cada gráfico
+
+// Gráfico de Rede
+fetch(`/medidas/graficoRede/`, { cache: 'no-store' })
+  .then(function (response) {
+    if (response.ok) {
+      response.json()
+        .then(json => {
+          rede = [];
+          votos = [];
+          for (var i = 0; i < json.length; i++) {
+            rede.push(json[i].rede);
+            votos.push(json[i].Votos);
+          }
+          plotarGrafico('graficoRede', { labels: rede, data: votos, label: 'Votos', backgroundColor: 'rgba(255, 0, 0, 0.5)' }, 'Gráfico de Rede');
+        });
+    } else {
+      console.error('Nenhum dado encontrado ou erro na API');
+    }
+  })
+  .catch(function (error) {
+    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+  });
+
+// Gráfico de RAM
+fetch(`/medidas/graficoRam/`, { cache: 'no-store' })
+  .then(function (response) {
+    if (response.ok) {
+      response.json()
+        .then(json => {
+          ram = [];
+          votos = [];
+          for (var i = 0; i < json.length; i++) {
+            ram.push(json[i].ram);
+            votos.push(json[i].Votos);
+          }
+          plotarGrafico('graficoRam', { labels: ram, data: votos, label: 'Votos', backgroundColor: 'rgba(0, 255, 0, 0.5)' }, 'Gráfico de RAM');
+        });
+    } else {
+      console.error('Nenhum dado encontrado ou erro na API');
+    }
+  })
+  .catch(function (error) {
+    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+  });
+
+// Gráfico de Disco
+fetch(`/medidas/graficoDisco/`, { cache: 'no-store' })
+  .then(function (response) {
+    if (response.ok) {
+      response.json()
+        .then(json => {
+          disco = [];
+          votos = [];
+          for (var i = 0; i < json.length; i++) {
+            disco.push(json[i].disco);
+            votos.push(json[i].Votos);
+          }
+          plotarGrafico('graficoDisco', { labels: disco, data: votos, label: 'Votos', backgroundColor: 'rgba(0, 0, 255, 0.5)' }, 'Gráfico de Disco');
+        });
+    } else {
+      console.error('Nenhum dado encontrado ou erro na API');
+    }
+  })
+  .catch(function (error) {
+    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+  });
+
+// Gráfico de CPU
+fetch(`/medidas/graficocpu/`, { cache: 'no-store' })
+  .then(function (response) {
+    if (response.ok) {
+      response.json()
+        .then(json => {
+          cpu = [];
+          votos = [];
+          for (var i = 0; i < json.length; i++) {
+            cpu.push(json[i].cpu);
+            votos.push(json[i].Votos);
+          }
+          plotarGrafico('graficoCpu', { labels: cpu, data: votos, label: 'Votos', backgroundColor: 'rgba(255, 255, 0, 0.5)' }, 'Gráfico de CPU');
+        });
+    } else {
+      console.error('Nenhum dado encontrado ou erro na API');
+    }
+  })
+  .catch(function (error) {
+    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+  });
+
+// Gráfico de Status
+fetch(`/medidas/graficoStatus/`, { cache: 'no-store' })
+  .then(function (response) {
+    if (response.ok) {
+      response.json()
+        .then(json => {
+          estado = [];
+          votos = [];
+          for (var i = 0; i < json.length; i++) {
+            estado.push(json[i].estado);
+            votos.push(json[i].Votos);
+          }
+          plotarGrafico('graficoStatus', { labels: estado, data: votos, label: 'Votos', backgroundColor: 'rgba(255, 165, 0, 0.5)' }, 'Gráfico de Status');
+        });
+    } else {
+      console.error('Nenhum dado encontrado ou erro na API');
+    }
+  })
+  .catch(function (error) {
+    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+  });
+
+
+  window.onload = function () {
+    carregarNome();
+    obterDadosGrafico();  // Chama a função para obter os dados e plotar os gráficos
+  };
+
+
 </script>

@@ -46,12 +46,12 @@ CREATE TABLE IF NOT EXISTS Servidor (
     rede VARCHAR(50),
     ram VARCHAR(20),
     disco VARCHAR(20),
-    cpu_ VARCHAR(20),
+    cpu VARCHAR(20),
     fkEmpresa INT,
     FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa)
 );
 
-insert into servidor(nome,rede,ram,disco,cpu_,fkEmpresa) values ("Servidor 11° andar", "LAN","4GB","256GB","4 Núcleos",1);
+insert into servidor(nome,rede,ram,disco,cpu,fkEmpresa) values ("Servidor 11° andar", "LAN","4GB","256GB","4 Núcleos",1);
 
 -- Tabela Componentes para definir o tipo de componente e unidade de medida
 CREATE TABLE IF NOT EXISTS Componentes (

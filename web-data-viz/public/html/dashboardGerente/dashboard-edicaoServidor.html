@@ -12,84 +12,192 @@
   <title>Dashboard Edição Servidor | HardStock</title>
 
   <style>
-    .alinhamento {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      margin-top: 10%;
-      width: 50%;
-      height: 50%;
-      background-color: white;
-      border-radius: 50px;
-      padding-top: 20px;
-    }
 
-    .campos {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      padding: 20px;
-    }
+/* Estilos Globais */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f7fa;
+  color: #333;
+}
 
-    .antes,
-    .depois {
-      width: 45%;
-    }
+/* Formulário de Edição de Servidor */
+.alinhamento {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 5%;
+  width: 80%;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
 
-    .titulo {
-      margin-bottom: 20px;
-      font-size: 1.2rem;
-    }
+.alinhamento h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #191b27;
+}
 
-    label {
-      display: block;
-      margin-bottom: 20px;
-    }
+/* Formulário de Inputs */
+.campos {
+  width: 100%;
+}
 
-    label p {
-      font-size: 1rem;
-      margin-bottom: 5px;
-    }
+.form label {
+  display: block;
+  margin-bottom: 15px;
+}
 
-    #inputEditar {
-      width: 100%;
-      height: 35px;
-      border: none;
-      background-color: transparent;
-      border-bottom: 2px solid black;
-      font-size: 1rem;
-      padding: 5px;
-      margin-bottom: 10px;
-    }
+.form label p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 5px;
+}
 
-    #btnCancel,
-    #btnSave {
-      margin-top: 20px;
-      padding: 10px 20px;
-      width: auto;
-      height: auto;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.2s ease-in-out;
-    }
+#input_nome,
+#input_rede,
+#input_ram,
+#input_disco,
+#input_cpu,
+#input_estado {
+  width: 100%;
+  height: 35px;
+  font-size: 1rem;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  background-color: #fafafa;
+  transition: border-color 0.2s;
+}
 
-    #btnCancel {
-      background-color: white;
-      border: 1px solid red;
-      color: red;
-      margin-right: 10px;
-    }
+#input_nome:focus,
+#input_rede:focus,
+#input_ram:focus,
+#input_disco:focus,
+#input_cpu:focus,
+#input_estado:focus {
+  border-color: #3d4351;
+  outline: none;
+}
 
-    #btnSave {
-      background-color: rgb(11, 239, 11);
-      border: 1px solid rgb(11, 239, 11);
-      color: white;
-    }
+select {
+  width: 100%;
+  height: 35px;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  background-color: #fafafa;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
 
-    button:hover {
-      opacity: 0.8;
-    }
-  </style>
+select:focus {
+  border-color: #3d4351;
+  outline: none;
+}
+
+/* Estilos para a distribuição dos selects */
+.select-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.select-left, .select-right {
+  width: 48%;
+}
+
+/* Botões */
+button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  border-radius: 5px;
+}
+
+#btnCancel {
+  background-color: #fff;
+  color: red;
+  border: 2px solid red;
+  margin-right: 10px;
+}
+
+#btnSave {
+  background-color: #0bf70b;
+  color: white;
+  border: 2px solid #0bf70b;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+  .alinhamento {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .select-container {
+    flex-direction: column;
+  }
+
+  .select-left, .select-right {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .alinhamento {
+    width: 100%;
+    margin-top: 10%;
+    padding: 15px;
+  }
+
+  .form label p {
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .alinhamento {
+    width: 100%;
+    margin-top: 10%;
+    padding: 10px;
+  }
+
+  .form label p {
+    font-size: 0.85rem;
+  }
+
+  button {
+    padding: 8px 15px;
+    font-size: 0.85rem;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+}
+</style>
 
 
 </head>
@@ -113,35 +221,19 @@
         <li>
           <p style="margin-bottom: 20px;">
             <span id="nome" class="navItem-nome">
-
             </span>
           </p>
         </li>
         <li><a href="../dashboardGerente/dashboard_tempo.html">
-            <i class="fa-solid fa-chart-line"></i>
-            <span class="navItem">Relatório</span>
-          </a></li>
-        <li><a href="../dashboardGerente/dashboard_componentes.html">
-            <i class="fa-solid fa-table-list"></i>
-            <span class="navItem">Servidores</span>
-          </a></li>
-        <li><a href="../dashboardGerente/dashboard_mensal.html"
-            style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
-            <span class="navItem" style="color: #191b27;">Mensal</span>
+            <span class="navItem">Mensal</span>
           </a>
         </li>
-        <li><a href="../dashboardGerente/dashboard_funcionario.html">
-            <i class="fa-solid fa-user-plus"></i>
-            <span class="navItem">Funcionário</span>
-          </a>
-        </li>
-        <li>
-          <a id="btnIcone" onclick="toggleDarkMode()">
-            <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon"></i>
-            <span class="navItem">Mudar Tema</span>
-          </a>
-        </li>
+        <li><a href="../dashboardGerente/dashboard_componentes.html"
+            style="background: rgba(199, 208, 216, 1);color: #191b27;">
+            <i class="fa-solid fa-table-list"></i>
+            <span class="navItem" style="color: #191b27;">Servidores</span>
+          </a></li>
         <div class="sair">
           <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4" target="_blank">
               <i class="fa-solid fa-headset"></i>
@@ -160,39 +252,191 @@
   </div>
 
   <div class="alinhamento">
-    <h1>Atualizar Servidor</h1>
+    <h1>Editar Servidor</h1>
     <div class="campos">
-      <div class="antes">
-        <h3 class="titulo">Como estava:</h3>
-        <label id="telefone">
-          <p>Nome:</p><br>
-          <input disabled id="inputEditar" type="text" value="Servidor 4° andar sala B"><br>
+      <div class="form">
+        <label id="nome">
+          <p>Nome:</p>
+          <input id="input_nome" type="text" placeholder="Digite o Nome do Servidor:">
         </label>
-      </div>
-      <div class="depois">
-        <h3 class="titulo">Como irá ficar:</h3>
-        <label>
-          <p>Nome:</p><br>
-          <input id="inputEditar" type="text" placeholder="Informe o novo Nome:"><br>
+        <center>
+          <label id="selects">
+            <select name="rede" id="input_rede">
+              <option value="Rede" selected disabled>Rede</option>
+              <option value="LAN">LAN</option>
+              <option value="WLAN">WLAN</option>
+              <option value="WAN">WAN</option>
+              <option value="MAN">MAN</option>
+              <option value="VLAN">VLAN</option>
+            </select>
+          </label>
+          <label id="selects">
+            <select name="ram" id="input_ram">
+              <option value="ram" selected disabled>Ram</option>
+              <option value="8GB">8GB</option>
+              <option value="16GB">16GB</option>
+              <option value="32GB">32GB</option>
+              <option value="64GB">64GB</option>
+              <option value="128GB">128GB</option>
+            </select>
+          </label>
+          <label id="selects">
+            <select name="disco" id="input_disco">
+              <option value="disco" selected disabled>Disco</option>
+              <option value="SSDs">SSDs</option>
+              <option value="HDDs">HDDs </option>
+              <option value="HDDs NAS">HDDs NAS</option>
+            </select>
+          </label>
+          <label id="selects">
+            <select name="cpu" id="input_cpu">
+              <option value="cpu" selected disabled>CPU</option>
+              <option value="4 núcleos">4 núcleos</option>
+              <option value="8 núcleos">8 núcleos</option>
+              <option value="10 núcleos">10 núcleos</option>
+              <option value="20 núcleos">20 núcleos</option>
+            </select>
+          </label>
+          <label id="selects">
+            <select name="estado" id="input_estado">
+              <option value="" selected disabled>Selecione o Estado</option>
+              <option value="Ativo">Ativo</option>
+              <option value="Inativo">Inativo</option>
+            </select>
+          </label>
+
           <button id="btnCancel" onclick="cancelar()">Cancelar</button>
-          <button id="btnSave">Salvar</button>
-        </label>
+          <button id="btnSave" onclick="salvar()">Salvar</button>
+        </center>
       </div>
     </div>
   </div>
 
-
-
 </body>
 
-</html>
 <script>
-  function cancelar() {
-    window.location = "./dashboard_componentes.html"
-  }
-
+  // Função que carrega o nome do usuário
   function carregarNome() {
     let text = sessionStorage.NOME_USUARIO;
-    nome.innerHTML = "Olá, " + text;
+    document.getElementById('nome').innerHTML = "Olá, " + text;
   }
+
+  // Função que salva a edição do servidor
+  function salvar() {
+    const idServidor = sessionStorage.ID_EDITANDO;
+
+    if (!idServidor) {
+      alert('ID do servidor inválido');
+      return;
+    }
+
+    const nome = document.getElementById('input_nome').value;
+    const rede = document.getElementById('input_rede').value;
+    const ram = document.getElementById('input_ram').value;
+    const disco = document.getElementById('input_disco').value;
+    const cpu = document.getElementById('input_cpu').value;
+    const estado = document.getElementById('input_estado').value;
+
+    fetch(`/servidores/editar/${idServidor}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        nome: nome,
+        rede: rede,
+        ram: ram,
+        disco: disco,
+        cpu: cpu,
+        estado: estado
+      })
+    })
+      .then(response => {
+        if (response.ok) {
+          alert('Servidor atualizado com sucesso!');
+          window.location.href = "dashboard_componentes.html";
+        } else {
+          alert('Erro ao salvar a edição do servidor.');
+        }
+      })
+      .catch(error => {
+        console.error('Erro ao editar servidor:', error);
+        alert('Erro ao editar servidor.');
+      });
+  }
+
+  function cancelar() {
+    window.location.href = "dashboard_componentes.html";
+  }
+
+  window.onload = carregar();
+
+  function carregar() {
+    const idServidor = sessionStorage.getItem('ID_EDITANDO');
+
+    if (idServidor) {
+      // Adiciona um indicador de carregamento (opcional)
+      const loadingMessage = document.createElement('p');
+      loadingMessage.textContent = 'Carregando informações do servidor...';
+      document.body.appendChild(loadingMessage);
+
+      fetch(`/servidores/porId/${idServidor}`)
+        .then((res) => res.json().then((json) => {
+
+          // Preencher os campos do formulário com os dados do servidor
+          document.getElementById('input_nome').value = json.nome || '';
+          document.getElementById('input_rede').value = json.rede || '';
+          document.getElementById('input_ram').value = json.ram || '';
+          document.getElementById('input_disco').value = json.disco || '';
+          document.getElementById('input_cpu').value = json.cpu || '';
+          document.getElementById('input_estado').value = json.estado || '';
+        }))
+        .catch(error => {
+          console.error('Erro ao carregar os dados do servidor:', error);
+          alert('Erro ao carregar os dados do servidor.');
+        })
+        .finally(() => {
+          // Remove o indicador de carregamento
+          document.body.removeChild(loadingMessage);
+        })
+
+      // fetch(`/servidores/porId/${idServidor}`, {
+      //   method: "GET",
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   }
+      // })
+      //   .then(response => {
+      //     if (!response.ok) {
+      //       throw new Error('Erro ao buscar o servidor');
+      //     }
+
+      //     return response.json();
+      //   })
+      //   .then(data => {
+
+      //       console.log(data);
+
+
+      //     // Preencher os campos do formulário com os dados do servidor
+      //     document.getElementById('input_nome').value = data.nomeServidor || '';
+      //     document.getElementById('input_rede').value = data.rede || '';
+      //     document.getElementById('input_ram').value = data.ram || '';
+      //     document.getElementById('input_disco').value = data.disco || '';
+      //     document.getElementById('input_cpu').value = data.cpu || '';
+      //   })
+      //   .catch(error => {
+      //     console.error('Erro ao carregar os dados do servidor:', error);
+      //     alert('Erro ao carregar os dados do servidor.');
+      //   })
+      //   .finally(() => {
+      //     // Remove o indicador de carregamento
+      //     document.body.removeChild(loadingMessage);
+      //   });
+    } else {
+      alert('ID do servidor não encontrado no sessionStorage.');
+    }
+  };
 </script>
+
+</html>

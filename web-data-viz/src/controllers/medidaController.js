@@ -22,24 +22,6 @@ function buscarUltimasMedidas(req, res) {
 }
 
 
-function buscarMedidasEmTempoReal(req, res) {
-
-    var idAquario = req.params.idAquario;
-
-    console.log(`Recuperando medidas em tempo real`);
-
-    medidaModel.buscarMedidasEmTempoReal(idAquario).then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
-}
 
 function buscarMediasMensais(req, res) {
 
@@ -59,9 +41,109 @@ function buscarMediasMensais(req, res) {
     });
 }
 
+function graficoRede( req , res) {
+    medidaModel.graficoRede()
+    .then(resultadoAutenticar => {
+      console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+      console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+  
+      if (resultadoAutenticar.length > 0) {
+        res.status(200).json(resultadoAutenticar);
+      } else {
+        res.status(200).json([]);
+      }
+    })
+    .catch(erro => {
+      console.log(erro);
+      console.log("\nHouve um erro ao realizar o buscar Empresas! Erro: ", erro.sqlMessage);
+      res.status(500).json({ error: "Houve um erro ao realizar o buscar Empresas!", details: erro.sqlMessage });
+    });
+  }
+
+  function graficoRam( req , res) {
+    medidaModel.graficoRam()
+    .then(resultadoAutenticar => {
+      console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+      console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+  
+      if (resultadoAutenticar.length > 0) {
+        res.status(200).json(resultadoAutenticar);
+      } else {
+        res.status(200).json([]);
+      }
+    })
+    .catch(erro => {
+      console.log(erro);
+      console.log("\nHouve um erro ao realizar o buscar Empresas! Erro: ", erro.sqlMessage);
+      res.status(500).json({ error: "Houve um erro ao realizar o buscar Empresas!", details: erro.sqlMessage });
+    });
+  }
+
+  function graficoDisco( req , res) {
+    medidaModel.graficoDisco()
+    .then(resultadoAutenticar => {
+      console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+      console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+  
+      if (resultadoAutenticar.length > 0) {
+        res.status(200).json(resultadoAutenticar);
+      } else {
+        res.status(200).json([]);
+      }
+    })
+    .catch(erro => {
+      console.log(erro);
+      console.log("\nHouve um erro ao realizar o buscar Empresas! Erro: ", erro.sqlMessage);
+      res.status(500).json({ error: "Houve um erro ao realizar o buscar Empresas!", details: erro.sqlMessage });
+    });
+  }
+
+  function graficocpu( req , res) {
+    medidaModel.graficocpu()
+    .then(resultadoAutenticar => {
+      console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+      console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+  
+      if (resultadoAutenticar.length > 0) {
+        res.status(200).json(resultadoAutenticar);
+      } else {
+        res.status(200).json([]);
+      }
+    })
+    .catch(erro => {
+      console.log(erro);
+      console.log("\nHouve um erro ao realizar o buscar Empresas! Erro: ", erro.sqlMessage);
+      res.status(500).json({ error: "Houve um erro ao realizar o buscar Empresas!", details: erro.sqlMessage });
+    });
+  }
+
+  function graficoStatus( req , res) {
+    medidaModel.graficoStatus()
+    .then(resultadoAutenticar => {
+      console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+      console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+  
+      if (resultadoAutenticar.length > 0) {
+        res.status(200).json(resultadoAutenticar);
+      } else {
+        res.status(200).json([]);
+      }
+    })
+    .catch(erro => {
+      console.log(erro);
+      console.log("\nHouve um erro ao realizar o buscar Empresas! Erro: ", erro.sqlMessage);
+      res.status(500).json({ error: "Houve um erro ao realizar o buscar Empresas!", details: erro.sqlMessage });
+    });
+  }
+  
+
 
 module.exports = {
-    buscarMedidasEmTempoReal,
     buscarUltimasMedidas,
-    buscarMediasMensais
+    buscarMediasMensais,
+    graficoRede,
+    graficoRam,
+    graficoDisco,
+    graficocpu,
+    graficoStatus
 }

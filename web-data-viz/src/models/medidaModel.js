@@ -53,8 +53,67 @@ ORDER BY
     return database.executar(instrucaoSql);
 }
 
+function graficoRede() {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n graficoRede(): ")
+    var instrucaoSql =
+        `
+    SELECT rede, count(rede) as 'Votos' FROM servidor GROUP BY rede;
+
+  `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function graficoRam() {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n graficoRede(): ")
+    var instrucaoSql =
+        `
+    SELECT ram, count(ram) as 'Votos' FROM servidor GROUP BY ram;
+
+  `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function graficoDisco() {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n graficoRede(): ")
+    var instrucaoSql =
+        `
+    SELECT disco, count(disco) as 'Votos' FROM servidor GROUP BY disco;
+
+  `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function graficocpu() {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n graficoRede(): ")
+    var instrucaoSql =
+        `
+    SELECT cpu, count(cpu) as 'Votos' FROM servidor GROUP BY cpu;
+
+  `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function graficoStatus() {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n graficoRede(): ")
+    var instrucaoSql =
+        `
+    SELECT estado, count(estado) as 'Votos' FROM servidor GROUP BY estado;
+
+  `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarMediasMensais,
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    graficoRede,
+    graficoRam,
+    graficoDisco,
+    graficocpu,
+    graficoStatus
 }

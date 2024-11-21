@@ -80,6 +80,14 @@
       color: rgb(0, 0, 0);
       padding: 12px;
     }
+    .content-top{
+      position: sticky;
+      z-index: 1;
+    }
+
+    .corpo-table{
+      overflow: scroll;
+    }
 
     td {
       padding: 10px;
@@ -150,46 +158,43 @@
         <li>
           <p style="margin-bottom: 20px;">
             <span id="nome" class="navItem-nome">
-
             </span>
           </p>
         </li>
+        
         <li><a href="../dashboardGerente/dashboard_tempo.html">
-          <i class="fa-solid fa-chart-line"></i>
-          <span class="navItem">Relatório</span>
-        </a></li>
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
+            <span class="navItem">Relatórios</span>
+          </a></li>
+
         <li><a href="../dashboardGerente/dashboard_componentes.html"
             style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <i class="fa-solid fa-table-list"></i>
             <span class="navItem" style="color: #191b27;">Servidores</span>
           </a></li>
-        <li><a href="../dashboardGerente/dashboard_mensal.html">
+          <li><a href="../dashboardGerente/dashboard_mensal.html">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
             <span class="navItem">Mensal</span>
           </a>
         </li>
-        <li><a href="../dashboardGerente/dashboard_funcionario.html">
+          <li><a href="../dashboardGerente/dashboard_funcionario.html">
             <i class="fa-solid fa-user-plus"></i>
             <span class="navItem">Funcionário</span>
           </a>
         </li>
-        <li>
-          <a id="btnIcone" onclick="toggleDarkMode()">
-            <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon"></i>
-            <span class="navItem">Mudar Tema</span>
-          </a>
-        </li>
+
+        
+
         <div class="sair">
           <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4" target="_blank">
               <i class="fa-solid fa-headset"></i>
               <span class="navItem">Suporte</span>
             </a></li>
-          <li>
-            <a href="../../index.html">
+
+          <li><a href="../../index.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
               <span class="navItem">Sair</span>
-            </a>
-          </li>
+            </a></li>
 
         </div>
       </ul>
@@ -200,42 +205,133 @@
     <h1>Servidores</h1>
     <button id="add"><a href="cadastro-servidor.html">Novo Servidor <i id="icone"
           class="fa-solid fa-plus"></i></a></button>
-    <div id="userTable"></div>
+    <div class="corpo-table" id="userTable">
+      <table>
+        <thead class="content-top">
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Rede</th>
+            <th>RAM</th>
+            <th>Disco</th>
+            <th>CPU</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+    </div>
   </div>
 
 </body>
 
 </html>
+
 <script>
-  function populateTable(users) {
-    let tableHTML = '<table><thead><tr><th>ID</th><th>Nome</th><th>... Edições</th></tr></thead><tbody>';
+  document.addEventListener('DOMContentLoaded', function () {
+    const fkEmpresa = 1;
 
 
-    tableHTML += '</tbody></table>';
+    fetch(`/servidores/listar`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Erro na requisição! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      const userTable = document.getElementById("userTable");
 
-    document.getElementById('userTable').innerHTML = tableHTML;
-  }
+      if (data.length === 0) {
+        userTable.innerHTML = "<p>Nenhum servidor encontrado.</p>";
+        return;
+      }
 
-  function editUser(id) {
-    window.location = "./dashboard-edicaoServidor.html"
-  }
+      let tableHTML = `
+        <table>
+          <thead class="content-top">
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Rede</th>
+              <th>RAM</th>
+              <th>Disco</th>
+              <th>CPU</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          
+      `;
 
-  function deleteUser(id) {
-    const confirmDelete = confirm('Você tem certeza que deseja excluir o componente de ID: ' + id + '?');
-    if (confirmDelete) {
-      alert('componente de ID: ' + id + ' foi excluído.');
+      data.forEach(servidor => {
+        tableHTML += `
+          <trbody class ="corpo-table">
+            <td>${servidor.idServidor}</td>
+            <td>${servidor.nomeServidor}</td>
+            <td>${servidor.rede}</td>
+            <td>${servidor.ram}</td>
+            <td>${servidor.disco}</td>
+            <td>${servidor.cpu}</td>
+            <td>${servidor.estado}</td>
+            <td class="edits">
+              <button class="action-btn edit-btn" onclick="editar(${servidor.idServidor})">
+                <i id="editar" class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button class="action-btn delete-btn" onclick="deletar(${servidor.idServidor})">
+                <i id="excluir" class="fa-solid fa-trash"></i>
+              </button>
+            </tdbodys>
+          </tr>
+        `;
+      });
+
+      tableHTML += "</tbody></table>";
+      userTable.innerHTML = tableHTML;
+    })
+    .catch(error => {
+      console.error('Erro ao carregar os servidores:', error);
+      document.getElementById("userTable").innerHTML = "<p>Erro ao carregar os servidores.</p>";
+    });
+  });
+
+  function editar(idServidor) {
+    sessionStorage.ID_EDITANDO = idServidor;
+    console.log("Editando servidor com ID:", idServidor);
+    window.location.href = `dashboard-edicaoServidor.html?id=${idServidor}`;
+}
+
+
+  function deletar(idServidor) {
+    
+    if (confirm("Tem certeza que deseja excluir este servidor?")) {
+      fetch(`/servidores/deletar/${idServidor}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          alert("Servidor excluído com sucesso.");
+          location.reload();
+        } else {
+          alert("Erro ao excluir servidor.");
+        }
+      })
+      .catch(error => {
+        console.error("Erro ao deletar servidor:", error);
+        alert("Erro ao excluir servidor.");
+      });
     }
   }
 
-  const usersFromDB = [
-    { id: 1, name: 'Servidor 4° andar sala B' },
-    { id: 2, name: 'Servidor 1° andar sala A' }
-  ];
-
-  populateTable(usersFromDB);
-
   function carregarNome() {
     let text = sessionStorage.NOME_USUARIO;
-    nome.innerHTML = "Olá, " + text;
+    document.getElementById('nome').innerHTML = "Olá, " + text;
   }
 </script>

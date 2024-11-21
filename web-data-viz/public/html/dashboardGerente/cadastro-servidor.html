@@ -12,97 +12,238 @@
   <title>Cadastro Cadastrar Servidor | HardStock</title>
 
   <style>
-    .alinhamento {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      margin-top: 6%;
-      width: 50%;
-      height: 70%;
-      background-color: white;
-      border-radius: 50px;
-      padding-top: 20px;
-    }
+/* Estilo global */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fa;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
 
-    .campos {
-      width: 100%;
-      display: flex;
-      padding: 20px;
-      align-items: center;
-      justify-content: center;
-    }
+h1 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
 
-    .form {
-      width: 80%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+/* Container de alinhamento */
+.alinhamento {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 6%;
+  width: 60%;
+  max-width: 700px;
+  background-color: white;
+  border-radius: 10px;
+  padding-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding-bottom: 30px;
+}
 
-    .titulo {
-      margin-bottom: 20px;
-      font-size: 1.2rem;
-    }
+/* Estilo do formulário */
+.campos {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-    label {
-      width: auto;
-      display: block;
-      margin-bottom: 10px;
-    }
+.form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-    label p {
-      font-size: 1rem;
-      margin-bottom: 5px;
-    }
+/* Título */
+.titulo {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
 
-    #inputCadastrar {
-      width: 100%;
-      height: 35px;
-      border: none;
-      background-color: transparent;
-      border-bottom: 2px solid black;
-      font-size: 1rem;
-      padding: 5px;
-      margin-bottom: 10px;
-    }
+/* Estilo dos campos de input */
+label {
+  width: 100%;
+  margin-bottom: 20px;
+}
 
-    #btnCancel,
-    #btnSave {
-      margin-top: 20px;
-      padding: 10px 20px;
-      width: auto;
-      height: auto;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.2s ease-in-out;
-    }
+label p {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
 
-    #btnCancel {
-      background-color: white;
-      border: 1px solid red;
-      color: red;
-      margin-right: 10px;
-    }
+#input_nome,
+#input_rede,
+#input_ram,
+#input_disco,
+#input_cpu {
+  width: 100%;
+  height: 35px;
+  font-size: 1rem;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #fafafa;
+  transition: border-color 0.3s;
+}
 
-    #btnSave {
-      background-color: rgb(11, 239, 11);
-      border: 1px solid rgb(11, 239, 11);
-      color: white;
-    }
+#input_nome:focus,
+#input_rede:focus,
+#input_ram:focus,
+#input_disco:focus,
+#input_cpu:focus {
+  border-color: #4caf50;
+  outline: none;
+}
 
-    button:hover {
-      opacity: 0.8;
-    }
+/* Estilo dos selects */
+select {
+  width: 100%;
+  height: 35px;
+  font-size: 1rem;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #fafafa;
+  transition: border-color 0.3s;
+}
 
-    #select {
-      text-align: center;
-      background-color: #c7d0d8;
-      font-size: large;
-      padding: 0.5%;
-      border-radius: 50px;
-      width: auto;
-    }
+select:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+/* Botões */
+button {
+  width: auto;
+  padding: 12px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.2s ease-in-out;
+  margin-top: 20px;
+}
+
+#btnCancel {
+  background-color: white;
+  border: 2px solid red;
+  color: red;
+  margin-right: 10px;
+}
+
+#btnSave {
+  background-color: rgb(11, 239, 11);
+  border: 2px solid rgb(11, 239, 11);
+  color: white;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+  .alinhamento {
+    width: 80%;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  label p {
+    font-size: 0.9rem;
+  }
+
+  #input_nome,
+  #input_rede,
+  #input_ram,
+  #input_disco,
+  #input_cpu {
+    font-size: 0.95rem;
+    padding: 8px;
+  }
+
+  select {
+    font-size: 0.95rem;
+    padding: 8px;
+  }
+
+  button {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .alinhamento {
+    width: 90%;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  #input_nome,
+  #input_rede,
+  #input_ram,
+  #input_disco,
+  #input_cpu {
+    font-size: 0.9rem;
+    padding: 7px;
+  }
+
+  select {
+    font-size: 0.9rem;
+    padding: 7px;
+  }
+
+  button {
+    padding: 8px 15px;
+    font-size: 0.85rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .alinhamento {
+    width: 100%;
+    margin-top: 10%;
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1rem;
+  }
+
+  #input_nome,
+  #input_rede,
+  #input_ram,
+  #input_disco,
+  #input_cpu {
+    font-size: 0.85rem;
+    padding: 6px;
+  }
+
+  select {
+    font-size: 0.85rem;
+    padding: 6px;
+  }
+
+  button {
+    padding: 8px 15px;
+    font-size: 0.85rem;
+  }
+}
+
   </style>
 
 
@@ -127,37 +268,33 @@
         <li>
           <p style="margin-bottom: 20px;">
             <span id="nome" class="navItem-nome">
-
+          
             </span>
           </p>
         </li>
         <li><a href="../dashboardGerente/dashboard_tempo.html">
-          <i class="fa-solid fa-chart-line"></i>
-          <span class="navItem">Relatório</span>
-        </a></li>
-        <li><a href="../dashboardGerente/dashboard_componentes.html" 
-          style="background: rgba(199, 208, 216, 1);color: #191b27;">
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
+            <span class="navItem">Relatórios</span>
+          </a>
+        </li>
+        <li><a href="../dashboardGerente/dashboard_componentes.html"
+            style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <i class="fa-solid fa-table-list"></i>
             <span class="navItem" style="color: #191b27;">Servidores</span>
           </a></li>
-        <li><a href="../dashboardGerente/dashboard_mensal.html">
+          <li><a href="../dashboardGerente/dashboard_mensal.html">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
             <span class="navItem">Mensal</span>
           </a>
         </li>
-        <li><a href="../dashboardGerente/dashboard_funcionario.html">
+          <li><a href="../dashboardGerente/dashboard_funcionario.html">
             <i class="fa-solid fa-user-plus"></i>
             <span class="navItem">Funcionário</span>
           </a>
         </li>
-        <li>
-          <a id="btnIcone" onclick="toggleDarkMode()">
-            <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon"></i>
-            <span class="navItem">Mudar Tema</span>
-          </a>
-        </li>
         <div class="sair">
-          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4" target="_blank">
+          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4
+" target="_blank">
               <i class="fa-solid fa-headset"></i>
               <span class="navItem">Suporte</span>
             </a></li>
@@ -179,49 +316,49 @@
       <div class="form">
         <label id="nome">
           <p>Nome:</p>
-          <input id="inputCadastrar" type="text" placeholder="Digite o Nome do Servidor:">
+          <input id="input_nome" type="text" placeholder="Digite o Nome do Servidor:">
         </label>
         <center>
           <label id="selects">
-            <select name="rede" id="select">
+            <select name="rede" id="input_rede">
               <option value="Rede" selected disabled>Rede</option>
-              <option value="Rede">LAN</option>
-              <option value="Rede">WLAN</option>
-              <option value="Rede">WAN</option>
-              <option value="Rede">MAN</option>
-              <option value="Rede">VLAN</option>
+              <option value="LAN">LAN</option>
+              <option value="WLAN">WLAN</option>
+              <option value="WAN">WAN</option>
+              <option value="MAN">MAN</option>
+              <option value="VLAN">VLAN</option>
             </select>
           </label>
           <label id="selects">
-            <select name="ram" id="select">
+            <select name="ram" id="input_ram">
               <option value="ram" selected disabled>Ram</option>
-              <option value="ram">8GB</option>
-              <option value="ram">16GB</option>
-              <option value="ram">32GB</option>
-              <option value="ram">64GB</option>
-              <option value="ram">128GB</option>
+              <option value="8GB">8GB</option>
+              <option value="16GB">16GB</option>
+              <option value="32GB">32GB</option>
+              <option value="64GB">64GB</option>
+              <option value="128GB">128GB</option>
             </select>
           </label>
           <label id="selects">
-            <select name="disco" id="select">
+            <select name="disco" id="input_disco">
               <option value="disco" selected disabled>Disco</option>
-              <option value="disco">SSDs</option>
-              <option value="disco">HDDs </option>
-              <option value="disco">HDDs NAS</option>
+              <option value="SSDs">SSDs</option>
+              <option value="HDDs">HDDs </option>
+              <option value="HDDs NAS">HDDs NAS</option>
             </select>
           </label>
           <label id="selects">
-            <select name="cpu" id="select">
+            <select name="cpu" id="input_cpu">
               <option value="cpu" selected disabled>CPU</option>
-              <option value="cpu">4 núcleos</option>
-              <option value="cpu">8 núcleos</option>
-              <option value="cpu">10 núcleos</option>
-              <option value="cpu">20 núcleos</option>
+              <option value="4 núcleos">4 núcleos</option>
+              <option value="8 núcleos">8 núcleos</option>
+              <option value="10 núcleos">10 núcleos</option>
+              <option value="20 núcleos">20 núcleos</option>
             </select>
           </label>
 
           <button id="btnCancel" onclick="cancelar()">Cancelar</button>
-          <button id="btnSave">Salvar</button>
+          <button id="btnSave" onclick="cadastrar()">Cadastrar</button>
         </center>
       </div>
     </div>
@@ -235,10 +372,127 @@
 <script>
   function cancelar() {
     window.location = "./dashboard_componentes.html"
-  }
-
-  function carregarNome() {
-    let text = sessionStorage.NOME_USUARIO;
+  }-
+  
+  function carregarNome(){
+     let text = sessionStorage.NOME_USUARIO;
     nome.innerHTML = "Olá, " + text;
   }
+
+  function cadastrar() {
+    var nomeVar = input_nome.value;
+    var redeVar = input_rede.value;
+    var ramVar = input_ram.value;
+    var discoVar = input_disco.value;
+    var cpuVar = input_cpu.value;    
+    var empresaVar = sessionStorage.EMPRESA_USUARIO
+
+    if (
+        nomeVar == "" ||
+        redeVar == "" ||
+        ramVar == "" ||
+        discoVar == "" ||
+        cpuVar == ""||
+        empresaVar == ""
+    ) {
+        alert("Não foi possível realizar o cadastro do servidor, pois há campos em branco ou não selecionados");
+        return false;
+    }
+
+    // Adicione logs para garantir que os valores estão sendo passados corretamente
+    console.log("Enviando dados:", {
+        nome: nomeVar,
+        rede: redeVar,
+        ram: ramVar,
+        disco: discoVar,
+        cpu: cpuVar,
+        empresa: empresaVar
+    });
+
+    fetch("/servidores/cadastrarServidor", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            nomeServer: nomeVar,
+            redeServer: redeVar,
+            ramServer: ramVar,
+            discoServer: discoVar,
+            cpuServer: cpuVar,
+            empresaServer: empresaVar
+        }),
+    })
+    .then(function (resposta) {
+        if (resposta.ok) {
+            alert("Cadastro realizado com sucesso!");
+            window.location = "./dashboard_componentes.html"; // Redireciona após sucesso
+        } else {
+            throw new Error("Houve um erro ao tentar realizar o cadastro!");
+        }
+    })
+    .catch(function (erro) {
+        console.log("Erro na requisição:", erro);
+        alert("Erro ao tentar realizar o cadastro: " + erro.message);
+    });
+
+    return false;
+}
+
+
+  function listar() {
+    fetch("/empresas/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  function sumirMensagem() {
+    // cardErro.style.display = "none";
+  }
+  function voltar() {
+
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 </script>
