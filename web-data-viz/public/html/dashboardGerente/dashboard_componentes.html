@@ -33,18 +33,18 @@
       background-color: transparent;
       margin-right: -65%;
     }
-    
+
     #add a {
-    display: flex;
-    border-radius: 50px;
-    align-items: center;
-    width: 160px;
-    font-weight: bold;
-    color: white;
-    background-color: #191b27;
-    padding: inherit;
-    padding-left: 2%;
-    justify-content: center;
+      display: flex;
+      border-radius: 50px;
+      align-items: center;
+      width: 160px;
+      font-weight: bold;
+      color: white;
+      background-color: #191b27;
+      padding: inherit;
+      padding-left: 2%;
+      justify-content: center;
     }
 
     #icone {
@@ -150,13 +150,18 @@
         <li>
           <p style="margin-bottom: 20px;">
             <span id="nome" class="navItem-nome">
-              
+
             </span>
           </p>
         </li>
         <li><a href="../dashboardGerente/dashboard_tempo.html">
-            <i class="fa-solid fa-chart-line"></i>
-            <span class="navItem">Tempo real</span>
+          <i class="fa-solid fa-chart-line"></i>
+          <span class="navItem">Relatório</span>
+        </a></li>
+        <li><a href="../dashboardGerente/dashboard_componentes.html"
+            style="background: rgba(199, 208, 216, 1);color: #191b27;">
+            <i class="fa-solid fa-table-list"></i>
+            <span class="navItem" style="color: #191b27;">Servidores</span>
           </a></li>
         <li><a href="../dashboardGerente/dashboard_mensal.html">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
@@ -166,20 +171,21 @@
         <li><a href="../dashboardGerente/dashboard_funcionario.html">
             <i class="fa-solid fa-user-plus"></i>
             <span class="navItem">Funcionário</span>
-          </a></li>
-        <li><a href="../dashboardGerente/dashboard_componentes.html"
-            style="background: rgba(199, 208, 216, 1);color: #191b27;">
-            <i class="fa-solid fa-table-list"></i>
-            <span class="navItem" style="color: #191b27;">Servidores</span>
-          </a></li>
+          </a>
+        </li>
+        <li>
+          <a id="btnIcone" onclick="toggleDarkMode()">
+            <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon"></i>
+            <span class="navItem">Mudar Tema</span>
+          </a>
+        </li>
         <div class="sair">
-          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4
-" target="_blank">
+          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4" target="_blank">
               <i class="fa-solid fa-headset"></i>
               <span class="navItem">Suporte</span>
             </a></li>
           <li>
-             <a href="../../index.html">
+            <a href="../../index.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
               <span class="navItem">Sair</span>
             </a>
@@ -204,21 +210,6 @@
   function populateTable(users) {
     let tableHTML = '<table><thead><tr><th>ID</th><th>Nome</th><th>... Edições</th></tr></thead><tbody>';
 
-    users.forEach(user => {
-      tableHTML += `<tr>
-                          <td>${user.id}</td>
-                          <td>${user.name}</td>
-                          <td class="edits">
-                            <button class="icon-btn edit-btn" onclick="editUser(${user.id})">
-                            <i id="editar" class="fa-solid fa-pen-to-square"></i>                            
-                            </button>
-                            
-                            <button class="icon-btn delete-btn" onclick="deleteUser(${user.id})">
-                            <i id="excluir" class="fa-solid fa-trash"></i>
-                              </button>
-                        </td>
-                        </tr>`;
-    });
 
     tableHTML += '</tbody></table>';
 
@@ -243,8 +234,8 @@
 
   populateTable(usersFromDB);
 
-  function carregarNome(){
-     let text = sessionStorage.NOME_USUARIO;
+  function carregarNome() {
+    let text = sessionStorage.NOME_USUARIO;
     nome.innerHTML = "Olá, " + text;
   }
 </script>

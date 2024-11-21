@@ -113,31 +113,37 @@
         <li>
           <p style="margin-bottom: 20px;">
             <span id="nome" class="navItem-nome">
-            
+
             </span>
           </p>
         </li>
         <li><a href="../dashboardGerente/dashboard_tempo.html">
             <i class="fa-solid fa-chart-line"></i>
-            <span class="navItem">Tempo real</span>
+            <span class="navItem">Relatório</span>
           </a></li>
-        <li><a href="../dashboardGerente/dashboard_mensal.html">
+        <li><a href="../dashboardGerente/dashboard_componentes.html">
+            <i class="fa-solid fa-table-list"></i>
+            <span class="navItem">Servidores</span>
+          </a></li>
+        <li><a href="../dashboardGerente/dashboard_mensal.html"
+            style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
-            <span class="navItem">Mensal</span>
+            <span class="navItem" style="color: #191b27;">Mensal</span>
           </a>
         </li>
         <li><a href="../dashboardGerente/dashboard_funcionario.html">
             <i class="fa-solid fa-user-plus"></i>
             <span class="navItem">Funcionário</span>
-          </a></li>
-        <li><a href="../dashboardGerente/dashboard_componentes.html"
-            style="background: rgba(199, 208, 216, 1);color: #191b27;">
-            <i class="fa-solid fa-table-list"></i>
-            <span class="navItem" style="color: #191b27;">Servidores</span>
-          </a></li>
+          </a>
+        </li>
+        <li>
+          <a id="btnIcone" onclick="toggleDarkMode()">
+            <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon"></i>
+            <span class="navItem">Mudar Tema</span>
+          </a>
+        </li>
         <div class="sair">
-          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4
-" target="_blank">
+          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4" target="_blank">
               <i class="fa-solid fa-headset"></i>
               <span class="navItem">Suporte</span>
             </a></li>
@@ -185,8 +191,8 @@
     window.location = "./dashboard_componentes.html"
   }
 
-  function carregarNome(){
-     let text = sessionStorage.NOME_USUARIO;
+  function carregarNome() {
+    let text = sessionStorage.NOME_USUARIO;
     nome.innerHTML = "Olá, " + text;
   }
 </script>

@@ -143,6 +143,17 @@ a{
   margin-bottom: 3dvh;
 }
 
+.toggle-password {
+  position: absolute;
+  top: 48%;
+  margin-left: 25%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2em;
+  color: #232739;
+  z-index: 1;
+}
+
 @media (max-width: 768px) {
   /* Estilos para tablets e dispositivos móveis grandes */
   .content {
