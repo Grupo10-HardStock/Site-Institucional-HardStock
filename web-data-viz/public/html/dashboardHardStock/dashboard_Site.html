@@ -11,140 +11,9 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Dashboard Site | HardStock</title>
-<!-- <style>
-    .alinhamento {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      margin-top: 5%;
-      width: 40%;
-      height: 85%;
-      background-color: white;
-      border-radius: 50px;
-      padding-top: 20px;
-      padding-bottom: 0px;
-    }
 
-    .monitor-container {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      width: 100%;
-      max-width: 1200px;
-      padding: 20px;
-      margin-left: 15px;
-      margin-right: 15px;
-    }
-
-    .alert {
-      padding: 10px;
-      border-radius: 12px;
-      align-items: center;
-      flex-direction: column;
-      display: flex;
-      font-size: 1rem;
-      text-align: center;
-      width: 50%;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.4s ease, transform 0.3s ease;
-      background: linear-gradient(to bottom, #515a83, #232739, #191b27);
-      cursor: pointer;
-      color: white;
-    }
-
-    .alertas {
-      font-weight: bold;
-    }
-
-    span{
-      color: white;
-    }
-
-    .card {
-      background-color: rgb(203, 203, 203);
-      border-radius: 10px;
-      width: 96%;
-      height: 51%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    canvas {
-      width: 100% !important;
-      height: 100% !important;
-    }
-  </style> 
-  
-
-  <style>/* Definindo estilo para o container dos gráficos */
-.alinhamento {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin-top: 5%;
-  width: 80%;
-  height: auto;
-  background-color: white;
-  border-radius: 50px;
-  padding: 20px;
-}
-
-.monitor-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  width: 100%;
-  max-width: 1200px;
-}
-
-.card {
-  background-color: rgb(203, 203, 203);
-  border-radius: 10px;
-  width: 40%; /* Ajusta a largura para 48% para dar espaçamento entre os cards */
-  height: 200px; /* Ajusta a altura conforme necessário */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px; /* Adiciona um espaço inferior */
-  transition: transform 0.3s ease;
-
-}
-.card:hover {
-  transform: translateY(-10px); /* Efeito de hover para elevar o card */
-}
-
-canvas {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-h1{
-  margin-bottom: 10px;
-}
-
-.alert {
-      padding: 10px;
-      border-radius: 12px;
-      align-items: center;
-      flex-direction: column;
-      display: flex;
-      font-size: 1rem;
-      text-align: center;
-
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.4s ease, transform 0.3s ease;
-      background: linear-gradient(to bottom, #515a83, #232739, #191b27);
-      cursor: pointer;
-      color: white;
-    }
---> 
     <style>
-    .alinhamento {
+.alinhamento {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -157,7 +26,6 @@ h1{
 h5{
   font-size: 10px;
 }
-
 .alertas-container {
   display: flex;
   flex-wrap: wrap;
@@ -165,7 +33,6 @@ h5{
   justify-content: center;
   margin-bottom: 15px;
 }
-
 .alert {
   padding: 8px;
   border-radius: 12px;
@@ -185,7 +52,6 @@ h5{
 .alert:hover {
   transform: translateY(-5px); 
 }
-
 .monitor-container {
   display: flex;
   flex-wrap: wrap;
@@ -194,7 +60,6 @@ h5{
   width: 100%;
   max-width: 1200px;
 }
-
 .card {
   background-color: rgb(203, 203, 203);
   border-radius: 10px;
@@ -206,25 +71,18 @@ h5{
   flex-direction: column;
   padding: 10px 5px;
 }
-
 .card:hover {
   transform: translateY(-10px); 
 }
-
 canvas {
   width: 100% !important;
   height: 100% !important;
 }
-
 h1 {
   margin-bottom: 10px;
 }
-
-
 </style>
-
 </head>
-
 <body onload="carregarNome(),obterDadosGrafico()">
   <label for="sidebar-ativo" class="sideBar-open">
     <i class="fa-duotone fa-solid fa-bars"></i>
@@ -275,7 +133,6 @@ h1 {
             <span class="navItem" style="color: #191b27;">Graficos Site</span>
           </a></li>
         <div class="sair">
-
           <li>
             <a href="../../index.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -315,7 +172,6 @@ h1 {
         </div>
         <canvas id="userChart2"></canvas>
       </div>
-
       <div class="monitor-container">
       <div class="card">
         <div>
@@ -332,27 +188,18 @@ h1 {
     </div>
   </div>
   </div>
-  
-
 <script>
-
-
 function carregarNome(){
   var text = sessionStorage.NOME_USUARIO;
     aparecerNome.innerHTML = "Olá, " + text;
   }
-
-
 function obterDadosGrafico() {
-
 fetch(`/empresas/sitegrafico4/`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
         response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
             resposta.reverse();
-
             plotarGrafico(resposta);
-
         });
     } else {
         console.error('Nenhum dado encontrado ou erro na API');
@@ -362,7 +209,6 @@ fetch(`/empresas/sitegrafico4/`, { cache: 'no-store' }).then(function (response)
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
 }
-
 
   async function obterDadosGrafico() {
     /*Grafico 01*/
@@ -432,9 +278,6 @@ fetch(`/empresas/sitegrafico4/`, { cache: 'no-store' }).then(function (response)
       
   }
 
-  
-
-
   function plotarGrafico1(resposta1) {
     list_btnnome = []
     list_total_cliques = []
@@ -478,8 +321,6 @@ fetch(`/empresas/sitegrafico4/`, { cache: 'no-store' }).then(function (response)
         }
     });
   }
-
-
   function plotarGrafico2(resposta2) {
 list_btnnome = [];
 list_total_cliques = [];
@@ -632,10 +473,5 @@ QtdClickstot2.innerHTML = `<h5>Funcionaliade mais acessada:<br> ${btnMax} </h5>`
     carregarNome(),obterDadosGrafico(); 
   };
   </script>
-  
 </body>
-
 </html>
-
-
-  
