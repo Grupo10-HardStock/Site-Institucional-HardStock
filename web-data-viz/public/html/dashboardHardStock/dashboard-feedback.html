@@ -77,7 +77,7 @@
 
 </head>
 
-<body onload="carregarNome(),BuscarMsgBanco()">
+<body onload="carregarNome()">
     <label for="sidebar-ativo" class="sideBar-open">
         <i class="fa-duotone fa-solid fa-bars"></i>
     </label>
@@ -138,17 +138,39 @@
     <div class="container">
         <h1>Mensagens</h1>
         <div class="cards-container" id="cards-container">
- 
-            <!-- <div class="card">
+            <div class="card">
+                <h3>ID Mensagem: 1</h3>
+                <p><strong>Nome:</strong> João Alberto</p>
+                <p><strong>Email:</strong> joaoalberto@gmail.com</p>
+                <p><strong>Mensagem:</strong><br>Acredito que o site é o melhor que eu já utilizei na minha vida, estou
+                    sendo muito bem atendido de todas as minhas necessidades do dia a dia com o monitoramento.</p>
+            </div>
+
+            <div class="card">
+                <h3>ID Mensagem: 2</h3>
+                <p><strong>Nome:</strong> Maria Alice</p>
+                <p><strong>Email:</strong> mariaalice@gmail.com</p>
+                <p><strong>Mensagem:</strong><br>Acredito que o site é o melhor que eu já utilizei na minha vida, estou
+                    sendo muito bem atendido de todas as minhas necessidades do dia a dia com o monitoramento.</p>
+            </div>
+
+            <div class="card">
+                <h3>ID Mensagem: 3</h3>
+                <p><strong>Nome:</strong> Pedro Pinho</p>
+                <p><strong>Email:</strong> pedropinho@gmail.com</p>
+                <p><strong>Mensagem:</strong><br> Acredito que o site é o melhor que eu já utilizei na minha vida, estou
+                    sendo muito bem atendido de todas as minhas necessidades do dia a dia com o monitoramento.</p>
+            </div>
+
+            <div class="card">
                 <h3>ID Mensagem: 4</h3>
                 <p><strong>Nome:</strong> Kauê Almeida</p>
                 <p><strong>Email:</strong> kauealmeida@gmail.com</p>
                 <p><strong>Mensagem:</strong><br>Acredito que o site é o melhor que eu já utilizei na minha vida, estou
                     sendo muito bem atendido de todas as minhas necessidades do dia a dia com o monitoramento.</p>
-            </div> -->
+            </div>
         </div>
     </div>
-
 </body>
 
 </html>
@@ -158,45 +180,45 @@ function carregarNome(){
     let text = sessionStorage.NOME_USUARIO;
     nome.innerHTML = "Olá, " + text;
   }
-  function BuscarMsgBanco(){
 
-        fetch("/usuarios/buscarMensagens", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                const container = document.getElementById('cards-container');
-                container.innerHTML = '';
+    // b_usuario.innerHTML = sessionStorage.NOME_USUARIO
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     fetch("/usuarios/buscarMensagens", {
+    //         method: "GET",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         }
+    //     })
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error(`HTTP error! status: ${response.status}`);
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(data => {
+    //             const container = document.getElementById('cards-container');
+    //             container.innerHTML = '';
 
-                if (data.length === 0) {
-                    const message = document.createElement('p');
-                    message.textContent = 'Nenhuma mensagem encontrada.';
-                    container.appendChild(message);
-                } else {
-                    data.forEach(mensagem => {
-                        const card = document.createElement('div');
-                        card.classList.add('card');
-                        card.innerHTML = `
-                        <h3>ID Mensagem:&nbsp;&nbsp;${mensagem.idMensagem}</h3>
-                        <p><strong>Nome:</strong>&nbsp;${mensagem.nome}</p>
-                        <p><strong>Email:</strong>&nbsp;&nbsp;${mensagem.email}</p>
-                        <p><strong>Mensagem:</strong><br>${mensagem.mensagem}</p>
-                    `;
-                        container.appendChild(card);
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Houve um erro ao capturar os dados das mensagem!', error);
-            });
-    };
-
+    //             if (data.length === 0) {
+    //                 const message = document.createElement('p');
+    //                 message.textContent = 'Nenhuma mensagem encontrada.';
+    //                 container.appendChild(message);
+    //             } else {
+    //                 data.forEach(mensagem => {
+    //                     const card = document.createElement('div');
+    //                     card.classList.add('card');
+    //                     card.innerHTML = `
+    //                     <h3>ID Mensagem:&nbsp;&nbsp;${mensagem.idMensagem}</h3>
+    //                     <p><strong>Nome:</strong>&nbsp;${mensagem.nome}</p>
+    //                     <p><strong>Email:</strong>&nbsp;&nbsp;${mensagem.email}</p>
+    //                     <p><strong>Mensagem:</strong><br>${mensagem.mensagem}</p>
+    //                 `;
+    //                     container.appendChild(card);
+    //                 });
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.error('Houve um erro ao capturar os dados das mensagem!', error);
+    //         });
+    // });
 </script>

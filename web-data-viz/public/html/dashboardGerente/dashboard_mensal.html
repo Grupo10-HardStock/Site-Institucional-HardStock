@@ -4,60 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./dashboard-gerente.css">
+  <link rel="stylesheet" href="./css/dashboardMensal.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Dashboard Mensal | HardStock</title>
 
-  <style>
-    .centralizador {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-content: center;
-      align-items: center;
-      width: 100%;
-
-    }
-
-    #selecTempo {
-      text-align: center;
-      background-color: #232739;
-      color: white;
-      font-size: large;
-      padding: 0.5%;
-      border-radius: 50px;
-      width: 15%;
-    }
-
-    .graficos {
-      width: 65%;
-    }
-
-    .graficos1 {
-      display: flex;
-      flex-direction: initial;
-      width: 100%;
-    }
-
-    .graficos2 {
-      display: flex;
-      flex-direction: initial;
-      width: 100%;
-    }
-
-    .chart-container {
-      width: 100%;
-      margin: 20px auto;
-      align-items: center;
-
-    }
-  </style>
-
 </head>
 
-<body onload="carregarNome()">
+<body>
   <label for="sidebar-ativo" class="sideBar-open">
     <i class="fa-duotone fa-solid fa-bars"></i>
   </label>
@@ -78,14 +33,10 @@
         <li>
           <p style="margin-bottom: 20px;">
             <span id="nome" class="navItem-nome">
-     
+
             </span>
           </p>
         </li>
-        <li><a href="../dashboardGerente/dashboard_tempo.html">
-            <i class="fa-solid fa-chart-line"></i>
-            <span class="navItem">Tempo real</span>
-          </a></li>
         <li><a href="../dashboardGerente/dashboard_mensal.html"
             style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
@@ -95,19 +46,21 @@
         <li><a href="../dashboardGerente/dashboard_funcionario.html">
             <i class="fa-solid fa-user-plus"></i>
             <span class="navItem">Funcionário</span>
-          </a></li>
-        <li><a href="../dashboardGerente/dashboard_componentes.html">
-            <i class="fa-solid fa-table-list"></i>
-            <span class="navItem">Servidores</span>
-          </a></li>
+          </a>
+        </li>
+        <li>
+          <a id="btnIcone" onclick="toggleDarkMode()">
+            <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon"></i>
+            <span class="navItem">Mudar Tema</span>
+          </a>
+        </li>
         <div class="sair">
-          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4
-" target="_blank">
+          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4" target="_blank">
               <i class="fa-solid fa-headset"></i>
               <span class="navItem">Suporte</span>
             </a></li>
           <li>
-             <a href="../../index.html">
+            <a href="../../index.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
               <span class="navItem">Sair</span>
             </a>
@@ -118,39 +71,96 @@
   </nav>
   </div>
 
-  <div class="centralizador">
-
-    <select name="tempo" id="selecTempo">
-      <option value="#" selected disabled> Selecione o Tempo</option>
-      <option value="1"> 1 mês</option>
-      <option value="3"> 3 meses</option>
-      <option value="6"> 6 meses</option>
-      <option value="12"> 12 meses</option>
+  <div class="Alinhamento">
+    <select name="tempo" id="selecTempo" onchange="gerarGraficosMediasMensais()">
+      <option value="0" selected disabled>Selecione o Tempo</option>
+      <option value="1">1 mês</option>
+      <option value="3">3 meses</option>
+      <option value="6">6 meses</option>
+      <option value="12">12 meses</option>
     </select>
-
-
+    <h2 class="titulo">Análise temporal dos Servidores</h2>
     <div class="graficos">
       <div class="graficos1">
-
-        <div class="chart-container">
-          <b>Média CPU</b>
-          <canvas id="cpuChart"></canvas>
-        </div>
-        <div class="chart-container">
-          <b>Média RAM</b>
-          <canvas id="ramChart"></canvas>
-        </div>
-      </div>
-      <div class="graficos2">
         <div class="chart-container">
           <b>Média Rede</b>
-          <canvas id="networkChart"></canvas>
+          <div class="tooltip">
+            <div class="info-icon">
+              ℹ
+            </div>
+
+            <span class="tooltiptext"> Média de Upload e Download:<br>
+              Gráfico com duas linhas que mostram as médias mensais de dados enviados (upload) e recebidos (download)
+              em MB. <br><br>
+              Ajuda a monitorar o uso da rede e detectar variações no tráfego.
+            </span>
+          </div>
+          <canvas id="chart_Rede"></canvas>
         </div>
 
         <div class="chart-container">
-          <b>Média Disco</b>
-          <canvas id="diskChart"></canvas>
+          <b>Média Uso Disco</b>
+          <div class="tooltip">
+            <div class="info-icon">
+              ℹ
+            </div>
+
+            <span class="tooltiptext">Média de Uso do Disco: <br>
+              Exibe a média mensal do espaço de armazenamento efetivamente utilizado (em GB). <br><br>
+              Ajuda a entender como o espaço em disco está sendo consumido.
+            </span>
+          </div>
+
+          <canvas id="chart_Uso_do Disco Usado"></canvas>
         </div>
+      </div>
+
+      <div class="graficos2">
+        <div class="chart-container">
+          <b>Média Armazenamento</b>
+          <div class="tooltip">
+            <div class="info-icon">
+              ℹ
+            </div>
+
+            <span class="tooltiptext">Média Uso do Disco Total: <br>
+              Mostra a capacidade total de armazenamento disponível (em GB) em média ao longo de cada mês. <br><br>
+              Indica o espaço geral disponível no sistema.
+            </span>
+          </div>
+          <canvas id="chart_Uso_do Disco Total"></canvas>
+        </div>
+        <div class="chart-container">
+          <b>Média Uso CPU</b>
+          <div class="tooltip">
+            <div class="info-icon">
+              ℹ
+            </div>
+
+            <span class="tooltiptext">Média de Uso da CPU: <br>
+              Gráfico que exibe a média mensal do uso do processador, indicando o percentual de utilização ao longo do
+              tempo. <br><br>
+              Útil para identificar padrões de carga e possíveis sobrecargas.
+            </span>
+          </div>
+          <canvas id="chart_Uso_da CPU"></canvas>
+        </div>
+
+        <div class="chart-container">
+          <b>Média RAM</b>
+          <div class="tooltip">
+            <div class="info-icon">
+              ℹ
+            </div>
+
+            <span class="tooltipRAM">Média de Memória Usada: <br>
+              Representa a média mensal de memória utilizada (em GB). <br><br>
+              Permite acompanhar o consumo de memória e identificar tendências ou necessidades de ajuste no sistema.
+            </span>
+          </div>
+          <canvas id="chart_Memória_Usada"></canvas>
+        </div>
+
       </div>
     </div>
   </div>
@@ -159,52 +169,109 @@
 
 </html>
 
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 <script>
-  const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+  let chartComponents = {};
 
-  const cpuData = [40, 45, 50, 55, 60, 65, 70, 75, 68, 64, 58, 52];
-  const ramData = [50, 55, 60, 62, 65, 67, 70, 72, 68, 66, 63, 58];
-  const networkData = [200, 210, 220, 230, 240, 250, 260, 255, 245, 235, 225, 215];
-  const diskData = [60, 62, 65, 67, 70, 72, 75, 77, 73, 70, 68, 64];
+  function toggleDarkMode() {
+    const body = document.body;
+    const themeToggleIcon = document.getElementById('themeToggleIcon');
 
-  function createChart(ctx, label, data, color) {
-    new Chart(ctx, {
+
+    body.classList.toggle('dark-mode');
+
+
+    if (body.classList.contains('dark-mode')) {
+      themeToggleIcon.classList.remove('fa-moon');
+      themeToggleIcon.classList.add('fa-sun');
+    } else {
+      themeToggleIcon.classList.remove('fa-sun');
+      themeToggleIcon.classList.add('fa-moon');
+    }
+  }
+
+  function gerarGraficosMediasMensais() {
+    var periodo = selecTempo.value;
+
+    fetch(`/medidas/buscarMediasMensais/${periodo}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(function (resposta) {
+      if (resposta.ok) {
+        resposta.json().then(json => {
+          const dadosComponentes = {};
+          json.forEach(item => {
+            if (!dadosComponentes[item.componente]) {
+              dadosComponentes[item.componente] = { labels: [], data: [] };
+            }
+            dadosComponentes[item.componente].labels.push(item.mes_ano);
+            dadosComponentes[item.componente].data.push(item.media_valor);
+          });
+
+          ["Uso da CPU", "Memória Usada", "Uso do Disco Total", "Uso do Disco Usado"].forEach(componente => {
+            if (dadosComponentes[componente]) {
+              atualizarGrafico(componente, dadosComponentes[componente].labels, dadosComponentes[componente].data);
+            }
+          });
+
+          if (dadosComponentes["Bytes Enviados"] && dadosComponentes["Bytes Recebidos"]) {
+            atualizarGraficoRede(
+              dadosComponentes["Bytes Enviados"].labels,
+              dadosComponentes["Bytes Enviados"].data,
+              dadosComponentes["Bytes Recebidos"].data
+            );
+          }
+        });
+      } else {
+        console.log("Erro ao buscar dados de médias mensais.");
+        resposta.text().then(texto => console.error(texto));
+      }
+    }).catch(function (erro) {
+      console.log("Erro na requisição:", erro);
+    });
+  }
+
+  function atualizarGrafico(componente, labels, data) {
+    const canvasId = `chart_${componente.replace(" ", "_")}`;
+    const canvas = document.getElementById(canvasId);
+
+    if (!canvas) {
+      console.error(`Canvas com ID ${canvasId} não encontrado.`);
+      return;
+    }
+
+    let ctx = canvas.getContext('2d');
+    if (chartComponents[componente]) {
+      chartComponents[componente].destroy();
+    }
+
+    chartComponents[componente] = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: months,
+        labels: labels,
         datasets: [{
-          label: label,
+          label: `Média de ${componente}`,
           data: data,
-          borderColor: color,
-          fill: false,
+          borderColor: 'rgb(31, 27, 70)',
+          backgroundColor: 'rgba(31, 27, 70, 0.2)',
+          fill: true,
+          borderWidth: 2,
           tension: 0.1
         }]
       },
       options: {
         responsive: true,
         plugins: {
-          legend: {
-            display: true
-          }
-        },
-        scales: {
-          x: {
-            grid: {
-              display: false
-            }
-          },
-          y: {
-            beginAtZero: true,
-            grid: {
-              borderDash: [8, 4],
-              color: 'rgba(0, 0, 0, 0.1)',
-            },
-            title: {
-              display: true,
-              text: 'Uso (%) ou Mbps'
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                return `${context.raw.toFixed(2)}`;
+              }
             }
           }
         }
@@ -212,21 +279,81 @@
     });
   }
 
+  function atualizarGraficoRede(labels, dataUpload, dataDownload) {
+    const canvasId = "chart_Rede";
+    const canvas = document.getElementById(canvasId);
 
-  const cpuCtx = document.getElementById('cpuChart').getContext('2d');
-  createChart(cpuCtx, 'Média de Uso de CPU (%)', cpuData, 'red');
+    if (!canvas) {
+      console.error(`Canvas com ID ${canvasId} não encontrado.`);
+      return;
+    }
 
-  const ramCtx = document.getElementById('ramChart').getContext('2d');
-  createChart(ramCtx, 'Média de Uso de RAM (%)', ramData, 'blue');
+    let ctx = canvas.getContext('2d');
+    if (chartComponents["Rede"]) {
+      chartComponents["Rede"].destroy();
+    }
 
-  const networkCtx = document.getElementById('networkChart').getContext('2d');
-  createChart(networkCtx, 'Média de Uso de Rede (Mbps)', networkData, 'green');
-
-  const diskCtx = document.getElementById('diskChart').getContext('2d');
-  createChart(diskCtx, 'Média de Uso de Disco (%)', diskData, 'grey');
-
-  function carregarNome(){
-     let text = sessionStorage.NOME_USUARIO;
-    nome.innerHTML = "Olá, " + text;
+    chartComponents["Rede"] = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Média de Upload',
+            data: dataUpload,
+            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            fill: true,
+            borderWidth: 2,
+            tension: 0.1
+          },
+          {
+            label: 'Média de Download',
+            data: dataDownload,
+            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            fill: true,
+            borderWidth: 2,
+            tension: 0.1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                return `${context.raw.toFixed(2)}`;
+              }
+            }
+          }
+        }
+      }
+    });
   }
+
+  function iniciarAtualizacaoGraficos() {
+    gerarGraficosMediasMensais();
+    setInterval(gerarGraficosMediasMensais, 60000);
+  }
+
+
+  window.onload = iniciarAtualizacaoGraficos;
+
+  function carregarNome() {
+    const nomeSpan = document.getElementById("nome");
+    const nomeUsuario = sessionStorage.getItem("NOME_USUARIO") || "Usuário";
+
+    if (nomeSpan) {
+      nomeSpan.textContent = "Olá, " + nomeUsuario;
+    } else {
+      console.warn("Elemento com id 'nome' não foi encontrado.");
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    carregarNome();
+  });
+
 </script>

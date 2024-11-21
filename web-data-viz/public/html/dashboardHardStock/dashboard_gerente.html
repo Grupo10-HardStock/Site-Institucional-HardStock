@@ -182,7 +182,7 @@
         </label>
         <label id="telefone">
           <p>Telefone:</p><br>
-          <input id="input_telefone" type="tel" maxlength="11" onkeyup="handlePhone(event)"  placeholder="Informe seu Telefone:"><br>
+          <input id="input_telefone" type="text" placeholder="Informe seu Telefone:"><br>
         </label>
       </div>
       <div class="depois">
@@ -212,21 +212,6 @@
 </body>
 
 <script>
-
-  const handlePhone = (event) => {
-  let input = event.target
-  input.value = phoneMask(input.value)
-}
-
-const phoneMask = (value) => {
-  if (!value) return ""
-  value = value.replace(/\D/g,'')
-  value = value.replace(/(\d{2})(\d)/,"($1) $2")
-  value = value.replace(/(\d)(\d{4})$/,"$1-$2")
-  return value
-}
-
-
   function verificarCampos() {
     let nome = document.getElementById("input_nome").value;
     let sobrenome = document.getElementById("input_sobrenome").value;
@@ -236,7 +221,7 @@ const phoneMask = (value) => {
     let permissao = document.getElementById("input_permissao").value;
     let empresa = document.getElementById("listaEmpresas").value;
 
-    if (nome == "" || sobrenome == "" || telefone == "" || email == "" || senha == "" || permissao == "#" || empresa == "#") {
+    if (nome === "" || sobrenome === "" || telefone === "" || email === "" || senha === "" || permissao === "" || empresa === "") {
       alert("Por favor, preencha todos os campos.");
 
     } else if (!email.includes("@") || !email.includes(".")) {

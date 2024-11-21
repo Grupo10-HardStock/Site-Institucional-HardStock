@@ -4,128 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./dashboard-gerente.css">
+  <link rel="stylesheet" href="./css/dashboardFunc.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title>Dashboard Funcionário | HardStock</title>
-
-  <style>
-    .alinhamento {
-      display: flex;
-      flex-direction: column;
-      margin-top: 5%;
-      width: 80%;
-    }
-
-    h1 {
-      display: flex;
-      justify-content: center;
-      color: #191b27;
-    }
-
-    #add {
-      width: auto;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      background-color: transparent;
-      margin-right: -81%;
-    }
-
-    #add a {
-    display: flex;
-    border-radius: 50px;
-    align-items: center;
-    width: 190px;
-    font-weight: bold;
-    color: white;
-    background-color: #191b27;
-    padding: inherit;
-    padding-left: 2%;
-    justify-content: center;
-    }
-
-    #icone {
-      padding-left: 2%;
-      width: auto;
-      margin-left: 2%;
-      margin-bottom: 9px;
-    }
-
-    #userTable {
-      margin: 20px auto;
-      padding: 20px;
-      width: 100%;
-      background-color: #f9f9f9;
-      border: 1px solid #ddd;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-      border-radius: 10px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    table,
-    th,
-    td {
-      border: 1px solid #ddd;
-    }
-
-    th {
-      background-color: rgba(199, 208, 216, 1);
-      color: #191b27;
-      padding: 12px;
-    }
-
-    td {
-      padding: 10px;
-      text-align: left;
-    }
-
-    .action-btn {
-      padding: 5px 10px;
-      margin: 2px;
-      cursor: pointer;
-      border: none;
-      border-radius: 4px;
-    }
-
-    .edits {
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .edit-btn {
-      background-color: transparent;
-      color: white;
-    }
-
-    .delete-btn {
-      background-color: transparent;
-      color: white;
-    }
-
-    .edit-btn:hover {
-      background-color: transparent;
-    }
-
-    .delete-btn:hover {
-      background-color: transparent;
-    }
-
-    #editar {
-      color: #191b27;
-      background-color: none;
-    }
-
-    #excluir {
-      color: #d32f2f;
-    }
-  </style>
+  <title>Dashboard Visualização Analista | HardStock</title>
 
 </head>
 
@@ -150,14 +34,9 @@
         <li>
           <p style="margin-bottom: 20px;">
             <span id="nome" class="navItem-nome">
-            
             </span>
           </p>
         </li>
-        <li><a href="../dashboardGerente/dashboard_tempo.html">
-            <i class="fa-solid fa-chart-line"></i>
-            <span class="navItem">Tempo real</span>
-          </a></li>
         <li><a href="../dashboardGerente/dashboard_mensal.html">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
             <span class="navItem">Mensal</span>
@@ -168,18 +47,19 @@
             <i class="fa-solid fa-user-plus"></i>
             <span class="navItem" style="color: #191b27;">Funcionário</span>
           </a></li>
-        <li><a href="../dashboardGerente/dashboard_componentes.html">
-            <i class="fa-solid fa-table-list"></i>
-            <span class="navItem">Servidores</span>
-          </a></li>
+        <li>
+          <a id="btnIcone" onclick="toggleDarkMode()">
+            <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon"></i>
+            <span class="navItem">Mudar Tema</span>
+          </a>
+        </li>
         <div class="sair">
-          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4
-" target="_blank">
+          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4" target="_blank">
               <i class="fa-solid fa-headset"></i>
               <span class="navItem">Suporte</span>
             </a></li>
           <li>
-             <a href="../../index.html">
+            <a href="../../index.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
               <span class="navItem">Sair</span>
             </a>
@@ -194,60 +74,167 @@
     <h1>Funcionários</h1>
     <button id="add"><a href="cadastro-funcionario.html">Novo Funcionário <i id="icone"
           class="fa-solid fa-plus"></i></a></button>
-    <div id="userTable"></div>
-  </div>
+    <div id="tabelaAnalista">
+      <table id="tabelaAnalista-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Cargo</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
 
+        </tbody>
+      </table>
+    </div>
+
+  </div>
 </body>
 
 </html>
 <script>
-  function populateTable(users) {
-    let tableHTML = '<table><thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>... Edições</th></tr></thead><tbody>';
 
-    users.forEach(user => {
-      tableHTML += `<tr>
-                          <td>${user.id}</td>
-                          <td>${user.name}</td>
-                          <td>${user.email}</td>
-                          <td class="edits">
-                            <button class="icon-btn edit-btn" onclick="editUser(${user.id})">
-                            <i id="editar" class="fa-solid fa-pen-to-square"></i>                            
-                            </button>
-                            
-                            <button class="icon-btn delete-btn" onclick="deleteUser(${user.id})">
-                            <i id="excluir" class="fa-solid fa-trash"></i>
-                              </button>
-                        </td>
-                        </tr>`;
-    });
+  function toggleDarkMode() {
+    const body = document.body;
+    const themeToggleIcon = document.getElementById('themeToggleIcon');
 
-    tableHTML += '</tbody></table>';
 
-    document.getElementById('userTable').innerHTML = tableHTML;
-  }
+    body.classList.toggle('dark-mode');
 
-  function editUser(id) {
-    window.location = "./dashboard-edicaoFuncionario.html"
-  }
 
-  function deleteUser(id) {
-    const confirmDelete = confirm('Você tem certeza que deseja excluir o usuário de ID: ' + id + '?');
-    if (confirmDelete) {
-      alert('Usuário de ID: ' + id + ' foi excluído.');
+    if (body.classList.contains('dark-mode')) {
+      themeToggleIcon.classList.remove('fa-moon');
+      themeToggleIcon.classList.add('fa-sun');
+    } else {
+      themeToggleIcon.classList.remove('fa-sun');
+      themeToggleIcon.classList.add('fa-moon');
     }
   }
 
-  const usersFromDB = [
-    { id: 1, name: 'João Silva', email: 'joao.silva@profit.com' },
-    { id: 2, name: 'Maria Souza', email: 'maria.souza@profit.com' },
-    { id: 3, name: 'Carlos Pereira', email: 'carlos.pereira@profit.com' },
-    { id: 4, name: 'João Felipe', email: 'joao.felipe@profit.com' }
-  ];
 
-  populateTable(usersFromDB);
+  var fkEmpresa = sessionStorage.EMPRESA_USUARIO;
 
-  function carregarNome(){
-     let text = sessionStorage.NOME_USUARIO;
+  function carregarNome() {
+    let text = sessionStorage.NOME_USUARIO;
     nome.innerHTML = "Olá, " + text;
   }
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    fetch(`/usuarios/buscarFuncionario/${fkEmpresa}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        const tbody = document.querySelector('#tabelaAnalista-table tbody');
+        tbody.innerHTML = '';
+
+        if (data.length === 0) {
+          const row = document.createElement('tr');
+          const cell = document.createElement('td');
+          cell.colSpan = 4;
+          cell.textContent = 'Nenhum Analista vinculado.';
+          row.appendChild(cell);
+          tbody.appendChild(row);
+        } else {
+          data.forEach(funcionario => {
+            const row = document.createElement('tr');
+
+            const estadoCheckbox = funcionario.estado === "Ativo" ? "ativo" : "inativo";
+            const isChecked = funcionario.estado === "Ativo" ? "" : "checked";
+
+            row.innerHTML = `
+    <td>${funcionario.idFuncionario}</td>
+    <td>${funcionario.nome} ${funcionario.sobrenome}</td>
+    <td>${funcionario.email}</td>
+    <td>${funcionario.permissao}</td>
+    <td>${funcionario.estado}</td>
+    <td class="edits">
+      <button class="icon-btn edit-btn" onclick="editar(${funcionario.idFuncionario})">
+        <i id="editar" class="fa-solid fa-pen-to-square"></i>                            
+      </button>
+      <input id="checkbox-${funcionario.idFuncionario}" class="checkbox ${estadoCheckbox}" 
+             type="checkbox" ${isChecked} 
+             onclick="deletar(${funcionario.idFuncionario})">
+    </td>
+  `;
+
+            tbody.appendChild(row);
+          });
+
+        }
+      })
+      .catch(error => {
+        console.error('Houve um erro ao capturar os dados dos Funcionarios!', error);
+      });
+  });
+
+
+
+  function editar(idFuncionario) {
+    sessionStorage.ID_EDITANDO = idFuncionario;
+    console.log("Cliquei em editar - " + idFuncionario)
+    window.alert("Você será redirecionado à página de edição Funcionário de id: " + idFuncionario)
+    window.location.href = `dashboard-edicaoFuncionario.html`;
+  }
+
+
+
+  function deletar(idFuncionario) {
+    fetch(`/usuarios/verificarStatus/${idFuncionario}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(funcionario => {
+
+        if (funcionario[0].estado === "Ativo") {
+          console.log("Criar função desativar perfil escolhido - ID " + idFuncionario);
+
+          fetch(`/usuarios/deletar/${idFuncionario}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+            .then(resposta => {
+              if (resposta.ok) {
+                window.alert("Funcionário Inativo com sucesso pelo usuário de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+                location.reload();
+              } else if (resposta.status === 404) {
+                window.alert("Deu 404!");
+              } else if (resposta.status === 500) {
+                window.alert("Não é possível excluir esse Funcionário pois ele está vinculado a uma empresa.");
+              } else {
+                throw new Error("Houve um erro ao tentar excluir! Código da resposta: " + resposta.status);
+              }
+            })
+            .catch(error => {
+              console.log(`#ERRO: ${error}`);
+            });
+        } else {
+          window.alert("Funcionário já está Inativo!");
+
+        }
+      })
+      .catch(error => {
+        console.log(`#ERRO: ${error}`);
+      });
+  }
+
+
 </script>

@@ -4,105 +4,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./dashboard-gerente.css">
+  <link rel="stylesheet" href="./css/dashboardEdicao.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title>Dashboard Edição Funcionário | HardStock</title>
-
-  <style>
-    .alinhamento {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      margin-top: 2%;
-      width: 50%;
-      height: 90%;
-      background-color: white;
-      border-radius: 50px;
-      padding-top: 20px;
-    }
-
-    .campos {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      padding: 20px;
-    }
-
-    .antes,
-    .depois {
-      width: 45%;
-    }
-
-    .titulo {
-      margin-bottom: 20px;
-      font-size: 1.2rem;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 20px;
-    }
-
-    label p {
-      font-size: 1rem;
-      margin-bottom: 5px;
-    }
-
-    #inputEditar {
-      width: 100%;
-      height: 35px;
-      border: none;
-      background-color: transparent;
-      border-bottom: 2px solid black;
-      font-size: 1rem;
-      padding: 5px;
-      margin-bottom: 10px;
-    }
-
-    #btnCancel,
-    #btnSave {
-      margin-top: 20px;
-      padding: 10px 20px;
-      width: auto;
-      height: auto;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.2s ease-in-out;
-    }
-
-    #btnCancel {
-      background-color: white;
-      border: 1px solid red;
-      color: red;
-      margin-right: 10px;
-    }
-
-    #btnSave {
-      background-color: rgb(11, 239, 11);
-      border: 1px solid rgb(11, 239, 11);
-      color: white;
-    }
-
-    button:hover {
-      opacity: 0.8;
-    }
-  </style>
-
+  <title>Dashboard Edição Analista | HardStock</title>
 
 </head>
 
 <body onload="carregarNome()">
-  <label for="sidebar-ativo" class="sideBar-open">
-    <i class="fa-duotone fa-solid fa-bars"></i>
-  </label>
   <nav id="nav">
     <div class="link-conteiner">
-      <label for="sidebar-ativo" class="sideBar-close">
-        <i id="close" class="fa-solid fa-xmark"></i>
-      </label>
       <ul>
         <li>
           <p class="logo">
@@ -113,38 +26,34 @@
         <li>
           <p style="margin-bottom: 20px;">
             <span id="nome" class="navItem-nome">
- 
+
             </span>
           </p>
         </li>
-        <li><a href="../dashboardGerente/dashboard_tempo.html">
-            <i class="fa-solid fa-chart-line"></i>
-            <span class="navItem">Tempo real</span>
-          </a></li>
         <li><a href="../dashboardGerente/dashboard_mensal.html">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
             <span class="navItem">Mensal</span>
           </a>
         </li>
-        <li><a href="../dashboardGerente/dashboard_funcionario.html"
-            style="background: rgba(199, 208, 216, 1);color: #191b27;">
+        <li><a href="../dashboardGerente/dashboard_funcionario.html">
             <i class="fa-solid fa-user-plus"></i>
-            <span class="navItem" style="color: #191b27;">Funcionário</span>
+            <span class="navItem">Funcionário</span>
           </a></li>
-        <li><a href="../dashboardGerente/dashboard_componentes.html">
-            <i class="fa-solid fa-table-list"></i>
-            <span class="navItem">Servidores</span>
-          </a></li>
+          <li>
+            <a id="btnIcone" onclick="toggleDarkMode()">
+              <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon"></i>
+              <span class="navItem">Mudar Tema</span>
+            </a>
+          </li>
         <div class="sair">
-          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4
-" target="_blank">
+          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4" target="_blank">
               <i class="fa-solid fa-headset"></i>
               <span class="navItem">Suporte</span>
             </a></li>
           <li>
-            <a href="../dashboardGerente/">
+            <a href="./dashboard_funcionario.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
-              <span class="navItem">Cancelar</span>
+              <span class="navItem">Sair</span>
             </a>
           </li>
 
@@ -154,39 +63,58 @@
   </div>
 
   <div class="alinhamento">
-    <h1>Atualizar Funcionário</h1>
+    <h1>Editando Perfil:&nbsp;<b id="nomeFuncionario"></b> &nbsp;-&nbsp; <b id="permissaoFuncionario"></b></h1>
+
+
     <div class="campos">
-      <div class="antes">
-        <h3 class="titulo">Como estava:</h3>
+      <div class="coluna1" onload="listarInformacoes()">
+        <label id="Nome">
+          <p id="pform">Nome:</p><br>
+          <input id="inputNome" type="text"><br>
+        </label>
+        <label id="sobrenome">
+          <p id="pform">Sobrenome:</p><br>
+          <input id="inputSobrenome" type="text"><br>
+        </label>
         <label id="telefone">
-          <p>Telefone:</p><br>
-          <input disabled id="inputEditar" type="text" value="(11)91547-8545"><br>
+          <p id="pform">Telefone:</p><br>
+          <input id="inputTelefone" type="text" type="tel" maxlength="15" onkeyup="handlePhone(event)"><br>
         </label>
-        <label id="Senha">
-          <p>Senha:</p><br>
-          <input disabled id="inputEditar" type="text" value="profit2022"><br>
-        </label>
-        <label id="Cargo">
-          <p>Cargo:</p><br>
-          <input disabled id="inputEditar" type="text" value="Analista"><br>
+        <label id="status">
+          <p id="pform">Status:</p><br>
+          <select name="permissao" id="selectStatus">
+            <option value="#" selected disabled>Selecione o Status</option>
+            <option value="Ativo">Ativo</option>
+            <option value="Inativo">Inativo</option>
+          </select>
         </label>
       </div>
-      <div class="depois">
-        <h3 class="titulo">Como irá ficar:</h3>
-        <label>
-          <p>Telefone:</p><br>
-          <input id="inputEditar" type="number" placeholder="Informe seu novo Telefone:"><br>
+
+      <div class="coluna2">
+        <label id='Sobrenome'>
+          <p id="pform">Email:</p><br>
+          <input id="inputEmail" type="text" placeholder="Informe o novo Telefone:"><br>
         </label>
         <label>
-          <p>Senha:</p><br>
-          <input id="inputEditar" type="password" placeholder="Informe sua nova Senha:"><br>
+          <p id="pform">Senha:</p><br>
+          <input id="inputSenha" type="password" placeholder="Informe a nova Senha:">
+          <i class="fa-solid fa-eye toggle-password" onclick="togglePassword()" id="toggleIcon"></i>
+          <br>
         </label>
 
         <label>
-          <p>Cargo:</p><br>
-          <input id="inputEditar" type="text" placeholder="Informe seu novo Cargo:"><br>
+          <p id="pform">Cargo:</p><br>
+          <select name="permissao" id="selectpermissao">
+            <option value="#" selected disabled>Selecione o cargo</option>
+            <option value="Analista">Analista</option>
+            <option value="Gerente">Gerente</option>
+          </select>
+        </label>
+
+        </label>
+        <label id="botoes">
           <button id="btnCancel" onclick="cancelar()">Cancelar</button>
-          <button id="btnSave">Salvar</button>
+          <button id="btnSave" onclick="editar()">Salvar</button>
         </label>
       </div>
     </div>
@@ -198,12 +126,170 @@
 
 </html>
 <script>
-  function cancelar() {
-    window.location = "./dashboard_funcionario.html"
+      function toggleDarkMode() {
+    const body = document.body;
+    const themeToggleIcon = document.getElementById('themeToggleIcon');
+
+
+    body.classList.toggle('dark-mode');
+
+
+    if (body.classList.contains('dark-mode')) {
+      themeToggleIcon.classList.remove('fa-moon');
+      themeToggleIcon.classList.add('fa-sun');
+    } else {
+      themeToggleIcon.classList.remove('fa-sun');
+      themeToggleIcon.classList.add('fa-moon');
+    }
   }
 
-  function carregarNome(){
-     let text = sessionStorage.NOME_USUARIO;
+
+    function togglePassword() {
+      const passwordInput = document.getElementById("inputSenha");
+      const toggleIcon = document.getElementById("toggleIcon");
+
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleIcon.classList.remove("fa-eye");
+        toggleIcon.classList.add("fa-eye-slash"); 
+      } else {
+        passwordInput.type = "password";
+        toggleIcon.classList.remove("fa-eye-slash");
+        toggleIcon.classList.add("fa-eye"); 
+      }
+    }
+
+  function carregarNome() {
+    let text = sessionStorage.NOME_USUARIO;
     nome.innerHTML = "Olá, " + text;
   }
+
+  const handlePhone = (event) => {
+    let input = event.target
+    input.value = phoneMask(input.value)
+  }
+
+  const phoneMask = (value) => {
+    if (!value) return ""
+    value = value.replace(/\D/g, '')
+    value = value.replace(/(\d{2})(\d)/, "($1) $2")
+    value = value.replace(/(\d)(\d{4})$/, "$1-$2")
+    return value
+  }
+
+  function listarInformacoes() {
+    var idFuncionario = sessionStorage.ID_EDITANDO;
+    console.log("ID do Funcionário:", idFuncionario);
+
+    if (!idFuncionario) {
+      console.error("ID do funcionário não está definido.");
+      return;
+    }
+
+    console.log("Iniciando fetch para obter informações do funcionário...");
+    fetch(`/usuarios/listarFuncionario/${idFuncionario}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(funcionario => {
+        console.log("Dados do Funcionário:", funcionario);
+        if (funcionario) {
+          document.getElementById('permissaoFuncionario').innerText = funcionario[0].permissao;
+          document.getElementById('nomeFuncionario').innerText = funcionario[0].nome;
+          document.getElementById('inputNome').value = funcionario[0].nome || "(não definido)";
+          document.getElementById('inputSobrenome').value = funcionario[0].sobrenome || "(não definido)";
+          document.getElementById('inputTelefone').value = funcionario[0].numeroTelefone || "(não definido)";
+          document.getElementById('selectStatus').value = funcionario[0].estado || "(não definido)";
+          document.getElementById('inputEmail').value = funcionario[0].email || "(não definido)";
+          document.getElementById('inputSenha').value = funcionario[0].senha || "(não definido)";
+          document.getElementById('selectpermissao').value = funcionario[0].permissao || "(não definido)";
+        } else {
+          console.log('Funcionário não encontrado.');
+        }
+      })
+      .catch(error => {
+        console.error('Houve um erro ao capturar os dados dos Funcionarios!', error);
+      });
+  }
+
+  function cancelar() {
+    if (confirm("Você deseja realmente sair?")) {
+      window.location = "./dashboard_funcionario.html"
+    }
+  }
+
+  function editar() {
+    var nome = inputNome.value
+    var sobrenome = inputSobrenome.value
+    var telefone = inputTelefone.value;
+    var email = inputEmail.value
+    var senha = inputSenha.value;
+    var permissao = selectpermissao.value;
+    var estado = selectStatus.value;
+    var textoFinal = "";
+
+    if (nome.length < 3) {
+      textoFinal += "Preencha o campo Nome corretamente com mais de 3 dígitos.\n";
+    }
+    if (sobrenome.length < 3) {
+      textoFinal += "Preencha o campo Sobrenome corretamente com mais de 3 dígitos.\n";
+    }
+    if (telefone.length < 15) {
+      textoFinal += "Preencha o campo telefone corretamente com 11 dígitos.\n";
+    }
+    if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
+      textoFinal += "Preencha o email corretamente!"
+    }
+    if (email.length < 6 || email == null) {
+      textoFinal += "Insira um email válido!"
+    }
+    if (senha.length < 4) {
+      textoFinal += "Preencha o campo senha corretamente com mais de 4 dígitos.\n";
+    }
+    if (textoFinal.length > 0) {
+      window.alert(textoFinal);
+    } else {
+      fetch(`/usuarios/editar/${sessionStorage.getItem("ID_EDITANDO")}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          nome:nome,
+          sobrenome:sobrenome,
+          telefone: telefone,
+          email: email,
+          senha: senha,
+          permissao: permissao,
+          estado: estado
+        })
+      }).then(function (resposta) {
+
+        if (resposta.ok) {
+          window.alert("Perfil atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+          window.location = "./dashboard_funcionario.html"
+        } else if (resposta.status == 404) {
+          window.alert("Deu 404!");
+        } else {
+          throw ("Houve um erro ao tentar Editar! Código da resposta: " + resposta.status);
+        }
+      }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+    }
+  }
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    carregarNome();
+    listarInformacoes();
+  });
 </script>

@@ -8,10 +8,6 @@ router.post("/cadastrar", function (req, res) {
     empresaController.cadastrar(req, res);
 })
 
-router.post("/cadastrarGerente", function (req, res) {
-    empresaController.cadastrarGerente(req, res);
-})
-
 router.get("/buscar", function (req, res) {
     empresaController.buscarPorCnpj(req, res);
 });
@@ -24,19 +20,4 @@ router.get("/listar", function (req, res) {
   empresaController.listar(req, res);
 });
 
-router.get("/buscarEmpresa/", function (req, res) {
-  empresaController.buscarEmpresa(req, res);
-})
-
-router.put("/editar/:idEmpresa", function (req, res) {
-  empresaController.editar(req, res);
-});
-
-router.delete("/deletar/:idEmpresa", function (req, res) {
-  empresaController.deletar(req, res);
-});
-
-router.get("/listarEmpresa/:idEmpresa", function (req, res) {
-  empresaController.listarEmpresa(req, res);
-})
 module.exports = router;

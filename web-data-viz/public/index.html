@@ -145,15 +145,15 @@
             <h2>Contato</h2>
             <form action="submit_form.php" method="POST">
                 <label for="name">Nome:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="inputNome" name="name" required>
 
                 <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="inputEmail" name="email" required>
 
                 <label for="message">Mensagem:</label>
-                <textarea id="message" name="message" required></textarea>
+                <textarea id="inputMensagem" name="mensagem" required></textarea>
 
-                <button type="submit" class="btn-primary">Enviar</button>
+                <button type="submit" class="btn-primary" onclick="enviar()">Enviar</button>
             </form>
         </div>
     </section>
@@ -226,5 +226,55 @@
         navUl.classList.toggle('open');
     }
 
+
+    function enviar() {
+        var nome = inputNome.value;
+        var email = inputEmail.value; 
+        var menssagem = inputMensagem.value;
+
+        
+        if (email.indexOf('@') === -1 || email.indexOf('.') === -1){
+            alert("Preencha o email corretamente!")
+        setTimeout(() => {
+            alert("")
+        }, 2000)
+        } else if (email.length < 6 || email == null){
+            alert("Insira um email válido!")
+            setTimeout(() => {
+                alert("")
+            }, 2000)
+        } else if (nome.length < 3){
+            alert("Preencha o campo Nome!")
+            setTimeout(() => {
+                alert("")
+            }, 2000);
+        } else if (menssagem < 5 ){
+            alert("Preencha o campo mensagem!")
+            setTimeout(() => {
+                alert("")
+            }, 2000)
+        } else {
+            
+            fetch("/usuarios/enviarMensagem", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    nomeServer: nome,
+                    emailServer: email,
+                    menssagemServer: menssagem
+                    }),
+                    })
+                    
+                inputNome.value = "";
+                inputEmail.value = "";
+                inputMensagem.value = "";
+    
+            alert("Mensagem enviada com sucesso! \n Agradecemos pela contribuição! S2");
+            }
+            window.location = "http://localhost:3333/#contact"
+        
+        }
 
 </script>

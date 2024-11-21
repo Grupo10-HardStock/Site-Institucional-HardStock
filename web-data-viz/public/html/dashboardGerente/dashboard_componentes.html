@@ -154,7 +154,7 @@
             </span>
           </p>
         </li>
-        <li><a href="../dashboardGerente/dashboard_tempo.html">
+        <li><a href="../dashboardGerente/dashboard_mensal.html">
             <i class="fa-solid fa-chart-line"></i>
             <span class="navItem">Tempo real</span>
           </a></li>
@@ -204,21 +204,6 @@
   function populateTable(users) {
     let tableHTML = '<table><thead><tr><th>ID</th><th>Nome</th><th>... Edições</th></tr></thead><tbody>';
 
-    users.forEach(user => {
-      tableHTML += `<tr>
-                          <td>${user.id}</td>
-                          <td>${user.name}</td>
-                          <td class="edits">
-                            <button class="icon-btn edit-btn" onclick="editUser(${user.id})">
-                            <i id="editar" class="fa-solid fa-pen-to-square"></i>                            
-                            </button>
-                            
-                            <button class="icon-btn delete-btn" onclick="deleteUser(${user.id})">
-                            <i id="excluir" class="fa-solid fa-trash"></i>
-                              </button>
-                        </td>
-                        </tr>`;
-    });
 
     tableHTML += '</tbody></table>';
 

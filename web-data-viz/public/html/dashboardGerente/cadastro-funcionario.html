@@ -4,94 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./dashboard-gerente.css">
+  <link rel="stylesheet" href="./css/cadastroFunc.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title>Cadastro Funcioário | HardStock</title>
-
-  <style>
-    .alinhamento {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      margin-top: 2%;
-      width: 50%;
-      height: 90%;
-      background-color: white;
-      border-radius: 50px;
-      padding-top: 20px;
-    }
-
-    .campos {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      padding: 20px;
-    }
-
-    .antes,
-    .depois {
-      width: 45%;
-    }
-
-    .titulo {
-      margin-bottom: 20px;
-      font-size: 1.2rem;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 20px;
-    }
-
-    label p {
-      font-size: 1rem;
-      margin-bottom: 5px;
-    }
-
-    #inputCadastrar {
-      width: 100%;
-      height: 35px;
-      border: none;
-      background-color: transparent;
-      border-bottom: 2px solid black;
-      font-size: 1rem;
-      padding: 5px;
-      margin-bottom: 10px;
-    }
-
-    #btnCancel,
-    #btnSave {
-      margin-top: 20px;
-      padding: 10px 20px;
-      width: auto;
-      height: auto;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.2s ease-in-out;
-    }
-
-    #btnCancel {
-      background-color: white;
-      border: 1px solid red;
-      color: red;
-      margin-right: 10px;
-    }
-
-    #btnSave {
-      background-color: rgb(11, 239, 11);
-      border: 1px solid rgb(11, 239, 11);
-      color: white;
-    }
-
-    button:hover {
-      opacity: 0.8;
-    }
-  </style>
-
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Cadastro Analista | HardStock</title>
 </head>
 
 <body onload="carregarNome()">
@@ -113,31 +34,27 @@
         <li>
           <p style="margin-bottom: 20px;">
             <span id="nome" class="navItem-nome">
-        
+
             </span>
           </p>
         </li>
-        <li><a href="../dashboardGerente/dashboard_tempo.html">
-            <i class="fa-solid fa-chart-line"></i>
-            <span class="navItem">Tempo real</span>
-          </a></li>
         <li><a href="../dashboardGerente/dashboard_mensal.html">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
             <span class="navItem">Mensal</span>
           </a>
         </li>
-        <li><a href="../dashboardGerente/dashboard_funcionario.html"
-            style="background: rgba(199, 208, 216, 1);color: #191b27;">
+        <li><a href="../dashboardGerente/dashboard_funcionario.html">
             <i class="fa-solid fa-user-plus"></i>
-            <span class="navItem" style="color: #191b27;">Funcionário</span>
+            <span class="navItem">Funcionário</span>
           </a></li>
-        <li><a href="../dashboardGerente/dashboard_componentes.html">
-            <i class="fa-solid fa-table-list"></i>
-            <span class="navItem">Servidores</span>
-          </a></li>
+          <li>
+            <a id="btnIcone" onclick="toggleDarkMode()">
+              <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon"></i>
+              <span class="navItem">Mudar Tema</span>
+            </a>
+          </li>
         <div class="sair">
-          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4
-" target="_blank">
+          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4" target="_blank">
               <i class="fa-solid fa-headset"></i>
               <span class="navItem">Suporte</span>
             </a></li>
@@ -156,52 +73,184 @@
   <div class="alinhamento">
     <h1>Cadastrar Funcionário</h1>
     <div class="campos">
-      <div class="antes">
+      <div class="coluna1">
         <label id="nome">
           <p>Nome:</p><br>
-          <input id="inputCadastrar" type="text" placeholder="Digite o Nome:"><br>
+          <input id="inputNome" type="text" placeholder="Digite o Nome:"><br>
         </label>
         <label id="sobrenome">
           <p>Sobrenome:</p><br>
-          <input id="inputCadastrar" type="text" placeholder="Digite o Sobrenome:"><br>
+          <input id="inputSobrenome" type="text" placeholder="Digite o Sobrenome:"><br>
         </label>
         <label id="telefone">
           <p>Telefone:</p><br>
-          <input id="inputCadastrar" type="text" placeholder="Digite o número de telefone"><br>
+          <input id="inputTelefone" type="tel" maxlength="15" onkeyup="handlePhone(event)"
+            placeholder="Digite o número de telefone:"><br>
         </label>
       </div>
-      <div class="depois">
+      <div class="coluna2">
         <label>
           <p>Email:</p><br>
-          <input id="inputCadastrar" type="number" placeholder="Informe o E-mail:"><br>
+          <input id="inputEmail" type="text" placeholder="Informe o E-mail:"><br>
         </label>
         <label>
           <p>Senha:</p><br>
-          <input id="inputCadastrar" type="password" placeholder="Informe a Senha:"><br>
+          <input id="inputSenha" type="password" placeholder="Informe a Senha:">
+          <i class="fa-solid fa-eye toggle-password" onclick="togglePassword()" id="toggleIcon"></i>
+          <br>
         </label>
-
         <label>
           <p>Cargo:</p><br>
-          <input id="inputCadastrar" type="text" placeholder="Informe o Cargo:"><br>
+          <select name="Cargo" id="permissao">
+            <option value="#" selected disabled>Selecione o Cargo</option>
+            <option value="Analista">Analista</option>
+            <option value="Gerente">Gerente</option>
+          </select>
+        </label>
+        <label>
           <button id="btnCancel" onclick="cancelar()">Cancelar</button>
-          <button id="btnSave">Salvar</button>
+          <button id="btnSave" onclick="salvar()">Salvar</button>
         </label>
       </div>
     </div>
   </div>
 
-
-
 </body>
 
 </html>
+
 <script>
-  function cancelar() {
-    window.location = "./dashboard_funcionario.html"
+
+function toggleDarkMode() {
+    const body = document.body;
+    const themeToggleIcon = document.getElementById('themeToggleIcon');
+
+
+    body.classList.toggle('dark-mode');
+
+
+    if (body.classList.contains('dark-mode')) {
+      themeToggleIcon.classList.remove('fa-moon');
+      themeToggleIcon.classList.add('fa-sun');
+    } else {
+      themeToggleIcon.classList.remove('fa-sun');
+      themeToggleIcon.classList.add('fa-moon');
+    }
   }
 
-  function carregarNome(){
-     let text = sessionStorage.NOME_USUARIO;
-    nome.innerHTML = "Olá, " + text;
+
+  function togglePassword() {
+    const passwordInput = document.getElementById("inputSenha");
+    const toggleIcon = document.getElementById("toggleIcon");
+
+    
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      toggleIcon.classList.remove("fa-eye");
+      toggleIcon.classList.add("fa-eye-slash"); 
+    } else {
+      passwordInput.type = "password";
+      toggleIcon.classList.remove("fa-eye-slash");
+      toggleIcon.classList.add("fa-eye"); 
+    }
   }
+
+  const handlePhone = (event) => {
+    let input = event.target
+    input.value = phoneMask(input.value)
+  }
+
+  const phoneMask = (value) => {
+    if (!value) return ""
+    value = value.replace(/\D/g, '')
+    value = value.replace(/(\d{2})(\d)/, "($1) $2")
+    value = value.replace(/(\d)(\d{4})$/, "$1-$2")
+    return value
+  }
+
+  function cancelar() {
+    if (confirm("Você deseja realmente sair?")) {
+      window.location = "./dashboard_funcionario.html"
+    }
+  }
+
+
+  function salvar() {
+    var nome = inputNome.value;
+    var sobrenome = inputSobrenome.value;
+    var telefone = inputTelefone.value;
+    var email = inputEmail.value;
+    var senha = inputSenha.value;
+    var cargo = permissao.value;
+    var empresa = sessionStorage.EMPRESA_USUARIO;
+    var textoFinal = "";
+
+    if (nome.length < 3) {
+      textoFinal += "Preencha o campo nome corretamente com mais de 3 dígitos.\n";
+    }
+    if (sobrenome.length < 2) {
+      textoFinal += "Preencha o campo sobrenome corretamente com mais de 2 dígitos.\n";
+    }
+    if (telefone.length < 9) {
+      textoFinal += "Preencha o campo telefone corretamente com 9 dígitos.\n";
+    }
+    if (email.indexOf('@') === -1 || email.indexOf('.') === -1 || email.length < 6) {
+      textoFinal += "Preencha o campo email corretamente.\n";
+    }
+    if (senha.length < 4) {
+      textoFinal += "Preencha o campo senha corretamente com mais de 4 dígitos.\n";
+    }
+    if (cargo === "#") {
+      textoFinal += "Selecione o cargo corretamente.\n";
+    }
+    if (textoFinal.length > 0) {
+      window.alert(textoFinal);
+    } else {
+      
+
+      fetch("/usuarios/cadastrarFuncionario", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+
+          nomeServer: nome,
+          sobrenomeServer: sobrenome,
+          telefoneServer: telefone,
+          emailServer: email,
+          senhaServer: senha,
+          permissaoServer: cargo,
+          empresaServer: empresa,
+        }),
+      })
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+
+            alert("Funcionário cadastrado com sucesso!")
+            window.location = "./dashboard_funcionario.html"
+
+          } else {
+            throw alert("Houve um erro ao tentar realizar o cadastro!");
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+        });
+
+    }
+  }
+
+  function carregarNome() {
+  const nomeSpan = document.getElementById("nome");
+  const nomeUsuario = sessionStorage.getItem("NOME_USUARIO") || "Usuário"; // fallback se NOME_USUARIO não estiver no sessionStorage
+
+  if (nomeSpan) {
+    nomeSpan.textContent = "Olá, " + nomeUsuario;
+  } else {
+    console.warn("Elemento com id 'nome' não foi encontrado.");
+  }
+}
 </script>

@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HardStock | Login</title>
-    <link rel="stylesheet" href='../css/style.css'>
+    <link rel="stylesheet" href='./css/style.css'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,200..1000&display=swap"
         rel="stylesheet">
 </head>
@@ -31,6 +32,7 @@
                 <label for="input_email">
                     <span>Senha</span>
                     <input type="password" id="input_senha">
+                    <i class="fa-solid fa-eye toggle-password" onclick="togglePassword()" id="toggleIcon"></i>
                     <p id="alertSenha"></p>
                 </label>
                 <div class="ctBtn">
@@ -45,6 +47,20 @@
 
 </html>
 <script>
+      function togglePassword() {
+    const passwordInput = document.getElementById("input_senha");
+    const toggleIcon = document.getElementById("toggleIcon");
+
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      toggleIcon.classList.remove("fa-eye");
+      toggleIcon.classList.add("fa-eye-slash"); 
+    } else {
+      passwordInput.type = "password";
+      toggleIcon.classList.remove("fa-eye-slash");
+      toggleIcon.classList.add("fa-eye"); 
+    }
+  }
 
     function verificar (value){
 
@@ -119,14 +135,14 @@
                     }, 1000);
                    } else if (permissao == 'Gerente' & status == 'Ativo'){
                     setTimeout(function () {
-                        window.location = "../html/dashboardGerentePt2/dashboard_mensal.html";
+                        window.location = "../html/dashboardGerente/dashboard_componentes.html";
                     }, 1000);
-                   } else if (permissao == 'Analista'){
+                   } else if (permissao == 'Analista' && status == 'Ativo'){
                     setTimeout(function () {
-                        window.location = "../html/dashboardAnalista/dashboard_tempoAnalista.html   ";
+                        window.location = "../html/dashboardAnalista/dashboard_tempoAnalista.html";
                     }, 1000); 
-                   } else if(status == 'Desativado'){
-                    alert("Não foi possível fazer login, sua conta foi desativada!")
+                   } else if(status == 'Inativo'){
+                    alert("Não foi possível fazer login, sua conta foi Inativada!")
                    }else {
                     alert("Houve um erro ao tentar realizar o login!");
                    }
