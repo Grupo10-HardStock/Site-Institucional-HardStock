@@ -140,7 +140,7 @@
     <section id="contato">
         <div class="container">
             <h2 class="Titulos">Contato</h2>
-            <form action="submit_form.php" method="POST">
+            <form>
                 <label for="name">Nome:</label>
                 <input type="text" id="inputNome" name="name" required>
 
@@ -150,7 +150,7 @@
                 <label for="message">Mensagem:</label>
                 <textarea id="inputMensagem" name="mensagem" required></textarea>
 
-                <button type="submit" class="btn-primary">Enviar</button>
+                <button type="submit" class="btn-primary" onclick="enviar()">Enviar</button>
             </form>
         </div>
     </section>
@@ -292,7 +292,7 @@
     
             alert("Mensagem enviada com sucesso! \n Agradecemos pela contribuição! S2");
             }
-            window.location = "http://localhost:3333/#contact"
+            window.location = "http://localhost:3345/#contact"
         
         }
 

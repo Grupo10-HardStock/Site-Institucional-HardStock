@@ -7,7 +7,7 @@ function buscarPorId(id) {
 }
 
 function listar() {
-  var instrucaoSql = `SELECT razao_social FROM empresa`;
+  var instrucaoSql = `select idEmpresa, razaoSocial from Empresa;`;
 
   return database.executar(instrucaoSql);
 }
@@ -19,14 +19,14 @@ function buscarPorCnpj(cnpj) {
 }
 
 function cadastrar(nome, cnpj, email) {
-  var instrucaoSql = `insert into Empresa (razaoSocial,cnpj,emailCorporativo) values ('${nome}', ${cnpj}, '${email}')`;
+  var instrucaoSql = `insert into Empresa (razaoSocial,cnpj,emailCorporativo) values ('${nome}', '${cnpj}', '${email}');`;
 
   return database.executar(instrucaoSql);
 }
 
 
 function cadastrarGerente(nome, sobrenome, telefone, email, senha, permissao, empresa) {
-  var instrucaoSql = `insert into Funcionario (nome, sobrenome, numeroTelefone, email, senha, permissao, fkEmpresa) values ('${nome}', '${sobrenome}', ${telefone}, '${email}', '${senha}', '${permissao}', '${empresa}')`;
+  var instrucaoSql = `insert into Funcionario (nome, sobrenome, numerotelefone, email, senha, permissao, fkEmpresa) values ('${nome}', '${sobrenome}','${telefone}', '${email}', '${senha}', '${permissao}', '${empresa}');`;
 
   return database.executar(instrucaoSql);
 }
@@ -108,7 +108,6 @@ GROUP BY tipomobdes;`
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
-
 
 function sitegrafico1() {
   console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n sitegrafico1(): ")

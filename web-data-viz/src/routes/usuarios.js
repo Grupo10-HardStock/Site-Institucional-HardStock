@@ -32,13 +32,16 @@ router.delete("/deletar/:idFuncionario", function (req, res) {
     usuarioController.deletar(req, res);
 });
 
-
 router.get("/verificarStatus/:idFuncionario", function (req, res) {
     usuarioController.verificarStatus(req, res);
 });
 
 router.post("/enviarMensagem", function (req, res) {
     usuarioController.enviarMensagem(req, res);
+});
+
+router.get("/buscarMensagens", function (req, res) {
+    usuarioController.buscarMensagens(req, res);
 });
 
 

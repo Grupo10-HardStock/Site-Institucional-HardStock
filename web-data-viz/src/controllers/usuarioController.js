@@ -263,6 +263,27 @@ function enviarMensagem(req, res) {
     }
 }
 
+function buscarMensagens(req, res) {
+
+    usuarioModel.buscarMensagens()
+    .then(resultadoAutenticar => {
+        console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+        console.log(`\nResultados: ${JSON.stringify(resultadoAutenticar)}`);
+
+        if (resultadoAutenticar.length > 0) {
+            res.status(200).json(resultadoAutenticar);
+        } else {
+            res.status(200).json([]);
+        }
+    })
+    .catch(erro => {
+        console.log(erro);
+        console.log("\nHouve um erro ao realizar o buscar mensagens! Erro: ", erro.sqlMessage);
+        res.status(500).json({ error: "Houve um erro ao realizar o buscar mensagens!", details: erro.sqlMessage });
+    });
+
+    }
+
 
 module.exports = {
     cadastrarFuncionario,
@@ -270,6 +291,7 @@ module.exports = {
     listarFuncionario,
     verificarStatus,
     enviarMensagem,
+    buscarMensagens,
     autenticar,
     cadastrar,
     deletar,
