@@ -108,6 +108,46 @@ function graficoStatus() {
     return database.executar(instrucaoSql);
 }
 
+function obterGraficoCpu(idServidor) {
+    var instrucaoSql = `SELECT * FROM dadosGraficoCpu WHERE fkServidor = ${idServidor} limit 10;`;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function obterGraficoRam(idServidor) {
+    var instrucaoSql = `select * from dadosGraficoRam WHERE fkServidor = ${idServidor} limit 10;`;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function obterGraficoRede(idServidor) {
+    var instrucaoSql = `select * from dadosGraficoRede where fkServidor = ${idServidor} limit 10;`;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function obterDadoDisco(idServidor) {
+    var instrucaoSql = `select * from dadosGraficoDisco where fkServidor = ${idServidor} limit 1;`;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function dados_kpi_cpu() {
+    var instrucaoSql = 'select * from capturasCpu;';
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+function dados_kpi_ram() {
+    var instrucaoSql = 'select * from capturasRam;';
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+function dados_kpi_rede() {
+    var instrucaoSql = 'select * from capturasRede;';
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarMediasMensais,
     buscarUltimasMedidas,
@@ -115,5 +155,12 @@ module.exports = {
     graficoRam,
     graficoDisco,
     graficocpu,
-    graficoStatus
+    graficoStatus,
+    dados_kpi_cpu,
+    dados_kpi_ram,
+    dados_kpi_rede,
+    obterGraficoCpu,
+    obterGraficoRam,
+    obterGraficoRede,
+    obterDadoDisco
 }

@@ -10,54 +10,9 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Dashboard Mensal | HardStock</title>
 
-  <style>
-    .centralizador {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-content: center;
-      align-items: center;
-      width: 100%;
-
-    }
-
-    #selecTempo {
-      text-align: center;
-      background-color: #232739;
-      color: white;
-      font-size: large;
-      padding: 0.5%;
-      border-radius: 50px;
-      width: 15%;
-    }
-
-    .graficos {
-      width: 65%;
-    }
-
-    .graficos1 {
-      display: flex;
-      flex-direction: initial;
-      width: 100%;
-    }
-
-    .graficos2 {
-      display: flex;
-      flex-direction: initial;
-      width: 100%;
-    }
-
-    .chart-container {
-      width: 100%;
-      margin: 20px auto;
-      align-items: center;
-
-    }
-  </style>
-
 </head>
 
-<body onload="carregarNome()">
+<body onload="exibirAlerta()">
   <label for="sidebar-ativo" class="sideBar-open">
     <i class="fa-duotone fa-solid fa-bars"></i>
   </label>
@@ -80,13 +35,13 @@
             <span id="nome" class="navItem-nome"></span>
           </p>
         </li>
-        <li><a href="./dashboard_mensalAnalista.html">
+        <li><a href="./dashboard_tempoAnalista.html">
             <i class="fa-solid fa-chart-line"></i>
             <span class="navItem">Tempo real</span>
           </a></li>
         <li><a href="./dashboard_mensalAnalista.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
-            <span class="navItem" style="color: #191b27;">Mensal</span>
+            <span class="navItem" style="color: #191b27;">Configuração de alerta</span>
           </a>
         </li>
 
@@ -97,7 +52,7 @@
               <span class="navItem">Suporte</span>
             </a></li>
           <li>
-             <a href="../../index.html">
+            <a href="../../index.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
               <span class="navItem">Sair</span>
             </a>
@@ -106,118 +61,180 @@
         </div>
       </ul>
   </nav>
-  </div>
 
-  <div class="centralizador">
-
-    <select name="tempo" id="selecTempo">
-      <option value="#" selected disabled> Selecione o Tempo</option>
-      <option value="1"> 1 mês</option>
-      <option value="3"> 3 meses</option>
-      <option value="6"> 6 meses</option>
-      <option value="12"> 12 meses</option>
-    </select>
-
-
-    <div class="graficos">
-      <div class="graficos1">
-
-        <div class="chart-container">
-          <b>Média CPU</b>
-          <canvas id="cpuChart"></canvas>
-        </div>
-        <div class="chart-container">
-          <b>Média RAM</b>
-          <canvas id="ramChart"></canvas>
-        </div>
+  <div class="content-alerta">
+    <div id="div_alerta" class="alerta-main">
+      <div class="adicionar-text">
+        <i class="fa-regular fa-bell"></i>
+        <span>Configuração de alerta</span>
+        <p>Configurações dos alertas e visualização dos alertas existentes</p>
       </div>
-      <div class="graficos2">
-        <div class="chart-container">
-          <b>Média Rede</b>
-          <canvas id="networkChart"></canvas>
+      <button onclick="adicionar(1)" class="alerta-add acao">Novo alerta <i id="icone"
+          class="fa-solid fa-plus"></i></button>
+      <div class="alerta-content">
+        <table class="alerta-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Alerta</th>
+              <th>Parâmetro</th>
+              <th>Opções...</th>
+            </tr>
+          </thead>
+          <tbody id="tabela_alerta">
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="div_adicionar" class="content-adicionar">
+      <div class="adicionar-text">
+        <i class="fa-regular fa-bell"></i>
+        <span>Configuração de alerta</span>
+        <p>Configurações dos alertas e visualização dos alertas existentes</p>
+      </div>
+      <div class="adicionar-main">
+        <i onclick="adicionar(1)" class="fa-solid fa-chevron-left acao adicionar"></i>
+        <div class="adicionar-input">
+          <input id="ipt_nomeAlerta" type="text" placeholder="Nome do alerta">
+          <input id="ipt_alerta" type="text" placeholder="Alerta">
+        </div>
+        <div class="adicionar-select">
+          <div class="custom-select">
+            <select id="parametro">
+              <option value="#" selected disabled>Parâmetro</option>
+              <option value="normal">Normal</option>
+              <option value="alerta">Alerta</option>
+              <option value="critico">Crititco</option>
+              <option value="severo">Severo</option>
+            </select>
+            <i class="fa-solid fa-chevron-down seta"></i>
+          </div>
+
+          <div class="custom-select">
+            <select id="componente">
+              <option value="#" selected disabled>Componente</option>
+              <option value="rede">Placa de rede</option>
+              <option value="ram">Memoria RAM</option>
+              <option value="disco">Disco</option>
+              <option value="cpu">CPU</option>
+            </select>
+            <i class="fa-solid fa-chevron-down seta"></i>
+          </div>
+        </div>
+        <div class="adicionar-btn">
+          <button class="btn-cancelar">Cancelar alerta</button>
+          <button onclick="salvarAlerta()" class="btn-salvar">Salvar alerta</button>
         </div>
 
-        <div class="chart-container">
-          <b>Média Disco</b>
-          <canvas id="diskChart"></canvas>
-        </div>
       </div>
     </div>
   </div>
 
+
 </body>
 
 </html>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
 <script>
-  const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
-  const cpuData = [40, 45, 50, 55, 60, 65, 70, 75, 68, 64, 58, 52];
-  const ramData = [50, 55, 60, 62, 65, 67, 70, 72, 68, 66, 63, 58];
-  const networkData = [200, 210, 220, 230, 240, 250, 260, 255, 245, 235, 225, 215];
-  const diskData = [60, 62, 65, 67, 70, 72, 75, 77, 73, 70, 68, 64];
-
-  function createChart(ctx, label, data, color) {
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: months,
-        datasets: [{
-          label: label,
-          data: data,
-          borderColor: color,
-          fill: false,
-          tension: 0.1
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: true
-          }
-        },
-        scales: {
-          x: {
-            grid: {
-              display: false
-            }
-          },
-          y: {
-            beginAtZero: true,
-            grid: {
-              borderDash: [8, 4],
-              color: 'rgba(0, 0, 0, 0.1)',
-            },
-            title: {
-              display: true,
-              text: 'Uso (%) ou Mbps'
-            }
-          }
-        }
-      }
-    });
+  function exibirAlerta() {
+    fetch("/avisos/listarSelect", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then(json => {
+          json.forEach(tabela => {
+            console.log(tabela);
+            tabela_alerta.innerHTML += `
+            <tr>
+              <td>${tabela.idAlerta}</td>
+              <td>${tabela.nomeAlerta}</td>
+              <td>${tabela.parametro}</td>
+              <td><i onclick="editar()" id="editar" class="fa-solid fa-pen-to-square"></i><i onclick="deletar()"
+                  id="excluir" class="fa-solid fa-trash color-btn"></i></td>
+            </tr>
+          `
+          });
+        });
+      })
+      .catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+      });
   }
 
+  function editar() {
 
-  const cpuCtx = document.getElementById('cpuChart').getContext('2d');
-  createChart(cpuCtx, 'Média de Uso de CPU (%)', cpuData, 'red');
+    fetch(`/avisos/editarAlerta?idServidor=${Servidor}`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            
+          });
+        } else {
+          console.error('Nenhum dado encontrado para colocar na kpi de REDE.');
+          alert('Nenhum dado encontrado para colocar na kpi de REDE.');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ Kpi CPU: ${error.message}`);
+      });
+  }
 
-  const ramCtx = document.getElementById('ramChart').getContext('2d');
-  createChart(ramCtx, 'Média de Uso de RAM (%)', ramData, 'blue');
+  function deletar() {
+    alert("Deletandoo")
+  }
 
-  const networkCtx = document.getElementById('networkChart').getContext('2d');
-  createChart(networkCtx, 'Média de Uso de Rede (Mbps)', networkData, 'green');
+  function adicionar(sentido) {
+    if (sentido == 1) {
+      div_alerta.style.display = 'none'
+      div_adicionar.style.display = 'flex'
+    } else if (sentido == 2) {
+      div_alerta.style.display = 'flex'
+      div_adicionar.style.display = 'none'
+    }
+  }
 
-  const diskCtx = document.getElementById('diskChart').getContext('2d');
-  createChart(diskCtx, 'Média de Uso de Disco (%)', diskData, 'grey');
+  function salvarAlerta() {
+    let nomeAlerta = document.getElementById("ipt_nomeAlerta").value;
+    let alerta = document.getElementById("ipt_alerta").value;
+    let parametro = document.getElementById("parametro").value;
+    let componente = document.getElementById("componente").value;
+    let fkServidor = localStorage.getItem('ID_SERVIDOR');
 
-  function carregarNome(){
-     let text = sessionStorage.NOME_USUARIO;
+
+    fetch(`/avisos/cadastrar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nomeAlerta: nomeAlerta,
+        alerta: alerta,
+        parametro: parametro,
+        componente: componente,
+        fkServidor: fkServidor
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+
+          alert("Cadastro de alerta realizado com sucesso!");
+
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+    return false;
+  }
+
+  function carregarNome() {
+    let text = sessionStorage.NOME_USUARIO;
     nome.innerHTML = "Olá, " + text;
   }
 </script>
-

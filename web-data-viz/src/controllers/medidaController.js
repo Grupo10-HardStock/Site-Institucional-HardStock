@@ -136,6 +136,121 @@ function graficoRede( req , res) {
     });
   }
   
+  function obterGraficoCpu(req, res) {
+    const idServidor = req.query.idServidor;
+    console.log(`Pegando dados em porcentagem de uso do CPU`);
+    medidaModel.obterGraficoCpu(idServidor).then(function(resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+function obterGraficoRam(req, res) {
+    const idServidor = req.query.idServidor;
+    console.log(`Pegando dados em porcentagem de uso de RAM`);
+    medidaModel.obterGraficoRam(idServidor).then(function(resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function obterDadoDisco(req, res) {
+    const idServidor = req.query.idServidor;
+    console.log(`Pegando dados do disco`);
+    medidaModel.obterDadoDisco(idServidor).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function obterGraficoRede(req, res) {
+    const idServidor = req.query.idServidor;
+    console.log(`Pegando dados em porcentagem de uso de Rede`);
+    medidaModel.obterGraficoRede(idServidor).then(function(resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+function dados_kpi_cpu(req, res) {
+
+    console.log(`Pegando dados em porcentagem de uso do CPU`);
+    
+    medidaModel.dados_kpi_cpu().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function dados_kpi_ram(req, res) {
+
+    console.log(`Pegando dados em porcentagem de uso de RAM`);
+
+    medidaModel.dados_kpi_ram().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function dados_kpi_rede(req, res) {
+    
+    console.log(`Pegando dados em porcentagem de uso do CPU`);
+    
+    medidaModel.dados_kpi_rede().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 
 
 module.exports = {
@@ -145,5 +260,12 @@ module.exports = {
     graficoRam,
     graficoDisco,
     graficocpu,
-    graficoStatus
+    graficoStatus,
+    dados_kpi_cpu,
+    dados_kpi_ram,
+    dados_kpi_rede,
+    obterGraficoCpu,
+    obterGraficoRam,
+    obterGraficoRede,
+    obterDadoDisco
 }

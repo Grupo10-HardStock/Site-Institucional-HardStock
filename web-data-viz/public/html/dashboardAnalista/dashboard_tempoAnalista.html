@@ -8,11 +8,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/highcharts-more.js"></script>
+  <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <title>Dashboard Mensal | HardStock</title>
-
 </head>
 
-<body onload="carregarNome()">
+<body>
   <label for="sidebar-ativo" class="sideBar-open">
     <i class="fa-duotone fa-solid fa-bars"></i>
   </label>
@@ -35,23 +41,22 @@
             <span id="nome" class="navItem-nome"></span>
           </p>
         </li>
-        <li><a href="./dashboard_mensalAnalista.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
+        <li><a href="./dashboard_tempoAnalista.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <i class="fa-solid fa-chart-line"></i>
             <span class="navItem" style="color: #191b27;">Tempo real</span>
           </a></li>
         <li><a href="./dashboard_mensalAnalista.html">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
-            <span class="navItem">Mensal</span>
+            <span class="navItem">Configuração de alerta</span>
           </a>
         </li>
         <div class="sair">
-          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4
-" target="_blank">
+          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4target=" _blank">
               <i class="fa-solid fa-headset"></i>
               <span class="navItem">Suporte</span>
             </a></li>
           <li>
-             <a href="../../index.html">
+            <a href="../../index.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
               <span class="navItem">Sair</span>
             </a>
@@ -61,188 +66,552 @@
       </ul>
   </nav>
 
-  <div class="alinhamento">
-    <div class="monitor-container">
-      
-      <div class="alert" id="alerta-net">
-          <h3>Rede</h3>
-          <p>Desempenho: <span class="alertas" id="ConRede"> 130mbps</span></p>
-          <p>Nível atual: <span class="alertas"  id="rede">Normal</span></p>
+  <div class="geral">
+    <div class="content top">
+      <div class="content-kpi">
+        <div class="kpi">
+          <img src="./assets/img/Cpu.png">
+          <h2>CPU</h2>
+          <span id="porcent_cpu"></span>
+          <p>Porcentagem de uso dos dados de cpu</p>
+        </div>
+        <div class="kpi">
+          <img id="img" src="./assets/img/rede.png">
+          <h2>RAM</h2>
+          <span id="porcent_ram"></span>
+          <p>Quantidade utilizada da memória ram</p>
+        </div>
+        <div class="kpi">
+          <img src="./assets/img/Wifi.png">
+          <h2>REDE</h2>
+          <span id="porcent_rede"></span>
+          <p>Quantidade de mbps enviado da rede</p>
+        </div>
+        <div class="info"></div>
+        <div class="content-disco">
+          <div class="disco-item">
+            <figure class="highcharts-figure">
+              <div id="container-speed" class="chart-container"></div>
+            </figure>
+          </div>
+        </div>
       </div>
-      <div class="alert" id="alerta-ram">
-          <h3>RAM</h3>
-          <p>Desempenho: <span class="alertas" id="ConRam">0%</span></p>
-          <p>Nível atual: <span class="alertas" id="ram">Normal</span></p>
+
+
+    </div>
+    <div class="content-1 donw">
+      <div class="btn">
+        <button onclick="select(1)">Selecionar servidores</button>
+        <button style="font-size: 14px;"><img src="./assets/img/config.png"> Configuração de alerta</button>
       </div>
-      <div class="alert" id="alerta-disco">
-          <h3>Disco</h3>
-          <p>Desempenho: <span class="alertas" id="ConDisco">0%</span></p>
-          <p>Nível atual: <span class="alertas" id="disco">Normal</span></p>
-      </div>
-      <div class="alert" id="alerta-cpu">
-          <h3>CPU</h3>
-          <p>Desempenho: <span class="alertas" id="rede">0%</span></p>
-          <p>Nível atual: <span class="alertas" id="cpu">Normal</span></p>
+      <div class="cont-grafico">
+        <div class="content-grafico">
+          <div id="chart"></div>
+        </div>
+        <div class="content-grafico">
+          <div id="chart_ram"></div>
+        </div>
+        <div style="margin-right: 15px;" class="content-grafico">
+          <div id="chart_rede"></div>
+        </div>
       </div>
     </div>
-  
-    <div class="opcoes-btn">
-      <select>
-        <option disabled selected>Selecione um Servidor</option>
-        <option value="1">Servidor 1</option>
-        <option value="2">Servidor 2</option>
-        <option value="3">Servidor 3</option>
-        <option value="4">Servidor 4</option>
-      </select>
-    </div>
-    <main>
-      <div class="card">
-        <canvas id="RamChart"></canvas>
-      </div>
-      <div class="card">
-        <canvas id="DiscoChart"></canvas>
-      </div>
-      <div class="card">
-        <canvas id="CPUChart"></canvas>
-      </div>
-      <div class="card">
-        <canvas id="RedeChart"></canvas>
-      </div>
-    </main>
   </div>
+
+  <div id="fundoBlur" class="fundo-blur"></div>
+  <div id="servidor" class="card-servidores box">
+    <div class="title">
+      <img class="logo-servidor" src="./assets/img/servidor.png" alt="">
+      <div class="titlE-text">
+        <span>SERVIDORES REGISTRADOS</span>
+        <p>Lista dos servidores registrados</p>
+      </div>
+      <img class="exit" onclick="select(2)" src="./assets/img/cancel.png" alt="">
+    </div>
+    <span class="color">Selecione um servidor para exibir os dados:</span>
+    <div class="select-server">
+      <div class="select-title">
+        <span>ID</span>
+        <span>Nome do servidor</span>
+        <span>Estado</span>
+      </div>
+      <div id="select_server" class="select-body">
+
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 
-  
-function simulacao() {
-    const alertaNet = document.getElementById('alerta-net');
-    const alertaRam = document.getElementById('alerta-ram');
-    const alertaDisco = document.getElementById('alerta-disco');
-    const alertaCpu = document.getElementById('alerta-cpu');
+  document.addEventListener('DOMContentLoaded', function () {
+    obterKPI_cpu();
+    obterKPI_ram();
+    obterKPI_rede();
 
-    alertaNet.className = 'alert perigo'; 
-    document.getElementById('rede').textContent = 'Alerta';
-    document.getElementById('ConRede').textContent = '85mbps';
+    const Servidor = localStorage.getItem('ID_SERVIDOR');
+    exibirDados(Servidor);
+  })
 
-    alertaRam.className = 'alert critico'; 
-    document.getElementById('ram').textContent = 'Crítico';
-    document.getElementById('ConRam').textContent = '75%';
+  const fundo = document.getElementById('fundoBlur');
+  const servidor = document.getElementById('servidor');
 
-    alertaDisco.className = 'alert severo'; 
-    document.getElementById('disco').textContent = 'Severo';
-    document.getElementById('ConDisco').textContent = '98%';
+  function select(value) {
 
-    cpuAlert.className = 'alert normal'; 
-    document.getElementById('cpu').textContent = 'Normal';
-}
-setTimeout(simulacao, 8000);
-
-  // Gráfico de RAM
-  const ramCtx = document.getElementById('RamChart').getContext('2d');
-  new Chart(ramCtx, {
-    type: 'line',
-    data: {
-      labels: ['1', '2', '3', '4', '5', '6'],
-      datasets: [{
-        label: 'Uso de RAM',
-        data: [12, 19, 3, 5, 2, 3],
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 2,
-        fill: false
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: false
-        }
-      }
+    if (value == 1) {
+      obterDadosSelect()
+      fundo.style.display = 'flex';
+      servidor.style.display = 'flex';
     }
-  });
-
-  // Gráfico de Disco
-  const discoCtx = document.getElementById('DiscoChart').getContext('2d');
-  new Chart(discoCtx, {
-    type: 'bar',
-    data: {
-      labels: ['1', '2', '3', '4', '5', '6'],
-      datasets: [{
-        label: 'Uso de Disco',
-        data: [20, 30, 40, 50, 60, 70],
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        borderColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
+    if (value == 2) {
+      fundo.style.display = 'none';
+      servidor.style.display = 'none';
     }
-  });
-
-  // Gráfico de CPU
-  const cpuCtx = document.getElementById('CPUChart').getContext('2d');
-  new Chart(cpuCtx, {
-    type: 'line',
-    data: {
-      labels: ['1', '2', '3', '4', '5', '6'],
-      datasets: [{
-        label: 'Uso de CPU',
-        data: [10, 15, 8, 12, 7, 9],
-        borderColor: 'rgba(54, 162, 235, 1)',
-        borderWidth: 2,
-        fill: false
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: false
-        }
-      }
-    }
-  });
-
-  // Gráfico de Rede
-  const redeCtx = document.getElementById('RedeChart').getContext('2d');
-  new Chart(redeCtx, {
-    type: 'line',
-    data: {
-      labels: ['Download', 'Upload'],
-      datasets: [{
-        label: 'Uso de Rede',
-        data: [70, 30, 30, 30, 30, 30],
-        backgroundColor: [
-          'red',
-          'red'
-        ],
-        borderColor: [
-          'red',
-          'red'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false
-    }
-  });
-  
-  function carregarNome(){
-    let teste = sessionStorage.NOME_USUARIO;
-    nome.innerHTML = "Olá, " + teste;
   }
+
+  function obterKPI_cpu() {
+    fetch(`/medidas/dados_kpi_cpu/`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            porcent_cpu.innerHTML = `${resposta[0].valor}%`;
+          });
+        } else {
+          console.error('Nenhum dado encontrado para colocar na kpi de CPU.');
+          alert('Nenhum dado encontrado para colocar na kpi de CPU.');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ Kpi CPU: ${error.message}`);
+      });
+  }
+
+  function obterKPI_ram() {
+    fetch(`/medidas/dados_kpi_ram/`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            porcent_ram.innerHTML = `${resposta[0].valor}%`;
+          });
+        } else {
+          console.error('Nenhum dado encontrado para colocar na kpi de RAM.');
+          alert('Nenhum dado encontrado para colocar na kpi de RAM.');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ Kpi CPU: ${error.message}`);
+      });
+  }
+  function obterKPI_rede() {
+    fetch(`/medidas/dados_kpi_rede/`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            porcent_rede.innerHTML = `${resposta[0].valor}mbps`;
+          });
+        } else {
+          console.error('Nenhum dado encontrado para colocar na kpi de REDE.');
+          alert('Nenhum dado encontrado para colocar na kpi de REDE.');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ Kpi CPU: ${error.message}`);
+      });
+  }
+
+  function obterDadosSelect() {
+    fetch("/empresas/listarSelect", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then(json => {
+          select_server.innerHTML = '';
+          json.forEach(servidor => {
+            select_server.innerHTML += `
+        <div onclick="selectDados(${servidor.idServidor})" class="select-item">
+        <span>${servidor.idServidor}</span>
+        <span>${servidor.nome}</span>
+        <span>${servidor.estado}</span>
+        </div>`;
+        });
+        });
+      })
+      .catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+      });
+  }
+
+  function selectDados(value) {
+    localStorage.setItem('ID_SERVIDOR', value);
+    fundo.style.display = 'none';
+    servidor.style.display = 'none';
+    alert(value);
+    exibirDados();
+  }
+
+  function exibirDados() {
+
+    const Servidor = localStorage.getItem('ID_SERVIDOR');
+
+    fetch(`/medidas/obterGraficoCpu?idServidor=${Servidor}`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            plotarGraficoCpu(resposta);
+          });
+        } else {
+          console.error('Nenhum dado encontrado para colocar na kpi de REDE.');
+          alert('Nenhum dado encontrado para colocar na kpi de REDE.');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ Kpi CPU: ${error.message}`);
+      });
+
+    fetch(`/medidas/obterGraficoRam?idServidor=${Servidor}`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            plotarGraficoRam(resposta);
+          });
+        } else {
+          console.error('Nenhum dado encontrado para colocar na kpi de REDE.');
+          alert('Nenhum dado encontrado para colocar na kpi de REDE.');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ Kpi CPU: ${error.message}`);
+      });
+
+    fetch(`/medidas/obterGraficoRede?idServidor=${Servidor}`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            plotarGraficoRede(resposta);
+          });
+        } else {
+          console.error('Nenhum dado encontrado para colocar na kpi de REDE.');
+          alert('Nenhum dado encontrado para colocar na kpi de REDE.');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ Kpi CPU: ${error.message}`);
+      });
+
+    fetch(`/medidas/obterDadoDisco?idServidor=${Servidor}`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+            plotarDadosDisco(resposta);
+          });
+        } else {
+          console.error('Nenhum dado encontrado para colocar na kpi de REDE.');
+          alert('Nenhum dado encontrado para colocar na kpi de REDE.');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ Kpi CPU: ${error.message}`);
+      });
+
+  }
+
+
+  function plotarDadosDisco(resposta) {
+
+    const gaugeOptions = {
+      chart: {
+        type: 'solidgauge'
+      },
+
+      title: 'Gráfico DISCO',
+
+      pane: {
+        center: ['50%', '85%'],
+        size: '140%',
+        startAngle: -90,
+        endAngle: 90,
+        background: {
+          backgroundColor:
+            Highcharts.defaultOptions.legend.backgroundColor || '#fafafa',
+          borderRadius: 5,
+          innerRadius: '60%',
+          outerRadius: '100%',
+          shape: 'arc'
+        }
+      },
+
+      exporting: {
+        enabled: false
+      },
+
+      tooltip: {
+        enabled: false
+      },
+
+      // the value axis
+      yAxis: {
+        stops: [
+          [0.1, '#55BF3B'], // green
+          [0.5, '#DDDF0D'], // yellow
+          [0.9, '#DF5353'] // red
+        ],
+        lineWidth: 0,
+        tickWidth: 0,
+        minorTickInterval: null,
+        tickAmount: 2,
+        title: {
+          y: -70
+        },
+        labels: {
+          y: 16
+        }
+      },
+
+      plotOptions: {
+        solidgauge: {
+          borderRadius: 3,
+          dataLabels: {
+            y: 5,
+            borderWidth: 0,
+            useHTML: true
+          }
+        }
+      }
+    };
+
+    // The speed gauge
+    chartSpeed = Highcharts.chart(
+      'container-speed', Highcharts.merge(gaugeOptions, {
+        yAxis: {
+          min: 0,
+          max: resposta[0].usoDiscoTotal,
+          title: {
+            text: 'Gráfico CPU'
+          }
+        },
+
+        credits: {
+          enabled: false
+        },
+
+        series: [{
+          name: 'Quatidade de Uso',
+          data: [resposta[0].usoDiscoUsado],
+          dataLabels: {
+            format:
+              '<div style="text-align:center">' +
+              '<span style="font-size:25px">{y}</span><br/>' +
+              '<span style="font-size:12px;opacity:0.4">Gib</span>' +
+              '</div>'
+          },
+          tooltip: {
+            valueSuffix: 'Gib'
+          }
+        }]
+
+      }));
+  }
+
+
+  function plotarGraficoCpu(dados) {
+    var options = {
+      series: [{
+        name: "Velocidade da CPU",
+        data: dados.map(dado => dado.usoCpu),
+      }],
+      chart: {
+        type: 'area',
+        height: 268,
+        width: 430,
+        zoom: {
+          enabled: false
+        },
+        toolbar: {
+          show: false,
+        }
+      },
+      toolbar: {
+        show: false
+      },
+      dataLabels: {
+        enabled: false,
+        style: {
+          fontSize: '10px'
+        }
+      },
+      stroke: {
+        curve: 'smooth'
+      },
+
+      title: {
+        text: 'Gráfico de dados CPU',
+        align: 'center'
+      },
+      labels: dados.map(dado => dado.dataHora),
+      xaxis: {
+        type: 'category',
+        categories: dados.map(dado => {
+          const data = new Date(dado.dataHora);
+          const horas = data.getHours().toString().padStart(2, '0');
+          const minutos = data.getMinutes().toString().padStart(2, '0');
+          return `${horas}:${minutos}`;
+        })
+      },
+      yaxis: {
+        opposite: false,
+        min: 0,
+      },
+      legend: {
+        horizontalAlign: 'center'
+      }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+  }
+
+  function plotarGraficoRam(dados) {
+    var options = {
+      series: [{
+        name: 'RAM',
+        data: dados.map(dado => dado.numtheads)
+      }],
+      chart: {
+        type: 'area',
+        stacked: false,
+        height: 268,
+        width: 430,
+        zoom: {
+          type: 'x',
+          enabled: true,
+          autoScaleYaxis: true
+        },
+        toolbar: {
+          show: false,
+          tools: {
+            download: true,
+            selection: false,
+            zoom: false,
+            zoomin: false,
+            zoomout: false,
+            pan: false,
+            reset: false,
+            customIcons: []
+          }
+        }
+      },
+      colors: ['#cae91e'],
+      dataLabels: {
+        enabled: false
+      },
+      markers: {
+        size: 0
+      },
+      title: {
+        text: 'Gráfico de dados RAM',
+        align: 'center'
+      },
+      fill: {
+        type: 'gradient',
+        gradient: {
+          shadeIntensity: 1,
+          inverseColors: false,
+          opacityFrom: 0.5,
+          opacityTo: 0,
+          stops: [0, 90, 100]
+        }
+      },
+      yaxis: {
+        labels: {
+          formatter: function (val) {
+            return val.toFixed(0) + "%"; // Exibe valores com 1 casa decimal
+          }
+        },
+        title: {
+          text: 'Uso de RAM (%)'
+        }
+      },
+      xaxis: {
+        type: 'category',
+        categories: dados.map(dado => dado.porcMemoriaUsada),
+      },
+      tooltip: {
+        shared: false,
+        y: {
+          formatter: function (val) {
+            return val.toFixed(0) + "%"; // Exibe valores com 1 casa decimal
+          }
+        }
+      }
+    };
+
+    var chart_ram = new ApexCharts(document.querySelector("#chart_ram"), options);
+    chart_ram.render();
+  }
+
+
+  function plotarGraficoRede(dados) {
+
+    var options = {
+      series: [{
+        name: 'bytes enviados',
+        data: dados.map(dado => dado.bytesEnviados)
+      }, {
+        name: 'bytes recebidos',
+        data: dados.map(dado => dado.bytesRecebidos)
+      }],
+      chart: {
+        height: 268,
+        width: 420,
+        type: 'area',
+        toolbar: {
+          show: false, // Mostra a barra de ferramentas
+          tools: {
+            download: true, // Desativa o download
+            selection: false, // Desativa a seleção
+            zoom: false, // Ativa o zoom
+            zoomin: false, // Desativa o zoom in
+            zoomout: false, // Desativa o zoom out
+            pan: false, // Desativa o pan
+            reset: false, // Desativa o reset
+            customIcons: [] // Nenhum ícone personalizado
+          }
+        }
+      },
+      title: {
+        text: 'Gráfico de dados REDE',
+        align: 'center'
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: 'smooth'
+      },
+      xaxis: {
+        type: 'datetime',
+        categories: dados.map(dado => dado.dataHora)
+      },
+      tooltip: {
+        x: {
+          format: 'dd/MM/yy HH:mm'
+        },
+      },
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart_rede"), options);
+    chart.render();
+  }
+
+
 </script>
