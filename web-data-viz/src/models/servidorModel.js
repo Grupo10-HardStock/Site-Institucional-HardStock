@@ -24,11 +24,20 @@ function cadastrarServidor(nome, rede, ram, disco, cpu, empresa) {
         });
 }
 
-function deletar(idServidor) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idServidor);
+function inativar(idServidor) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function inativar():", idServidor);
     var instrucaoSql = `
-        DELETE FROM servidor WHERE idServidor = ${idServidor};
+        update servidor set estado = "Inativo" WHERE idServidor = ${idServidor};
     `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function verificarStatusServidor(idServidor) {
+    console.log("Verificando status dos servidor...");
+    
+    var instrucaoSql = ` SELECT estado FROM Servidor where idServidor = ${idServidor}; `;
+
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
@@ -81,8 +90,9 @@ function listar() {
 
 
 module.exports = {
+    verificarStatusServidor,
     cadastrarServidor,
-    deletar,
+    inativar,
     editar,
     listar,
     porId

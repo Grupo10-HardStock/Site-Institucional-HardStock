@@ -28,8 +28,8 @@ router.put("/editar/:idFuncionario", function (req, res) {
     usuarioController.editar(req, res);
 });
 
-router.delete("/deletar/:idFuncionario", function (req, res) {
-    usuarioController.deletar(req, res);
+router.delete("/inativar/:idFuncionario", function (req, res) {
+    usuarioController.inativar(req, res);
 });
 
 router.get("/verificarStatus/:idFuncionario", function (req, res) {

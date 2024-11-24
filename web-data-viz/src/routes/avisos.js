@@ -16,12 +16,12 @@ router.get("/editarAlerta/", function (req, res) {
     avisoController.editarAlerta(req, res);
 });
 
-router.put("/bala/", function (req, res) {
-    avisoController.editarAlerta(req, res);
-});
+// router.put("/bala/", function (req, res) {
+//     avisoController.editarAlerta(req, res);
+// });
 
-router.delete("/deletar/:idAviso", function (req, res) {
-    avisoController.deletar(req, res);
+router.delete("/inativar/:idAviso", function (req, res) {
+    avisoController.inativar(req, res);
 });
 
 module.exports = router;

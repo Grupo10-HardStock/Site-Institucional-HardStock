@@ -38,22 +38,22 @@
           </p>
         </li>
         <li><a href="../dashboardGerente/dashboard_tempo.html">
-          <i class="fa-solid fa-chart-line"></i>
-          <span class="navItem">Relatório</span>
-        </a></li>
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="navItem">Relatório</span>
+          </a></li>
         <li><a href="../dashboardGerente/dashboard_componentes.html">
-          <i class="fa-solid fa-table-list"></i>
-          <span class="navItem">Servidores</span>
-        </a></li>
+            <i class="fa-solid fa-table-list"></i>
+            <span class="navItem">Servidores</span>
+          </a></li>
         <li><a href="../dashboardGerente/dashboard_mensal.html">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
             <span class="navItem">Mensal</span>
           </a>
         </li>
         <li><a href="../dashboardGerente/dashboard_funcionario.html"
-          style="background: rgba(199, 208, 216, 1);color: #191b27;">
+            style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <i class="fa-solid fa-user-plus"></i>
-            <span class="navItem"  style="color: #191b27;">Funcionário</span>
+            <span class="navItem" style="color: #191b27;">Funcionário</span>
           </a>
         </li>
         <li>
@@ -127,9 +127,15 @@
 
   var fkEmpresa = sessionStorage.EMPRESA_USUARIO;
 
-  function carregarNome() {
-    let text = sessionStorage.NOME_USUARIO;
-    nome.innerHTML = "Olá, " + text;
+ function carregarNome() {
+    const nomeSpan = document.getElementById("nome");
+    const nomeUsuario = sessionStorage.getItem("NOME_USUARIO") || "Usuário"; // fallback se NOME_USUARIO não estiver no sessionStorage
+
+    if (nomeSpan) {
+      nomeSpan.textContent = "Olá, " + nomeUsuario;
+    } else {
+      console.warn("Elemento com id 'nome' não foi encontrado.");
+    }
   }
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -176,7 +182,7 @@
       </button>
       <input id="checkbox-${funcionario.idFuncionario}" class="checkbox ${estadoCheckbox}" 
              type="checkbox" ${isChecked} 
-             onclick="deletar(${funcionario.idFuncionario})">
+             onclick="inativar(${funcionario.idFuncionario})">
     </td>
   `;
 
@@ -201,7 +207,7 @@
 
 
 
-  function deletar(idFuncionario) {
+  function inativar(idFuncionario) {
     fetch(`/usuarios/verificarStatus/${idFuncionario}`, {
       method: "GET",
       headers: {
@@ -214,7 +220,7 @@
         if (funcionario[0].estado === "Ativo") {
           console.log("Criar função desativar perfil escolhido - ID " + idFuncionario);
 
-          fetch(`/usuarios/deletar/${idFuncionario}`, {
+          fetch(`/usuarios/inativar/${idFuncionario}`, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json"

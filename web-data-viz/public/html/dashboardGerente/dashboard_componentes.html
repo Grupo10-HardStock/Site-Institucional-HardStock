@@ -15,7 +15,8 @@
     .alinhamento {
       display: flex;
       flex-direction: column;
-      margin-top: 5%;
+      margin-top: 2%;
+      height: auto;
       width: 80%;
     }
 
@@ -80,14 +81,6 @@
       color: rgb(0, 0, 0);
       padding: 12px;
     }
-    .content-top{
-      position: sticky;
-      z-index: 1;
-    }
-
-    .corpo-table{
-      overflow: scroll;
-    }
 
     td {
       padding: 10px;
@@ -133,6 +126,75 @@
     #excluir {
       color: #d32f2f;
     }
+
+
+    .dark-mode {
+      background-color: #282c41;
+      color: #f0f0f0;
+    }
+
+    .dark-mode h1 {
+      color: white;
+    }
+
+    .dark-mode #add a {
+      background-color: #ffffff;
+      color: rgb(31, 27, 70);
+    }
+
+    .dark-mode table {
+      background-color: #ffffff;
+      color: #191b27;
+    }
+
+    .dark-mode #tabelaAnalista {
+      background-color: #ffffff;
+      color: #191b27;
+    }
+
+    .checkbox {
+      width: 40px;
+      height: 20px;
+      margin-top: 13%;
+      border-radius: 20px;
+      position: relative;
+      cursor: pointer;
+      appearance: none;
+      outline: none;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    /* Círculo interno */
+    .checkbox::before {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background-color: white;
+      top: 1px;
+      left: 1px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    /* Checkbox ativo (verde) */
+    .checkbox.ativo {
+      background-color: green;
+    }
+
+    .checkbox.ativo::before {
+      transform: translateX(20px);
+    }
+
+    /* Checkbox inativo (vermelho) */
+    .checkbox.inativo {
+      background-color: red;
+    }
+
+    /* Hover no checkbox */
+    .checkbox:hover {
+      filter: brightness(0.9);
+    }
   </style>
 
 </head>
@@ -161,29 +223,33 @@
             </span>
           </p>
         </li>
-        
-        <li><a href="../dashboardGerente/dashboard_tempo.html">
-            <i class="fa-solid fa-magnifying-glass-chart"></i>
-            <span class="navItem">Relatórios</span>
-          </a></li>
 
+        <li><a href="../dashboardGerente/dashboard_tempo.html">
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="navItem">Relatório</span>
+          </a></li>
         <li><a href="../dashboardGerente/dashboard_componentes.html"
             style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <i class="fa-solid fa-table-list"></i>
             <span class="navItem" style="color: #191b27;">Servidores</span>
           </a></li>
-          <li><a href="../dashboardGerente/dashboard_mensal.html">
+        <li><a href="../dashboardGerente/dashboard_mensal.html">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
             <span class="navItem">Mensal</span>
           </a>
         </li>
-          <li><a href="../dashboardGerente/dashboard_funcionario.html">
+        <li><a href="../dashboardGerente/dashboard_funcionario.html">
             <i class="fa-solid fa-user-plus"></i>
             <span class="navItem">Funcionário</span>
           </a>
         </li>
+        <li>
+          <a id="btnIcone" onclick="toggleDarkMode()">
+            <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon"></i>
+            <span class="navItem">Mudar Tema</span>
+          </a>
+        </li>
 
-        
 
         <div class="sair">
           <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4" target="_blank">
@@ -227,6 +293,23 @@
 </html>
 
 <script>
+  function toggleDarkMode() {
+    const body = document.body;
+    const themeToggleIcon = document.getElementById('themeToggleIcon');
+
+
+    body.classList.toggle('dark-mode');
+
+
+    if (body.classList.contains('dark-mode')) {
+      themeToggleIcon.classList.remove('fa-moon');
+      themeToggleIcon.classList.add('fa-sun');
+    } else {
+      themeToggleIcon.classList.remove('fa-sun');
+      themeToggleIcon.classList.add('fa-moon');
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     const fkEmpresa = 1;
 
@@ -237,21 +320,21 @@
         "Content-Type": "application/json"
       }
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Erro na requisição! Status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      const userTable = document.getElementById("userTable");
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Erro na requisição! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        const userTable = document.getElementById("userTable");
 
-      if (data.length === 0) {
-        userTable.innerHTML = "<p>Nenhum servidor encontrado.</p>";
-        return;
-      }
+        if (data.length === 0) {
+          userTable.innerHTML = "<p>Nenhum servidor encontrado.</p>";
+          return;
+        }
 
-      let tableHTML = `
+        let tableHTML = `
         <table>
           <thead class="content-top">
             <tr>
@@ -268,8 +351,12 @@
           
       `;
 
-      data.forEach(servidor => {
-        tableHTML += `
+        data.forEach(servidor => {
+
+          const estadoCheckbox = servidor.estado === "Ativo" ? "ativo" : "inativo";
+          const isChecked = servidor.estado === "Ativo" ? "" : "checked";
+
+          tableHTML += `
           <trbody class ="corpo-table">
             <td>${servidor.idServidor}</td>
             <td>${servidor.nomeServidor}</td>
@@ -282,52 +369,73 @@
               <button class="action-btn edit-btn" onclick="editar(${servidor.idServidor})">
                 <i id="editar" class="fa-solid fa-pen-to-square"></i>
               </button>
-              <button class="action-btn delete-btn" onclick="deletar(${servidor.idServidor})">
-                <i id="excluir" class="fa-solid fa-trash"></i>
-              </button>
+              <input id="checkbox-${servidor.idServidor}" class="checkbox ${estadoCheckbox}" 
+             type="checkbox" ${isChecked} 
+             onclick="inativar(${servidor.idServidor})">
             </tdbodys>
           </tr>
         `;
-      });
+        });
 
-      tableHTML += "</tbody></table>";
-      userTable.innerHTML = tableHTML;
-    })
-    .catch(error => {
-      console.error('Erro ao carregar os servidores:', error);
-      document.getElementById("userTable").innerHTML = "<p>Erro ao carregar os servidores.</p>";
-    });
+        tableHTML += "</tbody></table>";
+        userTable.innerHTML = tableHTML;
+      })
+      .catch(error => {
+        console.error('Erro ao carregar os servidores:', error);
+        document.getElementById("userTable").innerHTML = "<p>Erro ao carregar os servidores.</p>";
+      });
   });
 
   function editar(idServidor) {
     sessionStorage.ID_EDITANDO = idServidor;
     console.log("Editando servidor com ID:", idServidor);
     window.location.href = `dashboard-edicaoServidor.html?id=${idServidor}`;
-}
+  }
 
 
-  function deletar(idServidor) {
-    
-    if (confirm("Tem certeza que deseja excluir este servidor?")) {
-      fetch(`/servidores/deletar/${idServidor}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      .then(response => {
-        if (response.ok) {
-          alert("Servidor excluído com sucesso.");
-          location.reload();
+  function inativar(idServidor) {
+    fetch(`/servidores/verificarStatusServidor/${idServidor}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(servidor => {
+
+        if (servidor[0].estado === "Ativo") {
+          console.log("Criar função desativar perfil escolhido - ID " + idServidor);
+
+          if (confirm("Tem certeza que deseja excluir este servidor?")) {
+            fetch(`/servidores/inativar/${idServidor}`, {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json"
+              }
+            })
+              .then(response => {
+                if (response.ok) {
+                  alert("Servidor Inativo com sucesso.");
+                  location.reload();
+                } else {
+                  alert("Erro ao Inativar servidor.");
+                }
+              })
+              .catch(error => {
+                console.error("Erro ao Inativar servidor:", error);
+                alert("Erro ao excluir servidor.");
+              });
+          }
         } else {
-          alert("Erro ao excluir servidor.");
+          window.alert("Servidor já está Inativo!");
+
         }
       })
       .catch(error => {
-        console.error("Erro ao deletar servidor:", error);
-        alert("Erro ao excluir servidor.");
+        console.log(`#ERRO: ${error}`);
       });
-    }
+
+
   }
 
   function carregarNome() {

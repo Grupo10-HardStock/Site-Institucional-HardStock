@@ -31,7 +31,7 @@
                 </div>
                 <ul>
                     <li><i class="fa-solid fa-moon theme-icon" id="themeToggleIcon" onclick="toggleDarkMode()"></i></li>
-                    <li><a id="ref_home"  onclick="clickbtn(event, '#home')">Home</a></li>
+                    <li><a id="ref_home" onclick="clickbtn(event, '#home')">Home</a></li>
                     <li><a id="ref_solucao" onclick="clickbtn(event, '#solucao')">Solução</a></li>
                     <li><a id="ref_sobre" onclick="clickbtn(event, '#sobre')">Sobre</a></li>
                     <li><a id="ref_mvv" onclick="clickbtn(event, '#mvv')">MVV</a></li>
@@ -109,7 +109,7 @@
 
     <section id="mvv">
         <div class="container">
-        <h2 class="Titulos">MVV HardStock</h2>
+            <h2 class="Titulos">MVV HardStock</h2>
             <div class="solution-grid">
                 <div class="solution">
                     <h3><i class="fas fa-bullseye"></i> Missão</h3>
@@ -211,7 +211,7 @@
         }
 
         window.addEventListener('scroll', showOnScroll);
-        showOnScroll(); 
+        showOnScroll();
     });
 
     function toggleMenu() {
@@ -248,32 +248,32 @@
 
     function enviar() {
         var nome = inputNome.value;
-        var email = inputEmail.value; 
+        var email = inputEmail.value;
         var menssagem = inputMensagem.value;
 
-        
-        if (email.indexOf('@') === -1 || email.indexOf('.') === -1){
+
+        if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
             alert("Preencha o email corretamente!")
-        setTimeout(() => {
-            alert("")
-        }, 2000)
-        } else if (email.length < 6 || email == null){
+            setTimeout(() => {
+                alert("")
+            }, 2000)
+        } else if (email.length < 6 || email == null) {
             alert("Insira um email válido!")
             setTimeout(() => {
                 alert("")
             }, 2000)
-        } else if (nome.length < 3){
+        } else if (nome.length < 3) {
             alert("Preencha o campo Nome!")
             setTimeout(() => {
                 alert("")
             }, 2000);
-        } else if (menssagem < 5 ){
+        } else if (menssagem < 5) {
             alert("Preencha o campo mensagem!")
             setTimeout(() => {
                 alert("")
             }, 2000)
         } else {
-            
+
             fetch("/usuarios/enviarMensagem", {
                 method: "POST",
                 headers: {
@@ -283,17 +283,17 @@
                     nomeServer: nome,
                     emailServer: email,
                     menssagemServer: menssagem
-                    }),
-                    })
-                    
-                inputNome.value = "";
-                inputEmail.value = "";
-                inputMensagem.value = "";
-    
+                }),
+            })
+
+            inputNome.value = "";
+            inputEmail.value = "";
+            inputMensagem.value = "";
+
             alert("Mensagem enviada com sucesso! \n Agradecemos pela contribuição! S2");
-            }
-            window.location = "http://localhost:3345/#contact"
-        
+            window.reload
         }
+
+    }
 
 </script>

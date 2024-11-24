@@ -40,7 +40,7 @@ _O comando acima irá iniciar seu projeto e efetuar os comandos de acordo com a 
 
 ## Adicionar novo recurso ao projeto
 
-**"Recurso? O que é?"** Enquanto no Banco de Dados chamamos as tabelas de "entidades", quando tratamos de desenvolvimento WEB usamos a palavra "recurso" para se referir a algo que podemos criar, ler, atualizar ou deletar [1]. Estas ações são conhecidas como CRUD: Create, Read, Update e Delete. Para acessar cada ação, usamos os métodos HTTP: POST, GET, PUT e DELETE [2]. (Há outros verbos, porém com estes já conseguimos efetuar CRUDs). 
+**"Recurso? O que é?"** Enquanto no Banco de Dados chamamos as tabelas de "entidades", quando tratamos de desenvolvimento WEB usamos a palavra "recurso" para se referir a algo que podemos criar, ler, atualizar ou inativar [1]. Estas ações são conhecidas como CRUD: Create, Read, Update e Delete. Para acessar cada ação, usamos os métodos HTTP: POST, GET, PUT e DELETE [2]. (Há outros verbos, porém com estes já conseguimos efetuar CRUDs). 
 
 **Tabela para ajudar a fazer a associação**
 
@@ -76,7 +76,7 @@ _O comando acima irá iniciar seu projeto e efetuar os comandos de acordo com a 
   <tr>
     <td>D</td>
     <td>Delete</td>
-    <td>Deletar</td>
+    <td>inativar</td>
     <td>DELETE</td>
     <td>DELETE</td>
   </tr>

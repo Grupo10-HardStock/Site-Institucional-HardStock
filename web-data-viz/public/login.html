@@ -38,69 +38,69 @@
                 <div class="ctBtn">
                     <button id="btn-cancelar" class="btn" onclick="verificar('cancelar')">Cancelar</button>
                     <button id="btn-proximo" onclick="verificar('login')" class="btn">Login</button>
-                        
+
                 </div>
-                
+
             </div>
         </div>
 </body>
 
 </html>
 <script>
-      function togglePassword() {
-    const passwordInput = document.getElementById("input_senha");
-    const toggleIcon = document.getElementById("toggleIcon");
+    function togglePassword() {
+        const passwordInput = document.getElementById("input_senha");
+        const toggleIcon = document.getElementById("toggleIcon");
 
-    if (passwordInput.type === "password") {
-      passwordInput.type = "text";
-      toggleIcon.classList.remove("fa-eye");
-      toggleIcon.classList.add("fa-eye-slash"); 
-    } else {
-      passwordInput.type = "password";
-      toggleIcon.classList.remove("fa-eye-slash");
-      toggleIcon.classList.add("fa-eye"); 
-    }
-  }
-
-    function verificar (value){
-
-       if(value == 'login'){
-        let email = document.getElementById('input_email').value;
-        let senha = document.getElementById('input_senha').value;
-
-        if (email.indexOf('@') === -1 || email.indexOf('.') === -1){
-            alertEmail.innerHTML = "Preencha o email corretamente!"
-        setTimeout(() => {
-            alertEmail.innerHTML = ""
-        }, 2000)
-        } else if (email.length < 6 || email == null){
-            alertEmail.innerHTML = "Insira um email válido!"
-            setTimeout(() => {
-                alertEmail.innerHTML = ""
-            }, 2000)
-        } else if (senha == ""){
-            alertSenha.innerHTML = "Preencha o campo senha!"
-            setTimeout(() => {
-                alertSenha.innerHTML = ""
-            }, 2000);
-        } else if (senha.length < 4 ){
-            alertSenha.innerHTML = "Insira uma senha válida"
-            setTimeout(() => {
-                alertSenha.innerHTML = ""
-            }, 2000)
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleIcon.classList.remove("fa-eye");
+            toggleIcon.classList.add("fa-eye-slash");
         } else {
-            cadastro(email, senha)
+            passwordInput.type = "password";
+            toggleIcon.classList.remove("fa-eye-slash");
+            toggleIcon.classList.add("fa-eye");
         }
-       } else if (value == 'cancelar'){
-           if(confirm("Você deseja realmente sair?")){
-               window.location = "../index.html"
-           }
-       } else {
-        alert("ERRO de requisição!")
-       }
     }
 
-    function cadastro(email,senha) {
+    function verificar(value) {
+
+        if (value == 'login') {
+            let email = document.getElementById('input_email').value;
+            let senha = document.getElementById('input_senha').value;
+
+            if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
+                alertEmail.innerHTML = "Preencha o email corretamente!"
+                setTimeout(() => {
+                    alertEmail.innerHTML = ""
+                }, 2000)
+            } else if (email.length < 6 || email == null) {
+                alertEmail.innerHTML = "Insira um email válido!"
+                setTimeout(() => {
+                    alertEmail.innerHTML = ""
+                }, 2000)
+            } else if (senha == "") {
+                alertSenha.innerHTML = "Preencha o campo senha!"
+                setTimeout(() => {
+                    alertSenha.innerHTML = ""
+                }, 2000);
+            } else if (senha.length < 4) {
+                alertSenha.innerHTML = "Insira uma senha válida"
+                setTimeout(() => {
+                    alertSenha.innerHTML = ""
+                }, 2000)
+            } else {
+                cadastro(email, senha)
+            }
+        } else if (value == 'cancelar') {
+            if (confirm("Você deseja realmente sair?")) {
+                window.location = "../index.html"
+            }
+        } else {
+            alert("ERRO de requisição!")
+        }
+    }
+
+    function cadastro(email, senha) {
 
         fetch("/usuarios/autenticar", {
             method: "POST",
@@ -128,24 +128,24 @@
                     sessionStorage.STATUS_PERFIL = json.status;
                     status = sessionStorage.STATUS_PERFIL;
                     permissao = sessionStorage.PERMISSAO_USUARIO;
-                    
-                   if( permissao == 'Hardstock' & status == 'Ativo'){
-                    setTimeout(function () {
-                        window.location = "../html/dashboardHardStock/dashboard_clientes.html";
-                    }, 1000);
-                   } else if (permissao == 'Gerente' & status == 'Ativo'){
-                    setTimeout(function () {
-                        window.location = "../html/dashboardGerente/dashboard_componentes.html";
-                    }, 1000);
-                   } else if (permissao == 'Analista' && status == 'Ativo'){
-                    setTimeout(function () {
-                        window.location = "../html/dashboardAnalista/dashboard_tempoAnalista.html";
-                    }, 1000); 
-                   } else if(status == 'Inativo'){
-                    alert("Não foi possível fazer login, sua conta foi Inativada!")
-                   }else {
-                    alert("Houve um erro ao tentar realizar o login!");
-                   }
+
+                    if (permissao == 'Hardstock' & status == 'Ativo') {
+                        setTimeout(function () {
+                            window.location = "../html/dashboardHardStock/dashboardEmpresas.html";
+                        }, 1000);
+                    } else if (permissao == 'Gerente' & status == 'Ativo') {
+                        setTimeout(function () {
+                            window.location = "../html/dashboardGerente/dashboard_tempo.html";
+                        }, 1000);
+                    } else if (permissao == 'Analista' && status == 'Ativo') {
+                        setTimeout(function () {
+                            window.location = "../html/dashboardAnalista/dashboard_tempoAnalista.html";
+                        }, 1000);
+                    } else if (status == 'Inativo') {
+                        alert("Não foi possível fazer login, sua conta foi Inativada!")
+                    } else {
+                        alert("Houve um erro ao tentar realizar o login!");
+                    }
                 });
 
             } else {

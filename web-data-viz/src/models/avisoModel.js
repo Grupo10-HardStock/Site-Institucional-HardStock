@@ -80,8 +80,8 @@ function editar(novaDescricao, idAviso) {
     return database.executar(instrucaoSql);
 }
 
-function deletar(idAviso) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idAviso);
+function inativar(idAviso) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function inativar():", idAviso);
     var instrucaoSql = `
         DELETE FROM aviso WHERE id = ${idAviso};
     `;
@@ -118,7 +118,7 @@ module.exports = {
     pesquisarDescricao,
     publicar,
     editar,
-    deletar,
+    inativar,
     cadastrar,
     listarSelect,
     editarAlerta

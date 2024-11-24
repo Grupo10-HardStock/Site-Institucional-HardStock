@@ -32,15 +32,19 @@ router.put("/editar/:idEmpresa", function (req, res) {
   empresaController.editar(req, res);
 });
 
-router.delete("/deletar/:idEmpresa", function (req, res) {
-  empresaController.deletar(req, res);
+router.delete("/inativar/:idEmpresa", function (req, res) {
+  empresaController.inativar(req, res);
+});
+
+router.get("/verificarStatusEmpresa/:idEmpresa", function (req, res) {
+  empresaController.verificarStatusEmpresa(req, res);
 });
 
 router.get("/listarEmpresa/:idEmpresa", function (req, res) {
   empresaController.listarEmpresa(req, res);
 })
 
-router.get("/ultimas/", function (req, res) {
+router.get("/buscarUltimasMedidas/", function (req, res) {
   empresaController.buscarUltimasMedidas(req, res);
 });
 

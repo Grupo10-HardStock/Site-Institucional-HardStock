@@ -34,7 +34,15 @@ function buscarMediasMensais(periodo) {
     var instrucaoSql = `SELECT 
     c.nome AS componente,
     DATE_FORMAT(cp.dataHora, '%Y-%m') AS mes_ano,
-    AVG(cp.valor) AS media_valor
+    CASE 
+        -- Componentes de rede (não em percentual)
+        WHEN c.nome = 'Bytes Recebidos' THEN AVG(cp.valor)
+        WHEN c.nome = 'Bytes Enviados' THEN AVG(cp.valor)
+        -- Componentes em percentual
+        WHEN c.nome = 'Uso do Disco Usado' THEN (AVG(cp.valor) / (SELECT AVG(valor) FROM Capturas WHERE fkComponente = (SELECT idComponente FROM Componentes WHERE nome = 'Uso do Disco Total'))) * 100
+        WHEN c.nome = 'Memória Usada' THEN (AVG(cp.valor) / (SELECT AVG(valor) FROM Capturas WHERE fkComponente = (SELECT idComponente FROM Componentes WHERE nome = 'Memória Usada'))) * 100
+        ELSE AVG(cp.valor) -- Para Uso da CPU que já é diretamente em percentual
+    END AS media_valor
 FROM 
     Capturas cp
 JOIN 
@@ -43,10 +51,12 @@ WHERE
     c.nome IN ('Bytes Recebidos', 'Bytes Enviados', 'Uso do Disco Usado', 'Uso do Disco Total', 'Uso da CPU', 'Memória Usada')
     AND cp.dataHora >= DATE_SUB(CURDATE(), INTERVAL ${periodo} MONTH)
 GROUP BY 
+    c.idComponente, 
     c.nome, 
     DATE_FORMAT(cp.dataHora, '%Y-%m')
 ORDER BY 
     c.nome, mes_ano;
+
 `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

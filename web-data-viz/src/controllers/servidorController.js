@@ -44,7 +44,7 @@ function editar(req, res) {
     var novaRede = req.body.rede;
     var novaRam = req.body.ram;
     var novoDisco = req.body.disco;
-    var novaCpu = req.body.cpu_;
+    var novaCpu = req.body.cpu;
     var novoEstado = req.body.estado;
 
     if (novoNome == "") {
@@ -69,10 +69,10 @@ function editar(req, res) {
 }
 
 
-function deletar(req, res) {
+function inativar(req, res) {
     var idServidor = req.params.idServidor;
 
-    servidorModel.deletar(idServidor)
+    servidorModel.inativar(idServidor)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -81,10 +81,27 @@ function deletar(req, res) {
         .catch(
             function (erro) {
                 console.log(erro);
-                console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+                console.log("Houve um erro ao inativar o post: ", erro.sqlMessage);
                 res.status(500).json(erro.sqlMessage);
             }
         );
+}
+
+function verificarStatusServidor(req, res) {
+    var idServidor = req.params.idServidor;
+
+    servidorModel.verificarStatusServidor(idServidor)
+    .then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
 }
 
 function porId(req, res) {
@@ -117,9 +134,10 @@ function listar(req, res) {
 
 
 module.exports = {
+    verificarStatusServidor,
     cadastrarServidor,
     editar,
-    deletar,
+    inativar,
     listar,
     porId
 };
