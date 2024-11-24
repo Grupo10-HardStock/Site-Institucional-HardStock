@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./dashboard-hardstock.css">
+  <link rel="stylesheet" href="./css/dashSite.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -12,85 +12,6 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Dashboard Site | HardStock</title>
 
-  <style>
-    .alinhamento {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      margin-top: 1%;
-      width: 70%;
-      height: 95%;
-      background-color: white;
-      border-radius: 50px;
-    }
-
-    h5 {
-      font-size: 11px;
-    }
-
-    .alertas-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 15px;
-    }
-
-    .alert {
-      padding: 8px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      font-size: 1rem;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.4s ease, transform 0.3s ease;
-      background: linear-gradient(to bottom, #515a83, #232739, #191b27);
-      cursor: pointer;
-      color: white;
-      width: 180px;
-      height: auto;
-    }
-
-    .alert:hover {
-      transform: translateY(-5px);
-    }
-
-    .monitor-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      width: 100%;
-      max-width: 1200px;
-    }
-
-    .card {
-      background-color: rgb(203, 203, 203);
-      border-radius: 10px;
-      width: 40%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s ease;
-      flex-direction: column;
-      padding: 10px 5px;
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-    }
-
-    canvas {
-      width: 100% !important;
-      height: 100% !important;
-    }
-
-    h1 {
-      margin-bottom: 10px;
-    }
-  </style>
 </head>
 
 <body onload="carregarNome(),obterDadosGrafico()">

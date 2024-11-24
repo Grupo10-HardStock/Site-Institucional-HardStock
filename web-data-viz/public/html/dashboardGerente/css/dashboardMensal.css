@@ -566,12 +566,12 @@ canvas {
 }
 
 .dark-mode #selecTempo {
-  background-color: rgb(31, 27, 70);
+  background-color: #191b27;
   color: white;
 }
 
 .dark-mode #selecTempo:hover {
-  background-color: #2c2664;
+  background-color: #4c547a;
 }
 
 .dark-mode .graficos {

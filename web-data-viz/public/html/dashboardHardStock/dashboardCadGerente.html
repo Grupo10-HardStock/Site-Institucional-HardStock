@@ -4,120 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./dashboard-hardstock.css">
+  <link rel="stylesheet" href="./css/dashCadGerente.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Dashboard Cadastro Funcionário | HardStock</title>
 </head>
-
-<style>
-  .alinhamento {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 2%;
-    width: 50%;
-    height: 90%;
-    background-color: white;
-    border-radius: 50px;
-    padding-top: 20px;
-  }
-
-  .campos {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0px 20px 0px 20px;
-  }
-
-  .antes,
-  .depois {
-    width: 45%;
-  }
-
-  .titulo {
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-  }
-
-  label {
-    display: block;
-    /* margin-bottom: 20px; */
-  }
-
-  label p {
-    font-size: 1rem;
-    /* margin-bottom: 5px; */
-  }
-
-  input {
-    width: 100%;
-    height: 35px;
-    border: none;
-    background-color: transparent;
-    border-bottom: 2px solid black;
-    font-size: 1rem;
-    padding: 5px;
-    margin-bottom: 10px;
-  }
-
-  #input_permissao {
-    text-align: center;
-    background-color: #232739;
-    color: white;
-    font-size: large;
-    padding: 2%;
-    border-radius: 50px;
-    width: auto;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-  }
-
-  #btnCancel,
-  #btnSave {
-    margin-top: 12px;
-    padding: 10px 20px;
-    width: auto;
-    height: auto;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-  }
-
-  #btnCancel {
-    background-color: white;
-    border: 1px solid red;
-    color: red;
-    margin-right: 10px;
-  }
-
-  #btnSave {
-    background-color: rgb(11, 239, 11);
-    border: 1px solid rgb(11, 239, 11);
-    color: white;
-  }
-
-  button:hover {
-    opacity: 0.8;
-  }
-
-  .listaEmpresas {
-    text-align: center;
-    background-color: #c7d0d8;
-    font-size: large;
-    padding: 0.5%;
-    border-radius: 50px;
-    width: auto;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-  }
-</style>
 
 <body onload="carregarNome(), listar()">
   <label for="sidebar-ativo" class="sideBar-open">
