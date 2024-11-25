@@ -39,7 +39,7 @@
             <i class="fa-solid fa-chart-line"></i>
             <span class="navItem">Tempo real</span>
           </a></li>
-        <li><a href="./dashboard_mensalAnalista.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
+        <li><a href="./dashboard_alerta.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
             <span class="navItem" style="color: #191b27;">Configuração de alerta</span>
           </a>
@@ -150,7 +150,7 @@
               <td>${tabela.idAlerta}</td>
               <td>${tabela.nomeAlerta}</td>
               <td>${tabela.parametro}</td>
-              <td><i onclick="editar()" id="editar" class="fa-solid fa-pen-to-square"></i><i onclick="deletar()"
+              <td><i onclick="editar()" id="editar" class="fa-solid fa-pen-to-square"></i><i onclick="inativar()"
                   id="excluir" class="fa-solid fa-trash color-btn"></i></td>
             </tr>
           `
@@ -181,7 +181,7 @@
       });
   }
 
-  function deletar() {
+  function inativar() {
     alert("Deletandoo")
   }
 
@@ -233,8 +233,14 @@
     return false;
   }
 
-  function carregarNome() {
-    let text = sessionStorage.NOME_USUARIO;
-    nome.innerHTML = "Olá, " + text;
+ function carregarNome() {
+    const nomeSpan = document.getElementById("nome");
+    const nomeUsuario = sessionStorage.getItem("NOME_USUARIO") || "Usuário"; // fallback se NOME_USUARIO não estiver no sessionStorage
+
+    if (nomeSpan) {
+      nomeSpan.textContent = "Olá, " + nomeUsuario;
+    } else {
+      console.warn("Elemento com id 'nome' não foi encontrado.");
+    }
   }
 </script>

@@ -4,107 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./dashboard-hardstock.css">
+  <link rel="stylesheet" href="./css/dashCadEmpresa.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Dashboard Cadastro Empresa | HardStock</title>
 </head>
-
-<style>
-  .alinhamento {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 5%;
-    width: 40%;
-    height: 80%;
-    background-color: white;
-    border-radius: 50px;
-    padding-top: 20px;
-  }
-  
-  .campos {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* padding: 2px; */
-  }   
-
-  .antes,
-  .depois {
-    width: 45%;
-  }
-
-  .titulo {
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-  }
-
-  label {
-    display: block;
-    /* margin-bottom: 20px; */
-  }
-
-  label p {
-    font-size: 1rem;
-    /* margin-bottom: 5px; */
-  }
-  
-  input{
-    width: 100%;
-    height: 35px;
-    border: none;
-    background-color: transparent;
-    border-bottom: 2px solid black;
-    font-size: 1rem;
-    padding: 5px;
-    margin-bottom: 10px;
-  }
-
-  #btnCancel,
-  #btnSave {
-    margin-top: 12px;
-    padding: 5px 20px;
-    width: auto;
-    height: auto;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-  }
-  
-  #btnCancel {
-    background-color: white;
-    border: 1px solid red;
-    color: red;
-    margin-right: 10px;
-  }
-
-  #btnSave {
-    background-color: rgb(11, 239, 11);
-    border: 1px solid rgb(11, 239, 11);
-    color: white;
-  }
-
-
-  button:hover {
-    opacity: 0.8;
-  }
-
-  #select {
-    text-align: center;
-    background-color: #c7d0d8;
-    font-size: large;
-    padding: 0.5%;
-    border-radius: 50px;
-    width: auto;
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
-</style>
-
 
 <body onload="carregarNome()">
   <label for="sidebar-ativo" class="sideBar-open">
@@ -126,35 +32,36 @@
         </li>
         <li>
           <p style="margin-bottom: 20px;">
-            <span id="aparecerNome" class="navItem-nome">                
+            <span id="aparecerNome" class="navItem-nome">
             </span>
-        </p>
+          </p>
           </p>
         </li>
-        <li><a href="../dashboardHardStock/dashboard_empresa.html" style="background: rgba(199, 208, 216, 1);color: #191b27;">
+        <li><a href="../dashboardHardStock/dashboarCadEmpresa.html"
+            style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <i class="fa-solid fa-square-plus"></i>
             <span class="navItem" style="color: #191b27;">Cadastro Empresa</span>
           </a></li>
-        <li><a href="../dashboardHardStock/dashboard_gerente.html">
+        <li><a href="../dashboardHardStock/dashboardCadGerente.html">
             <i class="fa-solid fa-user-plus"></i>
             <span class="navItem">Cadastro Gerente</span>
           </a>
         </li>
-        <li><a href="../dashboardHardStock/dashboard_clientes.html">
+        <li><a href="../dashboardHardStock/dashboardEmpresas.html">
             <i class="fa-solid fa-people-group"></i>
             <span class="navItem">Empresas</span>
           </a></li>
-          <li><a href="../dashboardHardStock/dashboard-feedback.html">
+        <li><a href="../dashboardHardStock/dashboard-feedback.html">
             <i class="fa-solid fa-message"></i>
             <span class="navItem">Feedbacks</span>
-          </a></li>          
-          <li><a href="../dashboardHardStock/dashboard_QtdGerentes.html">
+          </a></li>
+        <li><a href="../dashboardHardStock/dashboard_QtdGerentes.html">
             <!-- <i class="fa-solid fa-display"></i> -->
             <i class="fa-solid fa-chart-line"></i>
             <span class="navItem">Graficos Empresas</span>
           </a></li>
-          <li><a href="../dashboardHardStock/dashboard_Site.html" >
-            <i class="fa-solid fa-display"></i> 
+        <li><a href="../dashboardHardStock/dashboard_Site.html">
+            <i class="fa-solid fa-display"></i>
             <span class="navItem">Graficos Site</span>
           </a></li>
 
@@ -180,7 +87,8 @@
         </label>
         <label id="cnpj">
           <p>CNPJ:</p><br>
-          <input id="input_cnpj" type="text" maxlength="18" onkeyup="handleCNPJ(event)" placeholder="Informe seu CNPJ:"><br>
+          <input id="input_cnpj" type="text" maxlength="18" onkeyup="handleCNPJ(event)"
+            placeholder="Informe seu CNPJ:"><br>
         </label>
         <label id="email">
           <p>E-mail:</p><br>
@@ -198,26 +106,26 @@
 </html>
 
 <script>
-  
-function carregarNome(){
+
+  function carregarNome() {
     var text = sessionStorage.NOME_USUARIO;
     aparecerNome.innerHTML = "Olá, " + text;
   }
 
-const handleCNPJ = (event) => {
-  let input = event.target;
-  input.value = cnpjMask(input.value);
-}
+  const handleCNPJ = (event) => {
+    let input = event.target;
+    input.value = cnpjMask(input.value);
+  }
 
-const cnpjMask = (value) => {
-  if (!value) return "";
-  value = value.replace(/\D/g, ''); // Remove caracteres não numéricos
-  value = value.replace(/^(\d{2})(\d)/, "$1.$2"); // Coloca o primeiro ponto
-  value = value.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3"); // Coloca o segundo ponto
-  value = value.replace(/\.(\d{3})(\d)/, ".$1/$2"); // Coloca a barra
-  value = value.replace(/(\d{4})(\d)/, "$1-$2"); // Coloca o hífen
-  return value;
-}
+  const cnpjMask = (value) => {
+    if (!value) return "";
+    value = value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    value = value.replace(/^(\d{2})(\d)/, "$1.$2"); // Coloca o primeiro ponto
+    value = value.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3"); // Coloca o segundo ponto
+    value = value.replace(/\.(\d{3})(\d)/, ".$1/$2"); // Coloca a barra
+    value = value.replace(/(\d{4})(\d)/, "$1-$2"); // Coloca o hífen
+    return value;
+  }
 
 
   function verificar() {
@@ -235,7 +143,7 @@ const cnpjMask = (value) => {
       cadastroEmpresa(nome, cnpj, email)
     }
   }
-  
+
   function cadastroEmpresa(nome, cnpj, email) {
 
     fetch("/empresas/cadastrar", {
@@ -254,14 +162,14 @@ const cnpjMask = (value) => {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-    
-           alert( "Empresa cadastrada com sucesso!")
-            document.getElementById("input_nome").value = "";
-            document.getElementById("input_cnpj").value = "";
-            document.getElementById("input_email").value = "";
+
+          alert("Empresa cadastrada com sucesso!")
+          document.getElementById("input_nome").value = "";
+          document.getElementById("input_cnpj").value = "";
+          document.getElementById("input_email").value = "";
 
         } else {
-          throw  alert ("Houve um erro ao tentar realizar o cadastro!");
+          throw alert("Houve um erro ao tentar realizar o cadastro!");
         }
       })
       .catch(function (resposta) {

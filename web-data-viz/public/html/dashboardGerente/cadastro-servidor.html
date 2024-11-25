@@ -4,252 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./dashboard-gerente.css">
+  <link rel="stylesheet" href="./css/dashCadServidor.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Cadastro Cadastrar Servidor | HardStock</title>
 
-  <style>
-/* Estilo global */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f7fa;
-  color: #333;
-  margin: 0;
-  padding: 0;
-}
-
-h1 {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-/* Container de alinhamento */
-.alinhamento {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 6%;
-  width: 60%;
-  max-width: 700px;
-  background-color: white;
-  border-radius: 10px;
-  padding-top: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding-bottom: 30px;
-}
-
-/* Estilo do formulário */
-.campos {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.form {
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Título */
-.titulo {
-  margin-bottom: 20px;
-  font-size: 1.2rem;
-}
-
-/* Estilo dos campos de input */
-label {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-label p {
-  font-size: 1rem;
-  margin-bottom: 5px;
-}
-
-#input_nome,
-#input_rede,
-#input_ram,
-#input_disco,
-#input_cpu {
-  width: 100%;
-  height: 35px;
-  font-size: 1rem;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  background-color: #fafafa;
-  transition: border-color 0.3s;
-}
-
-#input_nome:focus,
-#input_rede:focus,
-#input_ram:focus,
-#input_disco:focus,
-#input_cpu:focus {
-  border-color: #4caf50;
-  outline: none;
-}
-
-/* Estilo dos selects */
-select {
-  width: 100%;
-  height: 35px;
-  font-size: 1rem;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  background-color: #fafafa;
-  transition: border-color 0.3s;
-}
-
-select:focus {
-  border-color: #4caf50;
-  outline: none;
-}
-
-/* Botões */
-button {
-  width: auto;
-  padding: 12px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.2s ease-in-out;
-  margin-top: 20px;
-}
-
-#btnCancel {
-  background-color: white;
-  border: 2px solid red;
-  color: red;
-  margin-right: 10px;
-}
-
-#btnSave {
-  background-color: rgb(11, 239, 11);
-  border: 2px solid rgb(11, 239, 11);
-  color: white;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
-/* Responsividade */
-@media screen and (max-width: 768px) {
-  .alinhamento {
-    width: 80%;
-    padding: 20px;
-  }
-
-  h1 {
-    font-size: 1.4rem;
-  }
-
-  label p {
-    font-size: 0.9rem;
-  }
-
-  #input_nome,
-  #input_rede,
-  #input_ram,
-  #input_disco,
-  #input_cpu {
-    font-size: 0.95rem;
-    padding: 8px;
-  }
-
-  select {
-    font-size: 0.95rem;
-    padding: 8px;
-  }
-
-  button {
-    padding: 10px 18px;
-    font-size: 0.9rem;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .alinhamento {
-    width: 90%;
-    padding: 15px;
-  }
-
-  h1 {
-    font-size: 1.2rem;
-  }
-
-  #input_nome,
-  #input_rede,
-  #input_ram,
-  #input_disco,
-  #input_cpu {
-    font-size: 0.9rem;
-    padding: 7px;
-  }
-
-  select {
-    font-size: 0.9rem;
-    padding: 7px;
-  }
-
-  button {
-    padding: 8px 15px;
-    font-size: 0.85rem;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .alinhamento {
-    width: 100%;
-    margin-top: 10%;
-    padding: 10px;
-  }
-
-  h1 {
-    font-size: 1rem;
-  }
-
-  #input_nome,
-  #input_rede,
-  #input_ram,
-  #input_disco,
-  #input_cpu {
-    font-size: 0.85rem;
-    padding: 6px;
-  }
-
-  select {
-    font-size: 0.85rem;
-    padding: 6px;
-  }
-
-  button {
-    padding: 8px 15px;
-    font-size: 0.85rem;
-  }
-}
-
-  </style>
-
-
 </head>
 
-<body onload="carregarNome()">
+<body>
   <label for="sidebar-ativo" class="sideBar-open">
     <i class="fa-duotone fa-solid fa-bars"></i>
   </label>
@@ -268,33 +32,37 @@ button:hover {
         <li>
           <p style="margin-bottom: 20px;">
             <span id="nome" class="navItem-nome">
-          
+
             </span>
           </p>
         </li>
         <li><a href="../dashboardGerente/dashboard_tempo.html">
-            <i class="fa-solid fa-magnifying-glass-chart"></i>
-            <span class="navItem">Relatórios</span>
-          </a>
-        </li>
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="navItem">Relatório</span>
+          </a></li>
         <li><a href="../dashboardGerente/dashboard_componentes.html"
             style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <i class="fa-solid fa-table-list"></i>
             <span class="navItem" style="color: #191b27;">Servidores</span>
           </a></li>
-          <li><a href="../dashboardGerente/dashboard_mensal.html">
+        <li><a href="../dashboardGerente/dashboard_mensal.html">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
             <span class="navItem">Mensal</span>
           </a>
         </li>
-          <li><a href="../dashboardGerente/dashboard_funcionario.html">
+        <li><a href="../dashboardGerente/dashboard_funcionario.html">
             <i class="fa-solid fa-user-plus"></i>
             <span class="navItem">Funcionário</span>
           </a>
         </li>
+        <li>
+          <a id="btnIcone" onclick="toggleDarkMode()">
+            <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon"></i>
+            <span class="navItem">Mudar Tema</span>
+          </a>
+        </li>
         <div class="sair">
-          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4
-" target="_blank">
+          <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4" target="_blank">
               <i class="fa-solid fa-headset"></i>
               <span class="navItem">Suporte</span>
             </a></li>
@@ -311,17 +79,18 @@ button:hover {
   </div>
 
   <div class="alinhamento">
-    <h1>Cadastrar Servidor</h1>
+    <h1 id="h1-alinhamento">Cadastrar Servidor</h1>
     <div class="campos">
       <div class="form">
-        <label id="nome">
-          <p>Nome:</p>
-          <input id="input_nome" type="text" placeholder="Digite o Nome do Servidor:">
-        </label>
         <center>
+          <label id="nome">
+            Nome:
+            <input id="input_nome" type="text" placeholder="Digite o Nome do Servidor:">
+          </label>
           <label id="selects">
+            Rede:
             <select name="rede" id="input_rede">
-              <option value="Rede" selected disabled>Rede</option>
+              <option value="Rede" selected disabled>Selecione a Rede utilizada:</option>
               <option value="LAN">LAN</option>
               <option value="WLAN">WLAN</option>
               <option value="WAN">WAN</option>
@@ -330,8 +99,9 @@ button:hover {
             </select>
           </label>
           <label id="selects">
+            RAM:
             <select name="ram" id="input_ram">
-              <option value="ram" selected disabled>Ram</option>
+              <option value="ram" selected disabled>Selecione a Ram utilizada:</option>
               <option value="8GB">8GB</option>
               <option value="16GB">16GB</option>
               <option value="32GB">32GB</option>
@@ -340,16 +110,18 @@ button:hover {
             </select>
           </label>
           <label id="selects">
+            Disco:
             <select name="disco" id="input_disco">
-              <option value="disco" selected disabled>Disco</option>
+              <option value="disco" selected disabled>Selecione o Disco utilizado:</option>
               <option value="SSDs">SSDs</option>
               <option value="HDDs">HDDs </option>
               <option value="HDDs NAS">HDDs NAS</option>
             </select>
           </label>
           <label id="selects">
+            CPU:
             <select name="cpu" id="input_cpu">
-              <option value="cpu" selected disabled>CPU</option>
+              <option value="cpu" selected disabled>Selecione a CPU utilizada:</option>
               <option value="4 núcleos">4 núcleos</option>
               <option value="8 núcleos">8 núcleos</option>
               <option value="10 núcleos">10 núcleos</option>
@@ -370,74 +142,97 @@ button:hover {
 
 </html>
 <script>
+  function toggleDarkMode() {
+    const body = document.body;
+    const themeToggleIcon = document.getElementById('themeToggleIcon');
+
+
+    body.classList.toggle('dark-mode');
+
+
+    if (body.classList.contains('dark-mode')) {
+      themeToggleIcon.classList.remove('fa-moon');
+      themeToggleIcon.classList.add('fa-sun');
+    } else {
+      themeToggleIcon.classList.remove('fa-sun');
+      themeToggleIcon.classList.add('fa-moon');
+    }
+  }
+
   function cancelar() {
     window.location = "./dashboard_componentes.html"
-  }-
-  
-  function carregarNome(){
-     let text = sessionStorage.NOME_USUARIO;
-    nome.innerHTML = "Olá, " + text;
-  }
+  } -
+
+    function carregarNome() {
+      const nomeSpan = document.getElementById("nome");
+      const nomeUsuario = sessionStorage.getItem("NOME_USUARIO") || "Usuário"; // fallback se NOME_USUARIO não estiver no sessionStorage
+
+      if (nomeSpan) {
+        nomeSpan.textContent = "Olá, " + nomeUsuario;
+      } else {
+        console.warn("Elemento com id 'nome' não foi encontrado.");
+      }
+    }
 
   function cadastrar() {
     var nomeVar = input_nome.value;
     var redeVar = input_rede.value;
     var ramVar = input_ram.value;
     var discoVar = input_disco.value;
-    var cpuVar = input_cpu.value;    
+    var cpuVar = input_cpu.value;
     var empresaVar = sessionStorage.EMPRESA_USUARIO
 
     if (
-        nomeVar == "" ||
-        redeVar == "" ||
-        ramVar == "" ||
-        discoVar == "" ||
-        cpuVar == ""||
-        empresaVar == ""
+      nomeVar == "" ||
+      redeVar == "" ||
+      ramVar == "" ||
+      discoVar == "" ||
+      cpuVar == "" ||
+      empresaVar == ""
     ) {
-        alert("Não foi possível realizar o cadastro do servidor, pois há campos em branco ou não selecionados");
-        return false;
+      alert("Não foi possível realizar o cadastro do servidor, pois há campos em branco ou não selecionados");
+      return false;
     }
 
     // Adicione logs para garantir que os valores estão sendo passados corretamente
     console.log("Enviando dados:", {
-        nome: nomeVar,
-        rede: redeVar,
-        ram: ramVar,
-        disco: discoVar,
-        cpu: cpuVar,
-        empresa: empresaVar
+      nome: nomeVar,
+      rede: redeVar,
+      ram: ramVar,
+      disco: discoVar,
+      cpu: cpuVar,
+      empresa: empresaVar
     });
 
     fetch("/servidores/cadastrarServidor", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            nomeServer: nomeVar,
-            redeServer: redeVar,
-            ramServer: ramVar,
-            discoServer: discoVar,
-            cpuServer: cpuVar,
-            empresaServer: empresaVar
-        }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nomeServer: nomeVar,
+        redeServer: redeVar,
+        ramServer: ramVar,
+        discoServer: discoVar,
+        cpuServer: cpuVar,
+        empresaServer: empresaVar
+      }),
     })
-    .then(function (resposta) {
+      .then(function (resposta) {
         if (resposta.ok) {
-            alert("Cadastro realizado com sucesso!");
-            window.location = "./dashboard_componentes.html"; // Redireciona após sucesso
+          alert("Cadastro realizado com sucesso!");
+          window.location = "./dashboard_componentes.html"; // Redireciona após sucesso
         } else {
-            throw new Error("Houve um erro ao tentar realizar o cadastro!");
+          throw new Error("Houve um erro ao tentar realizar o cadastro!");
         }
-    })
-    .catch(function (erro) {
+      })
+      .catch(function (erro) {
         console.log("Erro na requisição:", erro);
         alert("Erro ao tentar realizar o cadastro: " + erro.message);
-    });
+      });
 
     return false;
-}
+  }
 
 
   function listar() {
@@ -494,5 +289,5 @@ button:hover {
 
 
 
-  
+
 </script>

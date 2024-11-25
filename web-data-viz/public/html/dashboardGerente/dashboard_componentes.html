@@ -4,136 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./dashboard-gerente.css">
+  <link rel="stylesheet" href="./css/dashServidor.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Dashboard Servidor | HardStock</title>
-
-  <style>
-    .alinhamento {
-      display: flex;
-      flex-direction: column;
-      margin-top: 5%;
-      width: 80%;
-    }
-
-    h1 {
-      display: flex;
-      justify-content: center;
-      color: #191b27;
-    }
-
-    #add {
-      width: auto;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      background-color: transparent;
-      margin-right: -65%;
-    }
-
-    #add a {
-      display: flex;
-      border-radius: 50px;
-      align-items: center;
-      width: 160px;
-      font-weight: bold;
-      color: white;
-      background-color: #191b27;
-      padding: inherit;
-      padding-left: 2%;
-      justify-content: center;
-    }
-
-    #icone {
-      padding-left: 2%;
-      width: auto;
-      margin-left: 2%;
-      margin-bottom: 9px;
-    }
-
-    #userTable {
-      margin: 20px auto;
-      padding: 20px;
-      width: 80%;
-      background-color: #f9f9f9;
-      border: 1px solid #ddd;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-      border-radius: 10px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    table,
-    th,
-    td {
-      border: 1px solid #ddd;
-    }
-
-    th {
-      background-color: rgba(199, 208, 216, 1);
-      color: rgb(0, 0, 0);
-      padding: 12px;
-    }
-    .content-top{
-      position: sticky;
-      z-index: 1;
-    }
-
-    .corpo-table{
-      overflow: scroll;
-    }
-
-    td {
-      padding: 10px;
-      text-align: left;
-    }
-
-    .action-btn {
-      padding: 5px 10px;
-      margin: 2px;
-      cursor: pointer;
-      border: none;
-      border-radius: 4px;
-    }
-
-    .edits {
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .edit-btn {
-      background-color: transparent;
-      color: white;
-    }
-
-    .delete-btn {
-      background-color: transparent;
-      color: white;
-    }
-
-    .edit-btn:hover {
-      background-color: transparent;
-    }
-
-    .delete-btn:hover {
-      background-color: transparent;
-    }
-
-    #editar {
-      color: #191b27;
-      background-color: none;
-    }
-
-    #excluir {
-      color: #d32f2f;
-    }
-  </style>
 
 </head>
 
@@ -161,29 +37,33 @@
             </span>
           </p>
         </li>
-        
-        <li><a href="../dashboardGerente/dashboard_tempo.html">
-            <i class="fa-solid fa-magnifying-glass-chart"></i>
-            <span class="navItem">Relatórios</span>
-          </a></li>
 
+        <li><a href="../dashboardGerente/dashboard_tempo.html">
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="navItem">Relatório</span>
+          </a></li>
         <li><a href="../dashboardGerente/dashboard_componentes.html"
             style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <i class="fa-solid fa-table-list"></i>
             <span class="navItem" style="color: #191b27;">Servidores</span>
           </a></li>
-          <li><a href="../dashboardGerente/dashboard_mensal.html">
+        <li><a href="../dashboardGerente/dashboard_mensal.html">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
             <span class="navItem">Mensal</span>
           </a>
         </li>
-          <li><a href="../dashboardGerente/dashboard_funcionario.html">
+        <li><a href="../dashboardGerente/dashboard_funcionario.html">
             <i class="fa-solid fa-user-plus"></i>
             <span class="navItem">Funcionário</span>
           </a>
         </li>
+        <li>
+          <a id="btnIcone" onclick="toggleDarkMode()">
+            <i class="fa-solid fa-moon theme-icon" id="themeToggleIcon"></i>
+            <span class="navItem">Mudar Tema</span>
+          </a>
+        </li>
 
-        
 
         <div class="sair">
           <li><a href="https://heathtech.atlassian.net/servicedesk/customer/portal/4" target="_blank">
@@ -227,6 +107,23 @@
 </html>
 
 <script>
+  function toggleDarkMode() {
+    const body = document.body;
+    const themeToggleIcon = document.getElementById('themeToggleIcon');
+
+
+    body.classList.toggle('dark-mode');
+
+
+    if (body.classList.contains('dark-mode')) {
+      themeToggleIcon.classList.remove('fa-moon');
+      themeToggleIcon.classList.add('fa-sun');
+    } else {
+      themeToggleIcon.classList.remove('fa-sun');
+      themeToggleIcon.classList.add('fa-moon');
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     const fkEmpresa = 1;
 
@@ -237,21 +134,21 @@
         "Content-Type": "application/json"
       }
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Erro na requisição! Status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      const userTable = document.getElementById("userTable");
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Erro na requisição! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        const userTable = document.getElementById("userTable");
 
-      if (data.length === 0) {
-        userTable.innerHTML = "<p>Nenhum servidor encontrado.</p>";
-        return;
-      }
+        if (data.length === 0) {
+          userTable.innerHTML = "<p>Nenhum servidor encontrado.</p>";
+          return;
+        }
 
-      let tableHTML = `
+        let tableHTML = `
         <table>
           <thead class="content-top">
             <tr>
@@ -268,8 +165,12 @@
           
       `;
 
-      data.forEach(servidor => {
-        tableHTML += `
+        data.forEach(servidor => {
+
+          const estadoCheckbox = servidor.estado === "Ativo" ? "ativo" : "inativo";
+          const isChecked = servidor.estado === "Ativo" ? "" : "checked";
+
+          tableHTML += `
           <trbody class ="corpo-table">
             <td>${servidor.idServidor}</td>
             <td>${servidor.nomeServidor}</td>
@@ -282,52 +183,73 @@
               <button class="action-btn edit-btn" onclick="editar(${servidor.idServidor})">
                 <i id="editar" class="fa-solid fa-pen-to-square"></i>
               </button>
-              <button class="action-btn delete-btn" onclick="deletar(${servidor.idServidor})">
-                <i id="excluir" class="fa-solid fa-trash"></i>
-              </button>
+              <input id="checkbox-${servidor.idServidor}" class="checkbox ${estadoCheckbox}" 
+             type="checkbox" ${isChecked} 
+             onclick="inativar(${servidor.idServidor})">
             </tdbodys>
           </tr>
         `;
-      });
+        });
 
-      tableHTML += "</tbody></table>";
-      userTable.innerHTML = tableHTML;
-    })
-    .catch(error => {
-      console.error('Erro ao carregar os servidores:', error);
-      document.getElementById("userTable").innerHTML = "<p>Erro ao carregar os servidores.</p>";
-    });
+        tableHTML += "</tbody></table>";
+        userTable.innerHTML = tableHTML;
+      })
+      .catch(error => {
+        console.error('Erro ao carregar os servidores:', error);
+        document.getElementById("userTable").innerHTML = "<p>Erro ao carregar os servidores.</p>";
+      });
   });
 
   function editar(idServidor) {
     sessionStorage.ID_EDITANDO = idServidor;
     console.log("Editando servidor com ID:", idServidor);
     window.location.href = `dashboard-edicaoServidor.html?id=${idServidor}`;
-}
+  }
 
 
-  function deletar(idServidor) {
-    
-    if (confirm("Tem certeza que deseja excluir este servidor?")) {
-      fetch(`/servidores/deletar/${idServidor}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      .then(response => {
-        if (response.ok) {
-          alert("Servidor excluído com sucesso.");
-          location.reload();
+  function inativar(idServidor) {
+    fetch(`/servidores/verificarStatusServidor/${idServidor}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(servidor => {
+
+        if (servidor[0].estado === "Ativo") {
+          console.log("Criar função desativar perfil escolhido - ID " + idServidor);
+
+          if (confirm("Tem certeza que deseja excluir este servidor?")) {
+            fetch(`/servidores/inativar/${idServidor}`, {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json"
+              }
+            })
+              .then(response => {
+                if (response.ok) {
+                  alert("Servidor Inativo com sucesso.");
+                  location.reload();
+                } else {
+                  alert("Erro ao Inativar servidor.");
+                }
+              })
+              .catch(error => {
+                console.error("Erro ao Inativar servidor:", error);
+                alert("Erro ao excluir servidor.");
+              });
+          }
         } else {
-          alert("Erro ao excluir servidor.");
+          window.alert("Servidor já está Inativo!");
+
         }
       })
       .catch(error => {
-        console.error("Erro ao deletar servidor:", error);
-        alert("Erro ao excluir servidor.");
+        console.log(`#ERRO: ${error}`);
       });
-    }
+
+
   }
 
   function carregarNome() {

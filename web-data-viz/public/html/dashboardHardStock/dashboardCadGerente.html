@@ -4,106 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./dashboard-hardstock.css">
+  <link rel="stylesheet" href="./css/dashCadGerente.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Dashboard Cadastro Funcionário | HardStock</title>
 </head>
-
-<style>
-  .alinhamento {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 2%;
-    width: 50%;
-    height: 90%;
-    background-color: white;
-    border-radius: 50px;
-    padding-top: 20px;
-  }
-
-  .campos {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0px 20px 0px 20px;
-  }
-
-  .antes,
-  .depois {
-    width: 45%;
-  }
-
-  .titulo {
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-  }
-
-  label {
-    display: block;
-    /* margin-bottom: 20px; */
-  }
-
-  label p {
-    font-size: 1rem;
-    /* margin-bottom: 5px; */
-  }
-
-  input {
-    width: 100%;
-    height: 35px;
-    border: none;
-    background-color: transparent;
-    border-bottom: 2px solid black;
-    font-size: 1rem;
-    padding: 5px;
-    margin-bottom: 10px;
-  }
-
-  #btnCancel,
-  #btnSave {
-    margin-top: 12px;
-    padding: 10px 20px;
-    width: auto;
-    height: auto;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-  }
-
-  #btnCancel {
-    background-color: white;
-    border: 1px solid red;
-    color: red;
-    margin-right: 10px;
-  }
-
-  #btnSave {
-    background-color: rgb(11, 239, 11);
-    border: 1px solid rgb(11, 239, 11);
-    color: white;
-  }
-
-  button:hover {
-    opacity: 0.8;
-  }
-
-  .listaEmpresas {
-    text-align: center;
-    background-color: #c7d0d8;
-    font-size: large;
-    padding: 0.5%;
-    border-radius: 50px;
-    width: auto;
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
-
-
-</style>
 
 <body onload="carregarNome(), listar()">
   <label for="sidebar-ativo" class="sideBar-open">
@@ -125,21 +32,21 @@
         </li>
         <li>
           <p style="margin-bottom: 20px;">
-            <span id="aparecerNome" class="navItem-nome">                
+            <span id="aparecerNome" class="navItem-nome">
             </span>
-        </p>
+          </p>
         </li>
-        <li><a href="../dashboardHardStock/dashboard_empresa.html">
+        <li><a href="../dashboardHardStock/dashboarCadEmpresa.html">
             <i class="fa-solid fa-square-plus"></i>
             <span class="navItem">Cadastro Empresa</span>
           </a></li>
-        <li><a href="../dashboardHardStock/dashboard_gerente.html"
+        <li><a href="../dashboardHardStock/dashboardCadGerente.html"
             style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <i class="fa-solid fa-user-plus"></i>
             <span class="navItem" style="color: #191b27;">Cadastro Gerente</span>
           </a>
         </li>
-        <li><a href="../dashboardHardStock/dashboard_clientes.html">
+        <li><a href="../dashboardHardStock/dashboardEmpresas.html">
             <i class="fa-solid fa-people-group"></i>
             <span class="navItem">Empresas</span>
           </a></li>
@@ -149,17 +56,17 @@
           </a>
         </li>
         <li><a href="../dashboardHardStock/dashboard_QtdGerentes.html">
-          <!-- <i class="fa-solid fa-display"></i> -->
-          <i class="fa-solid fa-chart-line"></i>
-          <span class="navItem">Graficos Empresas</span>
-        </a></li>
-        <li><a href="../dashboardHardStock/dashboard_Site.html" >
-          <i class="fa-solid fa-display"></i> 
-          <span class="navItem" >Graficos Site</span>
-        </a></li>
+            <!-- <i class="fa-solid fa-display"></i> -->
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="navItem">Graficos Empresas</span>
+          </a></li>
+        <li><a href="../dashboardHardStock/dashboard_Site.html">
+            <i class="fa-solid fa-display"></i>
+            <span class="navItem">Graficos Site</span>
+          </a></li>
 
         <div class="sair">
-    
+
           <li>
             <a href="../../index.html">
               <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -176,9 +83,8 @@
     <h1>Cadastrar Gerente</h1>
 
 
-    <h4>Selecione a Empresa:</h4>
     <select name="empresa" id="listaEmpresas" class="listaEmpresas">
-      <option value="#" disabled selected>Selecione a Empresa:</option>
+      <option value="#" disabled selected>Selecione a Empresa</option>
 
     </select>
     <div class="campos">
@@ -193,7 +99,8 @@
         </label>
         <label id="telefone">
           <p>Telefone:</p><br>
-          <input id="input_telefone" type="tel" maxlength="15" onkeyup="handlePhone(event)"  placeholder="Informe seu Telefone:"><br>
+          <input id="input_telefone" type="tel" maxlength="15" onkeyup="handlePhone(event)"
+            placeholder="Informe seu Telefone:"><br>
         </label>
       </div>
       <div class="depois">
@@ -208,7 +115,7 @@
         <label>
           <p>Permissão:</p><br>
           <select id="input_permissao">
-            <option disabled selected>Selecione o cargo</option>
+            <option value="#" disabled selected>Selecione o cargo</option>
             <option value="HardStock">HardStock</option>
             <option value="Gerente">Gerente</option>
             <option value="Analista">Analista</option>
@@ -224,23 +131,23 @@
 
 <script>
 
-function carregarNome(){
+  function carregarNome() {
     let text = sessionStorage.NOME_USUARIO;
     aparecerNome.innerHTML = "Olá, " + text;
   }
 
   const handlePhone = (event) => {
-  let input = event.target
-  input.value = phoneMask(input.value)
-}
+    let input = event.target
+    input.value = phoneMask(input.value)
+  }
 
-const phoneMask = (value) => {
-  if (!value) return ""
-  value = value.replace(/\D/g,'')
-  value = value.replace(/(\d{2})(\d)/,"($1) $2")
-  value = value.replace(/(\d)(\d{4})$/,"$1-$2")
-  return value
-}
+  const phoneMask = (value) => {
+    if (!value) return ""
+    value = value.replace(/\D/g, '')
+    value = value.replace(/(\d{2})(\d)/, "($1) $2")
+    value = value.replace(/(\d)(\d{4})$/, "$1-$2")
+    return value
+  }
 
 
   function verificarCampos() {
@@ -268,7 +175,7 @@ const phoneMask = (value) => {
   }
 
 
-  
+
   function cadastro(nome, sobrenome, telefone, email, senha, permissao, empresa) {
 
     fetch("/empresas/cadastrarGerente", {
@@ -294,6 +201,14 @@ const phoneMask = (value) => {
 
           alert("Gerente cadastrado com sucesso!")
 
+          document.getElementById("input_nome").value = "";
+          document.getElementById("input_sobrenome").value = "";
+          document.getElementById("input_telefone").value = "";
+          document.getElementById("input_email").value = "";
+          document.getElementById("input_senha").value = "";
+          document.getElementById("input_permissao").value = "#";
+          document.getElementById("listaEmpresas").value = "#";
+
         } else {
           throw alert("Houve um erro ao tentar realizar o cadastro!");
         }
@@ -305,22 +220,22 @@ const phoneMask = (value) => {
     return false;
   }
   function listar() {
-  fetch("/empresas/listar", {
-    method: "GET",
-  })
-    .then(function (resposta) {
-      resposta.json().then(json => {
-        json.forEach(empresa => {
-          console.log(empresa.idEmpresa);
-          console.log(empresa.razaoSocial);
-          listaEmpresas.innerHTML += `<option value='${empresa.idEmpresa}'>${empresa.razaoSocial}</option>`;
-        });
-      });
+    fetch("/empresas/listar", {
+      method: "GET",
     })
-    .catch(function (erro) {
-      console.log(`#ERRO: ${erro}`);
-    });
-}
+      .then(function (resposta) {
+        resposta.json().then(json => {
+          json.forEach(empresa => {
+            console.log(empresa.idEmpresa);
+            console.log(empresa.razaoSocial);
+            listaEmpresas.innerHTML += `<option value='${empresa.idEmpresa}'>${empresa.razaoSocial}</option>`;
+          });
+        });
+      })
+      .catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+      });
+  }
 
 </script>
 

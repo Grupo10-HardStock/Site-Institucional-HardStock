@@ -86,5 +86,6 @@ function listarSelect(req, res) {
 
 module.exports = {
     cadastrar,
-    listarSelect
+    listarSelect,
+    editarAlerta
 }

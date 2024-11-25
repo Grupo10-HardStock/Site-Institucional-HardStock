@@ -12,8 +12,11 @@
 * {
     margin: 0;
     padding: 0;
+    outline: none;
+    border: none;
+    text-decoration: none;
     box-sizing: border-box;
-    font-family: system-ui, sans-serif
+    font-family: Arial, sans-serif;
 }
 
 body {

@@ -245,101 +245,107 @@
   }
 
   function atualizarGrafico(componente, labels, data) {
-    const canvasId = `chart_${componente.replace(" ", "_")}`;
-    const canvas = document.getElementById(canvasId);
+  const canvasId = `chart_${componente.replace(" ", "_")}`;
+  const canvas = document.getElementById(canvasId);
 
-    if (!canvas) {
-      console.error(`Canvas com ID ${canvasId} não encontrado.`);
-      return;
+  if (!canvas) {
+    console.error(`Canvas com ID ${canvasId} não encontrado.`);
+    return;
+  }
+
+  let ctx = canvas.getContext('2d');
+  if (chartComponents[componente]) {
+    chartComponents[componente].destroy();
+  }
+
+  chartComponents[componente] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: `Média de ${componente}`,
+        data: data,
+        borderColor: 'rgb(31, 27, 70)',
+        backgroundColor: 'rgba(31, 27, 70, 0.2)',
+        fill: true,
+        borderWidth: 2,
+        tension: 0.1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              // Adiciona "%" ou mantém valor direto com base no nome do componente
+              const value = context.raw.toFixed(2);
+              const suffix = ["Uso do Disco Usado", "Uso do Disco Total", "Uso da CPU", "Memória Usada"].includes(componente) ? "%" : "";
+              return `${value}${suffix}`;
+            }
+          }
+        }
+      }
     }
+  });
+}
 
-    let ctx = canvas.getContext('2d');
-    if (chartComponents[componente]) {
-      chartComponents[componente].destroy();
-    }
+function atualizarGraficoRede(labels, dataUpload, dataDownload) {
+  const canvasId = "chart_Rede";
+  const canvas = document.getElementById(canvasId);
 
-    chartComponents[componente] = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: `Média de ${componente}`,
-          data: data,
-          borderColor: 'rgb(31, 27, 70)',
-          backgroundColor: 'rgba(31, 27, 70, 0.2)',
+  if (!canvas) {
+    console.error(`Canvas com ID ${canvasId} não encontrado.`);
+    return;
+  }
+
+  let ctx = canvas.getContext('2d');
+  if (chartComponents["Rede"]) {
+    chartComponents["Rede"].destroy();
+  }
+
+  chartComponents["Rede"] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Média de Upload',
+          data: dataUpload,
+          borderColor: 'rgba(54, 162, 235, 1)',
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
           fill: true,
           borderWidth: 2,
           tension: 0.1
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: function (context) {
-                return `${context.raw.toFixed(2)}`;
-              }
+        },
+        {
+          label: 'Média de Download',
+          data: dataDownload,
+          borderColor: 'rgba(255, 99, 132, 1)',
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          fill: true,
+          borderWidth: 2,
+          tension: 0.1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              // Adiciona "MB" para Bytes Enviados e Recebidos
+              const value = context.raw.toFixed(2);
+              const suffix = context.dataset.label.includes("Upload") || context.dataset.label.includes("Download") ? " MB" : "";
+              return `${value}${suffix}`;
             }
           }
         }
       }
-    });
-  }
-
-  function atualizarGraficoRede(labels, dataUpload, dataDownload) {
-    const canvasId = "chart_Rede";
-    const canvas = document.getElementById(canvasId);
-
-    if (!canvas) {
-      console.error(`Canvas com ID ${canvasId} não encontrado.`);
-      return;
     }
-
-    let ctx = canvas.getContext('2d');
-    if (chartComponents["Rede"]) {
-      chartComponents["Rede"].destroy();
-    }
-
-    chartComponents["Rede"] = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: 'Média de Upload',
-            data: dataUpload,
-            borderColor: 'rgba(54, 162, 235, 1)',
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            fill: true,
-            borderWidth: 2,
-            tension: 0.1
-          },
-          {
-            label: 'Média de Download',
-            data: dataDownload,
-            borderColor: 'rgba(255, 99, 132, 1)',
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            fill: true,
-            borderWidth: 2,
-            tension: 0.1
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: function (context) {
-                return `${context.raw.toFixed(2)}`;
-              }
-            }
-          }
-        }
-      }
-    });
-  }
+  });
+}
 
   function iniciarAtualizacaoGraficos() {
     gerarGraficosMediasMensais();

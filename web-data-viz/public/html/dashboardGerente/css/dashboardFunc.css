@@ -13,9 +13,8 @@ body {
   justify-content: center;
   width: 100%;
   max-width: 1300px;
-  height: 100dvh;
-  background: rgb(212, 212, 212);
-
+  height: auto;
+  background: rgba(199, 208, 216, 1);
 }
 
 nav {
@@ -417,9 +416,9 @@ p {
 .alinhamento {
   display: flex;
   flex-direction: column;
-  margin: 2%;
+  margin-top: 2%;
   width: 80%;
-  height: 150dvh;
+  height: auto;
   margin-bottom: 5%;
 }
 
@@ -509,7 +508,7 @@ td {
   color: white;
 }
 
-.deletar-btn {
+.inativar-btn {
   background-color: transparent;
   color: white;
 }
@@ -518,7 +517,7 @@ td {
   background-color: transparent;
 }
 
-.deletar-btn:hover {
+.inativar-btn:hover {
   background-color: transparent;
 }
 

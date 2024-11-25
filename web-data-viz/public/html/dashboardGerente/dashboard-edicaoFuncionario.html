@@ -31,9 +31,9 @@
           </p>
         </li>
         <li><a href="../dashboardGerente/dashboard_tempo.html">
-          <i class="fa-solid fa-chart-line"></i>
-          <span class="navItem">Relatório</span>
-        </a></li>
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="navItem">Relatório</span>
+          </a></li>
         <li><a href="../dashboardGerente/dashboard_componentes.html">
             <i class="fa-solid fa-table-list"></i>
             <span class="navItem">Servidores</span>
@@ -169,9 +169,15 @@
     }
   }
 
-  function carregarNome() {
-    let text = sessionStorage.NOME_USUARIO;
-    nome.innerHTML = "Olá, " + text;
+ function carregarNome() {
+    const nomeSpan = document.getElementById("nome");
+    const nomeUsuario = sessionStorage.getItem("NOME_USUARIO") || "Usuário"; // fallback se NOME_USUARIO não estiver no sessionStorage
+
+    if (nomeSpan) {
+      nomeSpan.textContent = "Olá, " + nomeUsuario;
+    } else {
+      console.warn("Elemento com id 'nome' não foi encontrado.");
+    }
   }
 
   const handlePhone = (event) => {

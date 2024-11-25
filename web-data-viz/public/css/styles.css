@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-html{
+html {
     scroll-behavior: smooth;
 }
 
@@ -14,7 +14,7 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     color: #232739;
-    background-color: white;
+    background-color: rgba(199, 208, 216, 1);
 
 }
 
@@ -105,47 +105,48 @@ nav ul li a:hover {
     background: #232739a4;
 }
 
-.dark-mode #solutions {
-    background-color: #232739;
-    color: #f0f0f0;
-}
-.dark-mode #solutions2 {
+.dark-mode #solucao {
     background-color: #232739;
     color: #f0f0f0;
 }
 
-.dark-mode .solution {
+.dark-mode #mvv {
+    background-color: #232739;
+    color: #f0f0f0;
+}
+
+.dark-mode .solucao {
     background-color: #191b27;
     color: #f0f0f0;
 }
 
-.dark-mode #about {
+.dark-mode #sobre {
     background-color: #232739;
     color: #f0f0f0;
 }
 
-.dark-mode #about p {
+.dark-mode #sobre p {
     background-color: #191b27;
     color: #f0f0f0;
 }
 
-.dark-mode #contact {
+.dark-mode #contato {
     background-color: #232739;
     color: #f0f0f0;
 }
 
-.dark-mode #contact .container {
+.dark-mode #contato .container {
     background-color: #232739;
     color: #f0f0f0;
 }
 
-.dark-mode #contact .container .btn-primary {
-    background-color:#404869;
+.dark-mode #contato .container .btn-primary {
+    background-color: #404869;
     color: white;
 }
 
-.dark-mode #contact .container .btn-primary:hover {
-    background-color:#191b27;
+.dark-mode #contato .container .btn-primary:hover {
+    background-color: #191b27;
     color: white;
 }
 
@@ -164,12 +165,6 @@ nav ul li a:hover {
     color: white;
     text-align: center;
     padding: 210px;
-}
-
-.Titulos{
-    align-items: center;
-    display: flex; 
-    justify-content: center;
 }
 
 .hero h2 {
@@ -197,33 +192,33 @@ nav ul li a:hover {
     background-color: #000285;
 }
 
-#solutions {
+#solucao {
     margin-top: 10px;
     padding: 90px 30px 10px;
     ;
-    background-color: white;
+    background-color: rgba(199, 208, 216, 1);
 }
 
-#solutions2 {
+#mvv {
     margin-top: 10px;
     padding: 134px 30px 10px;
-    background-color: white;
+    background-color: rgba(199, 208, 216, 1);
 }
 
-#solutions h2 {
+#solucao h2 {
     text-align: center;
     margin-bottom: 30px;
     font-size: 2rem;
 }
 
-.solution-grid {
+.solucao-grid {
     display: flex;
     justify-content: space-around;
     gap: 20px;
 }
 
-.solution {
-    background-color: #f4f4f4;
+.solucao {
+    background-color: #f8f9fb;
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -234,72 +229,80 @@ nav ul li a:hover {
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.solution.show {
+.solucao.show {
     opacity: 1;
     transform: translateY(0);
 }
 
-.solution, #about {
+.solucao,
+#sobre {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.solution.show, #about.show {
+.solucao.show,
+#sobre.show {
     opacity: 1;
     transform: translateY(0);
 }
 
-.solution h3 {
+.solucao h3 {
     margin-bottom: 10px;
     font-size: 1.4rem;
 }
 
-.solution p {
+.solucao p {
     font-size: 1rem;
     text-align: justify;
     text-justify: inter-word;
     padding: 2%;
 }
 
-#about {
+#sobre {
     margin-top: 10px;
     padding: 90px 30px 10px;
-    background-color: white;
+    background-color: rgba(199, 208, 216, 1);
     text-align: center;
 }
 
-#about h2 {
+#sobre h2 {
     font-size: 2rem;
     margin-bottom: 20px;
     padding-top: 51px;
 }
 
-#about p {
+#sobre p {
     font-size: 1.2rem;
     max-width: 800px;
     margin: 0 auto;
-    background-color: #ccc;
+    background-color: #f8f9fb;
     border-radius: 50px;
     padding: 4%;
     text-align: justify;
     text-justify: inter-word;
 }
 
-#contact {
-    margin-top: 10px;
-    padding: 30px 30px 10px;
-    background-color: white;
+.Titulos {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
 }
 
-#contact .container {
+#contato {
+    margin-top: 10px;
+    padding: 30px 30px 10px;
+    background-color: rgba(199, 208, 216, 1);
+}
+
+#contato .container {
     margin-top: 10px;
     padding: 90px 30px 10px;
     width: auto;
-    background-color: white;
+    background-color: rgba(199, 208, 216, 1);
 }
 
-#contact h2 {
+#contato h2 {
     text-align: center;
     margin-bottom: 30px;
     font-size: 2rem;
@@ -320,7 +323,7 @@ form input,
 form textarea {
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #232739;
+    border: 0px solid #232739;
     border-radius: 4px;
     font-size: 1rem;
 }
@@ -331,7 +334,8 @@ form button {
     padding: 12px;
     border: none;
     border-radius: 4px;
-    font-size: 1rem;font-weight: bold;
+    font-size: 1rem;
+    font-weight: bold;
 
 }
 
@@ -380,81 +384,81 @@ footer p {
 .menu-hamburguer {
     display: none;
     cursor: pointer;
-  }
-  
-  .menu-hamburguer .bar {
+}
+
+.menu-hamburguer .bar {
     width: 35px;
     height: 5px;
     background-color: #fff;
     margin: 6px auto;
     transition: all 0.3s ease-in-out;
-  }
-  
-  /* Estilo para o menu aberto */
-  .menu-hamburguer.open .bar:nth-child(1) {
+}
+
+/* Estilo para o menu aberto */
+.menu-hamburguer.open .bar:nth-child(1) {
     transform: rotate(45deg) translate(8px, 8px);
-  }
-  
-  .menu-hamburguer.open .bar:nth-child(2) {
+}
+
+.menu-hamburguer.open .bar:nth-child(2) {
     opacity: 0;
-  }
-  
-  .menu-hamburguer.open .bar:nth-child(3) {
+}
+
+.menu-hamburguer.open .bar:nth-child(3) {
     transform: rotate(-45deg) translate(8px, -8px);
-  }
-  
-  @media (max-width: 1030px) {
+}
+
+@media (max-width: 1030px) {
     nav ul {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: rgba(0, 0, 0, 0.8);
-      padding: 20px;
-      border-radius: 10px;
-      width: 100%;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        width: 100%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
-    
+
     nav ul li {
-      display: block;
-      margin-bottom: 20px;
+        display: block;
+        margin-bottom: 20px;
     }
-    
+
     nav ul li a {
-      color: #fff;
-      transition: color 0.2s ease-in-out;
+        color: #fff;
+        transition: color 0.2s ease-in-out;
     }
-    
+
     nav ul li a:hover {
-      color: #ccc;
+        color: #ccc;
     }
-  
-  .menu-hamburguer {
-      display: block;
+
+    .menu-hamburguer {
+        display: block;
     }
-    
-    .menu-hamburguer.open + ul {
-      display: block;
+
+    .menu-hamburguer.open+ul {
+        display: block;
     }
-    
+
     nav ul.open {
-      display: block;
+        display: block;
     }
-    
+
     /* Efeito blur ao fundo */
     .blur-background {
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
-  }
-  
-  /* Classe para adicionar o efeito blur */
-  .blur-background-active {
+}
+
+/* Classe para adicionar o efeito blur */
+.blur-background-active {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-  }
-  
+}
+
 
 @media (min-width: 1024px) {
     .hero h2 {
@@ -465,11 +469,11 @@ footer p {
         font-size: 1.4rem;
     }
 
-    .solution-grid {
+    .solucao-grid {
         flex-direction: row;
     }
 
-    .solution {
+    .solucao {
         width: 30%;
     }
 }
@@ -483,12 +487,12 @@ footer p {
         font-size: 1.3rem;
     }
 
-    .solution-grid {
+    .solucao-grid {
         flex-direction: row;
         flex-wrap: wrap;
     }
 
-    .solution {
+    .solucao {
         width: 45%;
         margin-bottom: 20px;
     }
@@ -522,11 +526,11 @@ footer p {
         font-size: 1.1rem;
     }
 
-    .solution-grid {
+    .solucao-grid {
         flex-direction: column;
     }
 
-    .solution {
+    .solucao {
         width: 100%;
         margin-bottom: 20px;
     }

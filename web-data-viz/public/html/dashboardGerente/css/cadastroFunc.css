@@ -14,8 +14,7 @@ body {
   width: 100%;
   max-width: 1300px;
   height: 100dvh;
-  background: rgb(212, 212, 212);
-
+  background: rgba(199, 208, 216, 1);
 }
 
 nav {

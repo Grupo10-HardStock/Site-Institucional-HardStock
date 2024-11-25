@@ -196,10 +196,10 @@ function editar(req, res) {
 }
 
 
-function deletar(req, res) {
+function inativar(req, res) {
     var idFuncionario = req.params.idFuncionario;
 
-    usuarioModel.deletar(idFuncionario)
+    usuarioModel.inativar(idFuncionario)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -208,7 +208,7 @@ function deletar(req, res) {
         .catch(
             function (erro) {
                 console.log(erro);
-                console.log("Houve um erro ao deletar o Funcionario: ", erro.sqlMessage);
+                console.log("Houve um erro ao inativar o Funcionario: ", erro.sqlMessage);
                 res.status(500).json(erro.sqlMessage);
             }
         );
@@ -294,6 +294,6 @@ module.exports = {
     buscarMensagens,
     autenticar,
     cadastrar,
-    deletar,
+    inativar,
     editar
 }
