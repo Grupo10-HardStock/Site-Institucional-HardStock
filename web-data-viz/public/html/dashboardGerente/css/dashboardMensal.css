@@ -716,7 +716,7 @@ canvas {
   font-size: 15px;
   font-weight: bold;
   margin-bottom: 11px;
-  padding: 11px;
+  padding: 10px;
   border-radius: 8px;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -730,7 +730,7 @@ canvas {
   color: #191b27;
   font-size: 15px;
   margin-bottom: 11px;
-  padding: 11px;
+  padding: 10px;
   font-weight: bold;
   border-radius: 8px;
   text-align: center;
@@ -744,7 +744,7 @@ canvas {
   color: white;
   font-size: 15px;
   margin-bottom: 11px;
-  padding: 12px;
+  padding: 10px;
   font-weight: bold;
   border-radius: 8px;
   text-align: center;
@@ -759,7 +759,7 @@ canvas {
   color: white;
   font-size: 14px;
   margin-bottom: 11px;
-  padding: 12px;
+  padding: 10px;
   font-weight: bold;
   border-radius: 8px;
   text-align: center;

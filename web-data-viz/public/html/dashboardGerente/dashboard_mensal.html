@@ -162,17 +162,17 @@
 
       <div class="kpi">
 
-        <div id="kpiTendencias">
-          <i class="fa-solid fa-chart-area"></i>
-          <div id="kpiTendencias-text">
-            Tendências: aguardando dados...
-          </div>
-        </div>
-
         <div id="kpiLimiarCritico">
           <i class="fa-solid fa-triangle-exclamation"></i>
           <div id="kpiLimiarCritico-text">
             Limiar Crítico: aguardando dados...
+          </div>
+        </div>
+
+        <div id="kpiTendencias">
+          <i class="fa-solid fa-chart-area"></i>
+          <div id="kpiTendencias-text">
+            Tendências: aguardando dados...
           </div>
         </div>
 
@@ -424,9 +424,9 @@ Correlação: Identificar padrões entre componentes.
         if (dados && dados[0]) {
           const tendencia = dados[0].variacao_percentual;
           if (periodo > 1) {
-            document.getElementById("kpiTendencias-text").textContent = `Tendência: ${tendencia}% de variação em comparação aos ${periodo} meses passados.`;
+            document.getElementById("kpiTendencias-text").textContent = `variação de ${tendencia}% em comparação aos dados recebidos dos ${periodo} meses passados.`;
           } else {
-            document.getElementById("kpiTendencias-text").textContent = `Tendência: ${tendencia}% de variação em comparação a ${periodo} mês atrás.`;
+            document.getElementById("kpiTendencias-text").textContent = `variação de ${tendencia}% em comparação a dados recebidos de ${periodo} mês atrás.`;
           }
         } else {
           console.log("Dados de tendência não encontrados.");
@@ -504,9 +504,9 @@ Correlação: Identificar padrões entre componentes.
         if (dados && dados[0] && dados[0].total_bytes_enviados !== undefined) {
           const total = dados[0].total_bytes_enviados;
           if (periodo > 1) {
-            document.getElementById("kpiAgregacao-text").textContent = `Total de dados enviados nos últimos ${periodo} meses: ${total}MB.`;
+            document.getElementById("kpiAgregacao-text").textContent = `Total de dados enviados nos últimos ${periodo} meses: ${total} MB.`;
           } else {
-            document.getElementById("kpiAgregacao-text").textContent = `Total de dados enviados no último mês: ${total}MB.`;
+            document.getElementById("kpiAgregacao-text").textContent = `Total de dados enviados no último mês: ${total} MB.`;
           }
         } else {
           console.log("Dados de agregação não encontrados.");
