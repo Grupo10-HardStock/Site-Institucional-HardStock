@@ -117,24 +117,6 @@ function graficoRede( req , res) {
     });
   }
 
-  function graficoStatus( req , res) {
-    medidaModel.graficoStatus()
-    .then(resultadoAutenticar => {
-      console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
-      console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
-  
-      if (resultadoAutenticar.length > 0) {
-        res.status(200).json(resultadoAutenticar);
-      } else {
-        res.status(200).json([]);
-      }
-    })
-    .catch(erro => {
-      console.log(erro);
-      console.log("\nHouve um erro ao realizar o buscar Empresas! Erro: ", erro.sqlMessage);
-      res.status(500).json({ error: "Houve um erro ao realizar o buscar Empresas!", details: erro.sqlMessage });
-    });
-  }
   
   function obterGraficoCpu(req, res) {
     const idServidor = req.query.idServidor;
@@ -251,6 +233,97 @@ function dados_kpi_rede(req, res) {
     });
 }
 
+function graficoAlerta( req , res) {
+  var selecao = req.params.selecao;
+
+  medidaModel.graficoAlerta(selecao)
+  .then(resultadoAutenticar => {
+    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+
+    if (resultadoAutenticar.length > 0) {
+      res.status(200).json(resultadoAutenticar);
+    } else {
+      res.status(200).json([]);
+    }
+  })
+  .catch(erro => {
+    console.log(erro);
+    console.log("\nHouve um erro ao realizar o buscar Empresas! Erro: ", erro.sqlMessage);
+    res.status(500).json({ error: "Houve um erro ao realizar o buscar Empresas!", details: erro.sqlMessage });
+  });
+}
+
+
+  function graficoServidores(req, res) {
+    var selecao = req.params.selecao;
+
+
+    medidaModel.graficoServidores(selecao)
+      .then(resultadoAutenticar => {
+        console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+        console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+    
+        if (resultadoAutenticar.length > 0) {
+          res.status(200).json(resultadoAutenticar);
+        } else {
+          console.log("Nenhum dado encontrado no banco.");
+          res.status(200).json([]);  
+        }
+      })
+      .catch(erro => {
+        console.log(erro);
+        console.log("\nHouve um erro ao realizar a busca de servidores! Erro: ", erro.sqlMessage);
+        res.status(500).json({ error: "Houve um erro ao realizar a busca de servidores!", details: erro.sqlMessage });
+      });
+  }
+  
+
+
+
+  function graficoStatus( req , res) {
+    var selecao = req.params.selecao;
+
+
+    medidaModel.graficoStatus(selecao)
+    .then(resultadoAutenticar => {
+      console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+      console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+  
+      if (resultadoAutenticar.length > 0) {
+        res.status(200).json(resultadoAutenticar);
+      } else {
+        res.status(200).json([]);
+      }
+    })
+    .catch(erro => {
+      console.log(erro);
+      console.log("\nHouve um erro ao realizar o buscar Empresas! Erro: ", erro.sqlMessage);
+      res.status(500).json({ error: "Houve um erro ao realizar o buscar Empresas!", details: erro.sqlMessage });
+    });
+  }
+
+
+  function dadosKpi(req, res) {
+
+    var selecao = req.params.selecao;
+
+
+    console.log(`Pegando dados em porcentagem de uso do CPU`);
+    
+    medidaModel.dadosKpi(selecao).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+  }
+
 
 
 module.exports = {
@@ -260,12 +333,16 @@ module.exports = {
     graficoRam,
     graficoDisco,
     graficocpu,
-    graficoStatus,
     dados_kpi_cpu,
     dados_kpi_ram,
     dados_kpi_rede,
     obterGraficoCpu,
     obterGraficoRam,
     obterGraficoRede,
-    obterDadoDisco
+    obterDadoDisco,
+    graficoStatus,
+    graficoAlerta,
+    graficoServidores,
+    dadosKpi
+
 }

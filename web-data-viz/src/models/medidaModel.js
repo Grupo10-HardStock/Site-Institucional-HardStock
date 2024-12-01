@@ -73,17 +73,6 @@ function graficocpu() {
     return database.executar(instrucaoSql);
 }
 
-function graficoStatus() {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n graficoRede(): ")
-    var instrucaoSql =
-        `
-    SELECT estado, count(estado) as 'Votos' FROM servidor GROUP BY estado;
-
-  `
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
 function obterGraficoCpu(idServidor) {
     var instrucaoSql = `SELECT * FROM dadosGraficoCpu WHERE fkServidor = ${idServidor} limit 10;`;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -124,18 +113,132 @@ function dados_kpi_rede() {
     return database.executar(instrucaoSql);
 }
 
+
+function graficoAlerta(selecao) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n graficoRede(): ")
+    var instrucaoSql =
+      `
+  SELECT 
+      componente AS 'alerta', 
+      COUNT(componente) AS 'Votos'
+  FROM 
+      Alertas
+  WHERE 
+      dataCriacao >= DATE_SUB(CURDATE(), INTERVAL ${selecao} MONTH) 
+  GROUP BY 
+      componente
+  ORDER BY 
+      Votos DESC;
+  
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+  }
+  
+  
+  
+  function dadosKpi(selecao) {
+    console.log("Obtendo o servidor com mais alertas...");
+  
+    var instrucaoSqlServidor = `
+  SELECT 
+      s.nome AS 'NomeServidor',
+      COUNT(a.idAlerta) AS 'QuantidadeTotalDeAlertas',
+      (SELECT 
+          a2.componente 
+       FROM 
+          Alertas a2 
+       WHERE 
+          a2.fkServidor = s.idServidor 
+          AND a2.dataCriacao >= DATE_SUB(CURDATE(), INTERVAL ${selecao} MONTH)  -- Filtro de tempo (últimos 6 meses)
+       GROUP BY 
+          a2.componente 
+       ORDER BY 
+          COUNT(a2.idAlerta) DESC 
+       LIMIT 1
+      ) AS 'ComponenteMaisAfetado'
+  FROM 
+      Servidor s
+  JOIN 
+      Alertas a ON a.fkServidor = s.idServidor
+  WHERE 
+      a.dataCriacao >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH)  -- Filtro de tempo (últimos 6 meses)
+  GROUP BY 
+      s.idServidor, s.nome
+  ORDER BY 
+      QuantidadeTotalDeAlertas DESC
+  LIMIT 1;
+  
+    `;
+  
+    console.log("Executando SQL para servidor:\n" + instrucaoSqlServidor);
+  
+    return database.executar(instrucaoSqlServidor);
+  }
+  
+  
+  
+  function graficoServidores(selecao) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n graficoRede(): ")
+    var instrucaoSql =
+      `
+      SELECT 
+      s.nome AS NomeServidor,
+      COUNT(a.idAlerta) AS QuantidadeTotalDeAlertas
+  FROM 
+      Alertas a
+  JOIN 
+      Servidor s ON a.fkServidor = s.idServidor
+  WHERE 
+      a.dataCriacao >= DATE_SUB(CURDATE(), INTERVAL ${selecao} MONTH)
+  GROUP BY 
+      s.idServidor, s.nome
+  ORDER BY 
+      QuantidadeTotalDeAlertas DESC;
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+  }
+  
+  
+  
+  function graficoStatus(selecao) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n graficoRede(): ")
+    var instrucaoSql =
+      `
+      SELECT 
+      estado, 
+      COUNT(estado) AS 'Votos'
+  FROM 
+      Servidor
+  WHERE 
+      dataCriacao >= DATE_SUB(CURDATE(), INTERVAL ${selecao} MONTH)  -- Supondo que exista o campo dataCriacao
+  GROUP BY 
+      estado
+  ORDER BY 
+      'Votos' DESC;
+  
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+  }
+  
+
 module.exports = {
     buscarMediasMensais,
     graficoRede,
     graficoRam,
     graficoDisco,
     graficocpu,
-    graficoStatus,
     dados_kpi_cpu,
     dados_kpi_ram,
     dados_kpi_rede,
     obterGraficoCpu,
     obterGraficoRam,
     obterGraficoRede,
-    obterDadoDisco
+    obterDadoDisco,
+    graficoStatus,
+    graficoAlerta,
+    graficoServidores,
+    dadosKpi
 }
