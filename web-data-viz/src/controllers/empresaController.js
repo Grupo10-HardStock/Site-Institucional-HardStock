@@ -250,33 +250,12 @@ function sitegrafico4( req , res) {
   });
 }
 
-const clickbtn = (req, res) => {
-  const { btnnome, tipomobdes } = req.body;
-  console.log('btnnome:', btnnome, 'tipomobdes:', tipomobdes);
-  // Verifique se btnnome é um string válida
-  if (typeof btnnome !== 'string' || btnnome.trim() === '') {
-      return res.status(400).json({ error: 'btnnome deve ser uma string válida.' });
-  }
-  if (!tipomobdes || (tipomobdes !== 'desktop' && tipomobdes !== 'mobile')) {
-      return res.status(400).json({ error: 'tipomobdes deve ser "desktop" ou "mobile".' });
-  }
-  empresaModel.clickbtn(btnnome, tipomobdes)
-      .then(result => {
-          res.status(200).json({ message: 'Interação registrada com sucesso.' });
-      })
-      .catch(err => {
-          console.error('Erro ao registrar interação:', err);
-          res.status(500).json({ error: 'Erro ao registrar interação.' });
-      });
-};
 
 module.exports = {
   verificarStatusEmpresa,
   cadastrarGerente,
   buscarEmpresa, 
   listarEmpresa,
-  editar,
-  clickbtn,
   listarSelect,
   buscarPorCnpj, 
   sitegrafico4,
