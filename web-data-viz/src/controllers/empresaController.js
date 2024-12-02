@@ -157,6 +157,26 @@ function listarEmpresa(req, res) {
       });
 }
 
+function viewServidoresOrdenados(req, res) {
+
+  empresaModel.viewServidoresOrdenados()
+      .then(resultadoAutenticar => {
+          console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+          console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
+
+          if (resultadoAutenticar.length > 0) {
+              res.status(200).json(resultadoAutenticar);
+          } else {
+              res.status(200).json([]);
+          }
+      })
+      .catch(erro => {
+          console.log(erro);
+          console.log("\nHouve um erro ao listar detalhes do Funcionario! Erro: ", erro.sqlMessage);
+          res.status(500).json({ error: "Houve um erro ao realizar o buscar Funcionarios!", details: erro.sqlMessage });
+      });
+}
+
 const clickbtn = (req, res) => {
   const { btnnome, tipomobdes } = req.body;
   console.log('btnnome:', btnnome, 'tipomobdes:', tipomobdes);
@@ -250,26 +270,20 @@ function sitegrafico4( req , res) {
   });
 }
 
-const clickbtn = (req, res) => {
-  const { btnnome, tipomobdes } = req.body;
-  console.log('btnnome:', btnnome, 'tipomobdes:', tipomobdes);
-  // Verifique se btnnome é um string válida
-  if (typeof btnnome !== 'string' || btnnome.trim() === '') {
-      return res.status(400).json({ error: 'btnnome deve ser uma string válida.' });
-  }
-  if (!tipomobdes || (tipomobdes !== 'desktop' && tipomobdes !== 'mobile')) {
-      return res.status(400).json({ error: 'tipomobdes deve ser "desktop" ou "mobile".' });
-  }
-  empresaModel.clickbtn(btnnome, tipomobdes)
-      .then(result => {
-          res.status(200).json({ message: 'Interação registrada com sucesso.' });
-      })
-      .catch(err => {
-          console.error('Erro ao registrar interação:', err);
-          res.status(500).json({ error: 'Erro ao registrar interação.' });
-      });
-};
-
+function buscarUltimasMedidas(req, res) {
+  console.log(`Recuperando as ultimas medidas`);
+  empresaModel.buscarUltimasMedidas().then(function (resultado) {
+      if (resultado.length > 0) {
+          res.status(200).json(resultado);
+      } else {
+          res.status(204).send("Nenhum resultado encontrado!")
+      }
+  }).catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+      res.status(500).json(erro.sqlMessage);
+  });
+}
 module.exports = {
   verificarStatusEmpresa,
   cadastrarGerente,
@@ -283,10 +297,12 @@ module.exports = {
   sitegrafico3,
   sitegrafico2,
   sitegrafico1,
-  buscarPorId, 
+  buscarPorId,
+  viewServidoresOrdenados, 
   cadastrar, 
   clickbtn,
   inativar,
   listar, 
-  editar
+  editar,
+  buscarUltimasMedidas
 };

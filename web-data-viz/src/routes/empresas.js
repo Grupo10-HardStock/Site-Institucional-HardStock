@@ -24,6 +24,10 @@ router.get("/listar", function (req, res) {
   empresaController.listar(req, res);
 });
 
+router.get("/viewServidoresOrdenados", function (req, res) {
+  empresaController.viewServidoresOrdenados(req, res);
+});
+
 router.get("/buscarEmpresa/", function (req, res) {
   empresaController.buscarEmpresa(req, res);
 })

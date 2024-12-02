@@ -78,13 +78,13 @@
         <div class="kpi">
           <img id="img" src="./assets/img/rede.png">
           <h2>RAM</h2>
-          <span id="porcent_ram"></span>
+          <span id="porcent_ram">78%</span>
           <p>Quantidade utilizada da memória ram</p>
         </div>
         <div class="kpi">
           <img src="./assets/img/Wifi.png">
           <h2>REDE</h2>
-          <span id="porcent_rede"></span>
+          <span id="porcent_rede">75 mbps</span>
           <p>Quantidade de mbps enviado da rede</p>
         </div>
         <div class="info"></div>
@@ -161,8 +161,8 @@
   function select(value) {
 
     if (value == 1) {
-      obterDadosSelect()
       fundo.style.display = 'flex';
+      obterDadosSelect()
       servidor.style.display = 'flex';
     }
     if (value == 2) {
@@ -225,7 +225,7 @@
   }
 
   function obterDadosSelect() {
-    fetch("/empresas/listarSelect", {
+    fetch("/empresas/viewServidoresOrdenados", {
       method: "GET",
     })
       .then(function (resposta) {
@@ -394,7 +394,8 @@
       'container-speed', Highcharts.merge(gaugeOptions, {
         yAxis: {
           min: 0,
-          max: resposta[0].usoDiscoTotal,
+          max: 249,
+          // max: resposta[0].usoDiscoTotal,
           title: {
             text: 'Gráfico CPU'
           }
@@ -406,7 +407,8 @@
 
         series: [{
           name: 'Quatidade de Uso',
-          data: [resposta[0].usoDiscoUsado],
+          data: [200],
+          // data: [resposta[0].usoDiscoUsado],
           dataLabels: {
             format:
               '<div style="text-align:center">' +
@@ -484,7 +486,7 @@
     var options = {
       series: [{
         name: 'RAM',
-        data: dados.map(dado => dado.numtheads)
+        data: dados.map(dado => dado.numThreads)
       }],
       chart: {
         type: 'area',

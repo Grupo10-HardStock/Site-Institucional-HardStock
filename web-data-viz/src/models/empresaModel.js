@@ -12,6 +12,12 @@ function listar() {
   return database.executar(instrucaoSql);
 }
 
+function viewServidoresOrdenados() {
+  var instrucaoSql = `select * from viewServidoresOrdenados;`;
+
+  return database.executar(instrucaoSql);
+}
+
 function buscarPorCnpj(cnpj) {
   var instrucaoSql = `SELECT * FROM empresa WHERE cnpj = '${cnpj};'`;
 
@@ -177,5 +183,6 @@ module.exports = {
   clickbtn,
   inativar,
   listar, 
-  editar
+  editar,
+  viewServidoresOrdenados
  };
