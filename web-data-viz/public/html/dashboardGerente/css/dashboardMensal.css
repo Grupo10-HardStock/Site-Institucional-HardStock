@@ -27,7 +27,7 @@ nav {
   height: 100dvh;
   width: 90px;
   background: linear-gradient(to bottom, #515a83, #232739, #191b27);
-  /* background-color: rgba(199, 208, 216, 1); */
+
   overflow: hidden;
   box-shadow: 0 10px 20px rgb(80, 80, 80);
   grid-column: 1/2;
@@ -37,11 +37,13 @@ nav {
   border-right: 2px solid #191b27;
 }
 
-.alinhamento{
+.alinhamento {
+  width: 100%;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 65%;
+
 }
 
 main {
@@ -252,9 +254,9 @@ nav:hover {
   align-items: center;
   justify-content: flex-start;
   gap: 20px;
-  width: 100%; 
-  max-width: 1200px; 
-  padding: 20px; 
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
 }
 
 .alert {
@@ -272,7 +274,7 @@ nav:hover {
 .alert p {
   width: 100%;
   margin: 0%;
-  padding: 5px 0px 5px 0px; 
+  padding: 5px 0px 5px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -283,20 +285,20 @@ nav:hover {
 }
 
 .normal {
-  background-color: #28a745; 
+  background-color: #28a745;
 }
 
 .perigo {
-  background-color: #ffc107; 
+  background-color: #ffc107;
   color: #333;
 }
 
-.critico{
-  background-color: #fd7e14; 
+.critico {
+  background-color: #fd7e14;
 }
 
 .severo {
-  background-color: #dc3545; 
+  background-color: #dc3545;
 }
 
 h3 {
@@ -316,7 +318,7 @@ p {
 
 @media (max-width: 768px) {
   .alert {
-      width: 100%;
+    width: 100%;
   }
 }
 
@@ -418,6 +420,8 @@ p {
   max-width: 1200px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+
 }
 
 .titulo {
@@ -425,19 +429,19 @@ p {
   justify-content: center;
   align-items: center;
   margin-top: 1%;
-  margin-left: 11%;
+  margin-left: 6%;
 }
 
 #selecTempo {
   position: absolute;
-  margin-left: 43%;
+  margin-left: -19%;
   color: rgb(35, 39, 57);
   font-size: 1rem;
   padding: 0.6% 1.4%;
   border: none;
   border-radius: 20px;
-  margin-top: 4.5%;
-  margin-bottom: -29%;
+  margin-top: 3.7%;
+  margin-bottom: 6%;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -455,50 +459,46 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 95%;
+  width: 80%;
   max-width: 1200px;
-  margin: 3% 1% 3% 7%;
+  margin: 5% 1% 3% -15%;
   padding-left: 10px;
-  padding: 20px;
+  padding: 8px 20px 8px 20px;
   background-color: rgb(178, 186, 194);
   border-radius: 15px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  height: 94%;
 }
 
 .graficos1 {
   display: flex;
   flex-direction: row;
-  width: 80%;
+  width: 118%;
+  height: 55%;
   margin-bottom: 10px;
+  margin: -0.5%;
+  align-items: center;
+  justify-content: center;
 }
 
 .graficos2 {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 118%;
+  height: 55%;
   margin-bottom: 10px;
   margin: -0.5%;
-}
-
-.graficos2 .chart-container {
-  width: 100%;
-  max-width: 550px;
-  background-color: #f8f9fb;
-  border-radius: 10px;
-  padding: 1.5px;
-  margin: 2% 1% 0% 0%;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: all 0.3s ease;
+  align-items: center;
+  justify-content: center;
 }
 
 .chart-container {
-  width: 100%;
+  width: 42%;
   max-width: 550px;
   background-color: #f8f9fb;
   border-radius: 10px;
-  padding: 2.5px;
-  margin: 2%;
+  padding: 0.5px;
+  margin: 1%;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: all 0.3s ease;
@@ -561,6 +561,11 @@ canvas {
   color: #f0f0f0;
 }
 
+.dark-mode .kpi {
+  background: linear-gradient(to bottom, #4c547a, #232739, #191b27);
+  color: #f0f0f0;
+}
+
 .dark-mode header {
   background: #232739a4;
 }
@@ -590,24 +595,24 @@ canvas {
   position: absolute;
   z-index: 1;
   bottom: 125%;
-  /* Posiciona acima do elemento */
+
   left: 50%;
   transform: translateX(-50%);
-  /* Centraliza horizontalmente */
 
-  /* Evitar que a página role */
+
+
   white-space: normal;
-  /* Quebra linhas se necessário */
+
   overflow: hidden;
   word-wrap: break-word;
-  /* Garante a quebra de palavras longas */
+
 }
 
 .tooltip .tooltipRAM::after {
   content: "";
   position: absolute;
   top: 100%;
-  /* Triângulo abaixo do tooltip */
+
   left: 50%;
   transform: translateX(-50%);
   border-width: 5px;
@@ -621,10 +626,10 @@ canvas {
 
 .tooltip .tooltipRAM[style*="overflow"]:hover {
   overflow: visible;
-  /* Permite expandir enquanto o tooltip está visível */
+
 }
 
-/* Ajustes para manter o tooltip dentro da tela */
+
 .tooltip .tooltipRAM {
   max-width: 300px;
   word-break: normal;
@@ -673,4 +678,109 @@ canvas {
 
 .info-icon:hover {
   background-color: #424868;
+}
+
+.horizontalmente {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 110%;
+  justify-content: center;
+  padding-left: 20%;
+  height: 93%;
+}
+
+.kpi {
+  display: flex;
+  padding: 10.5px;
+  width: 29%;
+  height: 94.1%;
+  margin-top: 1.5%;
+  border-radius: 12px;
+  background-color: rgb(178, 186, 194);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-evenly;
+}
+
+
+#kpiTendencias {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #007bff;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 11px;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+
+#kpiLimiarCritico {
+  width: 100%;
+  background-color: #ffc107;
+  color: #191b27;
+  font-size: 15px;
+  margin-bottom: 11px;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#kpiAgregacao {
+  width: 100%;
+  background-color: #28a745;
+  color: white;
+  font-size: 15px;
+  margin-bottom: 11px;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+
+#kpiCorrelacao {
+  width: 100%;
+  background-color: #17a2b8;
+  color: white;
+  font-size: 14px;
+  margin-bottom: 11px;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+
+.kpi div:hover {
+  opacity: 0.8;
+  cursor: default;
+}
+
+
+@media (max-width: 768px) {
+  .kpi {
+    width: 200px;
+    padding: 15px;
+  }
+
+  .kpi div {
+    font-size: 14px;
+  }
 }

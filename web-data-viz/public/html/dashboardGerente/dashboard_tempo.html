@@ -11,6 +11,240 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Incluindo o Chart.js -->
   <title>Dashboard Mensal | HardStock</title>
 
+  <style>
+       .centralizador {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 110px;
+}
+
+#selecTempo {
+  text-align: center;
+  background-color: #232739;
+  color: white;
+  font-size: large;
+  padding: 0.5%;
+  border-radius: 50px;
+  width: 250px;
+  height: 40px;
+  margin-bottom: 20px;
+  appearance: none;
+  background-image: none;
+  /* Remover a seta */
+}
+
+.linha-grafico-card {
+  display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 50%;
+    margin: -67px;
+    justify-content: center;
+    margin-left: -20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgb(178, 186, 194);
+    border-radius: 8px;
+    align-items: center;
+}
+
+.divisao {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  padding: 20px;
+  margin-top: -100px;
+  margin-left: -100px;
+}
+
+.card {
+  flex: 1;
+  margin: 10px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  max-width: 300px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card canvas {
+  width: 100% !important;
+  height: 200px;
+  max-height: 250px;
+  object-fit: contain;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cardLinha1,
+.cardLinha2 {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 90%;
+  height: 50%;
+}
+
+.iframe {
+  width: 72%;
+  height: 640px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: bisque;
+  margin-left: 70px;
+}
+
+@media (max-width: 768px) {
+  .centralizador {
+    flex-direction: column;
+  }
+
+  .linha-grafico-card,
+  .divisao {
+    width: 90%;
+    margin-left: 0;
+  }
+
+  .iframe,
+  .card {
+    width: 100%;
+    height: auto;
+  }
+
+  #selecTempo {
+    width: 100%;
+  }
+
+  .divisao {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .iframe {
+    width: 100%;
+    height: 400px;
+  }
+
+  .card canvas {
+    width: 100% !important;
+    height: 150px;
+    max-height: 200px;
+  }
+}
+
+.seletor-container {
+  display: flex;
+  flex-direction: column;  /* Organize os itens em coluna */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center;     /* Centraliza verticalmente */
+  gap: 10px;               /* Distância entre o select e o botão */
+  width: 100%;             /* Garante que ocupe toda a largura disponível */
+  max-width: 600px;        /* Limita a largura máxima para um layout mais organizado */
+  margin: 0 auto;          /* Centraliza o contêiner */
+}
+
+.alerta-titulo {
+  font-size: 30px;
+  font-weight: bold;
+  color: #232739;
+  text-align: center;
+  width: 100%; 
+  margin-bottom: 10px; 
+}
+
+#selectGraf {
+    background-color: #232739;
+    color: white;
+    font-size: large;
+    padding: 0.5%;
+    border-radius: 50px;
+    height: 40px;
+    border: none;
+    appearance: auto; /* Mantém a seta padrão do navegador */
+    width: 190px;
+    text-align: center;
+}
+
+
+#btnAtualizarGrafico {
+  background-color: #272339;
+  color: white;
+  font-size: large;
+  padding: 0.5% 1%;
+  border-radius: 50px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 160px;
+}
+
+#btnAtualizarGrafico:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.kpi-card {
+  flex: 1;
+  margin: 10px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  max-width: 300px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kpi-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.kpi-content {
+  width: 100%;
+  height: auto;
+  text-align: center;
+}
+
+.kpi-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.kpi-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #232739;
+}
+
+
+  </style>
+
 </head>
 
 <body onload="carregarNome()">
@@ -79,12 +313,13 @@
 
   <div class="centralizador">
     <div class="divisao">
+      
       <!-- Seleção do tipo de relatório -->
       <select id="selecTempo" onchange="carregarRelatorio()">
         <option disabled selected value="#">Selecione o relatório</option>
-        <option value="mensal">Relatório Mensal</option>
-        <option value="trimestral">Relatório Trimestral</option>
-        <option value="semestral">Relatório Semestral</option>
+        <option value="1">Relatório Mensal</option>
+        <option value="3">Relatório Trimestral</option>
+        <option value="6">Relatório Semestral</option>
       </select>
 
       <!-- Relatório RMarkdown -->
@@ -92,34 +327,47 @@
     </div>
 
     <div class="linha-grafico-card">
+      <!-- Seletor de tempo e alertas -->
+      <div class="seletor-container">
+        <p class="alerta-titulo">Alertas</p> <!-- Título acima do select -->
+        <div class="seletor-e-buscar"> <!-- Container para manter o select e o botão na mesma linha -->
+          <select id="selectGraf">
+            <option disabled selected value="#">Selecione o período</option>
+            <option value="1">Último Mês</option>
+            <option value="3">Últimos 3 Meses</option>
+            <option value="6">Últimos 6 Meses</option>
+          </select>
+          <button id="btnAtualizarGrafico" onclick="atualizarGrafico()">Buscar</button>
+        </div>
+      </div>
+    
       <div class="cardLinha1">
         <div class="card card1">
           <!-- Gráfico 1 -->
-          <canvas id="graficoRede"></canvas>
+          <canvas id="graficoAlerta"></canvas>
         </div>
-
-        <div class="card card2">
-          <!-- Gráfico 2 -->
-          <canvas id="graficoRam"></canvas>
-        </div>
-
-        <div class="card card3">
-          <!-- Gráfico 3 -->
-          <canvas id="graficoDisco"></canvas>
-        </div>
-      </div>
-
-      <div class="cardLinha2">
+    
         <div class="card card4">
           <!-- Gráfico 4 -->
-          <canvas id="graficoCpu"></canvas>
+          <span id="dados_Kpi"></span>
         </div>
-
+      </div>
+    
+      <div class="cardLinha2">
+        <div class="card card2">
+          <!-- Gráfico 2 -->
+          <canvas id="graficoServidores"></canvas>
+        </div>
+    
         <div class="card card5">
           <!-- Gráfico 5 -->
           <canvas id="graficoStatus"></canvas>
         </div>
       </div>
+    </div>
+    
+    </div>
+    
     </div>
   </div>
 
@@ -128,6 +376,9 @@
 
 </html>
 <script>
+
+let chartInstances = {};  // Objeto para armazenar as instâncias dos gráficos
+
   function toggleDarkMode() {
     const body = document.body;
     const themeToggleIcon = document.getElementById('themeToggleIcon');
@@ -145,11 +396,6 @@
     }
   }
 
-  function carregarNome() {
-    let text = sessionStorage.NOME_USUARIO;
-    document.getElementById('nome').innerHTML = "Olá, " + text;
-  }
-
   function carregarRelatorio() {
     const selecao = document.getElementById("selecTempo").value;
     let iframe = document.getElementById("iframeRelatorio");
@@ -160,13 +406,13 @@
     }
 
     switch (selecao) {
-      case "mensal":
+      case "1":
         iframe.src = "./relatorioMensal.html"; // Mude para o caminho correto do relatório mensal
         break;
-      case "trimestral":
+      case "3":
         iframe.src = "./relatorioTrimestral.html"; // Mude para o caminho correto do relatório trimestral
         break;
-      case "semestral":
+      case "6":
         iframe.src = "./relatorioSemestral.html"; // Mude para o caminho correto do relatório semestral
         break;
       default:
@@ -175,12 +421,28 @@
   }
 
   function plotarGrafico(graficoId, dados, titulo) {
+    if (!graficoId) {
+      console.error('Erro: ID do gráfico não fornecido.');
+      return;
+    }
+
     console.log(`Iniciando plotagem do gráfico para: ${graficoId}...`);
 
-    const ctx = document.getElementById(graficoId).getContext('2d');
+    const ctx = document.getElementById(graficoId);
     if (!ctx) {
       console.error(`Erro: o canvas com ID ${graficoId} não foi encontrado.`);
       return;
+    }
+
+    const context = ctx.getContext('2d');
+    if (!context) {
+      console.error(`Erro: o contexto do canvas com ID ${graficoId} não foi encontrado.`);
+      return;
+    }
+
+    // Verifica se já existe um gráfico com o mesmo ID e o destrói antes de criar um novo
+    if (chartInstances[graficoId]) {
+      chartInstances[graficoId].destroy();
     }
 
     const chartData = {
@@ -222,7 +484,7 @@
     };
 
     try {
-      new Chart(ctx, {
+      chartInstances[graficoId] = new Chart(context, {
         type: 'bar',
         data: chartData,
         options: chartOptions
@@ -232,123 +494,169 @@
     }
   }
 
-  // Exemplo de como chamar a função para cada gráfico
+  function atualizarGrafico() {
+    console.log("Atualizando os gráficos...");
 
-  // Gráfico de Rede
-  fetch(`/medidas/graficoRede/`, { cache: 'no-store' })
-    .then(function (response) {
-      if (response.ok) {
-        response.json()
-          .then(json => {
-            rede = [];
-            votos = [];
-            for (var i = 0; i < json.length; i++) {
-              rede.push(json[i].rede);
-              votos.push(json[i].Votos);
-            }
-            plotarGrafico('graficoRede', { labels: rede, data: votos, label: 'Votos', backgroundColor: 'rgba(255, 0, 0, 0.5)' }, 'Gráfico de Rede');
-          });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-    .catch(function (error) {
-      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
+    var selecao = document.getElementById("selectGraf").value;
 
-  // Gráfico de RAM
-  fetch(`/medidas/graficoRam/`, { cache: 'no-store' })
-    .then(function (response) {
-      if (response.ok) {
-        response.json()
-          .then(json => {
-            ram = [];
-            votos = [];
-            for (var i = 0; i < json.length; i++) {
-              ram.push(json[i].ram);
-              votos.push(json[i].Votos);
-            }
-            plotarGrafico('graficoRam', { labels: ram, data: votos, label: 'Votos', backgroundColor: 'rgba(0, 255, 0, 0.5)' }, 'Gráfico de RAM');
-          });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-    .catch(function (error) {
-      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
+    // Verifica se o valor selecionado no seletor é válido
+    if (selecao === "#" || selecao === "") {
+        // Caso não tenha seleção válida, exibe um alerta
+        alert("Por favor, selecione um período antes de buscar os dados.");
+        return;  // Interrompe a execução da função
+    }
 
-  // Gráfico de Disco
-  fetch(`/medidas/graficoDisco/`, { cache: 'no-store' })
-    .then(function (response) {
-      if (response.ok) {
-        response.json()
-          .then(json => {
-            disco = [];
-            votos = [];
-            for (var i = 0; i < json.length; i++) {
-              disco.push(json[i].disco);
-              votos.push(json[i].Votos);
-            }
-            plotarGrafico('graficoDisco', { labels: disco, data: votos, label: 'Votos', backgroundColor: 'rgba(0, 0, 255, 0.5)' }, 'Gráfico de Disco');
-          });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-    .catch(function (error) {
-      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
+    // Gráfico alerta
+    fetch(`/medidas/graficoAlerta/${selecao}`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json()
+            .then(json => {
+              let alerta = [];
+              let votos = [];
 
-  // Gráfico de CPU
-  fetch(`/medidas/graficocpu/`, { cache: 'no-store' })
-    .then(function (response) {
-      if (response.ok) {
-        response.json()
-          .then(json => {
-            cpu = [];
-            votos = [];
-            for (var i = 0; i < json.length; i++) {
-              cpu.push(json[i].cpu);
-              votos.push(json[i].Votos);
-            }
-            plotarGrafico('graficoCpu', { labels: cpu, data: votos, label: 'Votos', backgroundColor: 'rgba(255, 255, 0, 0.5)' }, 'Gráfico de CPU');
-          });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-    .catch(function (error) {
-      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
+              if (json && Array.isArray(json)) {
+                for (var i = 0; i < json.length; i++) {
+                  alerta.push(json[i].alerta);
+                  votos.push(json[i].Votos);
+                }
+              } else {
+                console.error('Resposta não é um array válido ou não contém dados esperados');
+              }
 
-  // Gráfico de Status
-  fetch(`/medidas/graficoStatus/`, { cache: 'no-store' })
-    .then(function (response) {
-      if (response.ok) {
-        response.json()
-          .then(json => {
-            estado = [];
-            votos = [];
-            for (var i = 0; i < json.length; i++) {
-              estado.push(json[i].estado);
-              votos.push(json[i].Votos);
+              plotarGrafico('graficoAlerta', {
+                labels: alerta,
+                data: votos,
+                label: 'Alertas',
+                backgroundColor: '#232739'
+              }, 'Total de Alertas');
+            });
+        } else {
+          console.error('Erro na resposta da API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+
+    // Plotagem da KPI
+    fetch(`/medidas/dadosKpi/${selecao}`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(resposta);  // Exibe toda a resposta no console para inspeção
+
+            if (resposta && Array.isArray(resposta) && resposta.length > 0) {
+              let nomeServidorComMaisAlertas = '';
+              let alertasMaximos = 0;
+              let componenteComMaisAlertas = '';
+              let alertasComponenteMaximo = 0;
+
+              for (let i = 0; i < resposta.length; i++) {
+                const servidor = resposta[i].NomeServidor;
+                const alertas = resposta[i].QuantidadeTotalDeAlertas;
+                const componente = resposta[i].ComponenteMaisAfetado;
+
+                if (alertas > alertasMaximos) {
+                  alertasMaximos = alertas;
+                  nomeServidorComMaisAlertas = servidor;
+                }
+
+                if (alertas > alertasComponenteMaximo) {
+                  alertasComponenteMaximo = alertas;
+                  componenteComMaisAlertas = componente;
+                }
+              }
+
+              const dados_Kpi = document.getElementById('dados_Kpi');
+              if (dados_Kpi) {
+                dados_Kpi.innerHTML = `  
+                  <strong>Servidor com mais alertas:</strong> ${nomeServidorComMaisAlertas || 'N/A'}<br>
+                  <strong>Quantidade de alertas:</strong> ${alertasMaximos || 'N/A'}<br>
+                  <strong>Componente com mais alertas:</strong> ${componenteComMaisAlertas || 'N/A'}<br>
+                `;
+              } else {
+                console.error('Elemento com ID "dados_Kpi" não encontrado.');
+              }
+            } else {
+              console.error('Resposta da API não contém dados válidos ou está vazia');
             }
-            plotarGrafico('graficoStatus', { labels: estado, data: votos, label: 'Votos', backgroundColor: 'rgba(255, 165, 0, 0.5)' }, 'Gráfico de Status');
           });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-    .catch(function (error) {
-      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
+        } else {
+          console.error('Resposta da API não OK.');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados: ${error.message}`);
+      });
+
+    // Gráfico de Servidores
+    fetch(`/medidas/graficoServidores/${selecao}`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json()
+            .then(json => {
+              console.log('Resposta completa da API para gráfico de servidores:', json);
+
+              if (json && Array.isArray(json)) {
+                let servidores = [];
+                let quantidadeAlertas = [];
+
+                for (var i = 0; i < json.length; i++) {
+                  servidores.push(json[i].NomeServidor);
+                  quantidadeAlertas.push(json[i].QuantidadeTotalDeAlertas);
+                }
+
+                plotarGrafico('graficoServidores', {
+                  labels: servidores,
+                  data: quantidadeAlertas,
+                  label: 'Quantidade de Alertas',
+                  backgroundColor: 'rgba(0, 123, 255, 0.5)'
+                }, 'Gráfico de Alertas por Servidor');
+              } else {
+                console.error("Estrutura de dados inesperada ou JSON vazio.");
+              }
+            });
+        } else {
+          console.error('Erro na API ou dados não encontrados');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na requisição da API: ${error.message}`);
+      });
+
+    // Gráfico de Status
+    fetch(`/medidas/graficoStatus/${selecao}`, { cache: 'no-store' })
+      .then(function (response) {
+        if (response.ok) {
+          response.json()
+            .then(json => {
+              let estado = [];
+              let votos = [];
+              for (var i = 0; i < json.length; i++) {
+                estado.push(json[i].estado);
+                votos.push(json[i].Votos);
+              }
+              plotarGrafico('graficoStatus', {
+                labels: estado,
+                data: votos,
+                label: 'Votos',
+                backgroundColor: 'rgba(255, 165, 0, 0.5)'
+              }, 'Gráfico de Status');
+            });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  }
 
 
   window.onload = function () {
     carregarNome();
-    obterDadosGrafico();  // Chama a função para obter os dados e plotar os gráficos
+    atualizarGrafico();  // Chama a função para obter os dados e plotar os gráficos
   };
-
 
 </script>

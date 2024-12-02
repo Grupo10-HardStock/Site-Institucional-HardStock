@@ -38,13 +38,13 @@
           </p>
         </li>
         <li><a href="../dashboardGerente/dashboard_tempo.html">
-          <i class="fa-solid fa-chart-line"></i>
-          <span class="navItem">Relatório</span>
-        </a></li>
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="navItem">Relatório</span>
+          </a></li>
         <li><a href="../dashboardGerente/dashboard_componentes.html">
-          <i class="fa-solid fa-table-list"></i>
-          <span class="navItem">Servidores</span>
-        </a></li>
+            <i class="fa-solid fa-table-list"></i>
+            <span class="navItem">Servidores</span>
+          </a></li>
         <li><a href="../dashboardGerente/dashboard_mensal.html"
             style="background: rgba(199, 208, 216, 1);color: #191b27;">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
@@ -79,7 +79,9 @@
   </nav>
   </div>
 
+
   <div class="Alinhamento">
+    <h2 class="titulo">Análise temporal dos Servidores</h2>
     <select name="tempo" id="selecTempo" onchange="gerarGraficosMediasMensais()">
       <option value="0" selected disabled>Selecione o Tempo</option>
       <option value="1">1 mês</option>
@@ -87,97 +89,124 @@
       <option value="6">6 meses</option>
       <option value="12">12 meses</option>
     </select>
-    <h2 class="titulo">Análise temporal dos Servidores</h2>
-    <div class="graficos">
-      <div class="graficos1">
-        <div class="chart-container">
-          <b>Média Rede</b>
-          <div class="tooltip">
-            <div class="info-icon">
-              ℹ
+
+    <div class="horizontalmente">
+      <div class="graficos">
+        <div class="graficos1">
+          <div class="chart-container">
+            <b>Média Rede</b>
+            <div class="tooltip">
+              <div class="info-icon">
+                ℹ
+              </div>
+
+              <span class="tooltiptext"> Média de Upload e Download:<br><br>
+                Monitora o tráfego de dados na rede para identificar congestionamentos,
+                quedas de serviço ou ataques de negação de serviço (DDoS). <br><br>
+                Ajuda a garantir comunicação estável e fluxo contínuo de dados.
+              </span>
+            </div>
+            <canvas id="chart_Rede"></canvas>
+          </div>
+
+          <div class="chart-container">
+            <b>Média de Leitura do Disco</b>
+            <div class="tooltip">
+              <div class="info-icon">
+                ℹ
+              </div>
+
+              <span class="tooltiptext">Média Tempo de Leitura do Disco: <br><br>
+                Média de Leitura do Disco: Mede o desempenho de leitura do disco para evitar gargalos, falhas de
+                armazenamento ou lentidão nos sistemas. <br><br>
+
+                Promove maior confiabilidade e rapidez no acesso aos dados.
+              </span>
             </div>
 
-            <span class="tooltiptext"> Média de Upload e Download:<br>
-              Gráfico com duas linhas que mostram as médias mensais de dados enviados (upload) e recebidos (download)
-              em MB. <br><br>
-              Ajuda a monitorar o uso da rede e detectar variações no tráfego.
-            </span>
+            <canvas id="chart_Tempo_de Leitura do Disco"></canvas>
           </div>
-          <canvas id="chart_Rede"></canvas>
         </div>
 
-        <div class="chart-container">
-          <b>Média Uso Disco</b>
-          <div class="tooltip">
-            <div class="info-icon">
-              ℹ
+        <div class="graficos2">
+          <div class="chart-container">
+            <b>Média Velocidade CPU</b>
+            <div class="tooltip">
+              <div class="info-icon">
+                ℹ
+              </div>
+
+              <span class="tooltiptext">Média de Velocidade da CPU: <br><br>
+                Acompanha o uso do processador para identificar
+                sobrecargas, ajustar recursos e evitar falhas de desempenho ou quebras no hardware.
+              </span>
             </div>
-
-            <span class="tooltiptext">Média de Uso do Disco: <br>
-              Exibe a média mensal do espaço de armazenamento efetivamente utilizado (em GB). <br><br>
-              Ajuda a entender como o espaço em disco está sendo consumido.
-            </span>
+            <canvas id="chart_Velocidade_da CPU"></canvas>
           </div>
+          <div class="chart-container">
+            <b>Média Número de Threads</b>
+            <div class="tooltip">
+              <div class="info-icon">
+                ℹ
+              </div>
 
-          <canvas id="chart_Uso_do Disco Usado"></canvas>
+              <span class="tooltiptext">Média de Número de Threads: <br><br>
+                Controla a quantidade de processos simultâneos para evitar concorrência excessiva, deadlocks e
+                exaustão de recursos, garantindo que o sistema funcione de maneira eficiente e sem interrupções.
+              </span>
+            </div>
+            <canvas id="chart_Número_de Threads"></canvas>
+          </div>
         </div>
       </div>
 
-      <div class="graficos2">
-        <div class="chart-container">
-          <b>Média Armazenamento</b>
-          <div class="tooltip">
-            <div class="info-icon">
-              ℹ
-            </div>
+      <div class="kpi">
 
-            <span class="tooltiptext">Média Uso do Disco Total: <br>
-              Mostra a capacidade total de armazenamento disponível (em GB) em média ao longo de cada mês. <br><br>
-              Indica o espaço geral disponível no sistema.
-            </span>
+        <div id="kpiLimiarCritico">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <div id="kpiLimiarCritico-text">
+            Limiar Crítico: aguardando dados...
           </div>
-          <canvas id="chart_Uso_do Disco Total"></canvas>
-        </div>
-        <div class="chart-container">
-          <b>Média Uso CPU</b>
-          <div class="tooltip">
-            <div class="info-icon">
-              ℹ
-            </div>
-
-            <span class="tooltiptext">Média de Uso da CPU: <br>
-              Gráfico que exibe a média mensal do uso do processador, indicando o percentual de utilização ao longo do
-              tempo. <br><br>
-              Útil para identificar padrões de carga e possíveis sobrecargas.
-            </span>
-          </div>
-          <canvas id="chart_Uso_da CPU"></canvas>
         </div>
 
-        <div class="chart-container">
-          <b>Média RAM</b>
-          <div class="tooltip">
-            <div class="info-icon">
-              ℹ
-            </div>
-
-            <span class="tooltipRAM">Média de Memória Usada: <br>
-              Representa a média mensal de memória utilizada (em GB). <br><br>
-              Permite acompanhar o consumo de memória e identificar tendências ou necessidades de ajuste no sistema.
-            </span>
+        <div id="kpiTendencias">
+          <i class="fa-solid fa-chart-area"></i>
+          <div id="kpiTendencias-text">
+            Tendências: aguardando dados...
           </div>
-          <canvas id="chart_Memória_Usada"></canvas>
+        </div>
+
+        <div id="kpiAgregacao">
+          <i class="fa-solid fa-database"></i>
+          <div id="kpiAgregacao-text">
+            Agregação: aguardando dados...
+          </div>
+
+        </div>
+
+        <div id="kpiCorrelacao">
+          <i class="fa-solid fa-chart-gantt"></i>
+          <div id="kpiCorrelacao-text">
+            Correlação: aguardando dados...
+          </div>
         </div>
 
       </div>
+
     </div>
+
   </div>
 
 </body>
 
 </html>
 
-
+<!-- 
+  Tendências temporais: Comparação percentual de valores.
+Limiar crítico: Identificar medições fora dos limites.
+Agregação: Total ou média por períodos.
+Correlação: Identificar padrões entre componentes.
+-->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
@@ -201,6 +230,8 @@
     }
   }
 
+
+
   function gerarGraficosMediasMensais() {
     var periodo = selecTempo.value;
 
@@ -215,15 +246,16 @@
           const dadosComponentes = {};
           json.forEach(item => {
             if (!dadosComponentes[item.componente]) {
-              dadosComponentes[item.componente] = { labels: [], data: [] };
+              dadosComponentes[item.componente] = { labels: [], data: [], unidade: item.unidade };  // Armazenando a unidade
             }
             dadosComponentes[item.componente].labels.push(item.mes_ano);
             dadosComponentes[item.componente].data.push(item.media_valor);
           });
 
-          ["Uso da CPU", "Memória Usada", "Uso do Disco Total", "Uso do Disco Usado"].forEach(componente => {
+          // Atualiza os gráficos
+          ['Tempo de Leitura do Disco', 'Velocidade da CPU', 'Número de Threads'].forEach(componente => {
             if (dadosComponentes[componente]) {
-              atualizarGrafico(componente, dadosComponentes[componente].labels, dadosComponentes[componente].data);
+              atualizarGrafico(componente, dadosComponentes[componente].labels, dadosComponentes[componente].data, dadosComponentes[componente].unidade);
             }
           });
 
@@ -231,8 +263,11 @@
             atualizarGraficoRede(
               dadosComponentes["Bytes Enviados"].labels,
               dadosComponentes["Bytes Enviados"].data,
-              dadosComponentes["Bytes Recebidos"].data
+              dadosComponentes["Bytes Recebidos"].data,
+              dadosComponentes["Bytes Enviados"].unidade  // Passando a unidade para o gráfico de rede
             );
+
+            gerarKPIs();
           }
         });
       } else {
@@ -244,108 +279,106 @@
     });
   }
 
-  function atualizarGrafico(componente, labels, data) {
-  const canvasId = `chart_${componente.replace(" ", "_")}`;
-  const canvas = document.getElementById(canvasId);
 
-  if (!canvas) {
-    console.error(`Canvas com ID ${canvasId} não encontrado.`);
-    return;
-  }
+  function atualizarGrafico(componente, labels, data, unidade) {
+    const canvasId = `chart_${componente.replace(" ", "_")}`;
+    const canvas = document.getElementById(canvasId);
 
-  let ctx = canvas.getContext('2d');
-  if (chartComponents[componente]) {
-    chartComponents[componente].destroy();
-  }
+    if (!canvas) {
+      console.error(`Canvas com ID ${canvasId} não encontrado.`);
+      return;
+    }
 
-  chartComponents[componente] = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: `Média de ${componente}`,
-        data: data,
-        borderColor: 'rgb(31, 27, 70)',
-        backgroundColor: 'rgba(31, 27, 70, 0.2)',
-        fill: true,
-        borderWidth: 2,
-        tension: 0.1
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        tooltip: {
-          callbacks: {
-            label: function (context) {
-              // Adiciona "%" ou mantém valor direto com base no nome do componente
-              const value = context.raw.toFixed(2);
-              const suffix = ["Uso do Disco Usado", "Uso do Disco Total", "Uso da CPU", "Memória Usada"].includes(componente) ? "%" : "";
-              return `${value}${suffix}`;
+    let ctx = canvas.getContext('2d');
+    if (chartComponents[componente]) {
+      chartComponents[componente].destroy();
+    }
+
+    chartComponents[componente] = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: `Média de ${componente}`,
+          data: data,
+          borderColor: 'rgb(31, 27, 70)',
+          backgroundColor: 'rgba(31, 27, 70, 0.2)',
+          fill: true,
+          borderWidth: 2,
+          tension: 0.1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const value = context.raw.toFixed(2);
+                return `${value} ${unidade}`;  // Inclui a unidade no tooltip
+              }
             }
           }
         }
       }
+    });
+  }
+
+
+  function atualizarGraficoRede(labels, dataUpload, dataDownload, unidade) {
+    const canvasId = "chart_Rede";
+    const canvas = document.getElementById(canvasId);
+
+    if (!canvas) {
+      console.error(`Canvas com ID ${canvasId} não encontrado.`);
+      return;
     }
-  });
-}
 
-function atualizarGraficoRede(labels, dataUpload, dataDownload) {
-  const canvasId = "chart_Rede";
-  const canvas = document.getElementById(canvasId);
+    let ctx = canvas.getContext('2d');
+    if (chartComponents["Rede"]) {
+      chartComponents["Rede"].destroy();
+    }
 
-  if (!canvas) {
-    console.error(`Canvas com ID ${canvasId} não encontrado.`);
-    return;
-  }
-
-  let ctx = canvas.getContext('2d');
-  if (chartComponents["Rede"]) {
-    chartComponents["Rede"].destroy();
-  }
-
-  chartComponents["Rede"] = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: labels,
-      datasets: [
-        {
-          label: 'Média de Upload',
-          data: dataUpload,
-          borderColor: 'rgba(54, 162, 235, 1)',
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          fill: true,
-          borderWidth: 2,
-          tension: 0.1
-        },
-        {
-          label: 'Média de Download',
-          data: dataDownload,
-          borderColor: 'rgba(255, 99, 132, 1)',
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          fill: true,
-          borderWidth: 2,
-          tension: 0.1
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        tooltip: {
-          callbacks: {
-            label: function (context) {
-              // Adiciona "MB" para Bytes Enviados e Recebidos
-              const value = context.raw.toFixed(2);
-              const suffix = context.dataset.label.includes("Upload") || context.dataset.label.includes("Download") ? " MB" : "";
-              return `${value}${suffix}`;
+    chartComponents["Rede"] = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Média de Upload',
+            data: dataUpload,
+            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            fill: true,
+            borderWidth: 2,
+            tension: 0.1
+          },
+          {
+            label: 'Média de Download',
+            data: dataDownload,
+            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            fill: true,
+            borderWidth: 2,
+            tension: 0.1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const value = context.raw.toFixed(2);
+                return `${value} ${unidade}`;  // Inclui a unidade no tooltip
+              }
             }
           }
         }
       }
-    }
-  });
-}
+    });
+  }
 
   function iniciarAtualizacaoGraficos() {
     gerarGraficosMediasMensais();
@@ -369,5 +402,162 @@ function atualizarGraficoRede(labels, dataUpload, dataDownload) {
   document.addEventListener("DOMContentLoaded", function () {
     carregarNome();
   });
+
+  function gerarKPIs() {
+    var periodo = selecTempo.value;
+
+
+    fetch(`/kpis/buscarTendencias/${periodo}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(function (resposta) {
+        if (!resposta.ok) {
+          console.error(`Erro ao buscar dados: ${resposta.statusText}`);
+          return resposta.text();
+        }
+        return resposta.json();
+      })
+      .then(function (dados) {
+        if (dados && dados[0]) {
+          const tendencia = dados[0].variacao_percentual;
+          if (periodo > 1) {
+            document.getElementById("kpiTendencias-text").textContent = `variação de ${tendencia}% em comparação aos dados recebidos dos ${periodo} meses passados.`;
+          } else {
+            document.getElementById("kpiTendencias-text").textContent = `variação de ${tendencia}% em comparação a dados recebidos de ${periodo} mês atrás.`;
+          }
+        } else {
+          console.log("Dados de tendência não encontrados.");
+        }
+      })
+      .catch(function (erro) {
+        console.log("Erro ao buscar dados de tendências temporais:", erro);
+      });
+
+
+    fetch(`/kpis/buscarLimiarCritico/${periodo}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(function (resposta) {
+        if (!resposta.ok) {
+          console.error(`Erro ao buscar dados: ${resposta.statusText}`);
+          return resposta.text();
+        }
+        return resposta.json();
+      })
+      .then(function (dados) {
+        if (dados && dados[0]) {
+          const ocorrencias = dados[0].ocorrencias_criticas;
+          if (ocorrencias > 0) {
+            if (periodo == 1) {
+              const div = document.getElementById("kpiLimiarCritico");
+              document.getElementById("kpiLimiarCritico-text").textContent =
+                `O tempo de leitura do disco ultrapassou o limite recomendado (40ms) ${ocorrencias} vezes no último mês`;
+            } else {
+              const div = document.getElementById("kpiLimiarCritico");
+              document.getElementById("kpiLimiarCritico-text").textContent =
+                `O tempo de leitura do disco ultrapassou o limite recomendado (40ms) ${ocorrencias} vezes nos últimos ${periodo} meses`;
+            }
+          } else {
+            if (periodo == 1) {
+              const div = document.getElementById("kpiLimiarCritico");
+              document.getElementById("kpiLimiarCritico-text").textContent =
+                `Nenhuma medição fora do limite crítico foi detectada no último ${periodo} mês.`
+            } else {
+              const div = document.getElementById("kpiLimiarCritico");
+              document.getElementById("kpiLimiarCritico-text").textContent =
+                `Nenhuma medição fora do limite crítico foi detectada nos últimos ${periodo} meses.`;
+            }
+
+          }
+        } else {
+          console.log("Dados de limiar crítico não encontrados.");
+        }
+      })
+      .catch(function (erro) {
+        console.log("Erro ao buscar dados de limiar crítico:", erro);
+      });
+
+
+    fetch(`/kpis/buscarAgregacao/${periodo}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(function (resposta) {
+        if (!resposta.ok) {
+          console.error(`Erro ao buscar dados: ${resposta.statusText}`);
+          return resposta.text();
+        }
+        return resposta.json();
+      })
+      .then(function (dados) {
+        console.log("Dados recebidos:", dados);
+
+
+        if (dados && dados[0] && dados[0].total_bytes_enviados !== undefined) {
+          const total = dados[0].total_bytes_enviados;
+          if (periodo > 1) {
+            document.getElementById("kpiAgregacao-text").textContent = `Total de dados enviados nos últimos ${periodo} meses: ${total} MB.`;
+          } else {
+            document.getElementById("kpiAgregacao-text").textContent = `Total de dados enviados no último mês: ${total} MB.`;
+          }
+        } else {
+          console.log("Dados de agregação não encontrados.");
+        }
+      })
+      .catch(function (erro) {
+        console.log("Erro ao buscar dados de agregação:", erro);
+      });
+
+
+
+    fetch(`/kpis/buscarCorrelacao/${periodo}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(function (resposta) {
+        if (!resposta.ok) {
+          console.error(`Erro ao buscar dados: ${resposta.statusText}`);
+          return resposta.text();
+        }
+        return resposta.json();
+      })
+      .then(function (dados) {
+        if (dados && dados.length > 0) {
+          const tempoDisco = dados.find(d => d.fkComponente === 6)?.media_valor;
+          const velocidadeCPU = dados.find(d => d.fkComponente === 9)?.media_valor;
+
+          if (tempoDisco !== undefined && velocidadeCPU !== undefined) {
+            let mensagem;
+
+            if (tempoDisco > 40 && velocidadeCPU < 1000) {
+              mensagem = `o tempo de leitura do disco está acima do limite esperado (40ms) e a velocidade da CPU está abaixo do mínimo esperado (1000), pode ser um possível Gargalo.`;
+            } else {
+              mensagem = `Os componentes estão operando dentro dos limites esperados.`;
+            }
+
+            document.getElementById('kpiCorrelacao-text').textContent = mensagem;
+          } else {
+            document.getElementById('kpiCorrelacao-text').textContent =
+              `Não foi possível calcular a correlação devido à ausência de dados suficientes.`;
+          }
+        } else {
+          console.log("Dados de correlação não encontrados.");
+        }
+      })
+      .catch(function (erro) {
+        console.log("Erro ao buscar dados de correlação:", erro);
+      });
+  }
+
 
 </script>

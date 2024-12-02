@@ -289,8 +289,6 @@ module.exports = {
   cadastrarGerente,
   buscarEmpresa, 
   listarEmpresa,
-  editar,
-  clickbtn,
   listarSelect,
   buscarPorCnpj, 
   sitegrafico4,

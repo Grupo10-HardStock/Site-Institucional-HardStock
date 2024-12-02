@@ -68,4 +68,25 @@ router.get("/dados_kpi_rede/", function (req, res) {
 router.get("/obterDadoDisco/", function (req, res) {
     medidaController.obterDadoDisco(req, res);
 })
+
+
+router.get("/graficoAlerta/:selecao", function (req, res) {
+    medidaController.graficoAlerta(req, res);
+});
+
+
+router.get("/graficoServidores/:selecao", function (req, res) {
+    medidaController.graficoServidores(req, res);
+})
+
+router.get("/dadosKpi/:selecao", function (req, res) {
+    medidaController.dadosKpi(req, res);
+})
+
+
+
+router.get("/graficoStatus/:selecao", function (req, res) {
+    medidaController.graficoStatus(req, res);
+})
+
 module.exports = router;
