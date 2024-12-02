@@ -6,27 +6,22 @@ function buscarTendencias(periodo) {
     var instrucaoSql =
         `
         SELECT 
-        ROUND(((media_atual - media_anterior) / media_anterior) * 100, 2) AS variacao_percentual,
+        ROUND(((COALESCE(media_atual, 0) - COALESCE(media_anterior, 0)) / COALESCE(media_anterior, 1)) * 100, 2) AS variacao_percentual,
         'Bytes Recebidos' AS componente
-          FROM (
+    FROM (
         SELECT 
-        AVG(CASE 
-                WHEN WEEK(dataHora) = WEEK(NOW()) 
-                     AND dataHora >= NOW() - INTERVAL ${periodo} MONTH 
-                THEN valor 
-                ELSE NULL 
-            END) AS media_atual,
-        AVG(CASE 
-                WHEN WEEK(dataHora) = WEEK(NOW()) - 1 
-                     AND dataHora >= NOW() - INTERVAL ${periodo} MONTH 
-                THEN valor 
-                ELSE NULL 
-            END) AS media_anterior
-          FROM Capturas
-            WHERE fkComponente = 2 -- ID de Bytes Recebidos
-        ) AS medias;
-
-
+            AVG(CASE 
+                    WHEN YEARWEEK(dataHora, 1) = YEARWEEK(NOW(), 1) THEN valor 
+                    ELSE NULL 
+                END) AS media_atual,
+            AVG(CASE 
+                    WHEN YEARWEEK(dataHora, 1) = YEARWEEK(NOW(), 1) - 1 THEN valor 
+                    ELSE NULL 
+                END) AS media_anterior
+        FROM Capturas
+        WHERE fkComponente = 2
+          AND dataHora >= NOW() - INTERVAL ${periodo} MONTH
+    ) AS medias;
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
