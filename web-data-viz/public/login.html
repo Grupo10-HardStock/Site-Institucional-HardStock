@@ -33,6 +33,7 @@
                     <span>Senha</span>
                     <input type="password" id="input_senha">
                     <i class="fa-solid fa-eye toggle-password" onclick="togglePassword()" id="toggleIcon"></i>
+         
                     <p id="alertSenha"></p>
                 </label>
                 <div class="ctBtn">
@@ -131,7 +132,7 @@
 
                     if (permissao == 'Hardstock' & status == 'Ativo') {
                         setTimeout(function () {
-                            window.location = "../html/dashboardHardStock/dashboardEmpresas.html";
+                            window.location = "../html/dashboardHardStock/dashboard_Site.html";
                         }, 1000);
                     } else if (permissao == 'Gerente' & status == 'Ativo') {
                         setTimeout(function () {
