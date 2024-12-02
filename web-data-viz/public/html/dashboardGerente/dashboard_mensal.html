@@ -504,9 +504,9 @@ Correlação: Identificar padrões entre componentes.
         if (dados && dados[0] && dados[0].total_bytes_enviados !== undefined) {
           const total = dados[0].total_bytes_enviados;
           if (periodo > 1) {
-            document.getElementById("kpiAgregacao-text").textContent = `Total de dados enviados nos últimos ${periodo} meses: ${total} MB.`;
+            document.getElementById("kpiAgregacao-text").textContent = `Total de dados enviados nos últimos ${periodo} meses: ${total.toFixed(2)} MB.`;
           } else {
-            document.getElementById("kpiAgregacao-text").textContent = `Total de dados enviados no último mês: ${total} MB.`;
+            document.getElementById("kpiAgregacao-text").textContent = `Total de dados enviados no último mês: ${total.toFixed(2)} MB.`;
           }
         } else {
           console.log("Dados de agregação não encontrados.");
