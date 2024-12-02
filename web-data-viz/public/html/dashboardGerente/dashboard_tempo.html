@@ -21,7 +21,7 @@
 }
 
 #selecTempo {
-  text-align: justify;
+  text-align: center;
   background-color: #232739;
   color: white;
   font-size: large;
@@ -161,7 +161,7 @@
 }
 
 .alerta-titulo {
-  font-size: 18px;
+  font-size: 30px;
   font-weight: bold;
   color: #232739;
   text-align: center;
@@ -170,17 +170,18 @@
 }
 
 #selectGraf {
-  background-color: #232739;
-  color: white;
-  font-size: large;
-  padding: 0.5%;
-  border-radius: 50px;
-  height: 40px;
-  border: none;
-  appearance: none;
-  width: 160px;
-  text-align: center;
+    background-color: #232739;
+    color: white;
+    font-size: large;
+    padding: 0.5%;
+    border-radius: 50px;
+    height: 40px;
+    border: none;
+    appearance: auto; /* Mantém a seta padrão do navegador */
+    width: 190px;
+    text-align: center;
 }
+
 
 #btnAtualizarGrafico {
   background-color: #272339;
@@ -330,7 +331,7 @@
         <p class="alerta-titulo">Alertas</p> <!-- Título acima do select -->
         <div class="seletor-e-buscar"> <!-- Container para manter o select e o botão na mesma linha -->
           <select id="selectGraf">
-            <option disabled selected value="#">Selecione o tempo</option>
+            <option disabled selected value="#">Selecione o período</option>
             <option value="1">Último Mês</option>
             <option value="3">Últimos 3 Meses</option>
             <option value="6">Últimos 6 Meses</option>
