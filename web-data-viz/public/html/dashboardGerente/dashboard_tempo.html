@@ -12,169 +12,187 @@
   <title>Dashboard Mensal | HardStock</title>
 
   <style>
-        .centralizador {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      width: 100%;
-      margin-top: 110px;
-    }
-
-    #selecTempo {
-      text-align: justify;
-      background-color: #232739;
-      color: white;
-      font-size: large;
-      padding: 0.5%;
-      border-radius: 50px;
-      width: 250px;
-      height: 40px;
-      margin-bottom: 20px;
-      appearance: none;
-      background-image: none;
-      /* Remover a seta */
-    }
-
-    .linha-grafico-card {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      width: 50%;
-      margin: 0 auto;
-      justify-content: space-between;
-      margin-left: -20px;
-    }
-
-    .divisao {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      width: 50%;
-      padding: 20px;
-      margin-top: -100px;
-    }
-
-    .card {
-      flex: 1;
-      margin: 10px;
-      padding: 20px;
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-      min-width: 200px;
-      max-width: 300px;
-      height: 250px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card canvas {
-      width: 100% !important;
-      height: 200px;
-      max-height: 250px;
-      object-fit: contain;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .cardLinha1,
-    .cardLinha2 {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      width: 100%;
-      height: 50%;
-    }
-
-    .iframe {
-      width: 72%;
-      height: 640px;
-      border-radius: 10px;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      background-color: bisque;
-      margin-left: 70px;
-    }
-
-    @media (max-width: 768px) {
-      .centralizador {
-        flex-direction: column;
-      }
-
-      .linha-grafico-card,
-      .divisao {
-        width: 90%;
-        margin-left: 0;
-      }
-
-      .iframe,
-      .card {
-        width: 100%;
-        height: auto;
-      }
-
-      #selecTempo {
-        width: 100%;
-      }
-
-      .divisao {
-        width: 100%;
-        height: auto;
-        padding: 10px;
-      }
-
-      .card {
-        width: 100%;
-      }
-
-      .iframe {
-        width: 100%;
-        height: 400px;
-      }
-
-      .card canvas {
-        width: 100% !important;
-        height: 150px;
-        max-height: 200px;
-      }
-    }
-
-    .seletor-container {
+       .centralizador {
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 110px;
+}
+
+#selecTempo {
+  text-align: justify;
+  background-color: #232739;
+  color: white;
+  font-size: large;
+  padding: 0.5%;
+  border-radius: 50px;
+  width: 250px;
+  height: 40px;
+  margin-bottom: 20px;
+  appearance: none;
+  background-image: none;
+  /* Remover a seta */
+}
+
+.linha-grafico-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 50%;
+  margin: -67px;
+  justify-content: space-between;
+  margin-left: -20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgb(178, 186, 194);
+  border-radius: 8px;
+}
+
+.divisao {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 10px; /* Controle da distância entre o select e o botão */
+  flex-direction: column;
+  width: 50%;
+  padding: 20px;
+  margin-top: -100px;
+  margin-left: -100px;
+}
+
+.card {
+  flex: 1;
+  margin: 10px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  max-width: 300px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card canvas {
+  width: 100% !important;
+  height: 200px;
+  max-height: 250px;
+  object-fit: contain;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cardLinha1,
+.cardLinha2 {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 50%;
+}
+
+.iframe {
+  width: 72%;
+  height: 640px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: bisque;
+  margin-left: 70px;
+}
+
+@media (max-width: 768px) {
+  .centralizador {
+    flex-direction: column;
+  }
+
+  .linha-grafico-card,
+  .divisao {
+    width: 90%;
+    margin-left: 0;
+  }
+
+  .iframe,
+  .card {
+    width: 100%;
+    height: auto;
+  }
+
+  #selecTempo {
+    width: 100%;
+  }
+
+  .divisao {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .iframe {
+    width: 100%;
+    height: 400px;
+  }
+
+  .card canvas {
+    width: 100% !important;
+    height: 150px;
+    max-height: 200px;
+  }
+}
+
+.seletor-container {
+  display: flex;
+  flex-direction: column;  /* Organize os itens em coluna */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center;     /* Centraliza verticalmente */
+  gap: 10px;               /* Distância entre o select e o botão */
+  width: 100%;             /* Garante que ocupe toda a largura disponível */
+  max-width: 600px;        /* Limita a largura máxima para um layout mais organizado */
+  margin: 0 auto;          /* Centraliza o contêiner */
+}
+
+.alerta-titulo {
+  font-size: 18px;
+  font-weight: bold;
+  color: #232739;
+  text-align: center;
+  width: 100%; 
+  margin-bottom: 10px; 
 }
 
 #selectGraf {
   background-color: #232739;
-    color: white;
-    font-size: large;
-    padding: 0.5%;
-    border-radius: 50px;
-    height: 40px;
-    border: none;
-    appearance: none;
-    width: 160px;
-    text-align: center;
+  color: white;
+  font-size: large;
+  padding: 0.5%;
+  border-radius: 50px;
+  height: 40px;
+  border: none;
+  appearance: none;
+  width: 160px;
+  text-align: center;
 }
 
 #btnAtualizarGrafico {
-  background-color: #232739;
-    color: white;
-    font-size: large;
-    padding: 0.5% 1%;
-    border-radius: 50px;
-    height: 40px;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 160px;
+  background-color: #272339;
+  color: white;
+  font-size: large;
+  padding: 0.5% 1%;
+  border-radius: 50px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 160px;
 }
 
 #btnAtualizarGrafico:hover {
@@ -182,46 +200,45 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
+.kpi-card {
+  flex: 1;
+  margin: 10px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  max-width: 300px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-    .kpi-card {
-      flex: 1;
-      margin: 10px;
-      padding: 20px;
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-      min-width: 200px;
-      max-width: 300px;
-      height: auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+.kpi-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
 
-    .kpi-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    }
+.kpi-content {
+  width: 100%;
+  height: auto;
+  text-align: center;
+}
 
-    .kpi-content {
-      width: 100%;
-      height: auto;
-      text-align: center;
-    }
+.kpi-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 
-    .kpi-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .kpi-value {
-      font-size: 24px;
-      font-weight: bold;
-      color: #232739;
-    }
+.kpi-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #232739;
+}
 
 
   </style>
@@ -294,6 +311,7 @@
 
   <div class="centralizador">
     <div class="divisao">
+      
       <!-- Seleção do tipo de relatório -->
       <select id="selecTempo" onchange="carregarRelatorio()">
         <option disabled selected value="#">Selecione o relatório</option>
@@ -307,43 +325,47 @@
     </div>
 
     <div class="linha-grafico-card">
-
+      <!-- Seletor de tempo e alertas -->
       <div class="seletor-container">
-        <select id="selectGraf">
-          <option value="1">Último Mês</option>
-          <option value="3">Últimos 3 Meses</option>
-          <option value="6">Últimos 6 Meses</option>
-        </select>
-        <button id="btnAtualizarGrafico" onclick="atualizarGrafico()">Atualizar Gráficos</button>
+        <p class="alerta-titulo">Alertas</p> <!-- Título acima do select -->
+        <div class="seletor-e-buscar"> <!-- Container para manter o select e o botão na mesma linha -->
+          <select id="selectGraf">
+            <option disabled selected value="#">Selecione o tempo</option>
+            <option value="1">Último Mês</option>
+            <option value="3">Últimos 3 Meses</option>
+            <option value="6">Últimos 6 Meses</option>
+          </select>
+          <button id="btnAtualizarGrafico" onclick="atualizarGrafico()">Buscar</button>
+        </div>
       </div>
-
+    
       <div class="cardLinha1">
-
         <div class="card card1">
           <!-- Gráfico 1 -->
           <canvas id="graficoAlerta"></canvas>
         </div>
-
+    
         <div class="card card4">
           <!-- Gráfico 4 -->
           <span id="dados_Kpi"></span>
-
-        </div>
-
-
-        <div class="cardLinha2">
-
-          <div class="card card2">
-            <!-- Gráfico 2 -->
-            <canvas id="graficoServidores"></canvas>
-          </div>
-
-          <div class="card card5">
-            <!-- Gráfico 5 -->
-            <canvas id="graficoStatus"></canvas>
-          </div>
         </div>
       </div>
+    
+      <div class="cardLinha2">
+        <div class="card card2">
+          <!-- Gráfico 2 -->
+          <canvas id="graficoServidores"></canvas>
+        </div>
+    
+        <div class="card card5">
+          <!-- Gráfico 5 -->
+          <canvas id="graficoStatus"></canvas>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+    
     </div>
   </div>
 
@@ -475,6 +497,13 @@ let chartInstances = {};  // Objeto para armazenar as instâncias dos gráficos
 
     var selecao = document.getElementById("selectGraf").value;
 
+    // Verifica se o valor selecionado no seletor é válido
+    if (selecao === "#" || selecao === "") {
+        // Caso não tenha seleção válida, exibe um alerta
+        alert("Por favor, selecione um período antes de buscar os dados.");
+        return;  // Interrompe a execução da função
+    }
+
     // Gráfico alerta
     fetch(`/medidas/graficoAlerta/${selecao}`, { cache: 'no-store' })
       .then(function (response) {
@@ -539,7 +568,7 @@ let chartInstances = {};  // Objeto para armazenar as instâncias dos gráficos
 
               const dados_Kpi = document.getElementById('dados_Kpi');
               if (dados_Kpi) {
-                dados_Kpi.innerHTML = `
+                dados_Kpi.innerHTML = `  
                   <strong>Servidor com mais alertas:</strong> ${nomeServidorComMaisAlertas || 'N/A'}<br>
                   <strong>Quantidade de alertas:</strong> ${alertasMaximos || 'N/A'}<br>
                   <strong>Componente com mais alertas:</strong> ${componenteComMaisAlertas || 'N/A'}<br>
@@ -621,6 +650,7 @@ let chartInstances = {};  // Objeto para armazenar as instâncias dos gráficos
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
       });
   }
+
 
   window.onload = function () {
     carregarNome();
