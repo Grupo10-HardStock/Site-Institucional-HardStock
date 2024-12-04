@@ -89,25 +89,25 @@ function graficocpu() {
 }
 
 function obterGraficoCpu(idServidor) {
-    var instrucaoSql = `SELECT * FROM dadosGraficoCpu WHERE fkServidor = ${idServidor} limit 10;`;
+    var instrucaoSql = `SELECT * FROM dadosGraficoCpu WHERE fkServidor = ${idServidor} LIMIT 10;`;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
 function obterGraficoRam(idServidor) {
-    var instrucaoSql = `select * from dadosGraficoRam WHERE fkServidor = ${idServidor} limit 10;`;
+    var instrucaoSql = `select * from dadosGraficoRam WHERE fkServidor = ${idServidor} LIMIT 10;`;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
 function obterGraficoRede(idServidor) {
-    var instrucaoSql = `select * from dadosGraficoRede where fkServidor = ${idServidor} limit 10;`;
+    var instrucaoSql = `select * from dadosGraficoRede where fkServidor = ${idServidor} LIMIT 10;`;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
 function obterDadoDisco(idServidor) {
-    var instrucaoSql = `select * from dadosGraficoDisco where fkServidor = ${idServidor} limit 1;`;
+    var instrucaoSql = `select * from dadosGraficoDisco where fkServidor = ${idServidor} LIMIT 1;`;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }

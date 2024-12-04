@@ -175,6 +175,10 @@
     fetch(`/medidas/dados_kpi_cpu/`, { cache: 'no-store' })
       .then(function (response) {
         if (response.ok) {
+          if (response.status === 204) {
+            console.log('Nenhum dado encontrado para colocar na kpi de CPU.');
+            return;
+          }
           response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
             porcent_cpu.innerHTML = `${resposta[0].valor}%`;
@@ -193,6 +197,10 @@
     fetch(`/medidas/dados_kpi_ram/`, { cache: 'no-store' })
       .then(function (response) {
         if (response.ok) {
+          if (response.status === 204) {
+            console.log('Nenhum dado encontrado para colocar na kpi de RAM.');
+            return;
+          }
           response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
             porcent_ram.innerHTML = `${resposta[0].valor}%`;
@@ -210,6 +218,10 @@
     fetch(`/medidas/dados_kpi_rede/`, { cache: 'no-store' })
       .then(function (response) {
         if (response.ok) {
+          if (response.status === 204) {
+            console.log('Nenhum dado encontrado para colocar na kpi de REDE.');
+            return;
+          }
           response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
             porcent_rede.innerHTML = `${resposta[0].valor}mbps`;
@@ -276,7 +288,12 @@
 
     fetch(`/medidas/obterGraficoRam?idServidor=${Servidor}`, { cache: 'no-store' })
       .then(function (response) {
+    
         if (response.ok) {
+          if (response.status === 204) {
+            console.log('Nenhum dado encontrado para colocar na kpi de RAM.');
+            return;
+          }
           response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
             plotarGraficoRam(resposta);
