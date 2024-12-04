@@ -5,23 +5,36 @@ function buscarTendencias(periodo) {
 
     var instrucaoSql =
         `
-        SELECT 
-        ROUND(((COALESCE(media_atual, 0) - COALESCE(media_anterior, 0)) / COALESCE(media_anterior, 1)) * 100, 2) AS variacao_percentual,
-        'Bytes Recebidos' AS componente
-    FROM (
-        SELECT 
-            AVG(CASE 
-                    WHEN YEARWEEK(dataHora, 1) = YEARWEEK(NOW(), 1) THEN valor 
-                    ELSE NULL 
-                END) AS media_atual,
-            AVG(CASE 
-                    WHEN YEARWEEK(dataHora, 1) = YEARWEEK(NOW(), 1) - 1 THEN valor 
-                    ELSE NULL 
-                END) AS media_anterior
-        FROM Capturas
-        WHERE fkComponente = 2
-          AND dataHora >= NOW() - INTERVAL ${periodo} MONTH
-    ) AS medias;
+   SELECT 
+    ROUND(((media_atual - media_anterior) / media_anterior) * 100, 2) AS variacao_percentual,
+    'Bytes Recebidos' AS componente
+FROM (
+    SELECT 
+        -- Última semana dentro do intervalo de tempo selecionado
+        (SELECT AVG(valor)
+         FROM Capturas
+         WHERE fkComponente = 2
+           AND YEARWEEK(dataHora, 1) = (
+               SELECT MAX(YEARWEEK(dataHora, 1)) 
+               FROM Capturas 
+               WHERE fkComponente = 2
+                 AND dataHora >= DATE_ADD(CURDATE(), INTERVAL -${periodo} MONTH)
+           )
+           AND dataHora >= DATE_ADD(CURDATE(), INTERVAL -${periodo} MONTH)) AS media_atual,
+
+        -- Penúltima semana dentro do intervalo de tempo selecionado
+        (SELECT AVG(valor)
+         FROM Capturas
+         WHERE fkComponente = 2
+           AND YEARWEEK(dataHora, 1) = (
+               SELECT MAX(YEARWEEK(dataHora, 1)) - 1
+               FROM Capturas
+               WHERE fkComponente = 2
+                 AND dataHora >= DATE_ADD(CURDATE(), INTERVAL -${periodo} MONTH)
+           )
+           AND dataHora >= DATE_ADD(CURDATE(), INTERVAL -${periodo} MONTH)) AS media_anterior
+) AS medias;
+
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -51,7 +64,7 @@ function buscarAgregacao(periodo) {
         SELECT 
         SUM(valor) AS total_bytes_enviados
     FROM Capturas
-    WHERE fkComponente = 1 -- ID de Bytes Enviados
+    WHERE fkComponente = 1
     AND dataHora >= NOW() - INTERVAL ${periodo} MONTH;
     `;
 
@@ -67,7 +80,7 @@ function buscarCorrelacao(periodo) {
         AVG(valor) AS media_valor,
         fkComponente
     FROM Capturas
-    WHERE fkComponente IN (6, 9) -- IDs de Tempo de Leitura do Disco e Velocidade da CPU
+    WHERE fkComponente IN (6, 9) 
     AND dataHora >= NOW() - INTERVAL ${periodo} MONTH
     GROUP BY fkComponente;
     `;

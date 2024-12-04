@@ -369,7 +369,7 @@ h1 {
     box-shadow: 20px 20px 20px rgb(126, 126, 126);
     padding: 30px;
     max-width: 400px;
-    width: 29%;
+    width: auto;
     margin: 13px;
 }
 

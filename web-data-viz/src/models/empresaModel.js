@@ -1,7 +1,7 @@
 var database = require("../database/config");
 
 function buscarPorId(id) {
-  var instrucaoSql = `SELECT * FROM empresa WHERE id = '${id}'`;
+  var instrucaoSql = `SELECT * FROM Empresa WHERE id = '${id}'`;
 
   return database.executar(instrucaoSql);
 }
@@ -19,7 +19,7 @@ function viewServidoresOrdenados() {
 }
 
 function buscarPorCnpj(cnpj) {
-  var instrucaoSql = `SELECT * FROM empresa WHERE cnpj = '${cnpj};'`;
+  var instrucaoSql = `SELECT * FROM Empresa WHERE cnpj = '${cnpj};'`;
 
   return database.executar(instrucaoSql);
 }
