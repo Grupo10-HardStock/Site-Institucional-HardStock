@@ -27,7 +27,7 @@ function cadastrarServidor(nome, rede, ram, disco, cpu, empresa) {
 function inativar(idServidor) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function inativar():", idServidor);
     var instrucaoSql = `
-        update servidor set estado = "Inativo" WHERE idServidor = ${idServidor};
+        update Servidor set estado = "Inativo" WHERE idServidor = ${idServidor};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -45,7 +45,7 @@ function verificarStatusServidor(idServidor) {
 function editar(novoNome, novaRede, novaRam, novoDisco, novaCpu, novoEstado, idServidor) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editar(): ");
     var instrucaoSql = `
-    UPDATE servidor SET 
+    UPDATE Servidor SET 
         nome = '${novoNome}', 
         rede = '${novaRede}', 
         ram = '${novaRam}', 
@@ -62,7 +62,7 @@ function editar(novoNome, novaRede, novaRam, novoDisco, novaCpu, novoEstado, idS
 function porId (idServidor){
     console.log("Buscando servidores...");
     var instrucaoSql = `
-        SELECT * FROM servidor WHERE idServidor = ${idServidor};
+        SELECT * FROM Servidor WHERE idServidor = ${idServidor};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
